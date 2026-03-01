@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craftsman Collection — Hearthwood Cabinetry</title>
+  <meta name="description" content="Explore the Craftsman Collection — 14 cabinet types, 5 door styles, 5 luxurious colors. Traditional craftsmanship for warm, inviting kitchens.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-line="line1">
+
+  <!-- NAVIGATION -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Hearth<span>wood</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="line1.html" class="active">Craftsman Collection</a></li>
+        <li><a href="line2.html">Prestige Series</a></li>
+        <li><a href="visualizer.html">Kitchen Planner</a></li>
+        <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <header class="page-hero">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <span>Craftsman Collection</span></p>
+      <h1 id="line-name">Craftsman Collection</h1>
+      <p id="line-tagline">Timeless craftsmanship meets everyday living</p>
+      <p id="line-description" style="max-width:640px; margin: 0 auto 2rem;"></p>
+      <a href="visualizer.html" class="btn btn-gold btn-lg">
+        <i class="fa-solid fa-drafting-compass"></i> Plan Your Kitchen
+      </a>
+    </div>
+  </header>
+
+  <!-- SELECTOR BAR -->
+  <div class="selector-bar" aria-label="Style and color selectors">
+    <div class="selector-inner">
+      <div class="selector-row">
+        <span class="selector-label">Door Style</span>
+        <div class="door-styles" id="door-styles-container" role="group" aria-label="Door style options"></div>
+      </div>
+      <div class="selector-row">
+        <span class="selector-label">Color</span>
+        <div class="color-swatches" id="color-swatches-container" role="group" aria-label="Color options"></div>
+        <span style="font-size:0.78rem; color:var(--charcoal); opacity:0.5; margin-left:auto;">
+          <i class="fa-solid fa-circle-info"></i> Color previews are simulated — request a physical sample for accuracy
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CABINET GRID -->
+  <section class="catalog-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">14 Cabinet Types</span>
+        <h2>Choose Your Cabinets</h2>
+        <p class="section-subtitle">Every cabinet is available in your chosen door style and color. Click "Add to Inquiry" to build your list.</p>
+      </div>
+      <div class="catalog-grid" id="cabinet-grid">
+        <!-- Cabinet cards injected by catalog.js -->
+        <div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--charcoal); opacity:0.5;">
+          <i class="fa-solid fa-spinner fa-spin" style="font-size:2rem;"></i>
+          <p style="margin-top:1rem;">Loading cabinets...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISUALIZER CTA -->
+  <section class="cta-strip">
+    <div class="container">
+      <h2>Ready to Plan Your Layout?</h2>
+      <p>Use our Kitchen Planner to see exactly how these cabinets will fit in your space.</p>
+      <a href="visualizer.html" class="btn btn-primary btn-lg">
+        <i class="fa-solid fa-drafting-compass"></i> Open Kitchen Planner
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Hearth<span>wood</span></h3>
+          <p>Two premium collections for every kitchen vision. Crafted to last a lifetime.</p>
+          <!-- TODO: Replace # with actual social media URLs before launch -->
+          <div class="footer-social">
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Collections</h4>
+          <ul>
+            <li><a href="line1.html">Craftsman Collection</a></li>
+            <li><a href="line2.html">Prestige Series</a></li>
+            <li><a href="visualizer.html">Kitchen Planner</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Cabinet Types</h4>
+          <ul>
+            <li><a href="#cabinet-grid">Wall Cabinets</a></li>
+            <li><a href="#cabinet-grid">Base Cabinets</a></li>
+            <li><a href="#cabinet-grid">Pantry Cabinets</a></li>
+            <li><a href="#cabinet-grid">Island Cabinets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get Help</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html">Request a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Hearthwood Cabinetry. All rights reserved.</span>
+        <span>Craftsman Collection</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Selection Panel (fixed bottom-right) -->
+  <button class="selection-trigger hidden" id="selection-trigger" aria-label="View your inquiry list">
+    <i class="fa-solid fa-list-check"></i> My Inquiry
+    <span class="count" id="selection-count">0</span>
+  </button>
+
+  <div class="selection-panel" id="selection-panel" role="dialog" aria-label="Your inquiry list" aria-modal="true">
+    <div class="selection-header">
+      <h4><i class="fa-solid fa-list-check"></i> My Inquiry List</h4>
+      <button class="close-btn" id="selection-close" aria-label="Close inquiry panel">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="selection-list" id="selection-list"></div>
+    <div class="selection-footer">
+      <a href="contact.html" class="btn btn-primary btn-sm" id="selection-quote-btn" style="width:100%; justify-content:center;">
+        <i class="fa-solid fa-paper-plane"></i> Request Quote
+      </a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data/image-manifest.js"></script>
+  <script src="js/cabinet-data.js"></script>
+  <script src="js/catalog.js"></script>
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const links  = document.getElementById('nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', function () {
+        const open = links.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+        this.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+      });
+    }
+  </script>
+</body>
+</html>

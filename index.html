@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hearthwood Cabinetry — Custom Kitchen Cabinets</title>
+  <meta name="description" content="Hearthwood Cabinetry crafts beautiful, custom kitchen cabinets in two distinct collections. Explore door styles, colors, and plan your dream kitchen with our interactive layout tool.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/carousel.css">
+</head>
+<body>
+
+  <!-- ======================== NAVIGATION ======================== -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Hearth<span>wood</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="line1.html">Craftsman Collection</a></li>
+        <li><a href="line2.html">Prestige Series</a></li>
+        <li><a href="visualizer.html">Kitchen Planner</a></li>
+        <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ======================== HERO CAROUSEL ======================== -->
+  <section class="hero-section" aria-label="Featured kitchen photos">
+    <div class="hero-carousel" role="region" aria-label="Hero carousel">
+      <!-- Carousel track (slides injected by carousel.js) -->
+      <div class="carousel-track" aria-live="polite"></div>
+
+      <!-- Hero text overlay -->
+      <div class="carousel-hero-content">
+        <div class="container">
+          <p class="carousel-hero-tagline">Crafted for the heart of your home</p>
+          <h1>Beautiful Cabinets,<br>Built to Last Generations</h1>
+          <p>Two premium collections. Five door styles. Five luxurious colors.<br>Crafted with care and designed to inspire.</p>
+          <div class="carousel-hero-ctas">
+            <a href="line1.html" class="btn btn-gold btn-lg">Craftsman Collection</a>
+            <a href="line2.html" class="btn btn-outline-light btn-lg">Prestige Series</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation arrows -->
+      <button class="carousel-prev" aria-label="Previous slide">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="carousel-next" aria-label="Next slide">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <!-- Dot indicators -->
+      <div class="carousel-dots" role="tablist" aria-label="Carousel indicators"></div>
+
+      <!-- Counter -->
+      <div class="carousel-counter" aria-hidden="true">1 / 10</div>
+    </div>
+  </section>
+
+  <!-- ======================== INTRO ======================== -->
+  <section class="intro-section">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-text">
+          <span class="section-label">Our Story</span>
+          <h2>Where Every Kitchen Tells a Story</h2>
+          <p>At Hearthwood Cabinetry, we believe the kitchen is more than a room — it's the heart of your home. Every cabinet we build carries the weight of meals shared, memories made, and mornings that matter.</p>
+          <p>From our <strong>Craftsman Collection</strong> — rooted in timeless tradition — to the <strong>Prestige Series</strong> — where luxury meets innovation — we have a cabinet for every vision and every home.</p>
+          <div class="intro-ctas">
+            <a href="line1.html" class="btn btn-primary">Craftsman Collection</a>
+            <a href="line2.html" class="btn btn-outline">Prestige Series</a>
+            <a href="visualizer.html" class="btn btn-gold">Plan My Kitchen</a>
+          </div>
+        </div>
+        <div class="intro-image-wrap">
+          <!-- TODO: Replace with an actual kitchen photo at images/hero/hero1.jpg -->
+          <div class="intro-image-placeholder">
+            <i class="fa-solid fa-kitchen-set"></i>
+            <span>Add photo to images/hero/</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== PRODUCT LINES ======================== -->
+  <section class="lines-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Our Collections</span>
+        <h2>Two Lines. Infinite Possibilities.</h2>
+        <p class="section-subtitle">Choose the collection that matches your vision — both crafted with uncompromising quality.</p>
+      </div>
+      <div class="lines-grid">
+        <!-- Line 1 Card -->
+        <a href="line1.html" class="line-card" aria-label="Explore the Craftsman Collection">
+          <div class="line-card-bg"></div>
+          <div class="line-card-overlay"></div>
+          <div class="line-card-content">
+            <span class="section-label">Cabinet Line 1</span>
+            <h3>Craftsman Collection</h3>
+            <p>Timeless craftsmanship, solid wood construction, and enduring style for warm, inviting kitchens.</p>
+            <span class="btn btn-outline-light btn-sm">Explore Collection <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+        <!-- Line 2 Card -->
+        <a href="line2.html" class="line-card" aria-label="Explore the Prestige Series">
+          <div class="line-card-bg" style="background: linear-gradient(135deg, #2a2035, #4a3060);"></div>
+          <div class="line-card-overlay"></div>
+          <div class="line-card-content">
+            <span class="section-label">Cabinet Line 2</span>
+            <h3>Prestige Series</h3>
+            <p>Premium hardwoods, soft-close hardware, dovetail drawers — the pinnacle of kitchen craftsmanship.</p>
+            <span class="btn btn-outline-light btn-sm">Explore Series <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== WHY HEARTHWOOD ======================== -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Why Hearthwood</span>
+        <h2>Built Different. Built Better.</h2>
+        <p class="section-subtitle">Every cabinet is a promise — of quality, of beauty, and of a kitchen that works as hard as you do.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-tree" aria-hidden="true"></i></div>
+          <h4>Solid Wood Construction</h4>
+          <p>Responsibly sourced hardwoods, kiln-dried and hand-selected for strength and beauty.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i></div>
+          <h4>Custom Sizing Available</h4>
+          <p>Standard sizes in stock. Custom dimensions built to fit your exact space.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-palette" aria-hidden="true"></i></div>
+          <h4>5 Door Styles &amp; 5 Colors</h4>
+          <p>Mix and match from our curated palette of luxurious, on-trend finishes.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+          <h4>Lifetime Warranty</h4>
+          <p>We stand behind every joint, every hinge, every finish — for the life of the cabinet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== VISUALIZER CTA ======================== -->
+  <section class="cta-strip">
+    <div class="container">
+      <h2>See Your Dream Kitchen Before You Buy</h2>
+      <p>Use our free interactive planner to map out your space, choose your style, and download a layout — all in minutes.</p>
+      <a href="visualizer.html" class="btn btn-primary btn-lg">
+        <i class="fa-solid fa-drafting-compass"></i> Open Kitchen Planner
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Hearth<span>wood</span></h3>
+          <p>Crafting beautiful, lasting kitchen cabinets for families who believe the kitchen is the heart of the home. Two collections. Endless possibilities.</p>
+          <!-- TODO: Replace # with actual social media profile URLs before launch -->
+          <div class="footer-social">
+            <a href="#" target="_blank" rel="noopener" aria-label="Hearthwood on Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Hearthwood on Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Hearthwood on Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Hearthwood on YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Collections</h4>
+          <ul>
+            <li><a href="line1.html">Craftsman Collection</a></li>
+            <li><a href="line2.html">Prestige Series</a></li>
+            <li><a href="visualizer.html">Kitchen Planner</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Cabinet Types</h4>
+          <ul>
+            <li><a href="line1.html">Wall Cabinets</a></li>
+            <li><a href="line1.html">Base Cabinets</a></li>
+            <li><a href="line1.html">Pantry Cabinets</a></li>
+            <li><a href="line1.html">Island Cabinets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html">Request a Quote</a></li>
+            <li><a href="contact.html">Ask for Help</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Hearthwood Cabinetry. All rights reserved.</span>
+        <span>Crafted with care.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/image-manifest.js"></script>
+  <script src="js/carousel.js"></script>
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const links  = document.getElementById('nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', function () {
+        const open = links.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+        this.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+/* =============================================
+   HEARTHWOOD CABINETRY — Visualizer Styles
+   ============================================= */
+
+/* ---- Page Layout ---- */
+.visualizer-page { background: #fff; }
+
+/* ---- Step Progress Bar ---- */
+.step-progress {
+  background: var(--alabaster);
+  border-bottom: 1px solid rgba(194,181,165,0.4);
+  padding: 1.25rem 0;
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 100;
+}
+
+.step-progress-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  cursor: default;
+  opacity: 0.4;
+  transition: opacity 0.25s;
+}
+
+.step-indicator.active,
+.step-indicator.done { opacity: 1; }
+
+.step-num {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(194,181,165,0.4);
+  border: 2px solid transparent;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; color: var(--charcoal);
+  flex-shrink: 0;
+  transition: all 0.25s;
+}
+
+.step-indicator.active .step-num {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.step-indicator.done .step-num {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy);
+}
+
+.step-title {
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--charcoal); white-space: nowrap;
+}
+
+.step-connector {
+  flex: 0 0 2rem;
+  height: 1px;
+  background: rgba(194,181,165,0.5);
+  margin: 0 0.25rem;
+}
+
+/* ---- Step Panels ---- */
+.viz-content { padding: 3rem 0 5rem; }
+.viz-inner { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+.viz-step { display: none; }
+.viz-step.active { display: block; }
+
+.viz-step-header { margin-bottom: 2.5rem; }
+.viz-step-header h2 { margin-bottom: 0.5rem; }
+.viz-step-header p { font-weight: 300; color: var(--charcoal); opacity: 0.8; }
+
+/* ---- Step 1 — Photo Upload ---- */
+.photo-dropzone {
+  border: 2px dashed rgba(194,181,165,0.7);
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--alabaster);
+  position: relative;
+}
+
+.photo-dropzone:hover,
+.photo-dropzone.drag-over {
+  border-color: var(--gold);
+  background: rgba(201,169,110,0.04);
+}
+
+.photo-dropzone.has-photo {
+  border-color: var(--sage);
+  padding: 1rem;
+}
+
+.dropzone-icon {
+  font-size: 2.5rem;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
+
+.dropzone-text { font-size: 0.9rem; font-weight: 300; margin-bottom: 0.5rem; }
+.dropzone-hint {
+  font-size: 0.75rem; opacity: 0.55;
+  letter-spacing: 0.05em;
+}
+
+.dropzone-label {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-top: 1.25rem; cursor: pointer;
+}
+
+.photo-dropzone #room-photo-preview {
+  display: none;
+  width: 100%; max-height: 320px;
+  object-fit: contain; border-radius: 4px;
+}
+
+.photo-dropzone input[type="file"] {
+  position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+}
+
+.photo-note {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--charcoal);
+  opacity: 0.6;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+
+/* ---- Step 2 — Measurements ---- */
+.measurements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.measure-group { }
+.measure-label {
+  display: block;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--charcoal); margin-bottom: 0.6rem;
+}
+.measure-hint {
+  font-size: 0.72rem; opacity: 0.55; font-weight: 400;
+  letter-spacing: 0; text-transform: none; margin-left: 0.5rem;
+}
+
+.field-imperial,
+.field-metric {
+  display: flex; gap: 0.6rem; align-items: center;
+}
+
+.field-imperial { }
+.field-metric { display: none; }
+
+.measure-input-wrap {
+  display: flex; align-items: center; gap: 0.3rem; flex: 1;
+}
+
+.measure-input {
+  flex: 1;
+  padding: 0.65rem 0.75rem;
+  border: 2px solid rgba(194,181,165,0.5);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  transition: border-color 0.2s;
+  max-width: 80px;
+  text-align: right;
+}
+
+.measure-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.measure-unit {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--charcoal);
+  opacity: 0.6;
+}
+
+/* Unit toggle */
+.unit-toggle {
+  display: inline-flex;
+  border: 2px solid rgba(194,181,165,0.5);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.unit-btn {
+  padding: 0.45rem 1rem;
+  background: #fff;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.unit-btn.active {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* ---- Step 3 / 4 — Layout Canvas ---- */
+.canvas-layout { }
+
+.canvas-wrap {
+  background: #FAF8F5;
+  border: 1px solid rgba(194,181,165,0.4);
+  border-radius: 8px;
+  overflow: auto;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+#layout-canvas {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.canvas-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--charcoal);
+  opacity: 0.45;
+}
+
+.canvas-empty i { font-size: 2.5rem; margin-bottom: 1rem; color: var(--greige); }
+.canvas-empty p { font-size: 0.9rem; font-weight: 300; }
+
+/* ---- Style Selectors (Step 4) ---- */
+.viz-style-selectors {
+  background: var(--alabaster);
+  border: 1px solid rgba(194,181,165,0.4);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.viz-selector-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 0;
+}
+
+.viz-selector-row + .viz-selector-row {
+  border-top: 1px solid rgba(194,181,165,0.35);
+}
+
+.viz-selector-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.line-btns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.line-btn {
+  padding: 0.4rem 1rem;
+  background: #fff;
+  border: 2px solid rgba(194,181,165,0.6);
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--charcoal);
+  transition: all 0.2s;
+}
+.line-btn.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+.line-btn:hover:not(.active) { border-color: var(--gold); }
+
+/* ---- Step Actions ---- */
+.viz-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid rgba(194,181,165,0.35);
+  margin-top: 1.5rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .step-title { display: none; }
+  .step-progress-inner { gap: 0; }
+  .step-connector { flex: 0 0 1rem; }
+  .measurements-grid { grid-template-columns: 1fr; }
+  .viz-inner { padding: 0 1rem; }
+}

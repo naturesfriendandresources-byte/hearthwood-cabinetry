@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Hearthwood Cabinetry</title>
+  <meta name="description" content="Ask for help, request a quote, or tell us about your dream kitchen. We'd love to hear from you.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Hearth<span>wood</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="line1.html">Craftsman Collection</a></li>
+        <li><a href="line2.html">Prestige Series</a></li>
+        <li><a href="visualizer.html">Kitchen Planner</a></li>
+        <li><a href="contact.html" class="active nav-cta">Get a Quote</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <header class="page-hero">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <span>Contact Us</span></p>
+      <h1>Ask for Help</h1>
+      <p>Tell us about your kitchen project and we'll be in touch. No obligation — just helpful advice from people who love cabinets.</p>
+    </div>
+  </header>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Left: Info -->
+        <div class="contact-info">
+          <span class="section-label">We'd Love to Help</span>
+          <h3>Let's Talk Cabinets</h3>
+          <p>Whether you have a quick question, need help choosing between lines, or are ready to get a full quote — reach out. We typically respond within one business day.</p>
+
+          <div class="contact-info-items">
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <h5>Email</h5>
+                <!-- TODO: Update email if needed -->
+                <p>cabinetsbyhearthwood@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
+              <div>
+                <h5>Response Time</h5>
+                <p>Within 1 business day, usually much sooner.</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fa-solid fa-drafting-compass"></i></div>
+              <div>
+                <h5>Free Planning Help</h5>
+                <p>Use our Kitchen Planner to get a layout, then send it to us for a detailed quote.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 2.5rem;">
+            <h5 style="font-family: var(--font-body); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;">Follow Along</h5>
+            <!-- TODO: Replace # with actual social media profile URLs before launch -->
+            <div class="footer-social" style="margin-top:0;">
+              <a href="#" target="_blank" rel="noopener" aria-label="Hearthwood on Instagram" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="#" target="_blank" rel="noopener" aria-label="Hearthwood on Facebook" title="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="#" target="_blank" rel="noopener" aria-label="Hearthwood on Pinterest" title="Pinterest">
+                <i class="fa-brands fa-pinterest-p"></i>
+              </a>
+              <a href="#" target="_blank" rel="noopener" aria-label="Hearthwood on YouTube" title="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="contact-form-wrap">
+          <h3>Send a Message</h3>
+          <p>Fill out the form below and we'll get back to you shortly.</p>
+
+          <!--
+            FORMSPREE SETUP:
+            1. Go to formspree.io and sign up (free tier: 50 submissions/month)
+            2. Create a new form → enter cabinetsbyhearthwood@gmail.com
+            3. Copy your form ID (looks like: xpwdabcd)
+            4. Replace YOUR_FORM_ID below with your actual form ID
+            TODO: Replace YOUR_FORM_ID in the action attribute below
+          -->
+          <form
+            id="contact-form"
+            action="https://formspree.io/f/YOUR_FORM_ID"
+            method="POST"
+            novalidate>
+
+            <!-- Honeypot spam field (hidden) -->
+            <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="contact-name">Full Name <span style="color:var(--gold);">*</span></label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  class="form-input"
+                  placeholder="Jane Smith"
+                  required
+                  autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="contact-phone"
+                  name="phone"
+                  class="form-input"
+                  placeholder="(555) 555-5555"
+                  autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-email">Email Address <span style="color:var(--gold);">*</span></label>
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                class="form-input"
+                placeholder="jane@example.com"
+                required
+                autocomplete="email">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-line">Cabinet Line Interest</label>
+              <select id="contact-line" name="cabinet_line" class="form-select">
+                <option value="">— Select a collection (optional) —</option>
+                <option value="Craftsman Collection">Craftsman Collection</option>
+                <option value="Prestige Series">Prestige Series</option>
+                <option value="Both / Not Sure">Both / Not Sure Yet</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-message">Message <span style="color:var(--gold);">*</span></label>
+              <textarea
+                id="contact-message"
+                name="message"
+                class="form-textarea"
+                placeholder="Tell us about your kitchen project — dimensions, timeline, questions..."
+                required></textarea>
+            </div>
+
+            <!-- Hidden field for layout summary (pre-filled by visualizer) -->
+            <input type="hidden" id="layout-summary" name="layout_summary" value="">
+
+            <div id="layout-summary-preview" style="display:none; background:var(--alabaster); padding:0.75rem 1rem; border-radius:var(--radius); font-size:0.82rem; margin-bottom:1.25rem; color:var(--charcoal); white-space:pre-wrap; font-family:monospace; border-left:3px solid var(--gold);"></div>
+
+            <button type="submit" class="btn btn-primary form-submit btn-lg">
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+
+            <!-- Status messages -->
+            <div id="form-success" class="form-message success" role="alert" style="display:none;">
+              <i class="fa-solid fa-circle-check"></i> <strong>Message sent!</strong> We'll be in touch within one business day. Thank you!
+            </div>
+            <div id="form-error" class="form-message error" role="alert" style="display:none;">
+              <i class="fa-solid fa-circle-exclamation"></i> <strong>Something went wrong.</strong> Please try again, or email us directly at cabinetsbyhearthwood@gmail.com.
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Hearth<span>wood</span></h3>
+          <p>Two premium collections for every kitchen vision. Crafted to last a lifetime.</p>
+          <!-- TODO: Replace # with actual social media URLs before launch -->
+          <div class="footer-social">
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Collections</h4>
+          <ul>
+            <li><a href="line1.html">Craftsman Collection</a></li>
+            <li><a href="line2.html">Prestige Series</a></li>
+            <li><a href="visualizer.html">Kitchen Planner</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col"></div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Hearthwood Cabinetry. All rights reserved.</span>
+        <span>Get in Touch</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile nav
+    const toggle = document.getElementById('nav-toggle');
+    const links  = document.getElementById('nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', function () {
+        const open = links.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+        this.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+      });
+    }
+
+    // Pre-fill from URL params (set by Visualizer or Catalog "Request Quote" buttons)
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const summary = params.get('summary');
+      if (summary) {
+        const input   = document.getElementById('layout-summary');
+        const preview = document.getElementById('layout-summary-preview');
+        const msgArea = document.getElementById('contact-message');
+        const decoded = decodeURIComponent(summary);
+        if (input)   input.value = decoded;
+        if (preview) { preview.textContent = decoded; preview.style.display = 'block'; }
+        if (msgArea && !msgArea.value) {
+          msgArea.placeholder = 'Any additional notes or questions? (Layout summary above will be included automatically.)';
+        }
+      }
+    })();
+
+    // Formspree AJAX submission
+    (function () {
+      const form    = document.getElementById('contact-form');
+      const success = document.getElementById('form-success');
+      const error   = document.getElementById('form-error');
+      if (!form) return;
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        // Basic validation
+        const name  = form.querySelector('[name="name"]');
+        const email = form.querySelector('[name="email"]');
+        const msg   = form.querySelector('[name="message"]');
+        if (!name.value.trim() || !email.value.trim() || !msg.value.trim()) {
+          if (error) { error.textContent = 'Please fill in all required fields.'; error.style.display = 'block'; }
+          return;
+        }
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+        // Hide previous messages
+        if (success) success.style.display = 'none';
+        if (error)   error.style.display   = 'none';
+
+        try {
+          const formData = new FormData(form);
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            form.reset();
+            if (success) success.style.display = 'block';
+            const preview = document.getElementById('layout-summary-preview');
+            if (preview) preview.style.display = 'none';
+          } else {
+            const data = await res.json().catch(() => ({}));
+            if (error) {
+              error.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> <strong>Could not send.</strong> ' +
+                (data.errors ? data.errors.map(e => e.message).join(', ') : 'Please try again or email us directly.');
+              error.style.display = 'block';
+            }
+          }
+        } catch (err) {
+          if (error) {
+            error.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> <strong>Network error.</strong> Please check your connection and try again.';
+            error.style.display = 'block';
+          }
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
