@@ -151,7 +151,7 @@
         }
         state.measurements = { ...state.measurements, ...m };
         computeLayout();
-        showStep(4);
+        showStep(3);
       });
     }
   }
