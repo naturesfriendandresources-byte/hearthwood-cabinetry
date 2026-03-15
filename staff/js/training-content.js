@@ -356,6 +356,931 @@
   };
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // OFFICE ADMIN PLAN — Maria (Weeks 13–19)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  const OFFICE_URL_QBO  = 'https://quickbooks.intuit.com/tutorials/';
+  const OFFICE_URL_GOOG = 'https://workspace.google.com/intl/en/learn-more/';
+  const OFFICE_URL_NKBA = 'https://www.nkba.org';
+  const OFFICE_LABEL    = 'Training Resource';
+
+  const MARIA_ADMIN_PLAN = {
+
+    // ── WEEK 13: NFR SYSTEMS & TOOLS ─────────────────────────────────────────
+    13: [
+      // Mon — Concept
+      {
+        topic: 'NFR Portals Overview',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know every portal Maria touches: Staff Portal, Google Drive, CompanyCam, QuickBooks (view-only)',
+          'Understand which portal is used for which task',
+          'Log in to each portal and confirm access',
+        ],
+        task: 'Write a one-page portal map: name of each tool, what it\'s used for, and Maria\'s access level. Show Jose.',
+        tip: 'Knowing which tool to open before you need it saves 10 minutes per client interaction.',
+      },
+      // Tue — Application
+      {
+        topic: 'Google Workspace at NFR',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know the NFR Google Drive folder structure',
+          'Understand how to name and move files correctly',
+          'Know how shared drives work vs. personal drives',
+        ],
+        task: 'Navigate to the active project folder. Find one project file and verify it is named correctly per NFR convention. If not, correct it and note it.',
+        tip: 'Every file you create should be findable by Jose or the Field Manager without calling you.',
+      },
+      // Wed — Practice
+      {
+        topic: 'CompanyCam — Accessing & Organizing Job Photos',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know how to find a job in CompanyCam',
+          'Understand photo phases: before, milestone, after',
+          'Know how to share a photo link with a client or Jose',
+        ],
+        task: 'Find an active job in CompanyCam. Verify photos are labeled by trade and phase. Flag any missing phase photos to Jose.',
+        tip: 'CompanyCam photos are NFR\'s proof on every job. Treat them as part of the file.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'QuickBooks Basics — What Maria Sees',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_QBO,
+        objectives: [
+          'Know that Maria\'s QuickBooks role is read-only for project reference, not financial entry',
+          'Understand how to look up an invoice or payment record for a client',
+          'Know the separation: financials stay with Jose, Maria reads status only',
+        ],
+        task: 'With Jose, open a recent project in QuickBooks. Identify: Has the deposit posted? Is there an outstanding invoice? Write what you see — not what it means financially.',
+        tip: 'Maria\'s job is to know the project status, not to manage the books.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 13 Review — NFR Systems',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Name every tool Maria uses and its purpose from memory',
+          'Find a client project across all three systems (Drive, CompanyCam, QuickBooks) in under 5 minutes',
+          'Write the portal map from memory',
+        ],
+        task: 'Jose names a recent client. Maria locates the project folder, photos, and invoice status in under 5 minutes without asking for help. Write what she found.',
+        tip: 'Speed in the tools is confidence in the role.',
+      },
+    ],
+
+    // ── WEEK 14: CLIENT COMMUNICATION ────────────────────────────────────────
+    14: [
+      // Mon — Concept
+      {
+        topic: 'NFR Voice & Email Professionalism',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Understand what "NFR voice" means: warm, confident, professional, never casual',
+          'Know the email greeting and sign-off standard',
+          'Understand that every client email reflects the entire company',
+        ],
+        task: 'Read 3 past client emails from the NFR inbox. Rate each 1–5 for tone and professionalism. Write one that you think was too casual and rewrite it in NFR voice.',
+        tip: 'A professional email prevents a misunderstanding that costs 2 hours to fix.',
+      },
+      // Tue — Application
+      {
+        topic: 'Responding to New Inquiries',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know the NFR inquiry response time target: same day, within 4 hours',
+          'Know the 3-part inquiry response: acknowledge, qualify, next step',
+          'Draft a response to a new kitchen remodel inquiry from scratch',
+        ],
+        task: 'Jose provides a sample inquiry. Maria drafts a response using the 3-part format. Jose reviews for tone and completeness.',
+        tip: 'Speed + warmth in the first reply sets the client\'s impression for the entire project.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Follow-Up Cadence',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know the NFR follow-up schedule: 48h after proposal, 1 week if no response, 2 weeks final',
+          'Draft a follow-up email that is warm but not desperate',
+          'Know when to stop following up vs. when to escalate to Jose',
+        ],
+        task: 'Identify one open proposal in the pipeline. Write the next follow-up email using the NFR cadence. Show Jose before sending.',
+        tip: 'Most clients close on the second or third follow-up. Never stop after one.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Difficult Conversations — What to Escalate to Jose',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know which conversations Maria handles vs. which go directly to Jose',
+          'Understand the escalation trigger: pricing, scope changes, client complaints',
+          'Know how to hold a client warmly while Jose is looped in',
+        ],
+        task: 'Write the decision rule: "Maria handles ___. Maria escalates to Jose when ___." Use 3 real scenarios from the past 30 days.',
+        tip: 'Never try to resolve a scope or pricing conflict without Jose. Warm hold, then escalate.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 14 Review — Client Communication',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Draft an inquiry response from scratch in 10 minutes',
+          'Write a follow-up for an open proposal with no response',
+          'Identify one email that should be escalated to Jose and explain why',
+        ],
+        task: 'Jose gives Maria a mock inbox with 5 emails. Maria triages: handle, draft, or escalate. Jose reviews each decision.',
+        tip: 'A well-managed inbox is a well-managed company.',
+      },
+    ],
+
+    // ── WEEK 15: THE AGREEMENT WORKFLOW ──────────────────────────────────────
+    15: [
+      // Mon — Concept
+      {
+        topic: 'Agreement-First Philosophy',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Understand why NFR never starts work without a signed agreement and deposit',
+          'Know the Agreement-First sequence: Agreement → Jose approves → client signs → deposit → PO',
+          'Know that Maria does not create or approve agreements — Jose does',
+        ],
+        task: 'Write the Agreement-First rule in your own words. Why does it exist? What happens to NFR if we skip it? Show Jose.',
+        tip: 'The agreement protects both NFR and the client. Never treat it as a formality.',
+      },
+      // Tue — Application
+      {
+        topic: 'Reading an NFR Agreement',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know the key sections of an NFR agreement: scope, price, payment terms, start date',
+          'Identify what is missing from an incomplete agreement',
+          'Know what a signed agreement with deposit looks like in the system',
+        ],
+        task: 'Read a completed NFR agreement from a past project. List all 4 key sections. Write one thing that could go wrong if any section were missing.',
+        tip: 'You don\'t need to write agreements. You need to know when one is complete.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Proposal-to-Deposit Sequence',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Walk the full sequence from proposal sent → agreement signed → deposit received → project file opened',
+          'Know who does what at each step: Maria, Jose, client',
+          'Know what Maria enters in the system when a deposit is confirmed',
+        ],
+        task: 'Draw the full proposal-to-deposit sequence as a flowchart. Label each step with: who does it and what tool is used. Show Jose.',
+        tip: 'The sequence only works if everyone knows their step. Maria\'s steps are intake and confirmation.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'What Happens After Deposit',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know the post-deposit checklist: project folder created, PO triggered, schedule opened, client notified',
+          'Know what Maria does and what Jose does after deposit lands',
+          'Know the client communication at the deposit confirmation step',
+        ],
+        task: 'Write the post-deposit checklist from memory. Send it to Jose for review.',
+        tip: 'The deposit is the client\'s green light. Maria\'s job is to move fast and set expectations clearly.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 15 Review — Agreement Workflow',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Walk the full Agreement-First sequence from inquiry to PO without reference',
+          'Identify what step is missing from a broken workflow scenario',
+          'Write the client-facing deposit confirmation message from scratch',
+        ],
+        task: 'Jose gives Maria a scenario with a skipped step in the workflow. Maria identifies the gap, explains the risk, and writes the correction. Show Jose.',
+        tip: 'One missed step in the agreement workflow can delay a job by two weeks.',
+      },
+    ],
+
+    // ── WEEK 16: JOB FILE MANAGEMENT ─────────────────────────────────────────
+    16: [
+      // Mon — Concept
+      {
+        topic: 'NFR File Naming Conventions',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know the NFR file naming standard: [ClientLastName]-[JobType]-[Date] or equivalent',
+          'Understand why consistent naming prevents lost files and confusion',
+          'Audit 5 recent project files for naming compliance',
+        ],
+        task: 'Audit 5 project files in Google Drive. Are they named correctly? Fix any that aren\'t. Write what you changed and why.',
+        tip: 'If Jose can\'t find the file in 30 seconds, it\'s named wrong.',
+      },
+      // Tue — Application
+      {
+        topic: 'Google Drive Structure — Active vs. Archived Jobs',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know the difference between an active job folder and an archived job folder',
+          'Know when a job moves from active to archived',
+          'Know what files belong in the job folder at each stage',
+        ],
+        task: 'Find one job that should be archived but isn\'t. Move it to the correct folder with Jose\'s approval.',
+        tip: 'A clean active jobs folder = a clear picture of what\'s in progress.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Project Status Tracking',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know the NFR project stages: Inquiry → Proposal → Signed → Deposited → Scheduled → In Progress → Final → Archived',
+          'Know how Maria tracks project status in the system',
+          'Update the status of 3 current projects accurately',
+        ],
+        task: 'Check the status tracker. Are all active jobs at the right stage? Update any that are out of date. Flag one to Jose if the status is unclear.',
+        tip: 'Project status is only useful if it\'s current. Maria owns keeping it current.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'CompanyCam as Part of the Job File',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know that CompanyCam photos are part of the permanent job record',
+          'Know how to link a CompanyCam project to the Google Drive job folder',
+          'Know what to do if photos are missing at job close',
+        ],
+        task: 'Pick one recently closed job. Verify photos are complete in CompanyCam. If anything is missing, write the gap and the recovery plan.',
+        tip: 'Closed jobs without photos are a liability. Check before archiving.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 16 Review — File Management',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Set up a new project folder correctly from scratch',
+          'Name 3 files per NFR convention',
+          'Update the status tracker for all active jobs',
+        ],
+        task: 'Jose names a new project. Maria creates the full project folder, names the starter files, and sets the status to "Proposal." Jose inspects.',
+        tip: 'A well-organized file system means a well-organized company.',
+      },
+    ],
+
+    // ── WEEK 17: SCHEDULING & COORDINATION ───────────────────────────────────
+    17: [
+      // Mon — Concept
+      {
+        topic: 'Reading the NFR Calendar',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know how NFR\'s Google Calendar is structured: Jose, Jorge, project blocks',
+          'Understand what each calendar event type means (client meeting, job start, site visit, office)',
+          'Know what Maria can add vs. what needs Jose\'s approval',
+        ],
+        task: 'Review this week\'s calendar. Write a summary: how many active jobs are running, who is on site each day, are there any scheduling conflicts? Show Jose.',
+        tip: 'The calendar is the source of truth for what\'s happening. Read it every morning.',
+      },
+      // Tue — Application
+      {
+        topic: 'Field-to-Office Updates',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know the daily update flow: Jorge updates job status → Maria logs it → Jose reviews',
+          'Know what to do if Maria doesn\'t receive an update from the field',
+          'Know which updates require immediate action vs. logging only',
+        ],
+        task: 'Write the field-to-office update protocol: who sends, what they send, when, and what Maria does with it. Show Jose.',
+        tip: 'If Maria doesn\'t have today\'s site update by noon, she follows up. Don\'t wait.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Vendor Communication',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know which vendors Maria communicates with: cabinet supplier, materials, Interior Surface',
+          'Know the communication standard: order confirmation, delivery ETAs, follow-up on late orders',
+          'Know when to escalate a vendor issue to Jose',
+        ],
+        task: 'Identify one open material order on an active job. Check its status. Is there an ETA? If not, write the follow-up email to the vendor. Show Jose before sending.',
+        tip: 'Vendors respect consistent follow-up. Maria is the point of contact for routine vendor updates.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Scheduling Conflicts & Escalation',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know what a scheduling conflict looks like: two jobs needing the same crew on the same day',
+          'Know Maria\'s role: surface the conflict to Jose immediately, never resolve independently',
+          'Know how to hold a client while a scheduling conflict is being resolved',
+        ],
+        task: 'Write a scenario where a scheduling conflict arises. What does Maria do step by step? Who does she contact and what does she say? Show Jose.',
+        tip: 'Scheduling conflicts are Jose decisions. Maria\'s job is to surface them fast and hold clients professionally.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 17 Review — Scheduling & Coordination',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Read the calendar and summarize next week\'s active jobs in 5 minutes',
+          'Identify one coordination gap in the current schedule',
+          'Write the field-to-office update protocol from memory',
+        ],
+        task: 'Jose asks: what is happening next week, who is where, and is there anything that needs to be resolved? Maria answers from the calendar without being prompted.',
+        tip: 'A coordinator who knows the schedule is the reason the schedule works.',
+      },
+    ],
+
+    // ── WEEK 18: OFFICE FINANCIAL AWARENESS ──────────────────────────────────
+    18: [
+      // Mon — Concept
+      {
+        topic: 'What Maria Touches vs. What She Doesn\'t',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_QBO,
+        objectives: [
+          'Know the financial boundary: Maria reads status, never enters data or makes financial decisions',
+          'Know which financial tasks belong to Jose only: approving invoices, authorizing payments, reviewing P&L',
+          'Understand why this separation protects both Maria and the company',
+        ],
+        task: 'Write the financial boundary in your own words: what can Maria look at, what can she never touch? Include one example of each. Show Jose.',
+        tip: 'Financial clarity protects everyone. Stay in your lane and own it well.',
+      },
+      // Tue — Application
+      {
+        topic: 'Reading a PO',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_QBO,
+        objectives: [
+          'Know the key fields on an NFR PO: job name, materials, quantities, vendor, amount',
+          'Know how to read a PO to confirm what was ordered vs. what arrived',
+          'Know what to do if a PO doesn\'t match the delivery',
+        ],
+        task: 'Open a recent PO with Jose. Read every line. Write: does it match what was ordered? If anything is off, how would you flag it?',
+        tip: 'A PO is a commitment. Know what was committed before the delivery arrives.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Deposit Tracking',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_QBO,
+        objectives: [
+          'Know how to check whether a client deposit has been received',
+          'Know the project does not move forward until deposit is confirmed',
+          'Know the client communication when deposit is received vs. not received',
+        ],
+        task: 'Check the deposit status for all active projects. Write: deposited, pending, or not yet requested. Flag any project that is "in progress" but deposit is unconfirmed.',
+        tip: 'No deposit = no start. Maria enforces this by tracking, not by guessing.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Materials Awareness — What Things Cost',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_QBO,
+        objectives: [
+          'Know the rough cost range for common NFR materials: cabinet sets, countertops, flooring, paint',
+          'Understand why Maria knowing approximate costs helps her support the sales process',
+          'Know that Maria never quotes prices to clients — she directs price questions to Jose',
+        ],
+        task: 'With Jose, review the material costs on one recent project. Write the approximate range for 3 material types. What would you say if a client asked you "how much does a cabinet set cost?"',
+        tip: 'Knowing costs makes you a better coordinator. Quoting costs is Jose\'s job.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 18 Review — Office Financial Awareness',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_QBO,
+        objectives: [
+          'State Maria\'s financial boundary accurately from memory',
+          'Read a PO and confirm or flag the match',
+          'Check deposit status for all active projects without being asked',
+        ],
+        task: 'Jose asks for a deposit status report on all active projects. Maria produces it independently in under 10 minutes. Jose reviews for accuracy.',
+        tip: 'Financial awareness makes Maria a better partner to Jose — not a replacement for him.',
+      },
+    ],
+
+    // ── WEEK 19: GRADUATION — OFFICE OPERATIONS ──────────────────────────────
+    19: [
+      // Mon — Concept
+      {
+        topic: 'SOP Review — Office Operations',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Review all office SOPs Maria has been trained on over Weeks 13–18',
+          'Identify which SOPs feel fully confident vs. need more practice',
+          'Write any SOP gaps Maria has identified during the 6 weeks',
+        ],
+        task: 'Self-audit across all 6 weeks. Rate yourself 1–5 in each area: Systems, Communication, Agreement Workflow, File Management, Scheduling, Financial Awareness. Write your honest assessment.',
+        tip: 'Honest self-assessment is the first step to closing the gaps.',
+      },
+      // Tue — Application
+      {
+        topic: 'Evaluation Preparation',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Know what Jose will evaluate on Friday: live client scenario, file audit, calendar read, deposit status check',
+          'Prepare any weak areas identified in Monday\'s self-audit',
+          'Review the agreement workflow and portal map one more time',
+        ],
+        task: 'Pick your weakest area from Monday\'s self-audit. Spend today\'s session drilling it until you feel confident. Tell Jose what you practiced.',
+        tip: 'Preparation is what turns evaluation day into a confirmation, not a surprise.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Live Office Simulation',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Handle a simulated busy office morning: 3 client emails, a new inquiry, a vendor delivery question, and a scheduling conflict — all in 45 minutes',
+          'Prioritize and triage correctly',
+          'Know which items to escalate and which to handle independently',
+        ],
+        task: 'Jose runs a simulated office morning. Maria handles everything she can, escalates what she should, and logs what she did. Jose reviews each decision.',
+        tip: 'The simulation is designed to feel like a real Monday morning. Breathe, triage, move.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Jose Evaluation',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Complete the full Jose evaluation across all 6 office training areas',
+          'Receive specific feedback on each area',
+          'Identify the 3 strongest areas and 1 area for continued focus',
+        ],
+        task: 'Jose conducts the formal evaluation. Maria completes each task without coaching. Jose writes specific written feedback on each area.',
+        tip: 'This is the checkpoint, not the finish line. Growth continues after graduation.',
+      },
+      // Fri — Graduation
+      {
+        topic: 'Graduation — Office & Design Coordinator',
+        resourceLabel: OFFICE_LABEL,
+        resourceUrl: OFFICE_URL_GOOG,
+        objectives: [
+          'Celebrate completing the 7-week office administration track',
+          'Commit to the 90-day growth plan built from Jose\'s evaluation',
+          'Begin Track 3: Design Awareness next Monday',
+        ],
+        task: 'Maria and Jose review the journey from Week 13 to Week 19. Jose names one thing Maria does exceptionally well. Maria names one thing she\'s committed to improving. Both write it down.',
+        tip: 'You have the systems. You have the process. Design track starts Monday — you\'re ready.',
+      },
+    ],
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // DESIGN AWARENESS PLAN — Maria (Weeks 20–25)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  const DESIGN_URL_SW    = 'https://www.sherwin-williams.com/painting-contractors/color/color-forecast';
+  const DESIGN_URL_HOUZZ = 'https://www.houzz.com/magazine/decorating';
+  const DESIGN_URL_NKBA  = 'https://www.nkba.org';
+  const DESIGN_URL_AD    = 'https://www.architecturaldigest.com';
+  const DESIGN_LABEL     = 'Training Resource';
+
+  const MARIA_DESIGN_PLAN = {
+
+    // ── WEEK 20: WHAT DESIGNERS DO ────────────────────────────────────────────
+    20: [
+      // Mon — Concept
+      {
+        topic: 'The Designer\'s Role — What Design Actually Is',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_AD,
+        objectives: [
+          'Understand the difference between a designer\'s role and a salesperson\'s role',
+          'Know how a designer guides a client from confusion to a clear direction',
+          'Understand why design skills make an Office & Design Coordinator more valuable',
+        ],
+        task: 'Read one article on Architectural Digest about how designers work with clients. Write: what does a designer do that Maria could start doing in her role right now?',
+        tip: 'Design is not decoration. It\'s problem-solving with aesthetics.',
+      },
+      // Tue — Application
+      {
+        topic: 'How Clients Choose a Direction',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_HOUZZ,
+        objectives: [
+          'Understand the three ways clients arrive at a style: inspiration images, gut feeling, or "I don\'t know"',
+          'Know how to respond to each client type at the first meeting',
+          'Know what questions to ask to help a client define their direction',
+        ],
+        task: 'Browse Houzz. Find 3 images in 3 different styles. Write 2–3 words that describe each style\'s mood. Then write: what question would you ask a client who showed you each image?',
+        tip: 'Most clients can\'t name a style. They can describe a feeling. Maria\'s job is to translate.',
+      },
+      // Wed — Practice
+      {
+        topic: 'NFR\'s Design Role — Where Maria Fits',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_AD,
+        objectives: [
+          'Know where NFR\'s design involvement begins and ends: Maria supports, Jose closes',
+          'Understand that Maria\'s design role is to help the client feel heard and get to yes',
+          'Know when to involve Jose in the design conversation',
+        ],
+        task: 'Write: at what point in the client journey does Maria\'s design input make the biggest difference? What does Maria say or show that moves a client forward?',
+        tip: 'Maria\'s design role is not about being a full designer — it\'s about guiding a client to a decision.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'The Design Appointment — What Happens and Why',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_HOUZZ,
+        objectives: [
+          'Know the structure of a design appointment: listen, show, narrow, confirm',
+          'Understand what questions open a client up vs. shut them down',
+          'Know how to end an appointment with a clear next step',
+        ],
+        task: 'With Jose, role-play a design appointment using a past client scenario. Maria asks the questions. Jose plays the client. Debrief: what worked, what to sharpen.',
+        tip: 'A design appointment ends with a direction, not a question mark.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 20 Review — What Designers Do',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_AD,
+        objectives: [
+          'Describe what a designer does in one clear sentence',
+          'Name the 3 client arrival types and how to handle each',
+          'Explain where Maria\'s design role fits in the NFR sales process',
+        ],
+        task: 'Write a one-page summary: What does Maria do differently in client conversations now that she understands the designer\'s role?',
+        tip: 'Understanding the role changes how you show up in every client interaction.',
+      },
+    ],
+
+    // ── WEEK 21: COLOR THEORY & TRENDS ───────────────────────────────────────
+    21: [
+      // Mon — Concept
+      {
+        topic: 'Color Wheel Basics',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_SW,
+        objectives: [
+          'Know the color relationships: complementary, analogous, triadic',
+          'Understand warm vs. cool, light vs. dark, saturated vs. muted',
+          'Know how color temperature affects how a space feels',
+        ],
+        task: 'Draw or print a color wheel. Circle 3 pairs of complementary colors. Write one word that describes the mood of each pair.',
+        tip: 'Color theory is the grammar of design. You don\'t need to be fluent — you need to be functional.',
+      },
+      // Tue — Application
+      {
+        topic: 'Sherwin-Williams Color Forecast',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_SW,
+        objectives: [
+          'Know how to read the SW annual color forecast',
+          'Understand which current trending colors are showing up in NFR project requests',
+          'Know the 3 most requested NFR palette types: warm neutral, cool gray, white/bright',
+        ],
+        task: 'Visit the SW color forecast page. Write the 3 trending directions and which one best matches what NFR clients have been asking for.',
+        tip: 'Trending colors are talking points. Knowing them makes Maria sound current and credible.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Translating Client Language to Palettes',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_SW,
+        objectives: [
+          'Know how to hear "cozy," "clean," "modern," or "farmhouse" and translate to specific color directions',
+          'Practice matching common client words to SW color families',
+          'Know 3 go-to NFR palettes that close reliably',
+        ],
+        task: 'Jose gives Maria 5 client descriptions: "I want it to feel warm and cozy," "I want it to look like a magazine," "I want something timeless," "I want it bright," "I don\'t know — just not dark." Maria translates each to a color direction and 1–2 SW colors.',
+        tip: 'The client says "cozy." Maria hears "warm whites and wood tones." That\'s the translation skill.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Light vs. Dark, Warm vs. Cool — How It Affects the Room',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_SW,
+        objectives: [
+          'Understand how light affects color: north-facing vs. south-facing rooms read color differently',
+          'Know when to recommend a lighter vs. darker tone based on the room\'s light exposure',
+          'Know how cabinet finish color interacts with wall and countertop color',
+        ],
+        task: 'Pick 2 photos of kitchens from Houzz — one in a bright room, one in a darker room. Describe how each color choice works or doesn\'t work with the light in that room.',
+        tip: 'A color that looks beautiful in a showroom can look wrong in a north-facing kitchen. Light is everything.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 21 Review — Color Theory & Trends',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_SW,
+        objectives: [
+          'Name the 3 most-requested NFR palette types',
+          'Translate 3 client style words to color directions',
+          'Describe how light exposure affects color choice',
+        ],
+        task: 'Jose gives Maria a client description. Maria picks a color direction, names 1–2 SW colors, and explains why. Jose rates it: would this close the client?',
+        tip: 'Color confidence is a sales superpower. Own it.',
+      },
+    ],
+
+    // ── WEEK 22: MATERIALS & FINISHES ────────────────────────────────────────
+    22: [
+      // Mon — Concept
+      {
+        topic: 'Cabinet Finishes — What\'s Available & What\'s Trending',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_NKBA,
+        objectives: [
+          'Know the main Hearthwood finish categories: painted, stained, thermofoil',
+          'Know which finishes are most popular with current NFR clients',
+          'Know how to describe each finish in terms a client would understand',
+        ],
+        task: 'Open the Hearthwood catalog. Write a one-sentence client-friendly description for each finish category. Which one would Maria most confidently recommend to a client who wants "clean and modern"?',
+        tip: 'Materials are easier to sell when you know how to describe what they feel like, not just what they are.',
+      },
+      // Tue — Application
+      {
+        topic: 'Countertops — Quartz, Granite, Laminate & Solid Surface',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_NKBA,
+        objectives: [
+          'Know the trade-offs of each countertop type: cost, durability, maintenance, appearance',
+          'Know which countertop types NFR installs vs. refers out',
+          'Know the NFR standard recommendation for a mid-range kitchen remodel',
+        ],
+        task: 'Write a 4-row comparison table: countertop type, cost range, best for, and one reason clients choose it. Show Jose.',
+        tip: 'Countertop choice is usually where the client\'s budget and taste collide. Know both sides.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Flooring — LVP, Hardwood, Tile & Carpet',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_NKBA,
+        objectives: [
+          'Know the most common flooring types in NFR jobs',
+          'Know how to match flooring to cabinet finish and wall color for a cohesive look',
+          'Know the NFR flooring division\'s most commonly installed products',
+        ],
+        task: 'Pick a kitchen from Houzz. Identify: what flooring would you pair with those cabinets and why? What flooring would you avoid and why? Bring 2 Houzz examples.',
+        tip: 'Flooring ties the room together. When it\'s wrong, the whole design feels off.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Hardware Trends — Pulls, Knobs & Finishes',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_NKBA,
+        objectives: [
+          'Know the current hardware finish trends: matte black, brushed gold, satin nickel',
+          'Know how to match hardware finish to faucets and light fixtures for a cohesive look',
+          'Know when hardware is an upgrade vs. a standard spec',
+        ],
+        task: 'Browse 5 kitchen photos. Identify the hardware in each. Write: what finish, does it match the faucet/fixtures, and does it work with the cabinet finish? What would you change?',
+        tip: 'Hardware is the jewelry of a kitchen. Small choice, big visual impact.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 22 Review — Materials & Finishes',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_NKBA,
+        objectives: [
+          'Name the Hearthwood finish categories and describe each to a client',
+          'Build a cohesive kitchen spec: cabinets + countertop + flooring + hardware',
+          'Explain one trade-off a client should know before choosing a material',
+        ],
+        task: 'Jose gives Maria a client brief: "mid-range kitchen, wants it to feel modern but warm." Maria builds a full material spec: cabinet finish, countertop, flooring, hardware. Jose reviews.',
+        tip: 'A full material spec is what separates a design coordinator from a receptionist.',
+      },
+    ],
+
+    // ── WEEK 23: KITCHEN & BATH TRENDS ───────────────────────────────────────
+    23: [
+      // Mon — Concept
+      {
+        topic: 'Current Kitchen Styles — Transitional, Modern Farmhouse, Contemporary',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_NKBA,
+        objectives: [
+          'Know the defining features of each style: cabinet style, finish, hardware, countertop, lighting',
+          'Know which style is most popular in Columbus right now',
+          'Know how to identify a client\'s style from their inspiration images',
+        ],
+        task: 'Find one example of each style on Houzz. Write 3 defining features for each. Which one is NFR building the most of right now?',
+        tip: 'Style vocabulary makes Maria credible in client conversations.',
+      },
+      // Tue — Application
+      {
+        topic: 'Current Bath Styles & Trends',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_NKBA,
+        objectives: [
+          'Know the top 3 current bath remodel trends: floating vanities, walk-in showers, spa-inspired neutrals',
+          'Know the difference between a primary bath, a guest bath, and a half bath renovation scope',
+          'Know which bath projects NFR handles vs. refers out',
+        ],
+        task: 'Browse NKBA bath trend pages. Write the 3 biggest trends for 2025–2026 bathrooms. Which one is most requested in NFR\'s Columbus market?',
+        tip: 'Bath projects are growing at NFR. Knowing trends helps Maria pre-sell the category.',
+      },
+      // Wed — Practice
+      {
+        topic: 'NKBA Resources — Using Industry Tools',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_NKBA,
+        objectives: [
+          'Know what NKBA is and why it\'s a credible design reference',
+          'Know which NKBA resources Maria can access and use with clients',
+          'Find one trend report or design guide and summarize it',
+        ],
+        task: 'Visit nkba.org. Find one resource Maria could use in a client conversation. Write a 3-sentence summary and explain how it would help close a kitchen or bath project.',
+        tip: 'Using industry sources makes Maria sound like a professional, not a salesperson.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Style Vocabulary — How to Talk About Design',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_AD,
+        objectives: [
+          'Know the 10 most common style terms used in kitchen and bath design',
+          'Know how to use style vocabulary in a client conversation naturally',
+          'Know how to describe a style without using jargon a client won\'t understand',
+        ],
+        task: 'Write a 10-term design vocabulary list with a plain-English definition for each. Then write: how would you use 3 of these terms naturally in a client meeting?',
+        tip: 'Vocabulary is confidence. Use it casually, not like you\'re reading from a textbook.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 23 Review — Kitchen & Bath Trends',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_NKBA,
+        objectives: [
+          'Describe 3 kitchen styles and 3 bath trends in client-friendly language',
+          'Identify a client\'s style from 3 inspiration images',
+          'Use design vocabulary correctly in a role-play client conversation',
+        ],
+        task: 'Jose shows Maria 5 kitchen images. Maria identifies the style, names the defining features, and states what type of NFR client would choose it.',
+        tip: 'When Maria can name a style and its client, she can build the whole pitch around it.',
+      },
+    ],
+
+    // ── WEEK 24: SPOTTING A LOOK ──────────────────────────────────────────────
+    24: [
+      // Mon — Concept
+      {
+        topic: 'Houzz & Pinterest — How Clients Use Them',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_HOUZZ,
+        objectives: [
+          'Understand that most clients arrive with a Houzz or Pinterest board',
+          'Know how to read a client\'s saved images to find the common thread',
+          'Know how to ask for a client\'s inspiration board before the first meeting',
+        ],
+        task: 'Browse Houzz and save 10 images that feel consistent in style. Write: what is the common thread? What style would you call it? What material shows up most?',
+        tip: 'The client\'s inspiration board tells you everything. Learn to read it.',
+      },
+      // Tue — Application
+      {
+        topic: 'Mood Board Basics — What They Are and Why They Work',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_HOUZZ,
+        objectives: [
+          'Know what a mood board is: a visual collection that aligns client and designer',
+          'Know the basic components: cabinet finish, countertop, flooring, wall color, hardware',
+          'Know when to use a mood board: at the proposal stage, before spec is finalized',
+        ],
+        task: 'Build a simple mood board using Google Slides or a printed collage: 5 images representing a cohesive kitchen direction. Label each: what it is and which Hearthwood product it relates to.',
+        tip: 'A mood board does more work than a paragraph of description. Clients respond to images.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Listening to What Clients Really Want',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_HOUZZ,
+        objectives: [
+          'Know how to listen past the words to the feeling a client is describing',
+          'Know the difference between what a client says and what they mean',
+          'Practice reflecting back a client\'s feeling in design language',
+        ],
+        task: 'Jose plays 3 clients with different descriptions. Maria listens, reflects the feeling back, and names a design direction for each. Debrief: did Maria hear the right thing?',
+        tip: '"I want it to feel like a vacation" means something specific. Maria\'s job is to find out what.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'From Inspiration to Spec — Bridging the Gap',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_HOUZZ,
+        objectives: [
+          'Know how to take a client\'s inspiration images and translate them into an NFR spec',
+          'Understand which elements of an inspiration image can be replicated vs. approximated vs. referenced',
+          'Know when a client\'s vision exceeds the project budget and how to handle it',
+        ],
+        task: 'Take a Houzz kitchen image and build a corresponding NFR spec using available Hearthwood products and standard materials. What can you match? What do you approximate? What do you flag?',
+        tip: 'The best design coordinators translate beautifully — not perfectly. Close is enough to close the deal.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 24 Review — Spotting a Look',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_HOUZZ,
+        objectives: [
+          'Read a client\'s inspiration board and name the style and dominant material',
+          'Build a basic mood board in 20 minutes',
+          'Translate a client feeling into a design direction and a starting spec',
+        ],
+        task: 'Jose gives Maria a client brief with 5 inspiration images. Maria builds a mood board, names the style, and proposes a starting spec. Jose evaluates: would this move the client forward?',
+        tip: 'When Maria can translate a client\'s vision into a concrete direction, she is doing design work.',
+      },
+    ],
+
+    // ── WEEK 25: DESIGN → NFR SALES ──────────────────────────────────────────
+    25: [
+      // Mon — Concept
+      {
+        topic: 'Design as a Closing Tool',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_AD,
+        objectives: [
+          'Understand how design clarity reduces client hesitation and speeds decision-making',
+          'Know the principle: a client who can see it will sign it',
+          'Know where design input fits in the NFR sales sequence',
+        ],
+        task: 'Write: how has learning design helped Maria in her role? Where in the client journey can design make the biggest difference at NFR? Show Jose.',
+        tip: 'Design that closes deals is not about being an artist — it\'s about reducing uncertainty.',
+      },
+      // Tue — Application
+      {
+        topic: 'When to Involve Jose',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_AD,
+        objectives: [
+          'Know the clear triggers for looping in Jose: pricing decisions, scope expansions, client hesitation about budget',
+          'Know how to hand off a design-engaged client to Jose in a way that maintains momentum',
+          'Practice the hand-off conversation: "Let me bring Jose in to walk you through the options."',
+        ],
+        task: 'Write the exact hand-off script Maria uses when a client is ready for Jose. Role-play it with Jose. Debrief: does it feel natural? Does it create momentum?',
+        tip: 'A smooth hand-off from Maria to Jose is the moment the sale accelerates.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Maria\'s Expanded Role in the NFR Sales Process',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_AD,
+        objectives: [
+          'Know how Maria\'s design track changes her role from coordinator to design-informed coordinator',
+          'Know the 3 things Maria now does that she couldn\'t do before this training',
+          'Know what Maria\'s involvement looks like in a kitchen discovery conversation',
+        ],
+        task: 'Write a before/after summary: what did Maria do in a client meeting before this training vs. now? What specific actions changed? Show Jose.',
+        tip: 'Growth shows up in the specifics. Name exactly what changed.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'The Future of Design at NFR',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_NKBA,
+        objectives: [
+          'Understand Jose\'s vision: design-first positioning for NFR\'s kitchen and bath division',
+          'Know what Maria\'s expanded design role looks like in the next 90 days',
+          'Build a personal 90-day design growth plan: 2 skills to deepen, 1 stretch goal',
+        ],
+        task: 'Write a 90-day design growth plan: what will Maria practice, what will she study, and what does success look like? Submit to Jose.',
+        tip: 'The vision for design at NFR is bigger than this training. Maria is building toward it.',
+      },
+      // Fri — Design Graduation
+      {
+        topic: 'Design Track Graduation',
+        resourceLabel: DESIGN_LABEL,
+        resourceUrl: DESIGN_URL_AD,
+        objectives: [
+          'Celebrate completing all 3 tracks: Mozaik, Office Admin, Design Awareness',
+          'Acknowledge the growth from a Mozaik-only coordinator to a full Office & Design Coordinator',
+          'Commit to the 90-day growth plan as the next chapter',
+        ],
+        task: 'Maria presents to Jose: one thing she can now do for a client that she couldn\'t 90 days ago. Jose responds: one thing he\'s seen change in Maria during this training. Both write it down.',
+        tip: 'Ninety days. Three tracks. One hundred and eighty sessions. You are the Office & Design Coordinator NFR needs.',
+      },
+    ],
+  };
+
+  // ── COMBINED PLAN — all 3 tracks in one flat object ──────────────────────
+  const MARIA_PLAN = Object.assign({}, MOZAIK_PLAN, MARIA_ADMIN_PLAN, MARIA_DESIGN_PLAN);
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // CNC PLAN — Scott (Weeks 1–12)
   // ═══════════════════════════════════════════════════════════════════════════
 
@@ -2539,11 +3464,11 @@
   const TRAINING_CONTENT = {
     maria: {
       name:      'Maria',
-      role:      'Designer / Office Manager',
+      role:      'Office & Design Coordinator',
       color:     '#5F8062',
       anchor:    '2026-03-16',
       startWeek: 8,
-      plan:      MOZAIK_PLAN,
+      plan:      MARIA_PLAN,
     },
     scott: {
       name:      'Scott',

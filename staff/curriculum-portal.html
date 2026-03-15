@@ -513,6 +513,12 @@
       { weeks: [17,18,19,20],   label: 'Phase 5 — Leadership',         color: '#B8860B', bg: '#FFF5D6' },
     ];
 
+    var MARIA_PHASES = [
+      { weeks: [8,9,10,11,12],           label: 'Track 1 — Mozaik',           color: '#5F8062', bg: '#D4E6D5' },
+      { weeks: [13,14,15,16,17,18,19],   label: 'Track 2 — Office Admin',     color: '#1C5A8A', bg: '#D6EAF8' },
+      { weeks: [20,21,22,23,24,25],      label: 'Track 3 — Design Awareness', color: '#8B5E8B', bg: '#EAD6EA' },
+    ];
+
     // ── State ────────────────────────────────────────────────────────────────
 
     var state = {
@@ -540,6 +546,13 @@
     function getJorgePhase(week) {
       for (var i = 0; i < JORGE_PHASES.length; i++) {
         if (JORGE_PHASES[i].weeks.indexOf(week) !== -1) return JORGE_PHASES[i];
+      }
+      return null;
+    }
+
+    function getMariaPhase(week) {
+      for (var i = 0; i < MARIA_PHASES.length; i++) {
+        if (MARIA_PHASES[i].weeks.indexOf(week) !== -1) return MARIA_PHASES[i];
       }
       return null;
     }
@@ -593,18 +606,19 @@
       document.getElementById('trainee-dot').style.background = trainee.color;
       document.getElementById('trainee-label').textContent    = trainee.label + ' · ' + trainee.role;
 
-      // ── Phase badge (Jorge only)
+      // ── Phase badge (Jorge and Maria)
       var phaseBadge = document.getElementById('phase-badge');
+      var activePhaseBadge = null;
       if (key === 'jorge') {
-        var phase = getJorgePhase(week);
-        if (phase) {
-          phaseBadge.textContent    = phase.label;
-          phaseBadge.style.background  = phase.bg;
-          phaseBadge.style.color       = phase.color;
-          phaseBadge.style.display     = 'inline-block';
-        } else {
-          phaseBadge.style.display = 'none';
-        }
+        activePhaseBadge = getJorgePhase(week);
+      } else if (key === 'maria') {
+        activePhaseBadge = getMariaPhase(week);
+      }
+      if (activePhaseBadge) {
+        phaseBadge.textContent       = activePhaseBadge.label;
+        phaseBadge.style.background  = activePhaseBadge.bg;
+        phaseBadge.style.color       = activePhaseBadge.color;
+        phaseBadge.style.display     = 'inline-block';
       } else {
         phaseBadge.style.display = 'none';
       }
@@ -619,7 +633,10 @@
         var label = 'Week ' + w;
         if (key === 'jorge') {
           var ph = getJorgePhase(w);
-          if (ph) label += ' — ' + ph.label.replace('Phase X — ', '').replace(/Phase \d+ — /, '');
+          if (ph) label += ' — ' + ph.label.replace(/Phase \d+ — /, '');
+        } else if (key === 'maria') {
+          var mph = getMariaPhase(w);
+          if (mph) label += ' — ' + mph.label.replace(/Track \d+ — /, '');
         }
         return '<option value="' + w + '"' + (w === week ? ' selected' : '') + '>' + label + '</option>';
       }).join('');
@@ -628,11 +645,15 @@
       document.getElementById('btn-prev').disabled = wkIdx <= 0;
       document.getElementById('btn-next').disabled = wkIdx >= weeks.length - 1;
 
-      // ── Phase progress bar (Jorge only)
+      // ── Phase progress bar (Jorge and Maria)
       var phaseBar = document.getElementById('phase-progress');
-      if (key === 'jorge') {
+      var phaseSet = null;
+      if (key === 'jorge') phaseSet = JORGE_PHASES;
+      else if (key === 'maria') phaseSet = MARIA_PHASES;
+
+      if (phaseSet) {
         phaseBar.style.display = 'flex';
-        phaseBar.innerHTML = JORGE_PHASES.map(function (ph) {
+        phaseBar.innerHTML = phaseSet.map(function (ph) {
           var isActive = ph.weeks.indexOf(week) !== -1;
           return '<div class="phase-segment' + (isActive ? ' active' : '') + '" ' +
             'style="' + (isActive ? 'border-bottom-color:' + ph.color + ';color:' + ph.color + ';' : '') + '" ' +
@@ -751,6 +772,13 @@
           8:'Custom Modifications', 9:'Layouts & Room Planning',
           10:'Drawers, Hardware & Doors', 11:'Advanced Customization',
           12:'Graduation — Full Kitchen Build',
+          13:'NFR Systems & Tools', 14:'Client Communication',
+          15:'Agreement Workflow', 16:'Job File Management',
+          17:'Scheduling & Coordination', 18:'Office Financial Awareness',
+          19:'Graduation — Office Operations',
+          20:'What Designers Do', 21:'Color Theory & Trends',
+          22:'Materials & Finishes', 23:'Kitchen & Bath Trends',
+          24:'Spotting a Look', 25:'Design → NFR Sales',
         };
         return mariaThemes[week] || '';
       }
