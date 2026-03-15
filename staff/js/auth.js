@@ -21,10 +21,10 @@
       portals: ['training-employee'],
     },
     'warehouse-cnc-operator': {
-      portals: ['training-employee'],
+      portals: ['scott-training', 'inventory'],
     },
     'accounting': {
-      portals: ['jen','training-employee'],
+      portals: ['jen', 'training-employee', 'inventory'],
     },
   };
 
@@ -80,13 +80,18 @@
     }
 
     // Write training backwards-compat session keys so training JS files work unchanged.
-    var isManager  = roleDef.portals.indexOf('training-manager')  !== -1;
-    var isEmployee = roleDef.portals.indexOf('training-employee') !== -1;
+    var isManager      = roleDef.portals.indexOf('training-manager')  !== -1;
+    var isEmployee     = roleDef.portals.indexOf('training-employee') !== -1;
+    var isScottTraining = roleDef.portals.indexOf('scott-training')   !== -1;
     if (isManager) {
       sessionStorage.setItem('tp_role',     'manager');
       sessionStorage.setItem('tp_employee', '');
       sessionStorage.setItem('tp_name',     u.name);
     } else if (isEmployee) {
+      sessionStorage.setItem('tp_role',     'employee');
+      sessionStorage.setItem('tp_employee', employeeKey || '');
+      sessionStorage.setItem('tp_name',     u.name);
+    } else if (isScottTraining) {
       sessionStorage.setItem('tp_role',     'employee');
       sessionStorage.setItem('tp_employee', employeeKey || '');
       sessionStorage.setItem('tp_name',     u.name);

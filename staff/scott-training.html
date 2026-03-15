@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NFR Training — Scott's Daily Plan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/training-styles.css" />
+  <style>
+    /* ── Progress Rail ─────────────────────────────────────────── */
+    .step-rail {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .rail-pill {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      border: 2px solid #D1D5DB;
+      background: #fff;
+      color: #9CA3AF;
+      cursor: default;
+      transition: all .2s;
+    }
+    .rail-pill.active {
+      border-color: #3A6B5F;
+      background: #EDF5F2;
+      color: #2E5548;
+    }
+    .rail-pill.done {
+      border-color: #059669;
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    .rail-pill .pill-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      background: #D1D5DB; color: #6B7280;
+      flex-shrink: 0;
+    }
+    .rail-pill.active .pill-num { background: #3A6B5F; color: #fff; }
+    .rail-pill.done .pill-num   { background: #059669; color: #fff; }
+    .rail-pill .pill-time {
+      font-size: 11px; font-weight: 400; opacity: .7; margin-left: auto;
+    }
+
+    /* ── Section Cards ─────────────────────────────────────────── */
+    .section-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .section-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .8px; color: #9CA3AF; margin-bottom: 8px;
+    }
+    .section-topic {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; color: #1C2B4A;
+      margin-bottom: 16px;
+    }
+    .badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .badge {
+      padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;
+      background: #EDF5F2; color: #2E5548;
+    }
+    .badge.orange { background: #FEF3C7; color: #92400E; }
+
+    /* objectives */
+    .obj-list { list-style: none; padding: 0; margin: 0 0 16px; }
+    .obj-list li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 14px; color: #374151; padding: 6px 0;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .obj-list li:last-child { border: none; }
+    .obj-list li i { color: #3A6B5F; margin-top: 2px; flex-shrink: 0; }
+
+    /* resource link */
+    .resource-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #1C2B4A; color: #fff;
+      padding: 9px 18px; border-radius: 7px;
+      font-size: 13px; font-weight: 700; text-decoration: none;
+      transition: opacity .15s; margin-bottom: 20px;
+    }
+    .resource-btn:hover { opacity: .85; }
+
+    /* practice task box */
+    .task-box {
+      background: #FEF9EC;
+      border: 1px solid #FDE68A;
+      border-radius: 8px;
+      padding: 16px 18px;
+      font-size: 13px; color: #78350F;
+      margin-bottom: 16px;
+    }
+    .task-box strong { display: block; margin-bottom: 6px; color: #92400E; }
+
+    /* tip box */
+    .tip-box {
+      background: #F0FDF4;
+      border-left: 4px solid #059669;
+      padding: 12px 16px;
+      font-size: 13px; color: #065F46;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 20px;
+    }
+    .tip-box strong { color: #047857; }
+
+    /* notes */
+    .notes-label {
+      font-size: 12px; font-weight: 700; color: #6B7280;
+      text-transform: uppercase; letter-spacing: .4px;
+      margin-bottom: 6px;
+    }
+    .notes-area {
+      width: 100%; min-height: 90px;
+      border: 1.5px solid #D1D5DB; border-radius: 7px;
+      padding: 10px 14px; font-family: 'Lato', sans-serif; font-size: 14px;
+      color: #374151; resize: vertical; outline: none;
+      transition: border-color .15s;
+    }
+    .notes-area:focus { border-color: #3A6B5F; }
+
+    /* continue button */
+    .btn-continue {
+      width: 100%; padding: 14px;
+      background: #3A6B5F; color: #fff;
+      border: none; border-radius: 8px;
+      font-family: 'Lato', sans-serif; font-size: 15px; font-weight: 700;
+      cursor: pointer; margin-top: 18px;
+      transition: background .15s;
+    }
+    .btn-continue:hover { background: #2E5548; }
+    .btn-continue:disabled {
+      background: #D1D5DB; color: #9CA3AF; cursor: not-allowed;
+    }
+
+    /* inventory items in step 3 */
+    .inv-table {
+      width: 100%; border-collapse: collapse; margin-bottom: 16px;
+      font-size: 14px;
+    }
+    .inv-table th {
+      text-align: left; padding: 8px 10px;
+      font-size: 11px; font-weight: 700; color: #9CA3AF;
+      text-transform: uppercase; letter-spacing: .4px;
+      border-bottom: 2px solid #E5E7EB;
+    }
+    .inv-table td {
+      padding: 10px 10px; border-bottom: 1px solid #F3F4F6;
+      color: #374151;
+    }
+    .inv-table tr:last-child td { border: none; }
+    .qty-badge {
+      display: inline-block; background: #EDF5F2; color: #2E5548;
+      padding: 3px 10px; border-radius: 12px; font-weight: 700; font-size: 13px;
+    }
+    .flag-row { display: none; margin-top: 6px; }
+    .flag-row textarea {
+      width: 100%; border: 1.5px solid #FCA5A5; border-radius: 6px;
+      padding: 7px 10px; font-size: 13px; font-family: 'Lato', sans-serif;
+      resize: none; outline: none;
+    }
+    .btn-flag {
+      background: #FEF2F2; border: 1px solid #FECACA; color: #EF4444;
+      padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 700;
+      cursor: pointer; transition: background .15s;
+    }
+    .btn-flag:hover { background: #FEE2E2; }
+    .btn-flag.flagged { background: #FEE2E2; }
+
+    .inv-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #5A7FA3; color: #fff;
+      padding: 9px 18px; border-radius: 7px;
+      font-size: 13px; font-weight: 700; text-decoration: none;
+      margin-bottom: 20px;
+      transition: opacity .15s;
+    }
+    .inv-link:hover { opacity: .85; }
+
+    /* clock */
+    .clock-bar {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      background: #F9FAFB; border-radius: 8px; padding: 10px 16px;
+      margin-bottom: 20px; font-size: 13px; color: #6B7280;
+    }
+    .clock-bar strong { color: #374151; }
+
+    /* rest card */
+    .rest-card-custom {
+      background: #fff; border-radius: 12px;
+      padding: 48px 32px; text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .rest-card-custom .icon { font-size: 40px; margin-bottom: 16px; }
+    .rest-card-custom h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; color: #1C2B4A; margin-bottom: 10px;
+    }
+    .rest-card-custom p { font-size: 14px; color: #6B7280; }
+
+    /* header */
+    .app-header {
+      background: #3A6B5F;
+      color: #fff;
+      padding: 0 28px;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .header-brand { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; }
+    .header-right { display: flex; align-items: center; gap: 14px; font-size: 13px; }
+    .btn-logout {
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.35);
+      color: #fff; padding: 6px 14px; border-radius: 6px;
+      font-family: 'Lato', sans-serif; font-size: 12px; font-weight: 700;
+      cursor: pointer; transition: background .15s;
+    }
+    .btn-logout:hover { background: rgba(255,255,255,.25); }
+
+    .main-wrap {
+      max-width: 760px; margin: 0 auto; padding: 32px 20px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; color: #1C2B4A; margin-bottom: 4px;
+    }
+    .page-sub { font-size: 13px; color: #9CA3AF; margin-bottom: 24px; }
+  </style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-brand">🌿 NFR · Scott's Training</div>
+  <div class="header-right">
+    <span id="header-name"></span>
+    <button class="btn-logout" onclick="NFRAuth.logout()">Sign Out</button>
+  </div>
+</header>
+
+<div class="main-wrap" id="main-wrap">
+  <div class="rest-card-custom">
+    <div class="icon">⏳</div>
+    <h2>Loading your session…</h2>
+  </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/training-tracker.js"></script>
+<script src="js/training-content.js"></script>
+<script src="js/content-library.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var session = NFRAuth.requireAuth('scott-training');
+  if (!session) return;
+
+  document.getElementById('header-name').textContent = session.name;
+
+  var TODAY = tracker.todayStr();
+  var DOW   = new Date(TODAY + 'T12:00:00').getDay(); // 0=Sun, 6=Sat
+
+  // ── Storage helpers ──────────────────────────────────────────────────────
+  var STORE_KEY = 'nfr_scott_daily';
+
+  function loadStore() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) { return {}; }
+  }
+  function saveStore(data) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+  }
+  function getDay(dateStr) {
+    var s = loadStore();
+    if (!s[dateStr]) {
+      s[dateStr] = {
+        cnc:       { completed: false, notes: '' },
+        office:    { completed: false, notes: '' },
+        warehouse: { completed: false, notes: '', inventoryDone: false }
+      };
+      saveStore(s);
+    }
+    return s[dateStr];
+  }
+  function updateDay(dateStr, key, patch) {
+    var s = loadStore();
+    if (!s[dateStr]) getDay(dateStr); // ensure exists
+    s = loadStore();
+    Object.assign(s[dateStr][key], patch);
+    saveStore(s);
+  }
+  function setClockIn(dateStr, timeStr) {
+    var s = loadStore();
+    if (!s[dateStr]) getDay(dateStr);
+    s = loadStore();
+    if (!s[dateStr].clockIn) { s[dateStr].clockIn = timeStr; saveStore(s); }
+  }
+  function setClockOut(dateStr, timeStr) {
+    var s = loadStore();
+    if (!s[dateStr]) getDay(dateStr);
+    s = loadStore();
+    s[dateStr].clockOut = timeStr; saveStore(s);
+  }
+
+  // ── Weekend gate ─────────────────────────────────────────────────────────
+  if (DOW === 0 || DOW === 6) {
+    document.getElementById('main-wrap').innerHTML =
+      '<div class="rest-card-custom">' +
+        '<div class="icon">🌿</div>' +
+        '<h2>Rest up, Scott.</h2>' +
+        '<p>Training resumes Monday. Come back then to start your week.</p>' +
+      '</div>';
+    return;
+  }
+
+  // ── Determine active step ────────────────────────────────────────────────
+  var dayData = getDay(TODAY);
+  var activeStep = 1;
+  if (dayData.cnc.completed && !dayData.office.completed) activeStep = 2;
+  else if (dayData.cnc.completed && dayData.office.completed) activeStep = 3;
+
+  // Auto clock-in when session starts
+  var now = new Date();
+  var nowTime = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+  if (activeStep === 1 && !dayData.cnc.completed) {
+    setClockIn(TODAY, nowTime);
+  }
+
+  // ── Render ───────────────────────────────────────────────────────────────
+  render();
+
+  function render() {
+    dayData = getDay(TODAY);
+    var wrap = document.getElementById('main-wrap');
+
+    // Check if all done
+    var allDone = dayData.cnc.completed && dayData.office.completed && dayData.warehouse.completed;
+
+    wrap.innerHTML =
+      '<div class="page-title">Good morning, Scott.</div>' +
+      '<div class="page-sub">Today is ' + formatDate(TODAY) + ' · ' + formatClock(dayData) + '</div>' +
+      renderRail(dayData, allDone) +
+      (allDone ? renderDone(dayData) : renderActiveStep(dayData));
+
+    attachHandlers(dayData);
+  }
+
+  function formatDate(ds) {
+    var d = new Date(ds + 'T12:00:00');
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate();
+  }
+
+  function formatClock(dd) {
+    var parts = [];
+    if (dd.clockIn)  parts.push('Clocked in ' + dd.clockIn);
+    if (dd.clockOut) parts.push('Out ' + dd.clockOut);
+    return parts.length ? parts.join(' · ') : 'Session active';
+  }
+
+  function renderRail(dd, allDone) {
+    var steps = [
+      { key: 'cnc',       label: 'CNC',           time: '50 min' },
+      { key: 'office',    label: 'Administration', time: '20 min' },
+      { key: 'warehouse', label: 'Warehouse',      time: '30 min' },
+    ];
+    var html = '<div class="step-rail">';
+    steps.forEach(function(s, i) {
+      var num = i + 1;
+      var done = dd[s.key].completed;
+      var active = !done && (
+        (s.key === 'cnc' && !dd.cnc.completed) ||
+        (s.key === 'office' && dd.cnc.completed && !dd.office.completed) ||
+        (s.key === 'warehouse' && dd.cnc.completed && dd.office.completed && !dd.warehouse.completed)
+      );
+      var cls = done ? 'done' : (active ? 'active' : '');
+      html += '<div class="rail-pill ' + cls + '">' +
+        '<div class="pill-num">' + (done ? '<i class="fa-solid fa-check" style="font-size:9px"></i>' : num) + '</div>' +
+        '<span>' + s.label + '</span>' +
+        '<span class="pill-time">' + s.time + '</span>' +
+        '</div>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function renderDone(dd) {
+    return '<div class="rest-card-custom">' +
+      '<div class="icon">✅</div>' +
+      '<h2>Session complete!</h2>' +
+      '<p>You finished all 3 pillars today. See you tomorrow.</p>' +
+      (dd.clockIn ? '<p style="margin-top:12px;font-size:13px;color:#6B7280">Clocked in: ' + dd.clockIn + (dd.clockOut ? ' · Out: ' + dd.clockOut : '') + '</p>' : '') +
+      '</div>';
+  }
+
+  function renderActiveStep(dd) {
+    var activeStep = 1;
+    if (dd.cnc.completed && !dd.office.completed) activeStep = 2;
+    else if (dd.cnc.completed && dd.office.completed) activeStep = 3;
+
+    if (activeStep === 1) return renderCNC(dd);
+    if (activeStep === 2) return renderOffice(dd);
+    return renderWarehouse(dd);
+  }
+
+  // ── Step 1: CNC ─────────────────────────────────────────────────────────
+  function renderCNC(dd) {
+    var td = getTrainingDay('scott', TODAY);
+    if (!td) {
+      return '<div class="section-card">' +
+        '<div class="section-label">Step 1 — CNC</div>' +
+        '<div class="section-topic">No CNC content for today.</div>' +
+        '<p style="font-size:14px;color:#6B7280">Check back next week, or ask Jose for an assignment.</p>' +
+        '</div>';
+    }
+
+    var objs = (td.objectives || []).map(function(o) {
+      return '<li><i class="fa-solid fa-circle-check"></i>' + escHtml(o) + '</li>';
+    }).join('');
+
+    var resBtn = td.resourceUrl
+      ? '<a class="resource-btn" href="' + td.resourceUrl + '" target="_blank" rel="noopener">' +
+        '<i class="fa-solid fa-play-circle"></i>' + escHtml(td.resourceLabel || 'Training Resource') + '</a>'
+      : '';
+
+    return '<div class="section-card">' +
+      '<div class="section-label">Step 1 of 3 — CNC Training</div>' +
+      '<div class="section-topic">' + escHtml(td.topic) + '</div>' +
+      '<div class="badge-row">' +
+        '<span class="badge">Week ' + td.week + ' · Day ' + td.day + '</span>' +
+        '<span class="badge orange">50 minutes</span>' +
+      '</div>' +
+      (objs ? '<ul class="obj-list">' + objs + '</ul>' : '') +
+      resBtn +
+      (td.task ? '<div class="task-box"><strong>Practice Task</strong>' + escHtml(td.task) + '</div>' : '') +
+      (td.tip  ? '<div class="tip-box"><strong>Jose\'s Tip:</strong> ' + escHtml(td.tip) + '</div>' : '') +
+      '<div class="notes-label">Your Notes</div>' +
+      '<textarea class="notes-area" id="notes-cnc" placeholder="Write your notes here…">' + escHtml(dd.cnc.notes) + '</textarea>' +
+      '<button class="btn-continue" id="btn-cnc-done">Mark Complete &amp; Continue →</button>' +
+      '</div>';
+  }
+
+  // ── Step 2: Administration ───────────────────────────────────────────────
+  function renderOffice(dd) {
+    var oc = CONTENT_LIBRARY.getOfficeContent(TODAY);
+    if (!oc) {
+      return '<div class="section-card">' +
+        '<div class="section-label">Step 2 — Administration</div>' +
+        '<div class="section-topic">No office content for today.</div>' +
+        '</div>';
+    }
+
+    return '<div class="section-card">' +
+      '<div class="section-label">Step 2 of 3 — Administration</div>' +
+      '<div class="section-topic">' + escHtml(oc.topic) + '</div>' +
+      '<div class="badge-row">' +
+        '<span class="badge">Office Admin</span>' +
+        '<span class="badge orange">20 minutes</span>' +
+      '</div>' +
+      (oc.focus    ? '<div class="tip-box" style="margin-bottom:16px"><strong>Focus:</strong> ' + escHtml(oc.focus) + '</div>' : '') +
+      (oc.scenario ? '<div class="task-box"><strong>Scenario</strong>' + escHtml(oc.scenario) + '</div>' : '') +
+      (oc.task     ? '<div class="task-box" style="background:#EFF6FF;border-color:#BFDBFE;color:#1E40AF"><strong style="color:#1D4ED8">Your Task</strong>' + escHtml(oc.task) + '</div>' : '') +
+      (oc.tip      ? '<div class="tip-box"><strong>Jose\'s Rule:</strong> ' + escHtml(oc.tip) + '</div>' : '') +
+      '<div class="notes-label">Your Notes</div>' +
+      '<textarea class="notes-area" id="notes-office" placeholder="Work through the scenario here…">' + escHtml(dd.office.notes) + '</textarea>' +
+      '<button class="btn-continue" id="btn-office-done">Mark Complete &amp; Continue →</button>' +
+      '</div>';
+  }
+
+  // ── Step 3: Warehouse ────────────────────────────────────────────────────
+  function renderWarehouse(dd) {
+    var items = getInventoryItems();
+    var rows = items.map(function(item, idx) {
+      return '<tr>' +
+        '<td>' + escHtml(item.name) + '</td>' +
+        '<td>' + escHtml(item.unit) + '</td>' +
+        '<td><span class="qty-badge">' + item.qty + '</span></td>' +
+        '<td>' +
+          '<button class="btn-flag" data-idx="' + idx + '" onclick="toggleFlag(' + idx + ')">Flag</button>' +
+          '<div class="flag-row" id="flag-row-' + idx + '">' +
+            '<textarea rows="2" placeholder="Describe the discrepancy…" id="flag-note-' + idx + '"></textarea>' +
+          '</div>' +
+        '</td>' +
+      '</tr>';
+    }).join('');
+
+    return '<div class="section-card">' +
+      '<div class="section-label">Step 3 of 3 — Warehouse Check</div>' +
+      '<div class="section-topic">Daily Inventory Verification</div>' +
+      '<div class="badge-row">' +
+        '<span class="badge">Warehouse</span>' +
+        '<span class="badge orange">30 minutes</span>' +
+      '</div>' +
+      '<p style="font-size:14px;color:#374151;margin-bottom:16px">Confirm current quantities are accurate. Flag any discrepancy below.</p>' +
+      '<table class="inv-table">' +
+        '<thead><tr><th>Item</th><th>Unit</th><th>Current Qty</th><th>Status</th></tr></thead>' +
+        '<tbody>' + rows + '</tbody>' +
+      '</table>' +
+      '<a class="inv-link" href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i>Go to Inventory — Add / Subtract by PO →</a>' +
+      '<div class="notes-label">Warehouse Observations</div>' +
+      '<textarea class="notes-area" id="notes-warehouse" placeholder="Any general warehouse notes for today…">' + escHtml(dd.warehouse.notes) + '</textarea>' +
+      '<button class="btn-continue" id="btn-warehouse-done">Mark Complete &amp; Finish Session →</button>' +
+      '</div>';
+  }
+
+  // ── Inventory items helper ───────────────────────────────────────────────
+  var DEFAULT_ITEMS = [
+    { id: 1, name: 'Sheet Goods — Maple Plywood (4×8)', unit: 'sheets', qty: 0 },
+    { id: 2, name: 'MDF Panels (4×8 Standard)',         unit: 'panels', qty: 0 },
+    { id: 3, name: 'Cabinet Hinges (Soft-Close)',        unit: 'each',   qty: 0 },
+    { id: 4, name: 'Drawer Slides (Soft-Close Pairs)',   unit: 'pairs',  qty: 0 },
+    { id: 5, name: 'CNC Router Bits',                    unit: 'each',   qty: 0 },
+  ];
+
+  function getInventoryItems() {
+    try {
+      var raw = localStorage.getItem('nfr_inventory_items');
+      return raw ? JSON.parse(raw) : DEFAULT_ITEMS;
+    } catch(e) { return DEFAULT_ITEMS; }
+  }
+
+  // ── Event handlers ───────────────────────────────────────────────────────
+  function attachHandlers(dd) {
+    // Auto-save notes
+    function autoSave(id, pillar) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', function() {
+        updateDay(TODAY, pillar, { notes: el.value });
+      });
+    }
+    autoSave('notes-cnc',       'cnc');
+    autoSave('notes-office',    'office');
+    autoSave('notes-warehouse', 'warehouse');
+
+    // CNC complete
+    var btnCnc = document.getElementById('btn-cnc-done');
+    if (btnCnc) {
+      btnCnc.addEventListener('click', function() {
+        updateDay(TODAY, 'cnc', { completed: true });
+        render();
+      });
+    }
+
+    // Office complete
+    var btnOffice = document.getElementById('btn-office-done');
+    if (btnOffice) {
+      btnOffice.addEventListener('click', function() {
+        updateDay(TODAY, 'office', { completed: true });
+        render();
+      });
+    }
+
+    // Warehouse complete
+    var btnWh = document.getElementById('btn-warehouse-done');
+    if (btnWh) {
+      btnWh.addEventListener('click', function() {
+        // collect flag notes
+        var items = getInventoryItems();
+        var flags = {};
+        items.forEach(function(item, idx) {
+          var noteEl = document.getElementById('flag-note-' + idx);
+          if (noteEl && noteEl.value.trim()) {
+            flags[item.id] = noteEl.value.trim();
+          }
+        });
+        updateDay(TODAY, 'warehouse', {
+          completed: true,
+          inventoryDone: true,
+          flags: flags
+        });
+        var nowOut = new Date();
+        var outTime = String(nowOut.getHours()).padStart(2,'0') + ':' + String(nowOut.getMinutes()).padStart(2,'0');
+        setClockOut(TODAY, outTime);
+        render();
+      });
+    }
+  }
+
+  // ── Flag toggle (global for inline onclick) ──────────────────────────────
+  window.toggleFlag = function(idx) {
+    var row = document.getElementById('flag-row-' + idx);
+    var btn = document.querySelector('[data-idx="' + idx + '"]');
+    if (!row) return;
+    var open = row.style.display === 'block';
+    row.style.display = open ? 'none' : 'block';
+    if (btn) btn.classList.toggle('flagged', !open);
+  };
+
+  // ── Utility ──────────────────────────────────────────────────────────────
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+
+})();
+</script>
+<script src="js/nfr-assistant-widget.js"></script>
+</body>
+</html>

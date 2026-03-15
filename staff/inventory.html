@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NFR — Warehouse Inventory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    :root {
+      --primary:  #3A6B5F;
+      --primary2: #2E5548;
+      --blue:     #5A7FA3;
+      --light:    #F0F4F2;
+      --text:     #1C2B4A;
+      --muted:    #6B7280;
+      --border:   #E5E7EB;
+      --success:  #059669;
+      --danger:   #EF4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Lato', sans-serif; background: #EEF3F1; min-height: 100vh; }
+
+    /* header */
+    .app-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 0 28px;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .header-brand { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; }
+    .header-right { display: flex; align-items: center; gap: 14px; font-size: 13px; }
+    .btn-logout {
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.35);
+      color: #fff; padding: 6px 14px; border-radius: 6px;
+      font-family: 'Lato', sans-serif; font-size: 12px; font-weight: 700;
+      cursor: pointer; transition: background .15s;
+    }
+    .btn-logout:hover { background: rgba(255,255,255,.25); }
+
+    .main-wrap { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; color: var(--text); margin-bottom: 4px;
+    }
+    .page-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+
+    /* read-only banner */
+    .readonly-banner {
+      background: #EFF6FF; border: 1px solid #BFDBFE;
+      border-radius: 8px; padding: 10px 16px;
+      font-size: 13px; color: #1D4ED8;
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* card */
+    .card {
+      background: #fff; border-radius: 12px;
+      padding: 24px 28px; margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; color: var(--text); margin-bottom: 16px;
+      padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+
+    /* inventory table */
+    .inv-table {
+      width: 100%; border-collapse: collapse; font-size: 14px;
+    }
+    .inv-table th {
+      text-align: left; padding: 9px 12px;
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .4px;
+      border-bottom: 2px solid var(--border);
+    }
+    .inv-table td {
+      padding: 12px 12px; border-bottom: 1px solid #F3F4F6; color: #374151;
+      vertical-align: middle;
+    }
+    .inv-table tr:last-child td { border: none; }
+
+    .qty-badge {
+      display: inline-block; background: #EDF5F2; color: #2E5548;
+      padding: 4px 12px; border-radius: 12px; font-weight: 700; font-size: 14px;
+    }
+    .qty-badge.low { background: #FEF3C7; color: #92400E; }
+
+    .btn-add, .btn-sub {
+      padding: 6px 14px; border-radius: 6px;
+      font-family: 'Lato', sans-serif; font-size: 12px; font-weight: 700;
+      cursor: pointer; border: none; margin-right: 4px;
+      transition: opacity .15s;
+    }
+    .btn-add { background: #D1FAE5; color: #065F46; }
+    .btn-add:hover { opacity: .8; }
+    .btn-sub { background: #FEE2E2; color: #991B1B; }
+    .btn-sub:hover { opacity: .8; }
+
+    /* inline transaction form */
+    .txn-form {
+      display: none;
+      background: #F9FAFB; border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 18px; margin-top: 10px;
+    }
+    .txn-form.open { display: block; }
+    .txn-form-title {
+      font-size: 12px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .4px;
+      margin-bottom: 12px;
+    }
+    .txn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .txn-field { flex: 1; min-width: 120px; }
+    .txn-field label {
+      display: block; font-size: 11px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .3px; margin-bottom: 5px;
+    }
+    .txn-field input, .txn-field textarea {
+      width: 100%; border: 1.5px solid var(--border); border-radius: 6px;
+      padding: 8px 12px; font-family: 'Lato', sans-serif; font-size: 14px;
+      color: var(--text); outline: none; transition: border-color .15s;
+    }
+    .txn-field input:focus, .txn-field textarea:focus { border-color: var(--primary); }
+    .txn-field textarea { resize: none; }
+    .btn-confirm {
+      background: var(--primary); color: #fff;
+      padding: 9px 20px; border-radius: 7px;
+      font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700;
+      border: none; cursor: pointer; margin-right: 8px;
+      transition: background .15s;
+    }
+    .btn-confirm:hover { background: var(--primary2); }
+    .btn-cancel-txn {
+      background: #F3F4F6; color: var(--muted);
+      padding: 9px 16px; border-radius: 7px;
+      font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700;
+      border: 1px solid var(--border); cursor: pointer;
+    }
+
+    /* transaction log */
+    .log-table {
+      width: 100%; border-collapse: collapse; font-size: 13px;
+    }
+    .log-table th {
+      text-align: left; padding: 8px 10px;
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .3px;
+      border-bottom: 2px solid var(--border);
+    }
+    .log-table td {
+      padding: 10px 10px; border-bottom: 1px solid #F9FAFB;
+      color: #374151;
+    }
+    .log-table tr:last-child td { border: none; }
+    .change-pos { color: var(--success); font-weight: 700; }
+    .change-neg { color: var(--danger);  font-weight: 700; }
+
+    .empty-log {
+      text-align: center; padding: 32px;
+      font-size: 14px; color: var(--muted);
+    }
+
+    /* toast */
+    #toast {
+      position: fixed; bottom: 28px; right: 28px;
+      background: #1C2B4A; color: #fff;
+      padding: 12px 20px; border-radius: 8px;
+      font-size: 14px; font-weight: 600;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+      opacity: 0; transition: opacity .3s;
+      pointer-events: none; z-index: 9999;
+    }
+    #toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-brand">🌿 NFR · Warehouse Inventory</div>
+  <div class="header-right">
+    <span id="header-name"></span>
+    <button class="btn-logout" onclick="NFRAuth.logout()">Sign Out</button>
+  </div>
+</header>
+
+<div class="main-wrap">
+  <div class="page-title">Warehouse Inventory</div>
+  <div class="page-sub" id="page-sub">Track stock levels and log transactions by PO number.</div>
+
+  <div id="readonly-banner" class="readonly-banner" style="display:none">
+    <i class="fa-solid fa-eye"></i>
+    <span>You have read-only access to this inventory.</span>
+  </div>
+
+  <!-- Inventory table card -->
+  <div class="card">
+    <div class="card-title">Current Stock</div>
+    <table class="inv-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Unit</th>
+          <th>Qty</th>
+          <th id="actions-col-header">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="inv-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Transaction log card -->
+  <div class="card">
+    <div class="card-title">Transaction Log</div>
+    <div id="log-container"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="js/auth.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var session = NFRAuth.requireAuth('inventory');
+  if (!session) return;
+
+  document.getElementById('header-name').textContent = session.name;
+
+  // Determine read-only based on role
+  var isReadOnly = session.role === 'accounting';
+  if (isReadOnly) {
+    document.getElementById('readonly-banner').style.display = 'flex';
+    document.getElementById('actions-col-header').style.display = 'none';
+    document.getElementById('page-sub').textContent = 'Read-only view — stock levels and transaction history.';
+  }
+
+  // ── Storage ──────────────────────────────────────────────────────────────
+  var ITEMS_KEY = 'nfr_inventory_items';
+  var LOG_KEY   = 'nfr_inventory_log';
+
+  var DEFAULT_ITEMS = [
+    { id: 1, name: 'Sheet Goods — Maple Plywood (4×8)', unit: 'sheets', qty: 0 },
+    { id: 2, name: 'MDF Panels (4×8 Standard)',         unit: 'panels', qty: 0 },
+    { id: 3, name: 'Cabinet Hinges (Soft-Close)',        unit: 'each',   qty: 0 },
+    { id: 4, name: 'Drawer Slides (Soft-Close Pairs)',   unit: 'pairs',  qty: 0 },
+    { id: 5, name: 'CNC Router Bits',                    unit: 'each',   qty: 0 },
+  ];
+
+  function getItems() {
+    try { return JSON.parse(localStorage.getItem(ITEMS_KEY) || 'null') || DEFAULT_ITEMS; } catch(e) { return DEFAULT_ITEMS; }
+  }
+  function saveItems(items) { localStorage.setItem(ITEMS_KEY, JSON.stringify(items)); }
+
+  function getLog() {
+    try { return JSON.parse(localStorage.getItem(LOG_KEY) || '[]'); } catch(e) { return []; }
+  }
+  function saveLog(log) { localStorage.setItem(LOG_KEY, JSON.stringify(log)); }
+
+  function fmtDate() {
+    var d = new Date();
+    var y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
+    return y + '-' + m + '-' + dd;
+  }
+  function fmtTime() {
+    var d = new Date();
+    var h = d.getHours(), min = d.getMinutes();
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return h + ':' + String(min).padStart(2,'0') + ' ' + ampm;
+  }
+
+  // ── Open transaction form state ───────────────────────────────────────────
+  var openForm = null; // { itemId, direction: 'add'|'sub' }
+
+  // ── Render ───────────────────────────────────────────────────────────────
+  function render() {
+    renderTable();
+    renderLog();
+  }
+
+  function renderTable() {
+    var items = getItems();
+    var tbody = document.getElementById('inv-tbody');
+    tbody.innerHTML = items.map(function(item) {
+      var qtyClass = item.qty <= 2 ? 'qty-badge low' : 'qty-badge';
+      var actionsCell = '';
+      if (!isReadOnly) {
+        var formOpen = openForm && openForm.itemId === item.id;
+        actionsCell =
+          '<button class="btn-add" onclick="openTxnForm(' + item.id + ',\'add\')"><i class="fa-solid fa-plus"></i> Add</button>' +
+          '<button class="btn-sub" onclick="openTxnForm(' + item.id + ',\'sub\')"><i class="fa-solid fa-minus"></i> Subtract</button>' +
+          (formOpen ? renderTxnForm(item) : '<div class="txn-form" id="txn-' + item.id + '"></div>');
+      }
+      return '<tr>' +
+        '<td>' +
+          '<div style="font-weight:700;color:#1C2B4A">' + escHtml(item.name) + '</div>' +
+          ((!isReadOnly) ? '<div id="txn-wrap-' + item.id + '">' + (openForm && openForm.itemId === item.id ? renderTxnForm(item) : '') + '</div>' : '') +
+        '</td>' +
+        '<td>' + escHtml(item.unit) + '</td>' +
+        '<td><span class="' + qtyClass + '">' + item.qty + '</span></td>' +
+        (isReadOnly ? '' : '<td>' +
+          '<button class="btn-add" onclick="openTxnForm(' + item.id + ',\'add\')"><i class="fa-solid fa-plus"></i> Add</button>' +
+          '<button class="btn-sub" onclick="openTxnForm(' + item.id + ',\'sub\')"><i class="fa-solid fa-minus"></i> Subtract</button>' +
+        '</td>') +
+      '</tr>';
+    }).join('');
+  }
+
+  function renderTxnForm(item) {
+    var dir = openForm ? openForm.direction : 'add';
+    var dirLabel = dir === 'add' ? '+ Receiving Stock' : '− Using / Removing Stock';
+    return '<div class="txn-form open" id="txn-' + item.id + '">' +
+      '<div class="txn-form-title">' + dirLabel + ' — ' + escHtml(item.name) + '</div>' +
+      '<div class="txn-row">' +
+        '<div class="txn-field" style="flex:0 0 100px">' +
+          '<label>Quantity</label>' +
+          '<input type="number" id="txn-qty" min="1" placeholder="0" />' +
+        '</div>' +
+        '<div class="txn-field">' +
+          '<label>PO Number <span style="color:#EF4444">*</span></label>' +
+          '<input type="text" id="txn-po" placeholder="IS-2026-000" />' +
+        '</div>' +
+        '<div class="txn-field">' +
+          '<label>Notes (optional)</label>' +
+          '<input type="text" id="txn-notes" placeholder="e.g. partial delivery" />' +
+        '</div>' +
+      '</div>' +
+      '<button class="btn-confirm" onclick="confirmTxn(' + item.id + ',\'' + dir + '\')">Confirm</button>' +
+      '<button class="btn-cancel-txn" onclick="cancelTxnForm()">Cancel</button>' +
+    '</div>';
+  }
+
+  function renderLog() {
+    var log = getLog().slice().reverse(); // newest first
+    var container = document.getElementById('log-container');
+    if (!log.length) {
+      container.innerHTML = '<div class="empty-log">No transactions yet. Add or subtract stock above.</div>';
+      return;
+    }
+    var rows = log.map(function(entry) {
+      var changeStr = entry.change > 0
+        ? '<span class="change-pos">+' + entry.change + '</span>'
+        : '<span class="change-neg">' + entry.change + '</span>';
+      return '<tr>' +
+        '<td>' + escHtml(entry.date) + '<br><span style="font-size:11px;color:#9CA3AF">' + escHtml(entry.time) + '</span></td>' +
+        '<td>' + escHtml(entry.by) + '</td>' +
+        '<td><code style="font-size:12px;background:#F3F4F6;padding:2px 6px;border-radius:4px">' + escHtml(entry.poNum) + '</code></td>' +
+        '<td>' + escHtml(entry.item) + '</td>' +
+        '<td>' + changeStr + '</td>' +
+        '<td><span style="font-weight:700">' + entry.newQty + '</span> <span style="color:#9CA3AF;font-size:11px">' + escHtml(entry.unit || '') + '</span></td>' +
+        (entry.notes ? '<td>' + escHtml(entry.notes) + '</td>' : '<td style="color:#D1D5DB">—</td>') +
+      '</tr>';
+    }).join('');
+    container.innerHTML =
+      '<table class="log-table">' +
+        '<thead><tr><th>Date / Time</th><th>By</th><th>PO #</th><th>Item</th><th>Change</th><th>New Qty</th><th>Notes</th></tr></thead>' +
+        '<tbody>' + rows + '</tbody>' +
+      '</table>';
+  }
+
+  // ── Transaction form actions (globals for inline onclick) ─────────────────
+  window.openTxnForm = function(itemId, direction) {
+    openForm = { itemId: itemId, direction: direction };
+    render();
+    // Scroll to form
+    setTimeout(function() {
+      var el = document.getElementById('txn-' + itemId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
+  };
+
+  window.cancelTxnForm = function() {
+    openForm = null;
+    render();
+  };
+
+  window.confirmTxn = function(itemId, direction) {
+    var qtyEl   = document.getElementById('txn-qty');
+    var poEl    = document.getElementById('txn-po');
+    var notesEl = document.getElementById('txn-notes');
+
+    var qtyVal = parseInt(qtyEl ? qtyEl.value : '', 10);
+    var poVal  = poEl  ? poEl.value.trim() : '';
+    var notesVal = notesEl ? notesEl.value.trim() : '';
+
+    if (!qtyVal || qtyVal <= 0) { showToast('Enter a valid quantity.'); return; }
+    if (!poVal) { showToast('PO Number is required.'); return; }
+
+    var items = getItems();
+    var item = items.find(function(i) { return i.id === itemId; });
+    if (!item) return;
+
+    var delta = direction === 'add' ? qtyVal : -qtyVal;
+    var newQty = Math.max(0, item.qty + delta);
+    item.qty = newQty;
+    saveItems(items);
+
+    var log = getLog();
+    log.push({
+      date:   fmtDate(),
+      time:   fmtTime(),
+      by:     session.name,
+      poNum:  poVal,
+      itemId: itemId,
+      item:   item.name,
+      change: delta,
+      newQty: newQty,
+      unit:   item.unit,
+      notes:  notesVal,
+    });
+    saveLog(log);
+
+    openForm = null;
+    render();
+    showToast((direction === 'add' ? 'Added ' : 'Removed ') + Math.abs(delta) + ' ' + item.unit + ' — ' + item.name);
+  };
+
+  // ── Toast ─────────────────────────────────────────────────────────────────
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 2800);
+  }
+
+  // ── Utility ──────────────────────────────────────────────────────────────
+  function escHtml(str) {
+    if (!str && str !== 0) return '';
+    return String(str)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+
+  // ── Init ─────────────────────────────────────────────────────────────────
+  render();
+
+})();
+</script>
+<script src="js/nfr-assistant-widget.js"></script>
+</body>
+</html>
