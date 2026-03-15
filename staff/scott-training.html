@@ -553,6 +553,11 @@
     if (btnCnc) {
       btnCnc.addEventListener('click', function() {
         updateDay(TODAY, 'cnc', { completed: true });
+        // Bridge: save CNC notes to shared tracker so manager sees latest note
+        if (window.tracker) {
+          var dd = getDay(TODAY);
+          if (dd.cnc.notes) tracker.saveNote('scott', TODAY, dd.cnc.notes);
+        }
         render();
       });
     }
@@ -562,6 +567,12 @@
     if (btnOffice) {
       btnOffice.addEventListener('click', function() {
         updateDay(TODAY, 'office', { completed: true });
+        // Bridge: save combined CNC + office notes to shared tracker
+        if (window.tracker) {
+          var dd = getDay(TODAY);
+          var combined = [dd.cnc.notes, dd.office.notes].filter(Boolean).join(' | ');
+          if (combined) tracker.saveNote('scott', TODAY, combined);
+        }
         render();
       });
     }
@@ -587,6 +598,16 @@
         var nowOut = new Date();
         var outTime = String(nowOut.getHours()).padStart(2,'0') + ':' + String(nowOut.getMinutes()).padStart(2,'0');
         setClockOut(TODAY, outTime);
+        // Bridge: mark day fully complete in nfr_tp_scott and save all notes
+        if (window.tracker) {
+          var td = getTrainingDay('scott', TODAY);
+          if (td) {
+            tracker.markComplete('scott', TODAY, td.week, td.day, td.topic);
+          }
+          var dd = getDay(TODAY);
+          var allNotes = [dd.cnc.notes, dd.office.notes, dd.warehouse.notes].filter(Boolean).join(' | ');
+          if (allNotes) tracker.saveNote('scott', TODAY, allNotes);
+        }
         render();
       });
     }

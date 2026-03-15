@@ -924,6 +924,27 @@ h1, h2, h3 {
   color: var(--grey-300);
 }
 
+/* Scott's 3-pillar strip in manager card */
+.pillar-strip {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.pillar-chip {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #F3F4F6;
+  color: #9CA3AF;
+}
+
+.pillar-chip.done {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */

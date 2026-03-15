@@ -130,6 +130,26 @@
     }
     pillsHtml += '</div>';
 
+    // 3-pillar strip for Scott (reads nfr_scott_daily)
+    let pillarHtml = '';
+    if (employee === 'scott') {
+      try {
+        var scottDaily = JSON.parse(localStorage.getItem('nfr_scott_daily') || '{}');
+        var scottToday = scottDaily[today] || {};
+        var pillars = [
+          { label: 'CNC',   done: scottToday.cnc       && scottToday.cnc.completed },
+          { label: 'Admin', done: scottToday.office     && scottToday.office.completed },
+          { label: 'W/H',   done: scottToday.warehouse  && scottToday.warehouse.completed },
+        ];
+        pillarHtml = '<div class="pillar-strip">' +
+          pillars.map(function(p) {
+            return '<span class="pillar-chip' + (p.done ? ' done' : '') + '">' +
+              (p.done ? '✓ ' : '') + p.label + '</span>';
+          }).join('') +
+        '</div>';
+      } catch(e) {}
+    }
+
     return `
       <div class="employee-col">
         <div class="employee-card">
@@ -146,6 +166,8 @@
             <div class="today-topic">${escHtml(todayTopic)}</div>
 
             ${pillsHtml}
+
+            ${pillarHtml}
 
             <div class="stats-row">
               <div class="stat">
