@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curriculum Review — NFR Staff Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <style>
+    :root {
+      --primary:  #3A6B5F;
+      --primary2: #2E5548;
+      --accent:   #E07B54;
+      --light:    #F2F8F6;
+      --border:   #A8CEBF;
+      --text:     #2C2C2C;
+      --muted:    #6B7B7A;
+      --linen:    #EEF3F1;
+      --linen-dk: #D8E5E2;
+      --mozaik:   #3A6B5F;
+      --office:   #A8CEBF;
+      --designer: #E07B54;
+      --reader:   #5A7FA3;
+      --quiz-bg:  #1C5A8A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--light); color: var(--text); min-height: 100vh; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    a { color: var(--accent); }
+
+    /* ── Header ──────────────────────────────────────────── */
+    .app-header {
+      background: var(--primary2);
+      color: #fff;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-brand { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .header-brand span { opacity: .65; font-size: 13px; font-family: 'Lato', sans-serif; font-weight: 400; }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+    .btn-back {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.3);
+      color: #fff;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px; font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-back:hover { background: rgba(255,255,255,.22); color: #fff; }
+    .btn-logout {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.3);
+      color: #fff;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px; font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-logout:hover { background: rgba(255,255,255,.22); }
+
+    /* ── Page ────────────────────────────────────────────── */
+    .curric-main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+    .page-title { font-size: 1.6rem; color: var(--primary2); margin-bottom: .2rem; }
+    .page-sub   { font-size: .88rem; color: var(--muted); margin-bottom: 2rem; }
+
+    /* ── Week Tabs ───────────────────────────────────────── */
+    .week-tabs { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+    .week-tab {
+      background: var(--linen);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      padding: .45rem 1rem;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--primary2);
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+      font-family: 'Lato', sans-serif;
+    }
+    .week-tab:hover { background: var(--linen-dk); }
+    .week-tab.active { background: var(--primary2); color: #fff; border-color: var(--primary2); }
+
+    /* ── Week Header ─────────────────────────────────────── */
+    .week-header {
+      background: var(--primary2);
+      color: #fff;
+      border-radius: 12px;
+      padding: 1.1rem 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .week-header h2 { font-size: 1.1rem; margin-bottom: .15rem; }
+    .week-header-designer { font-size: .82rem; color: var(--border); margin-top: .1rem; }
+    .week-header-dates { font-size: .75rem; opacity: .6; margin-top: .2rem; }
+
+    /* ── Day Card ────────────────────────────────────────── */
+    .day-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.07); margin-bottom: 10px; overflow: hidden; }
+    .day-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .9rem 1.2rem;
+      cursor: pointer;
+      user-select: none;
+      gap: 1rem;
+    }
+    .day-header:hover { background: var(--linen); }
+    .day-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--primary2); }
+    .day-date { font-size: .78rem; color: var(--muted); margin-left: .6rem; }
+    .day-themes { font-size: .74rem; color: var(--muted); text-align: right; }
+    .day-chevron { color: var(--muted); font-size: .78rem; transition: transform .18s; flex-shrink: 0; }
+    .day-card.open .day-chevron { transform: rotate(180deg); }
+    .day-body { display: none; border-top: 1px solid var(--linen); }
+    .day-card.open .day-body { display: block; }
+
+    /* ── Steps ───────────────────────────────────────────── */
+    .step-section { padding: 1rem 1.2rem; border-bottom: 1px solid var(--linen); }
+    .step-section:last-child { border-bottom: none; }
+
+    .step-label-row { display: flex; align-items: center; gap: .5rem; margin-bottom: .55rem; }
+    .step-badge {
+      display: inline-block;
+      font-size: .66rem; font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: .18rem .55rem;
+      border-radius: 4px;
+      color: #fff;
+    }
+    .badge-mozaik   { background: var(--mozaik); }
+    .badge-office   { background: var(--office); color: var(--primary2); }
+    .badge-designer { background: var(--designer); }
+    .badge-read     { background: var(--reader); }
+    .badge-quiz     { background: var(--quiz-bg); }
+    .step-time { font-size: .73rem; color: var(--muted); }
+
+    .step-title { font-family: 'Playfair Display', serif; font-size: .98rem; color: var(--primary2); margin-bottom: .45rem; }
+
+    .field-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: .12rem; margin-top: .5rem; }
+    .field-value { font-size: .86rem; color: var(--text); line-height: 1.5; }
+
+    .tip-box {
+      background: var(--linen);
+      border-left: 3px solid var(--accent);
+      padding: .45rem .7rem;
+      font-size: .84rem;
+      font-style: italic;
+      color: var(--primary2);
+      border-radius: 0 4px 4px 0;
+      margin-top: .55rem;
+    }
+
+    .scenario-box {
+      background: var(--linen);
+      border-radius: 8px;
+      padding: .55rem .85rem;
+      font-size: .84rem;
+      color: var(--text);
+      margin-top: .3rem;
+      line-height: 1.5;
+    }
+
+    .objectives { margin: 0; padding-left: 1.1rem; font-size: .84rem; color: var(--text); }
+    .objectives li { margin-bottom: .2rem; }
+
+    /* ── Video link ──────────────────────────────────────── */
+    .video-box {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      background: var(--linen);
+      border-radius: 8px;
+      padding: .55rem .85rem;
+      margin-top: .45rem;
+    }
+    .video-icon { color: var(--accent); font-size: .95rem; flex-shrink: 0; }
+    .video-info { flex: 1; min-width: 0; }
+    .video-title-text { font-size: .84rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .video-channel { font-size: .73rem; color: var(--muted); }
+    .btn-watch {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: .3rem .75rem;
+      font-size: .76rem;
+      font-weight: 700;
+      text-decoration: none;
+      flex-shrink: 0;
+      white-space: nowrap;
+      font-family: 'Lato', sans-serif;
+    }
+    .btn-watch:hover { opacity: .85; color: #fff; }
+    .video-soon { font-size: .78rem; color: var(--muted); font-style: italic; padding: .35rem 0; }
+
+    .btn-read {
+      display: inline-block;
+      margin-top: .45rem;
+      background: var(--reader);
+      color: #fff;
+      border-radius: 6px;
+      padding: .3rem .85rem;
+      font-size: .76rem;
+      font-weight: 700;
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+    }
+    .btn-read:hover { opacity: .85; color: #fff; }
+
+    .takeaways { margin: 0; padding-left: 1.1rem; font-size: .84rem; color: var(--text); }
+    .takeaways li { margin-bottom: .22rem; }
+
+    .content-tags { display: flex; flex-wrap: wrap; gap: .28rem; margin-top: .4rem; }
+    .ctag { background: var(--linen-dk); color: var(--primary2); font-size: .68rem; padding: .12rem .45rem; border-radius: 4px; }
+
+    .designer-meta { font-size: .78rem; color: var(--muted); margin-bottom: .35rem; }
+    .no-content { font-size: .8rem; color: var(--muted); font-style: italic; }
+
+    /* ── Quiz ────────────────────────────────────────────── */
+    .quiz-wrap { background: var(--linen); border-radius: 8px; padding: .75rem 1rem; }
+    .quiz-q { margin-bottom: .85rem; }
+    .quiz-q:last-child { margin-bottom: 0; }
+    .quiz-q-text { font-size: .86rem; font-weight: 700; color: var(--primary2); margin-bottom: .3rem; }
+    .quiz-opts { list-style: none; padding: 0; margin: 0; }
+    .quiz-opt { font-size: .82rem; color: var(--text); padding: .18rem .35rem; border-radius: 4px; display: flex; align-items: center; gap: .35rem; }
+    .quiz-opt.correct { background: #D1FAE5; color: #065F46; font-weight: 700; }
+    .quiz-opt.correct::before { content: '✓'; }
+    .quiz-note { font-size: .72rem; color: var(--muted); margin-top: .5rem; }
+
+    @media (max-width: 600px) {
+      .day-themes { display: none; }
+      .week-tab { font-size: .76rem; padding: .38rem .75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-brand">
+      🌿 NFR Staff Portal <span>· Curriculum Review</span>
+    </div>
+    <div class="header-right">
+      <a href="index.html" class="btn-back">← Dashboard</a>
+      <button class="btn-logout" id="btn-logout">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="curric-main">
+    <h1 class="page-title">Maria's Training Curriculum</h1>
+    <p class="page-sub">Every video, reading, and quiz she will see — Mozaik weeks 8–12.</p>
+    <div class="week-tabs" id="week-tabs"></div>
+    <div id="week-content"></div>
+  </main>
+
+  <script src="js/auth.js"></script>
+  <script src="js/content-library.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var session = NFRAuth.requireAuth('training-manager');
+    if (!session) return;
+
+    document.getElementById('btn-logout').addEventListener('click', NFRAuth.logout);
+
+    // ── Week config ─────────────────────────────────────────────────
+    var WEEKS = [
+      { mozaikWeek: 8,  label: 'Week 8',  start: '2026-03-16', title: 'Custom Modifications & Resizing' },
+      { mozaikWeek: 9,  label: 'Week 9',  start: '2026-03-23', title: 'Cabinet Layout & Space Planning' },
+      { mozaikWeek: 10, label: 'Week 10', start: '2026-03-30', title: '3D Rendering & Client Presentations' },
+      { mozaikWeek: 11, label: 'Week 11', start: '2026-04-06', title: 'Cut Lists, Reports & Manufacturing Output' },
+      { mozaikWeek: 12, label: 'Week 12', start: '2026-04-13', title: 'Complete Kitchen Projects' },
+    ];
+    var DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    var activeWeek = 0;
+
+    function weekDates(start) {
+      var base = new Date(start + 'T12:00:00');
+      return Array.from({ length: 5 }, function (_, i) {
+        var d = new Date(base);
+        d.setDate(d.getDate() + i);
+        return d.toISOString().slice(0, 10);
+      });
+    }
+
+    function fmtDate(ds) {
+      return new Date(ds + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    function isValidYT(id) {
+      return typeof id === 'string' && /^[a-zA-Z0-9_-]{11}$/.test(id);
+    }
+
+    // ── Tabs ────────────────────────────────────────────────────────
+    function renderTabs() {
+      var el = document.getElementById('week-tabs');
+      el.innerHTML = WEEKS.map(function (w, i) {
+        return '<button class="week-tab' + (i === activeWeek ? ' active' : '') + '" data-idx="' + i + '">Mozaik ' + w.label + '</button>';
+      }).join('');
+      el.querySelectorAll('.week-tab').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeWeek = parseInt(btn.dataset.idx);
+          renderTabs();
+          renderWeek();
+        });
+      });
+    }
+
+    // ── Week ────────────────────────────────────────────────────────
+    function renderWeek() {
+      var w = WEEKS[activeWeek];
+      var dates = weekDates(w.start);
+      var firstDesigner = CONTENT_LIBRARY.getContent(dates[0]);
+      var designerTheme = firstDesigner ? firstDesigner.weekTheme : '—';
+
+      var html = '<div class="week-header">' +
+        '<h2>Mozaik ' + w.label + ' — ' + w.title + '</h2>' +
+        '<div class="week-header-designer">Designer: ' + designerTheme + '</div>' +
+        '<div class="week-header-dates">' + fmtDate(dates[0]) + ' – ' + fmtDate(dates[4]) + '</div>' +
+        '</div>';
+
+      dates.forEach(function (ds, di) {
+        html += buildDayCard(ds, di, w.mozaikWeek);
+      });
+
+      var el = document.getElementById('week-content');
+      el.innerHTML = html;
+
+      el.querySelectorAll('.day-header').forEach(function (hdr) {
+        hdr.addEventListener('click', function () {
+          hdr.closest('.day-card').classList.toggle('open');
+        });
+      });
+
+      var first = el.querySelector('.day-card');
+      if (first) first.classList.add('open');
+    }
+
+    // ── Day card ────────────────────────────────────────────────────
+    function buildDayCard(ds, di, mozaikWeek) {
+      var mozaik   = CONTENT_LIBRARY.getMozaikContent(ds);
+      var office   = CONTENT_LIBRARY.getOfficeContent(ds);
+      var designer = CONTENT_LIBRARY.getContent(ds);
+      var isFriday = di === 4;
+
+      return '<div class="day-card">' +
+        '<div class="day-header">' +
+          '<div style="display:flex;align-items:baseline;gap:.5rem;">' +
+            '<span class="day-name">' + DAY_NAMES[di] + '</span>' +
+            '<span class="day-date">' + fmtDate(ds) + '</span>' +
+          '</div>' +
+          '<div class="day-themes">' +
+            (designer ? '<div>' + designer.designer + '</div><div>' + designer.dayTheme + '</div>' : '') +
+          '</div>' +
+          '<i class="fa-solid fa-chevron-down day-chevron"></i>' +
+        '</div>' +
+        '<div class="day-body">' +
+          stepMozaik(mozaik) +
+          stepOffice(office) +
+          stepDesigner(designer) +
+          stepRead(designer) +
+          (isFriday && mozaik && mozaik.quiz ? stepQuiz(mozaik.quiz, mozaikWeek) : '') +
+        '</div>' +
+      '</div>';
+    }
+
+    // ── Step 1: Mozaik ──────────────────────────────────────────────
+    function stepMozaik(m) {
+      if (!m) return '<div class="step-section"><div class="step-label-row"><span class="step-badge badge-mozaik">Step 1 — Mozaik</span><span class="step-time">50 min</span></div><p class="no-content">No content scheduled.</p></div>';
+
+      var validYT = isValidYT(m.youtubeId);
+      var objs = (m.objectives || []).map(function (o) { return '<li>' + o + '</li>'; }).join('');
+      var video = validYT
+        ? '<div class="video-box"><i class="fa-brands fa-youtube video-icon"></i><div class="video-info"><div class="video-title-text">' + (m.youtubeTitle || 'Training Video') + '</div><div class="video-channel">' + (m.youtubeChannel || '') + '</div></div><a href="https://www.youtube.com/watch?v=' + m.youtubeId + '" target="_blank" rel="noopener" class="btn-watch">Watch →</a></div>'
+        : '<p class="video-soon"><i class="fa-solid fa-clock" style="margin-right:.3rem;"></i>' + (m.youtubeTitle || 'Video coming soon') + (m.youtubeChannel ? ' · ' + m.youtubeChannel : '') + '</p>';
+
+      return '<div class="step-section">' +
+        '<div class="step-label-row"><span class="step-badge badge-mozaik">Step 1 — Mozaik</span><span class="step-time">50 min · Week ' + m.week + ' Day ' + m.day + '</span></div>' +
+        '<div class="step-title">' + m.topic + '</div>' +
+        '<div class="field-label">Objectives</div><ul class="objectives">' + objs + '</ul>' +
+        video +
+        '<div class="field-label">Search Tip</div><div class="field-value">' + (m.searchTip || '') + '</div>' +
+        '<div class="field-label">Practice Task</div><div class="field-value">' + (m.practiceTask || '') + '</div>' +
+        '<div class="tip-box">"' + (m.tip || '') + '"</div>' +
+      '</div>';
+    }
+
+    // ── Step 2: Office ──────────────────────────────────────────────
+    function stepOffice(o) {
+      if (!o) return '<div class="step-section"><div class="step-label-row"><span class="step-badge badge-office">Step 2 — Office</span><span class="step-time">20 min</span></div><p class="no-content">No content scheduled.</p></div>';
+
+      return '<div class="step-section">' +
+        '<div class="step-label-row"><span class="step-badge badge-office">Step 2 — Office Administration</span><span class="step-time">20 min</span></div>' +
+        '<div class="step-title">' + o.topic + '</div>' +
+        '<div class="field-label">Focus</div><div class="field-value">' + o.focus + '</div>' +
+        '<div class="field-label">Scenario</div><div class="scenario-box">' + o.scenario + '</div>' +
+        '<div class="field-label">Her Task</div><div class="field-value">' + o.task + '</div>' +
+        '<div class="tip-box">"' + o.tip + '"</div>' +
+      '</div>';
+    }
+
+    // ── Step 3: Designer ────────────────────────────────────────────
+    function stepDesigner(d) {
+      if (!d) return '<div class="step-section"><div class="step-label-row"><span class="step-badge badge-designer">Step 3 — Designer Inspiration</span><span class="step-time">35 min</span></div><p class="no-content">No content scheduled.</p></div>';
+
+      var v = d.video;
+      var validYT = isValidYT(v.youtubeId);
+      var tags = (v.tags || []).map(function (t) { return '<span class="ctag">' + t + '</span>'; }).join('');
+      var s = d.social || {};
+      var video = validYT
+        ? '<div class="video-box"><i class="fa-brands fa-youtube video-icon"></i><div class="video-info"><div class="video-title-text">' + v.title + '</div><div class="video-channel">' + v.channel + '</div></div><a href="https://www.youtube.com/watch?v=' + v.youtubeId + '" target="_blank" rel="noopener" class="btn-watch">Watch →</a></div>'
+        : '<p class="video-soon"><i class="fa-solid fa-clock" style="margin-right:.3rem;"></i>' + v.title + ' · ' + v.channel + '</p>';
+
+      return '<div class="step-section">' +
+        '<div class="step-label-row"><span class="step-badge badge-designer">Step 3 — Designer Inspiration</span><span class="step-time">35 min</span></div>' +
+        '<div class="step-title">' + d.designer + '</div>' +
+        '<div class="designer-meta">' + (d.location || '') + (d.dayTheme ? ' · ' + d.dayTheme : '') + '</div>' +
+        (s.bio ? '<div class="field-label">About</div><div class="field-value">' + s.bio + '</div>' : '') +
+        video +
+        (v.description ? '<div class="field-value" style="font-size:.8rem;color:var(--muted);margin-top:.4rem;">' + v.description + '</div>' : '') +
+        (tags ? '<div class="content-tags">' + tags + '</div>' : '') +
+        (s.studyPrompt ? '<div class="field-label">Study Prompt</div><div class="field-value">' + s.studyPrompt + '</div>' : '') +
+        (s.handle ? '<div class="field-label">Instagram</div><div class="field-value"><a href="' + s.url + '" target="_blank" rel="noopener">' + s.handle + '</a></div>' : '') +
+      '</div>';
+    }
+
+    // ── Step 4: Quick Read ──────────────────────────────────────────
+    function stepRead(d) {
+      if (!d || !d.article) return '<div class="step-section"><div class="step-label-row"><span class="step-badge badge-read">Step 4 — Quick Read</span><span class="step-time">10 min</span></div><p class="no-content">No article scheduled.</p></div>';
+
+      var a = d.article;
+      var tks = (a.takeaways || []).map(function (t) { return '<li>' + t + '</li>'; }).join('');
+      return '<div class="step-section">' +
+        '<div class="step-label-row"><span class="step-badge badge-read">Step 4 — Quick Read</span><span class="step-time">10 min</span></div>' +
+        '<div class="step-title">' + a.title + '</div>' +
+        '<div class="designer-meta">' + (a.tag || '') + ' · ' + (a.source || '') + '</div>' +
+        (tks ? '<div class="field-label">Key Takeaways</div><ul class="takeaways">' + tks + '</ul>' : '') +
+        '<a href="' + a.url + '" target="_blank" rel="noopener" class="btn-read">Read Article →</a>' +
+      '</div>';
+    }
+
+    // ── Friday Quiz ─────────────────────────────────────────────────
+    function stepQuiz(quiz, week) {
+      var qs = quiz.map(function (q, i) {
+        var opts = q.options.map(function (opt, j) {
+          return '<li class="quiz-opt' + (j === q.answer ? ' correct' : '') + '">' + String.fromCharCode(65 + j) + '. ' + opt + '</li>';
+        }).join('');
+        return '<div class="quiz-q"><div class="quiz-q-text">Q' + (i + 1) + '. ' + q.q + '</div><ul class="quiz-opts">' + opts + '</ul></div>';
+      }).join('');
+
+      return '<div class="step-section">' +
+        '<div class="step-label-row"><span class="step-badge badge-quiz">Friday Quiz — Mozaik Week ' + week + '</span></div>' +
+        '<div class="quiz-wrap">' + qs + '</div>' +
+        '<p class="quiz-note">✓ = correct answer shown in green. Maria sees answers only after she submits.</p>' +
+      '</div>';
+    }
+
+    // ── Init ────────────────────────────────────────────────────────
+    renderTabs();
+    renderWeek();
+  });
+  </script>
+</body>
+</html>
