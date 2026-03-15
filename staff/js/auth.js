@@ -12,19 +12,19 @@
 
   const NFR_ROLES = {
     'owner': {
-      portals: ['agreements','po','jen','calculator','contract','flooring','training-manager'],
+      portals: ['agreements','po','jen','calculator','contract','training-manager'],
     },
     'office-design-coordinator': {
-      portals: ['agreements','po','jen','flooring','training-employee'],
+      portals: ['agreements','po','training-employee'],
     },
     'field-manager': {
-      portals: ['flooring','training-employee'],
+      portals: ['training-employee'],
     },
     'warehouse-cnc-operator': {
       portals: ['training-employee'],
     },
     'accounting': {
-      portals: ['jen','flooring','training-employee'],
+      portals: ['jen','training-employee'],
     },
   };
 
