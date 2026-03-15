@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NFR Curriculum Review Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/training-styles.css" />
+  <style>
+    /* ── Curriculum Portal Layout ───────────────────────────── */
+
+    .curriculum-body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── Trainee Tabs ─────────────────────────────────────── */
+
+    .trainee-tabs {
+      display: flex;
+      gap: 0;
+      background: var(--espresso);
+      padding: 0 1.5rem;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .trainee-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 0.9rem 1.75rem;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      cursor: pointer;
+      color: rgba(255,255,255,0.55);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: color var(--transition), border-color var(--transition);
+    }
+
+    .trainee-tab .tab-name {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .trainee-tab .tab-role {
+      font-size: 0.7rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0.7;
+    }
+
+    .trainee-tab:hover {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .trainee-tab.active {
+      color: #fff;
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── Toolbar ──────────────────────────────────────────── */
+
+    .curriculum-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--grey-200);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 60px;
+      z-index: 90;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .trainee-color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .trainee-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--espresso);
+    }
+
+    .phase-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .week-progress-text {
+      font-size: 0.82rem;
+      color: var(--grey-500);
+      font-weight: 600;
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .week-nav-btn {
+      padding: 0.45rem 1rem;
+      background: var(--cream-dark);
+      border: 1.5px solid var(--grey-300);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--espresso);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .week-nav-btn:hover:not(:disabled) {
+      background: var(--espresso);
+      color: var(--white);
+      border-color: var(--espresso);
+    }
+
+    .week-nav-btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .week-jump {
+      padding: 0.4rem 0.6rem;
+      border: 1.5px solid var(--grey-300);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--espresso);
+      background: var(--white);
+      cursor: pointer;
+      min-width: 90px;
+    }
+
+    /* ── Phase Progress Bar ───────────────────────────────── */
+
+    .phase-progress {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 1.5rem;
+      background: var(--cream-dark);
+      border-bottom: 1px solid var(--grey-200);
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .phase-progress::-webkit-scrollbar { display: none; }
+
+    .phase-segment {
+      flex: 1;
+      min-width: 80px;
+      padding: 0.45rem 0.5rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      color: var(--grey-500);
+      transition: color var(--transition), border-color var(--transition), background var(--transition);
+      white-space: nowrap;
+    }
+
+    .phase-segment:hover {
+      color: var(--espresso);
+      background: var(--cream);
+    }
+
+    .phase-segment.active {
+      color: var(--espresso);
+      font-weight: 700;
+    }
+
+    /* ── Week Cards Grid ──────────────────────────────────── */
+
+    .curriculum-main {
+      flex: 1;
+      padding: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .week-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .week-title {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      color: var(--espresso);
+    }
+
+    .week-theme {
+      font-size: 0.85rem;
+      color: var(--grey-500);
+      font-weight: 600;
+    }
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+
+    /* ── Day Card ─────────────────────────────────────────── */
+
+    .day-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1.5px solid var(--grey-200);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .day-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .day-card-header {
+      padding: 0.6rem 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .day-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .day-number {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .day-card-body {
+      padding: 0.9rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .day-topic {
+      font-family: var(--font-head);
+      font-size: 0.92rem;
+      color: var(--espresso);
+      line-height: 1.3;
+    }
+
+    .day-section-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--grey-500);
+      margin-bottom: 0.25rem;
+    }
+
+    .day-objectives {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .day-objectives li {
+      font-size: 0.77rem;
+      color: var(--grey-700);
+      line-height: 1.45;
+      padding-left: 0.85rem;
+      position: relative;
+    }
+
+    .day-objectives li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--grey-300);
+    }
+
+    .day-task-text {
+      font-size: 0.8rem;
+      color: var(--espresso);
+      line-height: 1.5;
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      padding: 0.55rem 0.7rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .day-tip {
+      font-size: 0.75rem;
+      color: var(--grey-500);
+      font-style: italic;
+      line-height: 1.45;
+    }
+
+    .day-resource {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--terracotta);
+      text-decoration: none;
+      margin-top: auto;
+      padding-top: 0.25rem;
+      border-top: 1px solid var(--grey-200);
+    }
+
+    .day-resource:hover {
+      text-decoration: underline;
+    }
+
+    .day-resource::before {
+      content: '↗';
+      font-size: 0.7rem;
+    }
+
+    /* ── Empty / Loading States ───────────────────────────── */
+
+    .state-loading,
+    .state-empty {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--grey-500);
+      font-size: 0.9rem;
+    }
+
+    /* ── Schedule Badge (Today indicator) ─────────────────── */
+
+    .today-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--espresso);
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.15rem 0.4rem;
+      border-radius: 999px;
+    }
+
+    /* ── Responsive ───────────────────────────────────────── */
+
+    @media (max-width: 900px) {
+      .days-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .days-grid {
+        grid-template-columns: 1fr;
+      }
+      .trainee-tab {
+        padding: 0.75rem 1rem;
+      }
+      .curriculum-main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="curriculum-body">
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="app-header">
+    <div class="header-brand">
+      <span>NFR</span>
+      <span class="brand-dot">·</span>
+      <span>Curriculum Review</span>
+    </div>
+    <div class="header-right">
+      <span class="header-name" id="header-name"></span>
+      <button class="btn-logout" id="btn-logout">Sign Out</button>
+    </div>
+  </header>
+
+  <!-- ── Trainee Tabs ────────────────────────────────────────── -->
+  <nav class="trainee-tabs" id="trainee-tabs">
+    <button class="trainee-tab active" data-trainee="jorge">
+      <span class="tab-name">Jorge</span>
+      <span class="tab-role">Field Manager</span>
+    </button>
+    <button class="trainee-tab" data-trainee="maria">
+      <span class="tab-name">Maria</span>
+      <span class="tab-role">Office &amp; Design</span>
+    </button>
+    <button class="trainee-tab" data-trainee="scott">
+      <span class="tab-name">Scott</span>
+      <span class="tab-role">Warehouse &amp; CNC</span>
+    </button>
+  </nav>
+
+  <!-- ── Toolbar ────────────────────────────────────────────── -->
+  <div class="curriculum-toolbar">
+    <div class="toolbar-left">
+      <div class="trainee-color-dot" id="trainee-dot"></div>
+      <span class="trainee-label" id="trainee-label"></span>
+      <span class="phase-badge" id="phase-badge"></span>
+      <span class="week-progress-text" id="week-progress"></span>
+    </div>
+    <div class="toolbar-right">
+      <button class="week-nav-btn" id="btn-prev">← Prev</button>
+      <select class="week-jump" id="week-jump" title="Jump to week"></select>
+      <button class="week-nav-btn" id="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ── Phase Progress (Jorge only) ────────────────────────── -->
+  <div class="phase-progress" id="phase-progress" style="display:none"></div>
+
+  <!-- ── Main Content ───────────────────────────────────────── -->
+  <main class="curriculum-main" id="curriculum-main">
+    <div class="state-loading">Loading curriculum…</div>
+  </main>
+
+  <!-- ── Scripts ────────────────────────────────────────────── -->
+  <script src="js/auth.js"></script>
+  <script>
+    var _session = NFRAuth.requireAuth('curriculum');
+    if (_session) {
+      document.getElementById('header-name').textContent = _session.name;
+    }
+    document.getElementById('btn-logout').addEventListener('click', function () {
+      NFRAuth.logout();
+    });
+  </script>
+  <script src="js/training-content.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    // ── Config ──────────────────────────────────────────────────────────────
+
+    var TRAINEES = {
+      jorge: {
+        label: 'Jorge',
+        role:  'Field Manager',
+        color: '#7BAFD4',
+        key:   'jorge',
+      },
+      maria: {
+        label: 'Maria',
+        role:  'Office & Design Coordinator',
+        color: '#5F8062',
+        key:   'maria',
+      },
+      scott: {
+        label: 'Scott',
+        role:  'Warehouse & CNC Operator',
+        color: '#C4622D',
+        key:   'scott',
+      },
+    };
+
+    var DAY_NAMES = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+    var DAY_FULL  = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
+    var JORGE_PHASES = [
+      { weeks: [1,2,3,4],       label: 'Phase 1 — Foundation',         color: '#7BAFD4', bg: '#D6EAF8' },
+      { weeks: [5,6,7,8],       label: 'Phase 2 — Trade Knowledge',    color: '#5F8062', bg: '#D4E6D5' },
+      { weeks: [9,10,11,12],    label: 'Phase 3 — Field Operations',   color: '#C4622D', bg: '#F0D5C5' },
+      { weeks: [13,14,15,16],   label: 'Phase 4 — Managing Others',    color: '#8B5E8B', bg: '#EAD6EA' },
+      { weeks: [17,18,19,20],   label: 'Phase 5 — Leadership',         color: '#B8860B', bg: '#FFF5D6' },
+    ];
+
+    // ── State ────────────────────────────────────────────────────────────────
+
+    var state = {
+      trainee:  'jorge',
+      week:     1,
+    };
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+
+    function getConfig(key) {
+      return window.TRAINING_CONTENT && window.TRAINING_CONTENT[key];
+    }
+
+    function getPlan(key) {
+      var cfg = getConfig(key);
+      return cfg ? cfg.plan : null;
+    }
+
+    function getAllWeeks(key) {
+      var plan = getPlan(key);
+      if (!plan) return [];
+      return Object.keys(plan).map(Number).sort(function (a, b) { return a - b; });
+    }
+
+    function getJorgePhase(week) {
+      for (var i = 0; i < JORGE_PHASES.length; i++) {
+        if (JORGE_PHASES[i].weeks.indexOf(week) !== -1) return JORGE_PHASES[i];
+      }
+      return null;
+    }
+
+    function todayWeekDay() {
+      // Returns { week, dayIdx } for today relative to trainee anchor
+      var cfg = getConfig(state.trainee);
+      if (!cfg) return null;
+      var today = new Date();
+      today.setHours(12,0,0,0);
+      var anchor = new Date(cfg.anchor + 'T12:00:00');
+      var diffDays = Math.round((today - anchor) / 86400000);
+      if (diffDays < 0) return null;
+      var dow = today.getDay();
+      if (dow === 0 || dow === 6) return null;
+      var weekOffset = Math.floor(diffDays / 7);
+      var weekNum    = cfg.startWeek + weekOffset;
+      var dayIdx     = dow - 1;
+      return { week: weekNum, dayIdx: dayIdx };
+    }
+
+    function esc(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // ── Render ───────────────────────────────────────────────────────────────
+
+    function render() {
+      var key    = state.trainee;
+      var config = getConfig(key);
+      var trainee = TRAINEES[key];
+      var weeks  = getAllWeeks(key);
+      var week   = state.week;
+
+      // Clamp week
+      if (weeks.length && weeks.indexOf(week) === -1) {
+        week = state.week = weeks[0];
+      }
+
+      var plan     = getPlan(key);
+      var days     = plan ? (plan[week] || []) : [];
+      var cfg      = config || {};
+      var totalWks = weeks.length;
+      var wkIdx    = weeks.indexOf(week);
+
+      // ── Header color dot + label
+      document.getElementById('trainee-dot').style.background = trainee.color;
+      document.getElementById('trainee-label').textContent    = trainee.label + ' · ' + trainee.role;
+
+      // ── Phase badge (Jorge only)
+      var phaseBadge = document.getElementById('phase-badge');
+      if (key === 'jorge') {
+        var phase = getJorgePhase(week);
+        if (phase) {
+          phaseBadge.textContent    = phase.label;
+          phaseBadge.style.background  = phase.bg;
+          phaseBadge.style.color       = phase.color;
+          phaseBadge.style.display     = 'inline-block';
+        } else {
+          phaseBadge.style.display = 'none';
+        }
+      } else {
+        phaseBadge.style.display = 'none';
+      }
+
+      // ── Week progress
+      document.getElementById('week-progress').textContent =
+        'Week ' + week + ' of ' + (cfg.startWeek + totalWks - 1);
+
+      // ── Week jump select
+      var sel = document.getElementById('week-jump');
+      sel.innerHTML = weeks.map(function (w) {
+        var label = 'Week ' + w;
+        if (key === 'jorge') {
+          var ph = getJorgePhase(w);
+          if (ph) label += ' — ' + ph.label.replace('Phase X — ', '').replace(/Phase \d+ — /, '');
+        }
+        return '<option value="' + w + '"' + (w === week ? ' selected' : '') + '>' + label + '</option>';
+      }).join('');
+
+      // ── Prev / Next buttons
+      document.getElementById('btn-prev').disabled = wkIdx <= 0;
+      document.getElementById('btn-next').disabled = wkIdx >= weeks.length - 1;
+
+      // ── Phase progress bar (Jorge only)
+      var phaseBar = document.getElementById('phase-progress');
+      if (key === 'jorge') {
+        phaseBar.style.display = 'flex';
+        phaseBar.innerHTML = JORGE_PHASES.map(function (ph) {
+          var isActive = ph.weeks.indexOf(week) !== -1;
+          return '<div class="phase-segment' + (isActive ? ' active' : '') + '" ' +
+            'style="' + (isActive ? 'border-bottom-color:' + ph.color + ';color:' + ph.color + ';' : '') + '" ' +
+            'data-week="' + ph.weeks[0] + '">' +
+            esc(ph.label) +
+            '</div>';
+        }).join('');
+        // Click on phase segment
+        phaseBar.querySelectorAll('.phase-segment').forEach(function (el) {
+          el.addEventListener('click', function () {
+            state.week = parseInt(el.dataset.week, 10);
+            render();
+          });
+        });
+      } else {
+        phaseBar.style.display = 'none';
+      }
+
+      // ── Today check
+      var todayInfo = todayWeekDay();
+
+      // ── Main content
+      var main = document.getElementById('curriculum-main');
+
+      if (!days.length) {
+        main.innerHTML = '<div class="state-empty">No curriculum found for this week.</div>';
+        return;
+      }
+
+      // Week header — get a theme from the first day's topic area
+      var weekTheme = getWeekTheme(key, week);
+
+      var html = '<div class="week-header">' +
+        '<h2 class="week-title">Week ' + week + '</h2>' +
+        (weekTheme ? '<span class="week-theme">— ' + esc(weekTheme) + '</span>' : '') +
+        '</div>' +
+        '<div class="days-grid">';
+
+      days.forEach(function (day, idx) {
+        var isToday = todayInfo && todayInfo.week === week && todayInfo.dayIdx === idx;
+        var headerBg = trainee.color;
+
+        html += '<div class="day-card">';
+
+        // Card header
+        html += '<div class="day-card-header" style="background:' + headerBg + '">' +
+          '<span class="day-label">' + esc(DAY_NAMES[idx]) + '</span>' +
+          '<span>' +
+          (isToday ? '<span class="today-badge">Today</span>' : '<span class="day-number">Day ' + (idx + 1) + '</span>') +
+          '</span>' +
+          '</div>';
+
+        // Card body
+        html += '<div class="day-card-body">';
+
+        // Topic
+        html += '<div class="day-topic">' + esc(day.topic || '') + '</div>';
+
+        // Objectives
+        if (day.objectives && day.objectives.length) {
+          html += '<div>';
+          html += '<div class="day-section-label">Objectives</div>';
+          html += '<ul class="day-objectives">';
+          day.objectives.forEach(function (obj) {
+            html += '<li>' + esc(obj) + '</li>';
+          });
+          html += '</ul></div>';
+        }
+
+        // Task
+        if (day.task) {
+          html += '<div>';
+          html += '<div class="day-section-label">Today\'s Task</div>';
+          html += '<div class="day-task-text">' + esc(day.task) + '</div>';
+          html += '</div>';
+        }
+
+        // Tip
+        if (day.tip) {
+          html += '<div class="day-tip">💡 ' + esc(day.tip) + '</div>';
+        }
+
+        // Resource
+        if (day.resourceUrl && day.resourceLabel) {
+          html += '<a class="day-resource" href="' + esc(day.resourceUrl) + '" target="_blank" rel="noopener">' +
+            esc(day.resourceLabel) + '</a>';
+        }
+
+        html += '</div>'; // body
+        html += '</div>'; // card
+      });
+
+      html += '</div>'; // days-grid
+      main.innerHTML = html;
+    }
+
+    function getWeekTheme(key, week) {
+      // Jorge phases provide the theme via JORGE_PHASES; other trainees use generic labels
+      if (key === 'jorge') {
+        var themes = {
+          1:'Professional Communication', 2:'Job Site Safety',
+          3:'Reading Construction Plans', 4:'Field Calculations',
+          5:'Painting Standards', 6:'Drywall Standards',
+          7:'Flooring Standards', 8:'Demo Standards',
+          9:'Photo Documentation', 10:'Project Planning',
+          11:'Client Communication', 12:'Daily Reporting',
+          13:'Directing a Crew', 14:'Managing Subcontractors',
+          15:'Quality Control Inspections', 16:'Scope & Change Orders',
+          17:'Running Multiple Jobs', 18:'Crew Reliability & Leadership',
+          19:'Budget & Material Awareness', 20:'Graduation — Field Leadership',
+        };
+        return themes[week] || '';
+      }
+      if (key === 'maria') {
+        var mariaThemes = {
+          8:'Custom Modifications', 9:'Layouts & Room Planning',
+          10:'Drawers, Hardware & Doors', 11:'Advanced Customization',
+          12:'Graduation — Full Kitchen Build',
+        };
+        return mariaThemes[week] || '';
+      }
+      if (key === 'scott') {
+        var scottThemes = {
+          1:'CNC Basics & Setup', 2:'File Prep & Nesting',
+          3:'Cut Operations', 4:'Panel Processing',
+          5:'Advanced Operations', 6:'Quality & Inspection',
+          7:'Maintenance & Troubleshooting', 8:'Workflow Optimization',
+          9:'Inventory & Materials', 10:'Full Production Run',
+          11:'Advanced Projects', 12:'Graduation — CNC Mastery',
+        };
+        return scottThemes[week] || '';
+      }
+      return '';
+    }
+
+    // ── Tab switching ─────────────────────────────────────────────────────────
+
+    document.getElementById('trainee-tabs').addEventListener('click', function (e) {
+      var tab = e.target.closest('.trainee-tab');
+      if (!tab) return;
+      var key = tab.dataset.trainee;
+      if (!key) return;
+
+      document.querySelectorAll('.trainee-tab').forEach(function (t) {
+        t.classList.toggle('active', t.dataset.trainee === key);
+      });
+
+      var weeks = getAllWeeks(key);
+      state.trainee = key;
+      // Jump to today's week for this trainee if available, else first week
+      var todayInfo = (function () {
+        var cfg = getConfig(key);
+        if (!cfg) return null;
+        var today = new Date();
+        today.setHours(12,0,0,0);
+        var anchor = new Date(cfg.anchor + 'T12:00:00');
+        var diffDays = Math.round((today - anchor) / 86400000);
+        if (diffDays < 0) return null;
+        var weekOffset = Math.floor(diffDays / 7);
+        return cfg.startWeek + weekOffset;
+      })();
+      state.week = (todayInfo && weeks.indexOf(todayInfo) !== -1) ? todayInfo : (weeks[0] || 1);
+      render();
+    });
+
+    // ── Week navigation ───────────────────────────────────────────────────────
+
+    document.getElementById('btn-prev').addEventListener('click', function () {
+      var weeks = getAllWeeks(state.trainee);
+      var idx = weeks.indexOf(state.week);
+      if (idx > 0) { state.week = weeks[idx - 1]; render(); }
+    });
+
+    document.getElementById('btn-next').addEventListener('click', function () {
+      var weeks = getAllWeeks(state.trainee);
+      var idx = weeks.indexOf(state.week);
+      if (idx < weeks.length - 1) { state.week = weeks[idx + 1]; render(); }
+    });
+
+    document.getElementById('week-jump').addEventListener('change', function () {
+      state.week = parseInt(this.value, 10);
+      render();
+    });
+
+    // ── Init ─────────────────────────────────────────────────────────────────
+
+    // Default to Jorge's current week
+    (function init() {
+      var cfg = getConfig('jorge');
+      if (cfg) {
+        var today = new Date();
+        today.setHours(12,0,0,0);
+        var anchor = new Date(cfg.anchor + 'T12:00:00');
+        var diffDays = Math.round((today - anchor) / 86400000);
+        var weeks = getAllWeeks('jorge');
+        if (diffDays >= 0) {
+          var weekOffset = Math.floor(diffDays / 7);
+          var currentWeek = cfg.startWeek + weekOffset;
+          if (weeks.indexOf(currentWeek) !== -1) {
+            state.week = currentWeek;
+          } else {
+            state.week = weeks[0] || 1;
+          }
+        } else {
+          state.week = weeks[0] || 1;
+        }
+      }
+      render();
+    })();
+
+  })();
+  </script>
+</body>
+</html>

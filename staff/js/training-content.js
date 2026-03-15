@@ -1121,641 +1121,1413 @@
   };
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // FIELD PLAN — Jorge (Weeks 1–10)
+  // FIELD PLAN — Jorge (Weeks 1–20, 20-Week Phased Program)
+  // Schedule: 7:30–8:00am Mon–Fri during carpool to warehouse with Scott
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const FIELD_URL_SAFETY  = 'https://www.osha.gov/construction';
-  const FIELD_URL_QUALITY = 'https://www.youtube.com/results?search_query=construction+quality+control';
-  const FIELD_LABEL       = 'Training Resource';
+  const FIELD_URL_SAFETY    = 'https://www.osha.gov/construction';
+  const FIELD_URL_OSHA10    = 'https://www.osha.gov/training/outreach/construction';
+  const FIELD_URL_HAZCOM    = 'https://www.osha.gov/hazcom';
+  const FIELD_URL_BLUEPRINTS= 'https://www.youtube.com/watch?v=sd5seNSHQW4';
+  const FIELD_URL_PAINT_SW  = 'https://www.youtube.com/watch?v=7lnXlHMPx0Y';
+  const FIELD_URL_PDCA      = 'https://www.pdca.org';
+  const FIELD_URL_DRYWALL   = 'https://www.youtube.com/watch?v=ZFe3plJEcZM';
+  const FIELD_URL_USG       = 'https://www.youtube.com/c/USGypsum';
+  const FIELD_URL_DEMO_OSHA = 'https://www.osha.gov/demolition';
+  const FIELD_URL_EMAIL     = 'https://www.thebalancemoney.com/email-etiquette-tips-2061246';
+  const FIELD_URL_QC        = 'https://www.youtube.com/results?search_query=construction+quality+control';
+  const FIELD_URL_QUALITY   = FIELD_URL_QC;
+  const FIELD_URL_NAHB      = 'https://www.nahb.org/nahb-community/nahb-rmi';
+  const FIELD_LABEL         = 'Training Resource';
 
   const FIELD_PLAN = {
+
+    // ── PHASE 1: FOUNDATION (Weeks 1–4) ──────────────────────────────────────
+
     1: [
+      // Mon — Concept
       {
-        topic: 'PPE Requirements by Trade',
-        resourceLabel: FIELD_LABEL,
+        topic: 'Email Response Basics',
+        resourceLabel: 'Email Etiquette Guide',
+        resourceUrl: FIELD_URL_EMAIL,
+        objectives: [
+          'Understand why email matters even when you prefer texting',
+          'Know the parts of a professional response: greeting, body, action, close',
+          'Reply to a job-related email within 2 hours during business hours',
+        ],
+        task: 'Read the email etiquette guide. Write 3 example replies to Jose: one confirming a job start time, one asking a question about scope, one reporting a problem on site.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. How you respond in writing reflects your professionalism — even a short email matters.',
+      },
+      // Tue — Application
+      {
+        topic: 'Texting vs. Calling vs. Emailing',
+        resourceLabel: 'Email Etiquette Guide',
+        resourceUrl: FIELD_URL_EMAIL,
+        objectives: [
+          'Know when to text, when to call, and when to email',
+          'Understand that urgent problems get a call, not a text',
+          'Know that anything with a decision or a number belongs in email or text thread',
+        ],
+        task: 'Write the rule in your own words: "I text when ___. I call when ___. I email when ___." Share with Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Bad communication mode causes delays. A missed call about a flooded site costs real money.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Field Update Format',
+        resourceLabel: 'Email Etiquette Guide',
+        resourceUrl: FIELD_URL_EMAIL,
+        objectives: [
+          'Know the NFR daily field update format: Job, Status, Issue, Next',
+          'Send one update for every active job before 5pm',
+          'Keep updates short — 4 lines max per job',
+        ],
+        task: 'Write a field update for each job you are on today using the format: Job Name | Status | Any issue? | What happens next?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. If Jose has to ask "what is the status on X?" — the update system failed.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Writing to Jose — Tone, Clarity, Brevity',
+        resourceLabel: 'Email Etiquette Guide',
+        resourceUrl: FIELD_URL_EMAIL,
+        objectives: [
+          'Communicate with Jose directly and without drama',
+          'Lead with the bottom line — no long setups before the point',
+          'Flag problems with a proposed solution, not just a complaint',
+        ],
+        task: 'Rewrite this message in professional format: "Hey so the painters didn\'t show up and the drywall guy said maybe tomorrow and the client is blowing up my phone." Submit to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Short, clear messages build Jose\'s confidence in you. Long vague ones make him worry.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 1 Review — Communication',
+        resourceLabel: 'Email Etiquette Guide',
+        resourceUrl: FIELD_URL_EMAIL,
+        objectives: [
+          'Recall the email/text/call decision rule from memory',
+          'Describe the 4-line field update format without looking',
+          'Write a professional message to Jose as if a real issue just occurred',
+        ],
+        task: 'Write a short review: What is the biggest communication habit you need to build? What will you do differently starting Monday?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Week 1 is done. Communication sets the tone for everything else.',
+      },
+    ],
+
+    // ── WEEK 2: JOB SITE SAFETY ───────────────────────────────────────────────
+    2: [
+      // Mon — Concept
+      {
+        topic: 'PPE by Trade',
+        resourceLabel: 'OSHA Construction Safety',
         resourceUrl: FIELD_URL_SAFETY,
         objectives: [
-          'Know the required PPE for each NFR trade type',
-          'Check crew PPE before work starts each day',
-          'Correct crew members if PPE is missing',
+          'Know the required PPE for each NFR trade: paint, drywall, flooring, demo',
+          'Check crew PPE before work starts each morning',
+          'Know your personal liability if someone gets hurt without PPE',
         ],
-        task: 'Review the OSHA construction safety page. List the required PPE for: paint, demo, flooring, and drywall.',
-        tip: 'You are responsible for crew PPE on your site. If someone gets hurt without PPE, it comes back to you.',
+        task: 'Review the OSHA construction page. Write the PPE list for each trade NFR uses. Keep it somewhere you can reference on site.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. You are responsible for PPE on every site you manage. Period.',
       },
+      // Tue — Application
       {
         topic: 'Hazard Identification',
-        resourceLabel: FIELD_LABEL,
+        resourceLabel: 'OSHA Construction Safety',
         resourceUrl: FIELD_URL_SAFETY,
         objectives: [
           'Identify the 5 most common job site hazards for NFR work',
-          'Know how to report a hazard to Jose',
+          'Know how to document and report a hazard',
           'Create a hazard log entry with photos',
         ],
-        task: 'Walk a real or mock job site. Identify and photograph 5 potential hazards. Report to Jose via WhatsApp with photos.',
-        tip: 'The hazard you identify today is the injury that doesn\'t happen next week.',
+        task: 'Walk a real or mock job site. Identify and photograph 3 hazards. Report each one to Jose via WhatsApp with a photo and one-sentence description.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. The hazard you catch today is the injury that doesn\'t happen next week.',
       },
+      // Wed — Practice
       {
-        topic: 'Practice — Safety Walk',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'OSHA 10-Hour Construction — Start',
+        resourceLabel: 'OSHA 10 Outreach Training',
+        resourceUrl: FIELD_URL_OSHA10,
         objectives: [
-          'Complete an independent safety walk on an active job site',
-          'Log every hazard identified',
-          'Report findings to Jose without prompting',
+          'Understand what OSHA 10 certifies and why it matters for NFR',
+          'Find an authorized OSHA 10 provider and begin enrollment',
+          'Know the timeline to complete your OSHA 10 card',
         ],
-        task: 'Complete an independent safety walk on an active job site. Log every hazard. Report to Jose.',
-        tip: 'A safety walk you do once gets noticed. One you do every time saves someone.',
+        task: 'Visit the OSHA outreach training page. Find one authorized online provider. Show Jose the enrollment page and get the go-ahead to register.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. OSHA 10 is your baseline credential as a field manager. Get it done.',
       },
+      // Thu — Deepen
       {
-        topic: 'Chemical Safety — Paint, Epoxy & Adhesives',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Chemical Safety — SDS & Ventilation',
+        resourceLabel: 'OSHA Hazard Communication',
+        resourceUrl: FIELD_URL_HAZCOM,
         objectives: [
-          'Know SDS requirements for paint, epoxy, and adhesive products',
-          'Ensure proper ventilation before crew starts chemical work',
-          'Know emergency response for chemical exposure',
+          'Know what an SDS (Safety Data Sheet) is and how to read it',
+          'Understand ventilation requirements for paint, epoxy, and adhesive products',
+          'Know the emergency response steps for chemical exposure',
         ],
-        task: 'Look up the SDS for the paint product currently on a job. Write down the ventilation requirement and emergency response.',
-        tip: 'Never let crew work with chemical products in an unventilated space.',
+        task: 'Look up the SDS for the paint product currently on a job. Write down the ventilation requirement, first aid for skin/eye contact, and emergency response.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Never let crew work with chemical products in an unventilated space. Know this before someone asks.',
       },
+      // Fri — Review
       {
-        topic: 'Week 1 Review',
-        resourceLabel: FIELD_LABEL,
+        topic: 'Week 2 Review — Safety',
+        resourceLabel: 'OSHA Construction Safety',
         resourceUrl: FIELD_URL_SAFETY,
         objectives: [
-          'State the 3 non-negotiable PPE items for a demo job',
+          'State the PPE required for a demo job from memory',
           'Know the protocol when a crew member refuses PPE',
-          'Demonstrate safety walk from memory',
+          'Confirm OSHA 10 enrollment status',
         ],
-        task: 'Write: What are the 3 non-negotiable PPE items for a demo job? What do you do if a crew member refuses to wear PPE?',
-        tip: 'PPE refusal is a non-negotiable situation. Know your response before it happens.',
+        task: 'Write: What are the 3 non-negotiable PPE items for a demo job? What do you do if a crew member refuses? What is your OSHA 10 enrollment status?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Safety isn\'t a box you check — it\'s how you start every single day.',
       },
     ],
 
-    2: [
-      {
-        topic: 'What\'s in a Scope Document',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
-        objectives: [
-          'Read and understand all sections of an NFR scope/proposal',
-          'Identify the start and end of each line item',
-          'Know what is and is not included in the scope',
-        ],
-        task: 'Read a real NFR proposal from the templates folder. List every line item and what it covers.',
-        tip: 'If you don\'t understand a line item, ask Jose before the job starts — not during.',
-      },
-      {
-        topic: 'Line Item Breakdown',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
-        objectives: [
-          'Translate each line item into specific field tasks',
-          'Know who performs each task',
-          'Estimate what each task requires in time and materials',
-        ],
-        task: 'Take the proposal from Monday. For each line item, write: who does it, what materials they need, how long it should take.',
-        tip: 'This is how you plan the job before you arrive on site.',
-      },
-      {
-        topic: 'Practice — Scope Review',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
-        objectives: [
-          'Review a scope for a real upcoming job',
-          'Write a complete field plan: who, what, when for each line item',
-          'Present the plan to Jose for review',
-        ],
-        task: 'Review a scope for an upcoming real job. Write your field plan: who, what, when for each line item.',
-        tip: 'A written plan before the job prevents a verbal excuse during the job.',
-      },
-      {
-        topic: 'Change Order Triggers — What is NOT in Scope',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
-        objectives: [
-          'Identify when a client request is outside the original scope',
-          'Know the exact language to use when a change order situation arises',
-          'Know how to escalate to Jose immediately',
-        ],
-        task: 'Review NFR\'s change order template. Write 3 examples of scope creep that Jorge might encounter on site.',
-        tip: 'Never agree to extra work without calling Jose first. Every undocumented extra eats profit.',
-      },
-      {
-        topic: 'Week 2 Review',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
-        objectives: [
-          'State the 3 most common scope creep situations in NFR work',
-          'Know the exact words to say to a client asking for extra work',
-          'Apply scope reading skills to a real upcoming job',
-        ],
-        task: 'Write: What are the 3 most common scope creep situations in NFR work? What exact words do you say to a client who asks for extra work?',
-        tip: 'The right words said calmly on site save the relationship and the margin.',
-      },
-    ],
-
+    // ── WEEK 3: READING CONSTRUCTION PLANS ───────────────────────────────────
     3: [
+      // Mon — Concept
       {
-        topic: 'How to Give Clear Task Instructions',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Blueprint Basics',
+        resourceLabel: 'How to Read Blueprints — YouTube',
+        resourceUrl: FIELD_URL_BLUEPRINTS,
         objectives: [
-          'Give instructions that include: what, how, when, and what done looks like',
-          'Practice written task briefings before verbal ones',
-          'Get a briefing reviewed by Jose before using it',
+          'Understand the purpose and parts of a construction blueprint',
+          'Know what a title block contains and how to read it',
+          'Identify the difference between architectural and structural drawings',
         ],
-        task: 'Practice giving a task briefing — written first, then verbal. Jose reviews.',
-        tip: 'If your instruction can be misunderstood, it will be.',
+        task: 'Watch the blueprint basics video. Sketch the parts of a title block from memory. Show it to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. You can\'t manage what you can\'t read. Plans are your bible on every job.',
       },
+      // Tue — Application
       {
-        topic: 'Setting Daily Production Targets',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Reading a Floor Plan',
+        resourceLabel: 'How to Read Blueprints — YouTube',
+        resourceUrl: FIELD_URL_BLUEPRINTS,
         objectives: [
-          'Set a realistic daily output target for each trade',
-          'Communicate it to the crew at the start of the day',
-          'Check progress at midday and adjust',
+          'Read room dimensions from a floor plan',
+          'Identify doors, windows, and walls on a plan',
+          'Translate scale measurements to real-world feet and inches',
         ],
-        task: 'For a current job, set a daily target for the crew. Check at 11am. Report to Jose by EOD whether target was hit.',
-        tip: 'A crew without a daily target drifts. A crew with one moves.',
+        task: 'Pull up a plan from an active NFR job (or use a sample). Read the dimensions of 3 rooms. Write them down. Verify against your tape measure on site.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Every room measurement on a plan needs to be confirmed on site before material is ordered.',
       },
+      // Wed — Practice
       {
-        topic: 'Practice — Daily Briefing',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Elevation Views',
+        resourceLabel: 'How to Read Blueprints — YouTube',
+        resourceUrl: FIELD_URL_BLUEPRINTS,
         objectives: [
-          'Give the full crew morning briefing independently',
-          'Include: today\'s target, each person\'s assignment, what done looks like',
-          'Have Jose observe and provide feedback',
+          'Understand what an elevation view shows vs. a floor plan',
+          'Read wall heights, window placement, and cabinet layouts from an elevation',
+          'Use elevation views to verify cabinet installs and wall work',
         ],
-        task: 'Give the full crew morning briefing independently. Jose observes. Briefing must include: today\'s target, each person\'s assignment, and what done looks like.',
-        tip: 'The briefing sets the tone. Own it.',
+        task: 'Find an elevation view on any plan. Identify the wall height, window header height, and any cabinetry or millwork shown. Sketch it by hand.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Elevation views prevent the most common install errors — use them before you hang anything.',
       },
+      // Thu — Deepen
       {
-        topic: 'Managing Crew Pace and Quality',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Symbols, Dimensions & Scale',
+        resourceLabel: 'How to Read Blueprints — YouTube',
+        resourceUrl: FIELD_URL_BLUEPRINTS,
         objectives: [
-          'Identify when a crew is falling behind pace',
-          'Correct pace without micromanaging',
-          'Catch quality issues in the moment before they compound',
+          'Recognize common architectural symbols (doors, windows, outlets, fixtures)',
+          'Read fractional dimensions on a plan (1/4" = 1\' scale)',
+          'Convert plan dimensions to real measurements without a calculator',
         ],
-        task: 'Observe a crew for 2 hours. Log pace observations. Identify one quality or pace correction and make it. Report to Jose.',
-        tip: 'Correct early and clearly. Don\'t let problems build until they\'re too big to fix on-site.',
+        task: 'On any plan: identify 5 symbols, convert 3 scaled dimensions to real measurements, and confirm them on site or against a spec sheet.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. You should be able to read a plan cold — not study it for 20 minutes before a walk-through.',
       },
+      // Fri — Review
       {
-        topic: 'Week 3 Review',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Week 3 Review — Plans',
+        resourceLabel: 'How to Read Blueprints — YouTube',
+        resourceUrl: FIELD_URL_BLUEPRINTS,
         objectives: [
-          'Describe the hardest part of directing a crew',
-          'State the protocol when a crew member pushes back on instruction',
-          'Apply briefing skills on a real job site',
+          'Read a floor plan and call out room dimensions from memory',
+          'Explain what an elevation view shows and when to use it',
+          'Identify 5 blueprint symbols without looking them up',
         ],
-        task: 'Write: What is the hardest part of directing a crew? What do you do when a crew member pushes back on your instruction?',
-        tip: 'Pushback handled well builds authority. Handled poorly, it undermines it.',
+        task: 'Walk an active job site with a plan in hand. Call out 3 things the plan shows that are visible in the field. Report one discrepancy between plan and reality if you find one.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. A field manager who can read plans runs a tighter, faster, more professional job.',
       },
     ],
 
+    // ── WEEK 4: FIELD CALCULATIONS ────────────────────────────────────────────
     4: [
+      // Mon — Concept
       {
-        topic: 'Paint Prep Standards',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
+        topic: 'Measuring Rooms Accurately',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_SAFETY,
         objectives: [
-          'Know the surface prep requirements before painting',
-          'Verify prep is complete before paint starts',
-          'Flag any surface issues that will affect the finish',
+          'Know the correct sequence for measuring a room (longest wall first)',
+          'Account for doors, windows, closets, and offsets',
+          'Record measurements in a consistent format',
         ],
-        task: 'Review NFR\'s paint SOP. List every prep step in order. Walk a prepped surface and verify against the list.',
-        tip: '80% of a bad paint job is bad prep. Never let paint start on a surface that isn\'t ready.',
+        task: 'Measure any room on an active or nearby site. Write dimensions for length, width, and any offsets. Double-check by re-measuring.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Measure twice, order once. Bad measurements cost real money and real time.',
       },
+      // Tue — Application
       {
-        topic: 'Cut Line and Edge Standards',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
+        topic: 'Square Footage Math',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_SAFETY,
         objectives: [
-          'Define what an acceptable cut line looks like',
-          'Identify unacceptable cut lines on a real job',
-          'Know the correction process for failed cut lines',
+          'Calculate square footage for rectangular and L-shaped rooms',
+          'Subtract door and window openings from wall square footage for paint',
+          'Know how to add 10–15% waste factor for flooring and paint',
         ],
-        task: 'Inspect cut lines on a paint job in progress or completed. Photograph any that fail the standard. Show Jose.',
-        tip: 'Cut lines are what clients look at first. They notice before anything else.',
+        task: 'Calculate square footage for a room you measured yesterday. Then calculate how many gallons of paint it needs at 400 sq ft per gallon coverage. Show your math to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. You should be able to do sq ft math in your head for any standard room.',
       },
+      // Wed — Practice
       {
-        topic: 'Practice — Full Paint Inspection',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
+        topic: 'Linear Feet & Perimeter',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_SAFETY,
         objectives: [
-          'Complete an independent paint inspection on a real or practice surface',
-          'Photograph all findings',
-          'Log findings with specific descriptions',
+          'Calculate perimeter (linear feet) for baseboard, crown, and trim orders',
+          'Know the difference between square footage and linear feet',
+          'Add waste factor for trim (10%) vs flooring (15%)',
         ],
-        task: 'Complete an independent paint inspection on a real or practice surface. Photograph and log all findings.',
-        tip: 'What you document, you own. Document everything.',
+        task: 'For the same room you\'ve been working with: calculate linear feet of baseboard needed. Calculate how many 12-ft sticks you need. Include a 10% waste factor.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Trim orders without linear feet math always come up short.',
       },
+      // Thu — Deepen
       {
-        topic: 'Paint Inspection Checklist',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
+        topic: 'Material Quantity Estimates',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_SAFETY,
         objectives: [
-          'Build a personal paint inspection checklist',
-          'Cover all inspection points consistently',
-          'Get Jose\'s approval before using it on jobs',
+          'Estimate material quantities for paint, flooring, and drywall from a room measurement',
+          'Understand how to read a spec sheet for coverage rates',
+          'Know when to flag a quantity concern before materials are ordered',
         ],
-        task: 'Build the paint inspection checklist. Jose approves it.',
-        tip: 'The checklist is what keeps you from missing something on a busy day.',
+        task: 'Pick a room. Estimate: gallons of paint, boxes of LVP flooring, and sheets of drywall needed. Compare to any existing order or estimate for that job.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. When you can estimate materials, you can catch mistakes before they happen.',
       },
+      // Fri — Review
       {
-        topic: 'Week 4 Review',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
+        topic: 'Week 4 Review — Calculations',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_SAFETY,
         objectives: [
-          'Use the new paint inspection checklist on a completed job',
-          'Write what passed, what failed, what surprised you',
-          'Own the paint quality standard for every NFR job going forward',
+          'Calculate sq ft, linear ft, and paint gallons for a room from memory',
+          'Apply correct waste factors without prompting',
+          'Verify estimates against a real order or material sheet',
         ],
-        task: 'Inspect a completed paint job using your new checklist. Write: What passed, what failed, what did you find that surprised you?',
-        tip: 'Your checklist is only as good as your commitment to using it every time.',
+        task: 'Jose gives Jorge a room spec. Jorge calculates sq ft, baseboard linear ft, paint gallons, and flooring boxes in under 5 minutes. No phone calculator.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Phase 1 complete. You now have the foundation every field manager needs.',
       },
     ],
 
+    // ── PHASE 2: TRADE KNOWLEDGE (Weeks 5–8) ─────────────────────────────────
+
+    // ── WEEK 5: PAINTING STANDARDS ────────────────────────────────────────────
     5: [
+      // Mon — Concept
       {
-        topic: 'Subfloor Prep Standards',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
+        topic: 'Prep & Priming Standards',
+        resourceLabel: 'Sherwin-Williams Pro Painter — YouTube',
+        resourceUrl: FIELD_URL_PAINT_SW,
         objectives: [
-          'Know acceptable subfloor conditions for LVP and carpet',
-          'Identify issues that must be fixed before install begins',
-          'Know who is responsible for fixing each type of issue',
+          'Know the NFR prep sequence: patch, sand, clean, prime',
+          'Understand when primer is required vs. optional',
+          'Identify surfaces that need special primer (drywall, stained wood, glossy surfaces)',
         ],
-        task: 'Review subfloor prep standards. Inspect a subfloor on a job site and log its condition.',
-        tip: 'A bad subfloor telegraphs through any flooring. Never approve install on a bad subfloor.',
+        task: 'Watch the painting prep video. Write the prep checklist NFR painters should follow on every job before a brush touches the wall.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Good paint jobs start with prep — not with the first coat.',
       },
+      // Tue — Application
       {
-        topic: 'Seam and Transition Standards',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
+        topic: 'Cut Lines & Paint Types',
+        resourceLabel: 'Sherwin-Williams Pro Painter — YouTube',
+        resourceUrl: FIELD_URL_PAINT_SW,
         objectives: [
-          'Define an acceptable seam in LVP and carpet',
-          'Identify unacceptable seam placement or quality',
-          'Know the transition strip standard at doorways',
+          'Know what a clean cut line is and how to evaluate one',
+          'Understand sheen levels: flat, eggshell, satin, semi-gloss, gloss — and when each is used',
+          'Know NFR\'s default paint specs for walls, trim, and ceilings',
         ],
-        task: 'Inspect seams and transitions on a completed flooring job. Photograph any that fail the standard.',
-        tip: 'Seams in high-traffic areas and visible doorways are client hot buttons. Inspect those first.',
+        task: 'Walk a paint job in progress (or recently completed). Evaluate the cut lines at ceiling, trim, and corners. Write what\'s acceptable and what needs fixing.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. You can\'t enforce quality you can\'t identify. Know what good looks like before you inspect.',
       },
+      // Wed — Practice
       {
-        topic: 'Practice — Full Flooring Inspection',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
+        topic: 'NFR Paint SOP',
+        resourceLabel: 'PDCA — Painting Contractors Standards',
+        resourceUrl: FIELD_URL_PDCA,
         objectives: [
-          'Complete an independent flooring inspection',
-          'Log all findings with photos',
-          'Flag any issues before client walkthrough',
+          'Know the step-by-step NFR painting sequence from prep to final coat',
+          'Understand what triggers a re-coat vs. a patch-and-touch-up',
+          'Know the final walk criteria before a paint job is signed off',
         ],
-        task: 'Complete an independent flooring inspection. Log all findings with photos.',
-        tip: 'Flooring issues found before client walkthrough cost nothing. Found after, they cost trust.',
+        task: 'Write the NFR paint SOP in your own words: What happens from the moment the painter arrives to the moment Jose signs off? Step by step.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. An SOP in your head is as good as one on paper — but only if you actually know it.',
       },
+      // Thu — Deepen
       {
-        topic: 'Flooring Inspection Checklist',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
+        topic: 'Finish Inspection — Paint',
+        resourceLabel: 'Sherwin-Williams Pro Painter — YouTube',
+        resourceUrl: FIELD_URL_PAINT_SW,
         objectives: [
-          'Build a personal flooring inspection checklist',
-          'Cover subfloor, seams, transitions, and edges',
-          'Get Jose\'s approval before using it on jobs',
+          'Know the 5 things to inspect on every completed paint job',
+          'Identify: holidays (missed spots), lap marks, brush marks, poor cut lines, drips',
+          'Know the re-work threshold — what gets fixed before client walk-through',
         ],
-        task: 'Build Jorge\'s flooring inspection checklist. Jose approves.',
-        tip: 'Same principle as paint — the checklist is your standard.',
+        task: 'Do a finish inspection on any wall. Write your findings using the 5-point checklist. Decide: pass or rework? Report to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Your eye should catch paint issues before the client\'s eye does. That\'s what a field manager does.',
       },
+      // Fri — Review
       {
-        topic: 'Week 5 Review',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
+        topic: 'Week 5 Review — Painting',
+        resourceLabel: 'Sherwin-Williams Pro Painter — YouTube',
+        resourceUrl: FIELD_URL_PAINT_SW,
         objectives: [
-          'Inspect a flooring job using the new checklist',
-          'Write findings including what passed and what failed',
-          'Identify one improvement to the checklist',
+          'Describe the prep-to-finish sequence without prompting',
+          'Call out the correct sheen for a kitchen wall vs. bathroom ceiling',
+          'Pass or fail a paint job on the spot with documented reasoning',
         ],
-        task: 'Inspect a flooring job using your checklist. Write findings: what passed, what failed, and one thing to add to the checklist.',
-        tip: 'A checklist that never improves eventually becomes obsolete.',
+        task: 'Jose gives Jorge a paint scenario with 3 issues embedded. Jorge identifies all 3 and writes what he would tell the painter to fix and why.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. When you know painting like a painter, you can run painters like a manager.',
       },
     ],
 
+    // ── WEEK 6: DRYWALL STANDARDS ─────────────────────────────────────────────
     6: [
+      // Mon — Concept
       {
-        topic: 'Demo Scope Verification',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Hanging Drywall',
+        resourceLabel: 'USG / Sheetrock — YouTube',
+        resourceUrl: FIELD_URL_USG,
         objectives: [
-          'Verify what comes down and what stays before demo starts',
-          'Walk the scope with the crew before the first swing',
-          'Know how to handle unexpected discoveries',
+          'Know the standard drywall sheet sizes and which to use where',
+          'Understand stud layout and how it drives sheet orientation',
+          'Know the difference between 1/2" and 5/8" drywall and when each is required',
         ],
-        task: 'Review a demo scope. Walk the space and mark what comes down.',
-        tip: 'A demo mistake is irreversible. Verify twice before the crew starts.',
+        task: 'Watch the USG drywall hanging video. Write: What thickness drywall is used on ceilings? What about fire-rated assemblies? What does "back-to-back" mean for seams?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. You can\'t inspect a hang job without understanding how it works.',
       },
+      // Tue — Application
       {
-        topic: 'Safe Demo Sequence',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Taping & Mudding',
+        resourceLabel: 'USG / Sheetrock — YouTube',
+        resourceUrl: FIELD_URL_DRYWALL,
         objectives: [
-          'Know the correct top-down demo sequence',
-          'Understand structural awareness — what cannot be touched',
-          'Manage dust and debris flow correctly',
+          'Know the three-coat mud sequence: tape coat, fill coat, finish coat',
+          'Understand the drying time between coats',
+          'Identify the difference between setting compound and drying compound',
         ],
-        task: 'Watch a demo sequence video. Write the correct sequence for a standard room gut demo.',
-        tip: 'Demo from top to bottom. Taking a load-bearing wall down wrong ends the job and starts a lawsuit.',
+        task: 'Watch the taping and mudding video. Write the 3-coat sequence in your own words. Include drying time and what can go wrong at each step.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Bad mud work shows through paint. Inspect it before primer goes on.',
       },
+      // Wed — Practice
       {
-        topic: 'Practice — Demo Walkthrough',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Drywall Finish Levels 1–5',
+        resourceLabel: 'USG Finish Level Standards',
+        resourceUrl: FIELD_URL_USG,
         objectives: [
-          'Walk a demo job from start to finish',
-          'Log sequence, crew PPE, and debris management',
-          'Identify anything that deviates from the correct procedure',
+          'Know what each finish level (1–5) looks like and when it\'s required',
+          'Understand that NFR residential jobs are typically Level 4 or 5',
+          'Know how to call out the wrong finish level before paint goes on',
         ],
-        task: 'Walk a demo job start to finish. Log sequence, crew PPE, and debris management.',
-        tip: 'What you inspect, you influence.',
+        task: 'Walk a drywall job in progress. Estimate what finish level it\'s at today. What level does it need to reach before painting? Write your assessment.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Finish level is a client-agreement item — it affects cost and time. Know the standard.',
       },
+      // Thu — Deepen
       {
-        topic: 'Post-Demo Inspection Checklist',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Drywall Inspection Checklist',
+        resourceLabel: 'USG / Sheetrock — YouTube',
+        resourceUrl: FIELD_URL_USG,
         objectives: [
-          'Build a post-demo inspection checklist',
-          'Cover debris removal, floor condition, structural integrity, and utilities',
-          'Get Jose\'s approval before using it',
+          'Know the 6-point drywall inspection: seams, corners, fasteners, texture, finish level, moisture',
+          'Identify common defects: bowing sheets, nail pops, visible tape, rough mud',
+          'Know the sign-off criteria before painting begins',
         ],
-        task: 'Build Jorge\'s post-demo inspection checklist. Jose approves. Include: debris removal complete, floor swept, no structural damage, utilities marked.',
-        tip: 'A clean demo site is as important as a clean finished job.',
+        task: 'Inspect a wall section using the 6-point checklist. Write your findings. What passes? What doesn\'t? What would a client notice on move-in day?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Painting over bad drywall is how NFR gets callbacks. Stop it here.',
       },
+      // Fri — Review
       {
-        topic: 'Week 6 Review',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_SAFETY,
+        topic: 'Week 6 Review — Drywall',
+        resourceLabel: 'USG / Sheetrock — YouTube',
+        resourceUrl: FIELD_URL_USG,
         objectives: [
-          'Walk a completed demo and run the new checklist',
-          'Identify what was missed and what passed',
-          'Reflect on what you\'d do differently',
+          'Describe the 3-coat mud sequence from memory',
+          'Identify the correct finish level for an NFR residential kitchen remodel',
+          'Complete a drywall inspection without using notes',
         ],
-        task: 'Walk a completed demo. Run your new checklist. Write: What was missed, what passed, what would you do differently next time?',
-        tip: 'Every demo teaches you something about the next one.',
+        task: 'Jose gives Jorge a drywall scenario with 2 finish defects. Jorge identifies both and writes the correction instructions.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Drywall is invisible when done right and obvious when done wrong. You\'re the last check.',
       },
     ],
 
+    // ── WEEK 7: FLOORING STANDARDS ────────────────────────────────────────────
     7: [
+      // Mon — Concept
+      {
+        topic: 'Subfloor Prep',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Understand what makes a subfloor ready for LVP or carpet',
+          'Know the flatness tolerance standard for LVP (3/16" over 10 ft)',
+          'Identify subfloor issues that must be corrected before flooring starts',
+        ],
+        task: 'Visit a floor in prep. Check for squeaks, high spots, low spots, and moisture. Write a short "ready or not ready" assessment with reason.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Flooring installed on a bad subfloor will fail. Catch it before the first plank goes down.',
+      },
+      // Tue — Application
+      {
+        topic: 'LVP Installation Standards',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the NFR LVP install sequence: acclimate, layout direction, first row, expansion gap',
+          'Understand the correct expansion gap (1/4") and why it matters',
+          'Know what "staggered seams" means and how to verify it',
+        ],
+        task: 'Watch LVP crew install (live or video). Write the install sequence. Identify one mistake or shortcut you see or imagine. What would you correct?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. LVP fails most often at the expansion gap and transitions. Know these before you inspect.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Carpet & Seam Standards',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know carpet seam placement rules (seams away from high-traffic zones)',
+          'Understand tack strip installation around the perimeter',
+          'Know what a properly stretched carpet looks and feels like',
+        ],
+        task: 'Find a carpet installation (active or completed). Evaluate: are seams in low-visibility locations? Is the stretch firm? Write your inspection notes.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Carpet seams that show up in the light are callbacks. Prevent them on install day.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Transitions & Final Walk',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the transition types: T-bar, reducer, threshold, end cap — and when to use each',
+          'Understand the NFR final flooring walk: check seams, transitions, gaps, damage',
+          'Know the sign-off criteria before a flooring job is closed',
+        ],
+        task: 'Walk a completed flooring install. Check transitions at every doorway. Check for edge gaps. Write pass/fail for each area you inspect.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Transitions are the most visible part of a flooring job. They tell the client if the crew cared.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 7 Review — Flooring',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Describe subfloor readiness criteria from memory',
+          'Call out the correct expansion gap for LVP',
+          'Complete a flooring final walk without prompting',
+        ],
+        task: 'Jose describes a flooring scenario with a subfloor problem and a bad transition. Jorge writes the correction plan for both.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Every trade has standards. Your job is to know them all well enough to inspect them all.',
+      },
+    ],
+
+    // ── WEEK 8: DEMO STANDARDS ────────────────────────────────────────────────
+    8: [
+      // Mon — Concept
+      {
+        topic: 'Scope Verification Before Demo',
+        resourceLabel: 'OSHA Demolition Standards',
+        resourceUrl: FIELD_URL_DEMO_OSHA,
+        objectives: [
+          'Read the scope document before any demo begins',
+          'Verify what comes out vs. what stays — with Jose if unclear',
+          'Know that unauthorized demo is one of the top NFR cost risks',
+        ],
+        task: 'Read the OSHA demolition page. Write the 3 questions you should answer before swinging the first hammer: What comes out? What stays? What\'s the utility status?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Demo mistakes are the most expensive kind — you can\'t un-remove a wall.',
+      },
+      // Tue — Application
+      {
+        topic: 'Top-Down Demo Sequence',
+        resourceLabel: 'OSHA Demolition Standards',
+        resourceUrl: FIELD_URL_DEMO_OSHA,
+        objectives: [
+          'Know the top-down sequence: ceilings first, then walls, then floors last',
+          'Understand why sequence matters for debris containment and safety',
+          'Know when to stop and call Jose vs. proceed independently',
+        ],
+        task: 'Write the demo sequence for a full kitchen gut: what goes first, second, third? Why does the sequence matter? What could go wrong if you reverse it?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Top-down isn\'t just best practice — it\'s the difference between controlled and chaotic.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Debris Management',
+        resourceLabel: 'OSHA Demolition Standards',
+        resourceUrl: FIELD_URL_DEMO_OSHA,
+        objectives: [
+          'Know NFR\'s debris removal process: dumpster call, load frequency, floor protection',
+          'Understand that debris sitting in a house is a safety and liability risk',
+          'Know what debris requires special disposal (asbestos, lead paint, treated wood)',
+        ],
+        task: 'Walk an active demo site. Is debris staged correctly? Is it blocking egress? Is the floor protected? Write a brief assessment and identify any unsafe conditions.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. A messy demo site signals a crew that doesn\'t care. A clean demo site signals a manager who does.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Structural Awareness During Demo',
+        resourceLabel: 'OSHA Demolition Standards',
+        resourceUrl: FIELD_URL_DEMO_OSHA,
+        objectives: [
+          'Know the visual signs of a load-bearing wall vs. a partition wall',
+          'Understand the rule: when in doubt, stop and call Jose',
+          'Know what to do if unexpected conditions appear (mold, asbestos tiles, knob-and-tube)',
+        ],
+        task: 'Write the protocol for what Jorge does if: (a) crew finds suspected mold during demo, (b) crew removes what they thought was a partition wall and it had a beam. Two separate answers.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Structural surprises are not field manager decisions. They are Jose decisions.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 8 Review — Demo',
+        resourceLabel: 'OSHA Demolition Standards',
+        resourceUrl: FIELD_URL_DEMO_OSHA,
+        objectives: [
+          'Describe the top-down demo sequence from memory',
+          'State the 3 pre-demo verification questions',
+          'Know the stop-and-call protocol for structural surprises',
+        ],
+        task: 'Jose gives Jorge a demo scenario with an unexpected structural condition. Jorge writes the exact steps he would take — including what he says to the crew and to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Phase 2 complete. You now know what good work looks like in every NFR trade.',
+      },
+    ],
+
+    // ── PHASE 3: FIELD OPERATIONS (Weeks 9–12) ────────────────────────────────
+
+    // ── WEEK 9: PHOTO DOCUMENTATION ──────────────────────────────────────────
+    9: [
+      // Mon — Concept
       {
         topic: 'NFR Photo Protocol',
-        resourceLabel: FIELD_LABEL,
+        resourceLabel: 'Training Resource',
         resourceUrl: FIELD_URL_QUALITY,
         objectives: [
-          'Know the required photos for every job type',
-          'Know when to take before, milestone, and after photos',
-          'Understand why before photos protect NFR legally',
+          'Know the NFR three-shot rule: before, milestone, after — for every trade',
+          'Understand why photo documentation protects NFR from disputes',
+          'Know the naming convention for job site photos',
         ],
-        task: 'Review NFR WhatsApp photo protocol. List every required photo for a standard paint job.',
-        tip: 'If it\'s not photographed, it didn\'t happen. Before photos protect NFR legally.',
+        task: 'Write the NFR photo protocol in your own words: when do you shoot, what do you shoot, and where do photos go? Show Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Photos are your proof. Disputes without photos favor the client. Photos always favor NFR.',
       },
+      // Tue — Application
       {
-        topic: 'CompanyCam for Interior Surface Jobs',
-        resourceLabel: FIELD_LABEL,
+        topic: 'Before, Milestone, After',
+        resourceLabel: 'Training Resource',
         resourceUrl: FIELD_URL_QUALITY,
         objectives: [
-          'Set up CompanyCam correctly on a job',
-          'Tag photos to the correct project',
-          'Know what Jose needs to see in CompanyCam',
+          'Know what counts as a "milestone" photo for each trade',
+          'Understand the difference between a documentation photo and a social media photo',
+          'Identify the 3 angles every room needs: wide, detail, and any defect or repair',
         ],
-        task: 'Open CompanyCam. Find the active Interior Surface project. Upload 5 photos tagged correctly.',
-        tip: 'Interior Surface clients look at CompanyCam. Every photo is client-facing.',
+        task: 'On your next site visit, shoot a full before/milestone/after set for one room. Review with Jose — are all the angles covered?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. A photo set that tells the whole story is better than 50 random snapshots.',
       },
+      // Wed — Practice
       {
-        topic: 'Practice — Full Photo Documentation',
-        resourceLabel: FIELD_LABEL,
+        topic: 'CompanyCam Workflow',
+        resourceLabel: 'Training Resource',
         resourceUrl: FIELD_URL_QUALITY,
         objectives: [
-          'Document a real job site from start to finish',
-          'Use the full photo protocol without prompting',
-          'Have Jose review the photos for completeness',
+          'Know how to create a project in CompanyCam and assign it to a job',
+          'Upload and label photos by trade and phase',
+          'Know how Jose and the Office & Design Coordinator access the photos',
         ],
-        task: 'Document a real job site from start to finish using the full photo protocol. Jose reviews the photos.',
-        tip: 'Documentation habits built now protect you on every future job.',
+        task: 'Create or update a CompanyCam project for an active job. Upload today\'s photos. Confirm Jose can see them. Write any workflow issue you hit.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. CompanyCam only works if you use it every day. Consistency is the habit.',
       },
+      // Thu — Deepen
       {
-        topic: 'What Makes a Good Site Photo',
-        resourceLabel: FIELD_LABEL,
+        topic: 'Legal Value of Job Site Photos',
+        resourceLabel: 'Training Resource',
         resourceUrl: FIELD_URL_QUALITY,
         objectives: [
-          'Know the difference between a useful and a useless site photo',
-          'Take photos that show progress, context, and quality',
-          'Get Jose\'s feedback on photo quality',
+          'Understand that photos are the primary defense in client disputes',
+          'Know what "pre-existing conditions" means and why to document them on day one',
+          'Understand how photos support warranty claims and change order justification',
         ],
-        task: 'Take 10 site photos. Jose rates each as useful or not useful. Discuss why.',
-        tip: 'A photo of a wall from 3 feet away shows nothing. Step back. Show context.',
+        task: 'Think about a past or current job where a client had a concern. Write: how would a complete photo set have helped NFR respond to that concern? Submit to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Pre-existing condition photos have saved contractors thousands in false damage claims. Take them.',
       },
+      // Fri — Review
       {
-        topic: 'Week 7 Review',
-        resourceLabel: FIELD_LABEL,
+        topic: 'Week 9 Review — Documentation',
+        resourceLabel: 'Training Resource',
         resourceUrl: FIELD_URL_QUALITY,
         objectives: [
-          'Conduct full photo documentation independently',
-          'Have Jose spot-check the results',
-          'Build photo documentation as a daily non-negotiable habit',
+          'Describe the NFR three-shot protocol from memory',
+          'State the legal value of a pre-existing conditions photo set',
+          'Confirm CompanyCam is active on all current jobs',
         ],
-        task: 'Conduct full photo documentation on a real job independently. Jose spot-checks.',
-        tip: 'The photos you take become the record of every job. Make them count.',
+        task: 'Jorge audits all current jobs in CompanyCam. Which ones are missing photos? Which phases are undocumented? Submit the audit to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Documentation is a habit. Build it now while jobs are small.',
       },
     ],
 
-    8: [
-      {
-        topic: 'What Jorge Can and Cannot Say',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
-        objectives: [
-          'Know the boundaries of Jorge\'s client communication authority',
-          'Know which questions to redirect to Jose immediately',
-          'Know how to handle scope questions on site',
-        ],
-        task: 'Review NFR client communication rules. Write: 5 things Jorge can answer, 5 things that go to Jose immediately.',
-        tip: 'Saying the wrong thing to a client on site can cost more than the job. When in doubt, redirect.',
-      },
-      {
-        topic: 'Handling Client Questions About Scope or Timeline',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
-        objectives: [
-          'Respond to client scope questions without committing to anything',
-          'Give professional responses that buy time to call Jose',
-          'Keep the client calm and confident while getting more information',
-        ],
-        task: 'Practice 3 client scenarios with Jose. He plays the client.',
-        tip: '"Let me confirm that with Jose and get back to you by end of day" is always a correct answer.',
-      },
-      {
-        topic: 'Practice — Client Scenarios',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
-        objectives: [
-          'Handle 5 client scenarios with increasing difficulty',
-          'Stay calm and redirect without seeming evasive',
-          'Build confidence in client-facing communication',
-        ],
-        task: '5 more client scenarios with Jose. Focus on keeping calm and redirecting without seeming evasive.',
-        tip: 'Calm redirection builds more trust than an on-the-spot answer that\'s wrong.',
-      },
-      {
-        topic: 'What to Do When a Client is Unhappy',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
-        objectives: [
-          'De-escalate a client complaint on site',
-          'Never argue or defend on the spot',
-          'Get Jose involved immediately with full context',
-        ],
-        task: 'Practice one difficult client scenario with Jose. Write the protocol for an unhappy client.',
-        tip: 'Your job is to listen and get Jose involved. Not to fix the complaint yourself.',
-      },
-      {
-        topic: 'Week 8 Review',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
-        objectives: [
-          'State the 3 most common client questions received on site',
-          'Write a scripted response to each',
-          'Apply the unhappy client protocol from memory',
-        ],
-        task: 'Write: What are the 3 most common client questions you get on site? What is your response to each?',
-        tip: 'Scripted responses aren\'t robotic — they\'re professional.',
-      },
-    ],
-
-    9: [
-      {
-        topic: 'Reading the Project Schedule',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
-        objectives: [
-          'Read and understand the NFR project schedule',
-          'Know each trade\'s window on the schedule',
-          'Identify dependencies between trades',
-        ],
-        task: 'Review the current week\'s project schedule in Google Calendar. For each active job, identify: what\'s happening, who\'s doing it, what comes next.',
-        tip: 'If you don\'t know the schedule, you can\'t flag when it\'s off.',
-      },
-      {
-        topic: 'When to Flag a Job is Running Late',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
-        objectives: [
-          'Identify signs a job will miss its deadline before it actually misses it',
-          'Know the threshold for flagging to Jose',
-          'Know what information Jose needs when you flag',
-        ],
-        task: 'For a current job, write a status report: on track vs. at risk. Send to Jose via WhatsApp.',
-        tip: 'Flag early. Jose can fix an early warning. He cannot fix a missed deadline.',
-      },
-      {
-        topic: 'Practice — Daily Reporting',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
-        objectives: [
-          'Send Jose a structured EOD field report for each active job',
-          'Cover done, in progress, and at risk for every job',
-          'Make reporting a daily non-negotiable habit',
-        ],
-        task: 'Send Jose a structured EOD field report for each active job: done, in progress, at risk. One paragraph per job.',
-        tip: 'A report Jose doesn\'t have to ask for is worth twice the one he does.',
-      },
-      {
-        topic: 'Managing Multiple Concurrent Jobs',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
-        objectives: [
-          'Prioritize time across multiple active jobs',
-          'Sequence site visits efficiently',
-          'Keep Jose informed across all jobs simultaneously',
-        ],
-        task: 'For the current week\'s jobs, build a daily visit plan — which job, at what time, for how long. Jose reviews.',
-        tip: 'You can\'t be on 3 sites at once. Plan your day so each job gets the attention it needs.',
-      },
-      {
-        topic: 'Week 9 Review',
-        resourceLabel: FIELD_LABEL,
-        resourceUrl: FIELD_URL_QUALITY,
-        objectives: [
-          'State how you decide which job to visit first',
-          'Write your daily reporting format for Jose',
-          'Apply schedule management skills to next week\'s jobs',
-        ],
-        task: 'Write: How do you decide which job to visit first? What is your reporting format for Jose each day?',
-        tip: 'A field manager who owns the schedule owns the outcome.',
-      },
-    ],
-
+    // ── WEEK 10: PROJECT PLANNING ─────────────────────────────────────────────
     10: [
+      // Mon — Concept
       {
-        topic: 'Managing vs. Leading on Site',
-        resourceLabel: FIELD_LABEL,
+        topic: 'Reading the Schedule',
+        resourceLabel: 'Training Resource',
         resourceUrl: FIELD_URL_QUALITY,
         objectives: [
-          'Understand the difference between task management and team leadership',
-          'Identify one leadership behavior to practice this week',
-          'Own the outcome of your jobs — not just your tasks',
+          'Read a project schedule and understand what each line means',
+          'Know the difference between a start date, a milestone date, and a completion date',
+          'Identify the critical path — the sequence that drives the end date',
         ],
-        task: 'Read or discuss: what is the difference between a manager and a leader? Write one leadership behavior you will practice this week.',
-        tip: 'A manager tells people what to do. A leader makes them want to do it right.',
+        task: 'Look at the schedule for one active job. Identify the next 3 milestones. What must happen before each one? Write it out.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. You can\'t run a project you haven\'t read. Know the schedule before you show up.',
       },
+      // Tue — Application
       {
-        topic: 'Building Crew Reliability',
-        resourceLabel: FIELD_LABEL,
+        topic: 'Trade Dependencies',
+        resourceLabel: 'Training Resource',
         resourceUrl: FIELD_URL_QUALITY,
         objectives: [
-          'Understand what makes a crew reliable vs. unreliable',
-          'Identify one thing Jorge does that builds crew trust',
-          'Identify one thing that undermines it',
+          'Know the standard NFR trade sequence: demo → rough → drywall → paint → flooring → trim',
+          'Understand what happens when a trade is late and how it cascades',
+          'Know how to alert Jose when a dependency is at risk',
         ],
-        task: 'Write: What makes your best 1099 crew member reliable? What do you do that makes them want to show up for NFR?',
-        tip: 'Reliable crews are earned, not assigned.',
+        task: 'Map the trade sequence for an active remodel job. Identify: is anything out of order or delayed? What is at risk? What does Jorge do today to prevent a problem?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Your job is to see delays before Jose has to ask about them.',
       },
+      // Wed — Practice
       {
-        topic: 'Self-Management — Owning Your Scope',
-        resourceLabel: FIELD_LABEL,
+        topic: 'Flagging Delays Early',
+        resourceLabel: 'Training Resource',
         resourceUrl: FIELD_URL_QUALITY,
         objectives: [
-          'Take personal ownership of every job on your list',
-          'Stop waiting for Jose to catch things — catch them yourself',
-          'Bring solutions not just problems to every conversation with Jose',
+          'Know the 24-hour rule: if you see a delay risk, flag it within 24 hours',
+          'Know the format for flagging: job name, what\'s delayed, impact, proposed fix',
+          'Understand that flagging early gives Jose options — waiting takes them away',
         ],
-        task: 'Audit your current jobs. Find one thing that could be better. Fix it or propose the fix to Jose.',
-        tip: 'Jose\'s job is not to run the field — it\'s yours. Own it.',
+        task: 'Find one real or potential delay on any active job. Write the delay flag in proper format: Job | What | Impact | Proposed Fix. Send to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Bringing a delay plus a solution is the difference between a field manager and a babysitter.',
       },
+      // Thu — Deepen
       {
-        topic: 'Bringing Solutions, Not Problems',
-        resourceLabel: FIELD_LABEL,
+        topic: 'Visit Sequencing — Prioritizing Your Day',
+        resourceLabel: 'Training Resource',
         resourceUrl: FIELD_URL_QUALITY,
         objectives: [
-          'Identify problems early and think through solutions before escalating',
-          'Come to Jose with a proposed solution alongside every problem',
-          'Eliminate pure problem-reporting without thinking first',
+          'Know how to sequence your site visits for maximum impact',
+          'Understand: inspection visits, check-in visits, and sign-off visits — each needs different time',
+          'Know which job needs Jorge most and how to determine that at 7am',
         ],
-        task: 'For the next issue that comes up on site, write a 2-sentence solution before calling Jose. Practice saying: "We have a problem and here\'s what I think we should do."',
-        tip: 'Anyone can report a problem. Leaders bring options.',
+        task: 'Plan your site visits for tomorrow: list each job, what stage it\'s in, and what you need to do at each. Prioritize by most at risk. Share with Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. A day of random drive-bys is not field management. A sequenced visit plan is.',
       },
+      // Fri — Review
       {
-        topic: 'Week 10 Graduation — Field Leadership Assessment',
-        resourceLabel: FIELD_LABEL,
+        topic: 'Week 10 Review — Planning',
+        resourceLabel: 'Training Resource',
         resourceUrl: FIELD_URL_QUALITY,
         objectives: [
-          'Demonstrate field leadership across all trained areas',
-          'Receive Jose\'s evaluation on site',
-          'Write a personal self-assessment after the evaluation',
+          'Read a project schedule cold and identify the next 2 milestones',
+          'Spot a trade dependency conflict and flag it correctly',
+          'Sequence a 3-job visit day and justify the order',
         ],
-        task: 'Jose and Jorge walk an active job site together. Jose evaluates: safety, quality, crew direction, documentation, communication. Jorge writes a self-assessment after.',
-        tip: 'The best field managers are always studying. Every job teaches you something if you pay attention.',
+        task: 'Jose gives Jorge a fictional 3-job scenario with one delay embedded. Jorge identifies the delay, flags it in proper format, and adjusts his visit sequence.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Field operations is your job now. Plan it like a professional.',
+      },
+    ],
+
+    // ── WEEK 11: CLIENT COMMUNICATION ────────────────────────────────────────
+    11: [
+      // Mon — Concept
+      {
+        topic: 'What Jorge Can and Cannot Say to Clients',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know that Jorge represents NFR on every site — everything he says is an NFR statement',
+          'Know the topics that belong to Jose only: price, timeline changes, scope changes',
+          'Know the topics Jorge handles directly: progress updates, access, safety',
+        ],
+        task: 'Write two lists: what Jorge CAN tell a client directly, and what he must redirect to Jose. Submit and discuss with Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. The wrong words to a client cost NFR money, reputation, or both.',
+      },
+      // Tue — Application
+      {
+        topic: 'Handling Client Questions on Site',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the redirect script: "That\'s a great question — let me have Jose follow up with you directly"',
+          'Understand that silence is better than a wrong answer',
+          'Know how to be warm and professional without over-promising',
+        ],
+        task: 'Role-play 3 client questions Jorge might get on site. For each one, write exactly what he would say. Use the redirect for anything above his authority.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. A confident redirect keeps everyone happy. An answer you shouldn\'t give causes problems.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Escalation Protocol',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the escalation triggers: client complaint, scope concern, safety issue, structural surprise',
+          'Know the escalation sequence: Jorge assesses → Jorge notifies Jose → Jose responds',
+          'Know the response time expectation: Jose needs to know within 1 hour of any client escalation',
+        ],
+        task: 'Write the escalation protocol in your own words for two scenarios: (a) client upset about timeline, (b) client asks about adding a room that\'s not in scope.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Escalation is not weakness. It\'s the right move. Own it.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Setting Expectations Without Over-Promising',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know how to give a "we\'re on track" update without committing to a specific date',
+          'Understand why "it should be done by Friday" from the field manager creates a problem',
+          'Know the language: "We\'re making good progress — Jose will confirm your completion date"',
+        ],
+        task: 'Write 3 client update phrases Jorge uses regularly. Make sure none of them include a date or price commitment. Show to Jose for feedback.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Manage expectations with facts and redirect. Never guess a date out loud.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 11 Review — Client Communication',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the can/cannot topics without looking at notes',
+          'Use the redirect script naturally in a role-play',
+          'Describe the escalation protocol for a client complaint from memory',
+        ],
+        task: 'Jose role-plays a difficult client on site. Jorge handles it — no dates, no prices, no promises. Debrief with Jose after.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. How you handle clients on site is how they judge NFR.',
+      },
+    ],
+
+    // ── WEEK 12: DAILY REPORTING ──────────────────────────────────────────────
+    12: [
+      // Mon — Concept
+      {
+        topic: 'EOD Report Format',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the NFR end-of-day report format: Jobs | Status | Issues | Tomorrow\'s Plan',
+          'Understand that the EOD report replaces most "what\'s happening on X?" texts from Jose',
+          'Know the deadline: EOD report by 5:00pm every day, no exceptions',
+        ],
+        task: 'Write today\'s EOD report in the correct format. Submit to Jose by 5pm. This becomes your daily habit starting now.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. If Jose gets your EOD report, he doesn\'t have to chase you. That\'s the whole point.',
+      },
+      // Tue — Application
+      {
+        topic: 'Reporting Across Multiple Jobs',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know how to write a clear EOD report when managing 3+ jobs simultaneously',
+          'Use consistent job names so Jose can track which is which',
+          'Flag which jobs are green, yellow, or red in every report',
+        ],
+        task: 'Write an EOD report for all active jobs today. Color code each: green (on track), yellow (minor concern), red (needs Jose now). Submit.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Color coding lets Jose triage at a glance. He reads your report in 60 seconds or it\'s too long.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Reporting Under Pressure',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know that a busy, chaotic day is when the EOD report matters most — not least',
+          'Understand how to write a quick but complete report even when exhausted',
+          'Know the minimum acceptable EOD report on a bad day: 1 line per job, color status, 1 action',
+        ],
+        task: 'On your most chaotic day this week, still submit an EOD report. It can be short — but it must cover every active job. No skipping.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. The days you most want to skip the report are the days Jose most needs it.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Keeping Jose Informed — Proactive vs. Reactive',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Understand the difference between reactive reporting (Jose asks) and proactive reporting (Jorge tells)',
+          'Know that Jose\'s confidence in Jorge is built by consistent, proactive updates',
+          'Identify one thing this week Jose should know that he hasn\'t asked about yet',
+        ],
+        task: 'Write one proactive update to Jose about something on a job he hasn\'t asked about. Not a problem — just something useful he should know.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Proactive communication is the mark of a manager Jose can trust with more responsibility.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 12 Review — Daily Reporting',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Have submitted an EOD report every day this week',
+          'Describe the report format from memory',
+          'Review this week\'s reports with Jose — what was clear? What was missing?',
+        ],
+        task: 'Review all 5 EOD reports from this week with Jose. What did Jose have to ask that should have been in the report? Identify your one reporting blind spot.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Phase 3 complete. You now run the job. Next phase: you run the people.',
+      },
+    ],
+
+    // ── PHASE 4: MANAGING OTHERS (Weeks 13–16) ────────────────────────────────
+
+    // ── WEEK 13: DIRECTING A CREW ─────────────────────────────────────────────
+    13: [
+      // Mon — Concept
+      {
+        topic: 'How to Give Clear Task Instructions',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the 4-part instruction format: What, Where, By When, To What Standard',
+          'Understand that vague instructions create vague results',
+          'Know how to confirm a crew member understood — not just "got it?"',
+        ],
+        task: 'Write 3 crew instructions using the 4-part format for real tasks on your current jobs. Compare to how you normally give instructions. What changed?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. "Handle the bathroom" is not an instruction. "Tape the drywall in the master bath, finish Level 4, by end of today" is.',
+      },
+      // Tue — Application
+      {
+        topic: 'Setting Daily Production Targets',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know how to set a realistic daily production target for a crew based on scope and headcount',
+          'Understand that a crew without a target works to comfort, not completion',
+          'Know how to set the target before you leave the site in the morning',
+        ],
+        task: 'Set a daily production target for one crew before their morning start. Check in at midday. Were they on track? Why or why not? Report to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Crews with clear daily targets finish faster and make fewer mistakes.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Accountability Check-ins',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the check-in cadence: morning direction + midday check + EOD confirmation',
+          'Understand how to do a check-in without hovering or undermining the crew',
+          'Know how to respond when work is behind or off-standard at check-in time',
+        ],
+        task: 'Do 3 real check-ins today (morning, midday, EOD) on one crew. Write what you found at each check-in and what action you took. Share with Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Check-ins catch problems while there\'s still time to fix them. Inspections at the end just find excuses.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'When a Crew Member Falls Short',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the 3-step response: address privately, describe the standard, give one chance to correct',
+          'Understand that public correction damages crew morale and authority',
+          'Know when to escalate a crew performance issue to Jose',
+        ],
+        task: 'Write the script Jorge uses when a crew member\'s work doesn\'t meet NFR standard. What does he say? How does he say it? When does he loop in Jose?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. How you handle one crew member who falls short defines how every crew member performs.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 13 Review — Directing a Crew',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Use the 4-part instruction format naturally, without thinking about it',
+          'Set and track a daily production target independently',
+          'Handle an off-standard situation with confidence',
+        ],
+        task: 'Jose reviews Jorge\'s check-in notes from the week. Discuss: were the production targets realistic? Were corrections made early enough? What needs to improve?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Directing a crew is the skill that separates a worker from a manager. You\'re becoming a manager.',
+      },
+    ],
+
+    // ── WEEK 14: MANAGING SUBCONTRACTORS ─────────────────────────────────────
+    14: [
+      // Mon — Concept
+      {
+        topic: 'Interior Surface Oversight',
+        resourceLabel: 'NAHB Field Management Resource',
+        resourceUrl: FIELD_URL_NAHB,
+        objectives: [
+          'Understand how Interior Surface fits into the NFR model (1099 sub, 30% markup)',
+          'Know the NFR quality gate: IS work must be inspected before NFR signs off',
+          'Know the communication protocol with Interior Surface (go through Jose, not directly)',
+        ],
+        task: 'Review the NFR Interior Surface SOP. Write: What is Jorge\'s role when IS is on site? What does he inspect? What does he not decide?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. IS is NFR\'s most trusted sub — but trust is verified, not assumed.',
+      },
+      // Tue — Application
+      {
+        topic: 'Managing Painting Subcontractors',
+        resourceLabel: 'NAHB Field Management Resource',
+        resourceUrl: FIELD_URL_NAHB,
+        objectives: [
+          'Know the NFR quality standard a painter sub must hit before Jorge signs off',
+          'Know how to brief a painter sub at the start of a job: scope, standard, deadline',
+          'Know the step if a painter sub\'s work doesn\'t meet standard: document, correct before leaving',
+        ],
+        task: 'Brief a painter sub (or write the briefing script) for an active painting job. What do you tell them before they start? What do you inspect before they leave?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. A well-briefed sub does better work. Don\'t assume they know NFR\'s standard — tell them.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Managing Flooring Crews',
+        resourceLabel: 'NAHB Field Management Resource',
+        resourceUrl: FIELD_URL_NAHB,
+        objectives: [
+          'Know the pre-start checklist for a flooring sub: subfloor ready, materials on site, plan reviewed',
+          'Know the mid-job check: seams, expansion gap, transitions staged',
+          'Know the final inspection: walk with the sub before they pack up',
+        ],
+        task: 'Create a 1-page flooring sub checklist: pre-start, mid-job, and final walk. Use it on the next flooring job. Submit completed version to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. A checklist shared with the sub upfront sets expectations. Inspection without it feels arbitrary.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Quality Gates for All Subs',
+        resourceLabel: 'NAHB Field Management Resource',
+        resourceUrl: FIELD_URL_NAHB,
+        objectives: [
+          'Understand that a "quality gate" is a defined checkpoint before a sub moves to the next phase',
+          'Know the NFR quality gates: after demo, after rough, after drywall, after paint, after flooring',
+          'Know that Jorge owns these gates — not Jose, not the sub',
+        ],
+        task: 'Write the quality gate criteria for one trade (your choice). What does Jorge check? What are the pass/fail criteria? What happens if it fails?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Quality gates are how NFR delivers consistent work across every sub, every job.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 14 Review — Subcontractor Management',
+        resourceLabel: 'NAHB Field Management Resource',
+        resourceUrl: FIELD_URL_NAHB,
+        objectives: [
+          'Brief a sub confidently before a job starts',
+          'Inspect and pass/fail a sub\'s work using trade standards',
+          'Know what goes to Jose vs. what Jorge handles independently',
+        ],
+        task: 'Jose reviews Jorge\'s sub inspection notes from the week. Discuss: were corrections made before subs left? Were quality gates enforced? What to improve?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Managing subs is the same as managing crews — except they\'re not on payroll and they can walk.',
+      },
+    ],
+
+    // ── WEEK 15: QUALITY CONTROL INSPECTIONS ─────────────────────────────────
+    15: [
+      // Mon — Concept
+      {
+        topic: 'Formal Inspection Process',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Understand the difference between a walk-through and a formal inspection',
+          'Know that a formal inspection is documented, trade-specific, and signed off',
+          'Know that Jorge\'s sign-off is what triggers the next trade or the client walk',
+        ],
+        task: 'Write the NFR formal inspection process: who does it, when, what tools are needed, and what the output document looks like.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. An inspection without documentation is just an opinion. Documentation is what holds up.',
+      },
+      // Tue — Application
+      {
+        topic: 'Paint Quality Control Inspection',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Complete a full paint QC inspection on a finished room',
+          'Use the 5-point checklist: holidays, lap marks, cut lines, drips, sheen consistency',
+          'Document findings with photos and written notes',
+        ],
+        task: 'Conduct a formal paint QC on an active or recently completed room. Complete the checklist. Attach photos. Submit pass/fail to Jose with documentation.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. The first time you run a formal QC without prompting is the day Jose starts trusting you with more.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Drywall QC Inspection',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Complete a drywall QC inspection before painting begins',
+          'Use the 6-point checklist: seams, corners, fasteners, texture, finish level, moisture',
+          'Know the threshold for re-mud vs. touch-and-prime',
+        ],
+        task: 'Conduct a drywall QC on any room before painting begins. Write findings. Issue a pass or a rework requirement. Notify the drywaller.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Drywall QC before paint saves one of the most expensive reworks in residential construction.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Flooring QC & Punch Lists',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Complete a flooring QC using the NFR final walk checklist',
+          'Create a punch list from QC findings: trade, item, correction, deadline',
+          'Know how to manage a punch list to completion before client walk-through',
+        ],
+        task: 'Create a real punch list from a current job. Format: Trade | Item | Correction | Who fixes it | Deadline. Submit to Jose and begin tracking.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Punch lists don\'t fix themselves. They need an owner and a deadline. That\'s Jorge.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 15 Review — QC',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Conduct any trade QC inspection without being asked',
+          'Produce a documented punch list from QC findings',
+          'Close at least one punch list item this week',
+        ],
+        task: 'Review the week\'s QC documentation with Jose. Did inspections happen before the next trade moved in? Were punch list items closed? What to improve?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. QC is not about catching people. It\'s about delivering a product worth the price NFR charges.',
+      },
+    ],
+
+    // ── WEEK 16: SCOPE & CHANGE ORDERS ───────────────────────────────────────
+    16: [
+      // Mon — Concept
+      {
+        topic: "What's In Scope",
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know how to read the NFR scope document before showing up to a job',
+          'Understand that anything not in the scope document is not NFR\'s responsibility — yet',
+          'Know the scope review habit: read it before every visit',
+        ],
+        task: 'Pull the scope document for one active job. List everything that is explicitly in scope. Then list 3 things a client might ask for that are NOT in scope.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. The scope document is your contract on site. Know it better than the client does.',
+      },
+      // Tue — Application
+      {
+        topic: 'Change Order Triggers',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the 4 change order triggers: client request, hidden condition, scope error, material upgrade',
+          'Understand that Jorge identifies triggers — Jose decides and prices the change order',
+          'Know the no-work-without-approval rule: nothing outside scope happens without a signed CO',
+        ],
+        task: 'Walk an active job. Can you find any work that was done or requested that might be outside the original scope? Document it and report to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Every unauthorized scope change costs NFR money. Every flagged one is a chance to add revenue.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Language to Use on Change Orders',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the correct language when a client asks for something outside scope',
+          'Use the phrase: "That sounds like something we can do — let me have Jose put together a change order for you"',
+          'Know why Jorge never quotes prices on site for out-of-scope work',
+        ],
+        task: 'Write 3 client out-of-scope requests and your exact response to each. Use the redirect language. Show Jose for feedback.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. The client respects a field manager who knows his boundaries. It feels professional, not evasive.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Escalation on Scope Issues',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the escalation timeline: scope issue identified → Jose notified within 2 hours',
+          'Understand that crew should never start out-of-scope work even if the client asks nicely',
+          'Know how to hold the line with a client while Jose prepares a change order',
+        ],
+        task: 'Write the escalation script Jorge uses when a client asks crew to "just do this one thing" that\'s outside scope and crew almost agreed. What does Jorge say to the crew? To the client?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Unauthorized work is NFR\'s #1 risk for disputes. Jorge is the last line of defense.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 16 Review — Scope & Change Orders',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Read a scope document and identify what\'s included vs. excluded',
+          'Identify a change order trigger and escalate it correctly',
+          'Use redirect language with a client requesting out-of-scope work',
+        ],
+        task: 'Jose gives Jorge a scenario: crew is on site, client asks for something outside scope, and a crew member is about to say yes. Jorge walks through his exact response, step by step.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Phase 4 complete. You can now direct crews AND manage subs AND protect scope. That\'s a field manager.',
+      },
+    ],
+
+    // ── PHASE 5: LEADERSHIP (Weeks 17–20) ────────────────────────────────────
+
+    // ── WEEK 17: RUNNING MULTIPLE JOBS ───────────────────────────────────────
+    17: [
+      // Mon — Concept
+      {
+        topic: 'Prioritizing Multiple Site Visits',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the 3-tier triage for site visits: critical (today or it stops), important (today for progress), routine (check-in)',
+          'Build a daily visit plan each morning at 7am before driving',
+          'Understand that the highest-risk job gets the first visit, not the closest job',
+        ],
+        task: 'Triage all active jobs into 3 tiers. Build today\'s visit sequence based on risk, not geography. Share with Jose. Did he agree with your ranking?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. When you have 5 jobs and 8 hours, sequencing is the skill. Guessing is not.',
+      },
+      // Tue — Application
+      {
+        topic: 'Time-Splitting Across Jobs',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know how long each type of site visit actually takes: QC inspection (30–60 min), check-in (15 min), problem-solve visit (60–90 min)',
+          'Allocate realistic time blocks and stick to them',
+          'Know when a job needs more time than planned and how to adjust the rest of the day',
+        ],
+        task: 'Time your visits today — when you arrive and when you leave each site. At EOD, report: How much time did each job actually take vs. what you planned?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. You can\'t manage time you don\'t track. Start tracking.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Triage — Knowing When to Go vs. Trust the Crew',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the difference between a crew that can be left to run and one that needs a physical visit',
+          'Understand that every in-person visit has a cost — use them where they matter most',
+          'Know the questions that determine "go vs. trust": Who is working? What phase? Any risks flagged?',
+        ],
+        task: 'For each active job today: decide "go" or "trust the crew with a text check-in." Write your reasoning for each. Submit to Jose and compare your decisions.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Knowing when NOT to go is as important as knowing when to go.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Knowing Which Job Needs You Most',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the risk signals that demand Jorge\'s physical presence: new crew, new trade, client on site, QC gate, known problem',
+          'Build a mental model for each job: green/yellow/red at any moment',
+          'Know how to update job status throughout the day without waiting for EOD',
+        ],
+        task: 'At 7am, score each job green/yellow/red. Text Jose the scores. Update the scores at noon. Report: did anything change? Why?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. When Jose asks "which job needs you most?" you should already know — without thinking.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 17 Review — Multiple Jobs',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Build a daily triage sequence without being prompted',
+          'Time-track actual visit durations and compare to planned',
+          'Score all active jobs in under 2 minutes',
+        ],
+        task: 'Review this week\'s triage decisions with Jose. Were the right jobs prioritized? What would Jose have done differently? What will Jorge do differently next week?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Running multiple jobs without dropping any is the core skill of a senior field manager.',
+      },
+    ],
+
+    // ── WEEK 18: CREW RELIABILITY & LEADERSHIP ───────────────────────────────
+    18: [
+      // Mon — Concept
+      {
+        topic: 'Building Trust with Your Crew',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Understand that trust is built through consistency, fairness, and follow-through',
+          'Know that a crew member who trusts their manager works harder and shows up more reliably',
+          'Identify one behavior Jorge does that builds trust and one that might undermine it',
+        ],
+        task: 'Write: What does a crew member need from a manager to feel trusted and motivated? Then write: What does Jorge do today that matches that? What doesn\'t?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Trust isn\'t built in one conversation. It\'s built in 100 small consistent moments.',
+      },
+      // Tue — Application
+      {
+        topic: 'Accountability Without Micromanaging',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the difference between accountability (checking outcomes) and micromanaging (controlling every step)',
+          'Understand that giving crew ownership of the HOW — while holding them to the WHAT — builds reliability',
+          'Know when to step in vs. when to let the crew figure it out',
+        ],
+        task: 'Identify one situation this week where Jorge\'s instinct was to step in and direct. Write: should he have? What was the better move — step in or trust the crew?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. The most reliable crews are the ones that have been trusted to solve problems.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Leading by Example',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know that crew members copy the manager\'s behavior — especially around safety, quality, and attitude',
+          'Understand that showing up early, staying organized, and being honest creates a culture that others adopt',
+          'Identify one behavior Jorge models that he would want every crew member to copy',
+        ],
+        task: 'Write: If your crew copied every habit you have — your arrival time, your communication style, your attention to quality — would NFR be better or worse? What would you change?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. You don\'t build a culture by talking about it. You build it by being it.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Handling a Difficult Crew Member',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the 3-step response: address behavior privately, state the standard, set a clear expectation with a deadline',
+          'Understand the difference between a performance issue (fixable) and a values issue (not)',
+          'Know when to escalate a crew member issue to Jose and what information to bring',
+        ],
+        task: 'Write the script Jorge would use with a crew member who showed up 45 minutes late to a job site with a client visit scheduled. Step by step. What does he say and do?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. How you handle one bad situation tells the whole crew what the standard is.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 18 Review — Leadership',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Describe the difference between a reliable crew and an unreliable one — and what Jorge\'s role is in each',
+          'Handle a crew accountability scenario without escalating unnecessarily',
+          'Identify one leadership improvement to carry into next week',
+        ],
+        task: 'Jose and Jorge debrief on crew performance this week. Which crews felt solid? Which felt loose? What did Jorge do that helped? What would he do differently?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Leadership is the longest game. Every week you either build it or borrow against it.',
+      },
+    ],
+
+    // ── WEEK 19: BUDGET & MATERIAL AWARENESS ─────────────────────────────────
+    19: [
+      // Mon — Concept
+      {
+        topic: 'Flagging Material Risk',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the signs of material risk: short supply, wrong order, damage on delivery, wrong spec',
+          'Understand that material risk flagged before install saves money; material risk discovered after costs 3x more',
+          'Know the protocol: flag to Jose within 1 hour of identifying a material concern',
+        ],
+        task: 'Check materials on one active job: Are the right products on site? Right quantity? Right spec? Any damage? Write a material status report and submit to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Every material problem caught before install is a crisis avoided. Every one missed is a callback.',
+      },
+      // Tue — Application
+      {
+        topic: 'Understanding NFR Markups',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the NFR markup structure: 24% on materials, 30% on subs, 15% on equipment',
+          'Understand why markups exist and what they cover: overhead, risk, margin',
+          'Know that Jorge never shares markup amounts with clients or subs',
+        ],
+        task: 'Write in your own words: why does NFR mark up materials and subs? What would happen to the company if it didn\'t? Why should this stay between Jorge and Jose?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Markup knowledge is internal. It protects the business model. Guard it.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Cost vs. Quality Decisions',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know the NFR default: spec quality, not premium quality — unless the client paid for the upgrade',
+          'Understand that cost overruns on materials come out of NFR\'s margin',
+          'Know the escalation path for a sub who wants to use a higher-cost material "because it\'s better"',
+        ],
+        task: 'A sub tells Jorge he wants to use a slightly better drywall mud "because it\'s easier to work with." It costs $40 more per job. Write: What does Jorge say? What does he do?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Field managers who protect the budget are trusted with bigger projects. Field managers who don\'t are managed tighter.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Budget Conversations with Jose',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know how to bring a cost concern to Jose with context: what it is, why it\'s a risk, what the options are',
+          'Understand that budget conversations are facts first, not opinions',
+          'Know the format: Situation | Cost Impact | Options | Jorge\'s Recommendation',
+        ],
+        task: 'Identify one real cost risk on an active job. Write it up in the 4-part format. Bring it to Jose as a budget flag — not just a complaint.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Jose trusts Jorge with bigger projects when Jorge talks about money like a business owner.',
+      },
+      // Fri — Review
+      {
+        topic: 'Week 19 Review — Budget & Materials',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Conduct a material audit on an active job without being asked',
+          'Explain NFR\'s markup structure accurately and confidentially',
+          'Bring a cost concern to Jose in the correct 4-part format',
+        ],
+        task: 'Jose reviews Jorge\'s material flags from the week. Were risks identified early? Were budget concerns brought as solutions? What to sharpen before graduation week?',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. One week left. This is the final stretch before your full field leadership role.',
+      },
+    ],
+
+    // ── WEEK 20: GRADUATION — FIELD LEADERSHIP ────────────────────────────────
+    20: [
+      // Mon — Concept
+      {
+        topic: 'Full Site Walkthrough Prep',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Know what a full site walkthrough assessment covers: safety, quality, documentation, crew direction, client readiness',
+          'Prepare for the joint walkthrough with Jose on Wednesday',
+          'Review all 20 weeks of training and identify your strongest and weakest areas',
+        ],
+        task: 'Self-audit across all 5 training phases. Rate yourself 1–5 in each: Communication, Safety, Trade Knowledge, Operations, Leadership. Write your honest assessment.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. The best field managers are always honest about where they can improve. That\'s what makes them great.',
+      },
+      // Tue — Application
+      {
+        topic: 'Self-Assessment',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Write a personal self-assessment across all 5 training phases',
+          'Identify the 3 areas of biggest growth since Week 1',
+          'Identify the 1 area that still needs the most work',
+        ],
+        task: 'Write your self-assessment. Be specific: what could you NOT do in Week 1 that you can do now? What situation still makes you uncomfortable? Submit to Jose before Wednesday.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. A self-assessment that only highlights strengths is not a self-assessment — it\'s a performance.',
+      },
+      // Wed — Practice
+      {
+        topic: 'Joint Site Walkthrough with Jose',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Lead Jose through an active job site as the field manager',
+          'Call out quality conditions, safety conditions, and documentation status unprompted',
+          'Receive Jose\'s evaluation on all 5 areas: safety, quality, crew direction, documentation, communication',
+        ],
+        task: 'Jorge leads Jose on a full active site walk. Jorge calls out everything. Jose observes and evaluates. No coaching during the walk — this is the assessment.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. This is the real thing. Lead like you mean it.',
+      },
+      // Thu — Deepen
+      {
+        topic: 'Reflection & 90-Day Growth Plan',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Debrief on the joint walkthrough with Jose',
+          'Understand the areas Jose identified for continued growth',
+          'Build a personal 90-day growth plan: 3 habits to cement, 1 skill to deepen',
+        ],
+        task: 'Jose shares his walkthrough evaluation. Jorge writes a 90-day growth plan based on the feedback: 3 habits, 1 skill, 1 stretch goal. Submit to Jose.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Graduation is not the finish line — it\'s the starting line for the next level.',
+      },
+      // Fri — Graduation
+      {
+        topic: 'Graduation — Field Manager',
+        resourceLabel: 'Training Resource',
+        resourceUrl: FIELD_URL_QUALITY,
+        objectives: [
+          'Celebrate 20 weeks of consistent 7:30am training with Scott',
+          'Acknowledge the growth from Week 1 (email basics) to Week 20 (leading a site walk)',
+          'Commit to the 90-day plan as the next chapter of Jorge\'s leadership journey',
+        ],
+        task: 'Jorge and Jose share this morning\'s carpool reviewing the 20-week journey. One question from Jose: "What is the most important thing you learned?" Jorge answers from the heart.',
+        tip: 'Complete during your 7:30–8:00am window before warehouse. Twenty weeks. One hundred sessions. You earned this. Now go be the field manager NFR needs.',
       },
     ],
   };
@@ -1785,7 +2557,7 @@
       name:      'Jorge',
       role:      'Field Manager',
       color:     '#7BAFD4',
-      anchor:    '2026-03-16',
+      anchor:    '2026-03-17',
       startWeek: 1,
       plan:      FIELD_PLAN,
     },
