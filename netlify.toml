@@ -7,6 +7,12 @@
   functions = "netlify/functions"
 
 [[redirects]]
+  # Root → staff portal
+  from   = "/"
+  to     = "/staff/"
+  status = 302
+
+[[redirects]]
   # Clean 404 fallback
   from   = "/*"
   to     = "/index.html"

@@ -110,6 +110,11 @@
   // ── training card ──────────────────────────────────────────────────────────
 
   function renderTrainingCard(content, record) {
+    if (content && content.mozaik) {
+      renderTrainingCardThreeBlock(content, record);
+      return;
+    }
+
     const main = document.getElementById('main-content');
     if (!main) return;
 
@@ -199,6 +204,92 @@
       if (!isComplete) {
         completeBtn.addEventListener('click', handleMarkComplete);
       }
+    }
+  }
+
+  // ── three-block card (Maria) ────────────────────────────────────────────────
+
+  function renderBlock(block, colors) {
+    const objectivesHtml = (block.objectives || []).map(function (obj) {
+      return '<li>' + escHtml(obj) + '</li>';
+    }).join('');
+    return `
+      <div class="training-block" style="border-left: 4px solid ${colors.border}; background: ${colors.bg}; padding: 16px; margin-bottom: 16px; border-radius: 6px;">
+        <div class="block-header" style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+          <span class="block-label" style="font-weight:700; color:${colors.border}; font-size:13px; text-transform:uppercase; letter-spacing:.05em;">${escHtml(block.label)}</span>
+          <span style="color:#888; font-size:12px;">${escHtml(block.duration)}</span>
+        </div>
+        <h2 style="font-size:18px; margin:0 0 10px; color:#1C2B4A;">${escHtml(block.topic)}</h2>
+        <div class="card-columns">
+          <div class="card-left">
+            <h3 class="section-heading">Objectives</h3>
+            <ul class="objectives-list">${objectivesHtml}</ul>
+            <a href="${escAttr(block.resourceUrl)}" target="_blank" rel="noopener" class="resource-btn">
+              <span class="resource-icon">📚</span>
+              ${escHtml(block.resourceLabel)}
+            </a>
+          </div>
+          <div class="card-right">
+            <div class="task-box">
+              <h3 class="section-heading">Today's Task</h3>
+              <p>${escHtml(block.task)}</p>
+            </div>
+            <blockquote class="tip-blockquote">
+              <span class="tip-label">Tip from Jose</span>
+              <p>${escHtml(block.tip)}</p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderTrainingCardThreeBlock(content, record) {
+    const main = document.getElementById('main-content');
+    if (!main) return;
+
+    const dateObj  = new Date(currentDate + 'T12:00:00');
+    const dayName  = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dateObj.getDay()];
+    const isComplete = record && record.completed;
+
+    const mozaikBlock = Object.assign({ label: 'Mozaik', duration: '1 hour' }, content.mozaik);
+    const adminBlock  = Object.assign({ label: 'Office Admin', duration: '45 min' }, content.admin);
+    const designBlock = Object.assign({ label: 'Design Awareness', duration: '45 min' }, content.design);
+
+    const completionHtml = isComplete
+      ? `<div class="completion-badge"><span class="checkmark">✓</span> Completed at ${escHtml(record.completedAt || '')}</div>`
+      : '';
+
+    const btnClass = isComplete ? 'mark-complete-btn done' : 'mark-complete-btn';
+    const btnText  = isComplete ? '✓ Completed' : 'Mark Complete';
+
+    main.innerHTML = `
+      <div class="training-card" style="--accent: #5F8062">
+        <div class="week-badge">Week ${content.week} &middot; Day ${content.day} &middot; ${dayName}</div>
+        <h1 class="topic-title" style="font-size:20px;">Daily Training — 2.5 Hours</h1>
+        ${completionHtml}
+
+        ${renderBlock(mozaikBlock, { border: '#5F8062', bg: '#F2F7F2' })}
+        ${renderBlock(adminBlock,  { border: '#1C5A8A', bg: '#F0F5FA' })}
+        ${renderBlock(designBlock, { border: '#8B5E8B', bg: '#F7F0F7' })}
+
+        <div class="notes-section">
+          <h3 class="section-heading">Notes</h3>
+          <textarea id="notes-area" class="notes-area" placeholder="Write your notes here…" rows="4">${escHtml((record && record.notes) || '')}</textarea>
+        </div>
+
+        <div class="complete-row">
+          <button id="btn-complete" class="${btnClass}">${btnText}</button>
+        </div>
+      </div>
+    `;
+
+    const notesEl = document.getElementById('notes-area');
+    if (notesEl) notesEl.addEventListener('input', handleNoteInput);
+
+    const completeBtn = document.getElementById('btn-complete');
+    if (completeBtn && !isComplete) {
+      completeBtn.addEventListener('click', handleMarkComplete);
     }
   }
 

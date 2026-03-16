@@ -514,9 +514,8 @@
     ];
 
     var MARIA_PHASES = [
-      { weeks: [8,9,10,11,12],           label: 'Track 1 — Mozaik',           color: '#5F8062', bg: '#D4E6D5' },
-      { weeks: [13,14,15,16,17,18,19],   label: 'Track 2 — Office Admin',     color: '#1C5A8A', bg: '#D6EAF8' },
-      { weeks: [20,21,22,23,24,25],      label: 'Track 3 — Design Awareness', color: '#8B5E8B', bg: '#EAD6EA' },
+      { weeks: [1,2,3,4], label: 'Basic Track',        color: '#5F8062', bg: '#D4E6D5' },
+      { weeks: [5,6,7],   label: 'Intermediate Track', color: '#8B5E8B', bg: '#EAD6EA' },
     ];
 
     // ── State ────────────────────────────────────────────────────────────────
@@ -636,7 +635,7 @@
           if (ph) label += ' — ' + ph.label.replace(/Phase \d+ — /, '');
         } else if (key === 'maria') {
           var mph = getMariaPhase(w);
-          if (mph) label += ' — ' + mph.label.replace(/Track \d+ — /, '');
+          if (mph) label += ' — ' + mph.label;
         }
         return '<option value="' + w + '"' + (w === week ? ' selected' : '') + '>' + label + '</option>';
       }).join('');
@@ -709,37 +708,57 @@
         // Card body
         html += '<div class="day-card-body">';
 
-        // Topic
-        html += '<div class="day-topic">' + esc(day.topic || '') + '</div>';
-
-        // Objectives
-        if (day.objectives && day.objectives.length) {
-          html += '<div>';
-          html += '<div class="day-section-label">Objectives</div>';
-          html += '<ul class="day-objectives">';
-          day.objectives.forEach(function (obj) {
-            html += '<li>' + esc(obj) + '</li>';
+        if (day.mozaik) {
+          // 3-block day (Maria)
+          var isCheckpoint = (week === 6 && idx === 4); // Week 6 Friday
+          if (isCheckpoint) {
+            html += '<div style="background:#FFF3CD;border:1px solid #C9A96E;border-radius:4px;padding:6px 10px;margin-bottom:10px;font-size:12px;font-weight:700;color:#856404;">⚑ Reevaluation Checkpoint — Jose decides next direction</div>';
+          }
+          var blocks = [
+            { b: day.mozaik, label: 'Mozaik', color: '#5F8062' },
+            { b: day.admin,  label: 'Admin',  color: '#1C5A8A' },
+            { b: day.design, label: 'Design', color: '#8B5E8B' },
+          ];
+          blocks.forEach(function (entry) {
+            var b = entry.b;
+            if (!b) return;
+            html += '<div style="border-left:3px solid ' + entry.color + ';padding:6px 8px;margin-bottom:8px;background:#fafafa;border-radius:0 4px 4px 0;">';
+            html += '<div style="font-size:11px;font-weight:700;color:' + entry.color + ';text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px;">' + entry.label + '</div>';
+            html += '<div class="day-topic" style="font-size:13px;margin-bottom:4px;">' + esc(b.topic || '') + '</div>';
+            if (b.resourceUrl && b.resourceLabel) {
+              html += '<a class="day-resource" href="' + esc(b.resourceUrl) + '" target="_blank" rel="noopener" style="font-size:11px;">' + esc(b.resourceLabel) + '</a>';
+            }
+            html += '</div>';
           });
-          html += '</ul></div>';
-        }
+        } else {
+          // Single-block day (Jorge / Scott)
+          html += '<div class="day-topic">' + esc(day.topic || '') + '</div>';
 
-        // Task
-        if (day.task) {
-          html += '<div>';
-          html += '<div class="day-section-label">Today\'s Task</div>';
-          html += '<div class="day-task-text">' + esc(day.task) + '</div>';
-          html += '</div>';
-        }
+          if (day.objectives && day.objectives.length) {
+            html += '<div>';
+            html += '<div class="day-section-label">Objectives</div>';
+            html += '<ul class="day-objectives">';
+            day.objectives.forEach(function (obj) {
+              html += '<li>' + esc(obj) + '</li>';
+            });
+            html += '</ul></div>';
+          }
 
-        // Tip
-        if (day.tip) {
-          html += '<div class="day-tip">💡 ' + esc(day.tip) + '</div>';
-        }
+          if (day.task) {
+            html += '<div>';
+            html += '<div class="day-section-label">Today\'s Task</div>';
+            html += '<div class="day-task-text">' + esc(day.task) + '</div>';
+            html += '</div>';
+          }
 
-        // Resource
-        if (day.resourceUrl && day.resourceLabel) {
-          html += '<a class="day-resource" href="' + esc(day.resourceUrl) + '" target="_blank" rel="noopener">' +
-            esc(day.resourceLabel) + '</a>';
+          if (day.tip) {
+            html += '<div class="day-tip">💡 ' + esc(day.tip) + '</div>';
+          }
+
+          if (day.resourceUrl && day.resourceLabel) {
+            html += '<a class="day-resource" href="' + esc(day.resourceUrl) + '" target="_blank" rel="noopener">' +
+              esc(day.resourceLabel) + '</a>';
+          }
         }
 
         html += '</div>'; // body
@@ -769,27 +788,24 @@
       }
       if (key === 'maria') {
         var mariaThemes = {
-          8:'Custom Modifications', 9:'Layouts & Room Planning',
-          10:'Drawers, Hardware & Doors', 11:'Advanced Customization',
-          12:'Graduation — Full Kitchen Build',
-          13:'NFR Systems & Tools', 14:'Client Communication',
-          15:'Agreement Workflow', 16:'Job File Management',
-          17:'Scheduling & Coordination', 18:'Office Financial Awareness',
-          19:'Graduation — Office Operations',
-          20:'What Designers Do', 21:'Color Theory & Trends',
-          22:'Materials & Finishes', 23:'Kitchen & Bath Trends',
-          24:'Spotting a Look', 25:'Design → NFR Sales',
+          1:'Mozaik Wk 8 + Basic Foundations',
+          2:'Mozaik Wk 9 + Basic Foundations',
+          3:'Mozaik Wk 10 + Basic Foundations',
+          4:'Mozaik Wk 11 + Basic Foundations',
+          5:'Mozaik Graduation + Intermediate',
+          6:'Production + Intermediate ← Checkpoint',
+          7:'Production + Intermediate',
         };
         return mariaThemes[week] || '';
       }
       if (key === 'scott') {
         var scottThemes = {
-          1:'CNC Basics & Setup', 2:'File Prep & Nesting',
-          3:'Cut Operations', 4:'Panel Processing',
-          5:'Advanced Operations', 6:'Quality & Inspection',
-          7:'Maintenance & Troubleshooting', 8:'Workflow Optimization',
-          9:'Inventory & Materials', 10:'Full Production Run',
-          11:'Advanced Projects', 12:'Graduation — CNC Mastery',
+          1:'Machine Overview & Safety', 2:'Software + Bit Awareness',
+          3:'Spoilboard & Material Setup', 4:'First Cuts',
+          5:'Mozaik Files + Bit Change', 6:'Live Cuts',
+          7:'Nesting & Full Panels', 8:'Doors & Drawer Fronts',
+          9:'Bit Management', 10:'Machine Maintenance',
+          11:'Quality Control', 12:'Graduation — CNC Mastery',
         };
         return scottThemes[week] || '';
       }

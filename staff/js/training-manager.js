@@ -130,8 +130,23 @@
     }
     pillsHtml += '</div>';
 
-    // 3-pillar strip for Scott (reads nfr_scott_daily)
+    // 3-pillar strip for Maria (Mozaik / Admin / Design)
     let pillarHtml = '';
+    if (employee === 'maria' && todayContent && todayContent.mozaik) {
+      var pillars = [
+        { label: 'Mozaik', done: records[today] && records[today].completed },
+        { label: 'Admin',  done: records[today] && records[today].completed },
+        { label: 'Design', done: records[today] && records[today].completed },
+      ];
+      pillarHtml = '<div class="pillar-strip">' +
+        pillars.map(function(p) {
+          return '<span class="pillar-chip' + (p.done ? ' done' : '') + '">' +
+            (p.done ? '✓ ' : '') + p.label + '</span>';
+        }).join('') +
+      '</div>';
+    }
+
+    // 3-pillar strip for Scott (reads nfr_scott_daily)
     if (employee === 'scott') {
       try {
         var scottDaily = JSON.parse(localStorage.getItem('nfr_scott_daily') || '{}');
@@ -257,8 +272,19 @@
           statusBadge = '<span class="cell-badge badge-upcoming">Upcoming</span>';
         }
 
+        var topicHtml;
+        if (content.mozaik) {
+          topicHtml = '<div class="cell-topic" style="font-size:11px;">' +
+            '<span style="color:#5F8062;font-weight:700;">M:</span> ' + escHtml(truncate(content.mozaik.topic, 20)) + '<br>' +
+            '<span style="color:#1C5A8A;font-weight:700;">A:</span> ' + escHtml(truncate(content.admin.topic, 20)) + '<br>' +
+            '<span style="color:#8B5E8B;font-weight:700;">D:</span> ' + escHtml(truncate(content.design.topic, 20)) +
+          '</div>';
+        } else {
+          topicHtml = '<div class="cell-topic">' + escHtml(content.topic) + '</div>';
+        }
+
         html += `<td class="${cellClass}">
-          <div class="cell-topic">${escHtml(content.topic)}</div>
+          ${topicHtml}
           ${statusBadge}
           ${record.notes ? '<div class="cell-note">' + escHtml(truncate(record.notes, 40)) + '</div>' : ''}
         </td>`;

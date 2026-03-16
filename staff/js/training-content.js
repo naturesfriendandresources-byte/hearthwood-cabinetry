@@ -1277,15 +1277,897 @@
     ],
   };
 
-  // ── COMBINED PLAN — all 3 tracks in one flat object ──────────────────────
-  const MARIA_PLAN = Object.assign({}, MOZAIK_PLAN, MARIA_ADMIN_PLAN, MARIA_DESIGN_PLAN);
+  // ── INTEGRATED 7-WEEK PLAN — 3 blocks per day (Mozaik 1hr + Admin 45min + Design 45min) ──
+  // MOZAIK_PLAN, MARIA_ADMIN_PLAN, MARIA_DESIGN_PLAN above are no longer used directly.
+  const MARIA_PLAN = {
+
+    // ══ PROGRAM WEEK 1 — Mozaik Wk8 / Admin Basic Wk1 / Design Basic Wk1 ════
+    1: [
+      // Mon
+      {
+        mozaik: {
+          topic: 'Custom Width Modifications', duration: '1 hour',
+          objectives: ['Change a standard cabinet to a custom width','Apply width changes to multiple cabinets in sequence','Verify the fit in the 3D layout view'],
+          task: 'Open a kitchen project, change one 24" base cabinet to 27", verify the change in 3D view, and save as [Project]-W1D1.',
+          tip: 'Always view in 3D after any width change.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'NFR Portals Overview', duration: '45 min',
+          objectives: ['Know every portal Maria touches: Staff Portal, Google Drive, CompanyCam, QuickBooks (view-only)','Understand which portal is used for which task','Log in to each portal and confirm access'],
+          task: 'Write a one-page portal map: name of each tool, what it\'s used for, and your access level. Show Jose.',
+          tip: 'Knowing which tool to open before you need it saves 10 minutes per client interaction.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'What Designers Do — Nate Berkus', duration: '45 min',
+          objectives: ['Understand the role of an interior designer vs. a decorator vs. a contractor','Study Nate Berkus\'s philosophy: collected, not decorated','Identify 3 recurring design elements across his portfolio'],
+          task: 'Browse Nate Berkus\'s work online. Write: What emotion does his design create? Which 3 choices could NFR apply to a kitchen project?',
+          tip: 'Design is not about having taste — it\'s about knowing what a client feels and giving them the room that creates it.',
+          resourceLabel: 'Watch: Nate Berkus — AD Tour', resourceUrl: 'https://www.youtube.com/results?search_query=Nate+Berkus+apartment+tour+Architectural+Digest',
+        },
+      },
+      // Tue
+      {
+        mozaik: {
+          topic: 'Height & Depth Customization', duration: '1 hour',
+          objectives: ['Adjust cabinet height for non-standard ceiling situations','Modify depth for appliance clearance requirements','Stack multiple modifications on a single cabinet'],
+          task: 'Change a base cabinet to 32" height, set a wall cabinet to reduced depth 11", and save as [Project]-W1D2.',
+          tip: 'Height changes affect countertop alignment — always check after.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Google Workspace at NFR', duration: '45 min',
+          objectives: ['Know the NFR Google Drive folder structure','Understand how to name and move files correctly per convention','Know how shared drives work vs. personal drives'],
+          task: 'Navigate to the active project folder. Find one project file and verify it is named correctly per NFR convention. If not, correct it and note it.',
+          tip: 'Every file you create should be findable by Jose or the Field Manager without calling you.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Client Types & Preferences — Angela Rose', duration: '45 min',
+          objectives: ['Study Angela Rose\'s client approach: practical beauty for real families','Identify the client type that values her work (family-oriented, functional, timeless)','Match the Angela Rose client type to the NFR buyer profile'],
+          task: 'Look at 5 Angela Rose kitchens. Write: What type of NFR client would choose this? What Hearthwood finish? What would they say in their first call?',
+          tip: 'Knowing the client type is the first step in knowing what to propose.',
+          resourceLabel: 'Watch: Angela Rose — Kitchen Design', resourceUrl: 'https://www.youtube.com/results?search_query=Angela+Rose+kitchen+design+home+renovation',
+        },
+      },
+      // Wed
+      {
+        mozaik: {
+          topic: 'Specialty Configurations — Fillers, Angles & Transitions', duration: '1 hour',
+          objectives: ['Add filler panels to close gaps at walls','Create corner transitions between two cabinet runs','Use specialty cabinet types in a layout'],
+          task: 'Build an L-shape layout, add fillers on wall ends, add a corner base cabinet, verify no gaps in 3D, and save as [Project]-W1D3.',
+          tip: 'Filler panels must match cabinet finish.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'CompanyCam — Accessing & Organizing Job Photos', duration: '45 min',
+          objectives: ['Know how to find a job in CompanyCam','Understand photo phases: before, milestone, after','Know how to share a photo link with a client or Jose'],
+          task: 'Find an active job in CompanyCam. Verify photos are labeled by trade and phase. Flag any missing phase photos to Jose.',
+          tip: 'CompanyCam photos are NFR\'s proof on every job. Treat them as part of the file.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Color & Personality — Genevieve Gorder', duration: '45 min',
+          objectives: ['Study how Genevieve Gorder uses color as a personality statement','Know the difference between a color statement and a color mistake','Understand how to help a client take a color risk confidently'],
+          task: 'Find 3 Genevieve Gorder rooms with bold color. Write: Would an NFR client do this? How would you soften the concept to fit their comfort level?',
+          tip: 'Most clients want more personality in their home than they think they\'re allowed to have. Your job is to show them what\'s possible.',
+          resourceLabel: 'Watch: Genevieve Gorder — Color in Design', resourceUrl: 'https://www.youtube.com/results?search_query=Genevieve+Gorder+color+design+home+renovation',
+        },
+      },
+      // Thu
+      {
+        mozaik: {
+          topic: 'Combining Modifications on Full Layouts', duration: '1 hour',
+          objectives: ['Apply multiple modifications across a full kitchen layout','Check for conflicts between stacked modifications','Regenerate the cut list after all changes are made'],
+          task: 'Build a 10×12 kitchen with at least 3 modification types, generate the cut list, and save as [Project]-W1D4.',
+          tip: 'Always regenerate cut list after modifications.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'QuickBooks Basics — What Maria Sees', duration: '45 min',
+          objectives: ['Know that Maria\'s QuickBooks role is read-only for project reference, not financial entry','Understand how to look up an invoice or payment record for a client','Know the separation: financials stay with Jose, Maria reads status only'],
+          task: 'With Jose, open a recent project in QuickBooks. Identify: Has the deposit posted? Is there an outstanding invoice? Write what you see — not what it means financially.',
+          tip: 'Maria\'s job is to know the project status, not to manage the books.',
+          resourceLabel: 'QuickBooks Tutorials', resourceUrl: 'https://quickbooks.intuit.com/tutorials/',
+        },
+        design: {
+          topic: 'The Midwest Design Perspective — Kevin O\'Gara', duration: '45 min',
+          objectives: ['Study Kevin O\'Gara\'s approach to Midwest residential design','Understand what "elevated approachable" means as a design positioning','Connect his work to NFR\'s Columbus, Ohio client base'],
+          task: 'Watch a Kevin O\'Gara video. Write: How does his work reflect the Columbus buyer? What one style choice would most NFR clients respond to?',
+          tip: 'Design that works in Columbus is different from design that works in New York. Know your market.',
+          resourceLabel: 'Watch: Kevin O\'Gara — Home Design', resourceUrl: 'https://www.youtube.com/results?search_query=Kevin+O%27Gara+home+design+midwest',
+        },
+      },
+      // Fri
+      {
+        mozaik: {
+          topic: 'Week 1 Review — Practice Kitchen', duration: '1 hour',
+          objectives: ['Complete a full kitchen using all Week 1 Mozaik skills without reference','Include custom width, non-standard height, and fillers','Generate a 3D view and cut list as deliverables'],
+          task: 'Build a complete kitchen from Jose\'s brief, apply all modifications, generate 3D and cut list — Friday 1pm check-in deliverable.',
+          tip: 'Friday check-in: show 3D view, walk through modifications, explain one decision.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Week 1 Admin Review — NFR Systems', duration: '45 min',
+          objectives: ['Name every tool Maria uses and its purpose from memory','Find a client project across all three systems (Drive, CompanyCam, QuickBooks) in under 5 minutes','Write the portal map from memory'],
+          task: 'Jose names a recent client. Maria locates the project folder, photos, and invoice status in under 5 minutes without asking for help.',
+          tip: 'Speed in the tools is confidence in the role.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Week 1 Design Review — Studio McGee Style Synthesis', duration: '45 min',
+          objectives: ['Study Studio McGee\'s approach to a cohesive, livable aesthetic','Understand why their style resonates with the NFR client profile','Build a one-paragraph design positioning statement for a mock NFR kitchen client'],
+          task: 'Watch a Studio McGee project. Write a design positioning statement: "She wants ___. Her home should feel ___. The palette starts with ___."',
+          tip: 'The best design briefs sound like the client wrote them, not the designer.',
+          resourceLabel: 'Watch: Studio McGee — Kitchen Design', resourceUrl: 'https://www.youtube.com/results?search_query=Studio+McGee+kitchen+design+makeover',
+        },
+      },
+    ],
+
+    // ══ PROGRAM WEEK 2 — Mozaik Wk9 / Admin Basic Wk2 / Design Basic Wk2 ════
+    2: [
+      // Mon
+      {
+        mozaik: {
+          topic: 'L-Shape Kitchen Layouts', duration: '1 hour',
+          objectives: ['Build a complete L-shape kitchen layout','Place the corner base cabinet correctly at the turn','Fill outward from the corner on both runs'],
+          task: 'Build a 10×10 L-shape kitchen with corner base cabinet at the turn and wall cabinets above both runs. Export 3D view.',
+          tip: 'Place corner cabinet first, fill outward.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'NFR Voice & Email Professionalism', duration: '45 min',
+          objectives: ['Understand what "NFR voice" means: warm, confident, professional, never casual','Know the email greeting and sign-off standard','Understand that every client email reflects the entire company'],
+          task: 'Read 3 past client emails from the NFR inbox. Rate each 1–5 for tone. Rewrite the most casual one in NFR voice.',
+          tip: 'A professional email prevents a misunderstanding that costs 2 hours to fix.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'High-Design Vocabulary — Kelly Wearstler', duration: '45 min',
+          objectives: ['Understand what makes Wearstler\'s work distinctive: bold, layered, material-rich','Learn 5 design vocabulary terms: patina, tension, materiality, scale, contrast','Practice using these terms in a room description'],
+          task: 'Find 3 Wearstler rooms. For each, write one sentence using professional design vocabulary. Read each aloud — does it sound confident?',
+          tip: 'Design vocabulary is not pretentiousness. It\'s precision. The right word moves a client forward.',
+          resourceLabel: 'Watch: Kelly Wearstler — Design Process', resourceUrl: 'https://www.youtube.com/results?search_query=Kelly+Wearstler+design+process+Architectural+Digest',
+        },
+      },
+      // Tue
+      {
+        mozaik: {
+          topic: 'Island & Peninsula Design', duration: '1 hour',
+          objectives: ['Add a kitchen island with correct aisle clearance','Apply a contrasting finish to the island','Verify minimum 42" clearance on all sides'],
+          task: 'Add a 36×60 island to the W2D1 layout with 42" clearance maintained. Apply a contrasting finish.',
+          tip: 'Island aisle clearance is a code minimum — do not go below 42".',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Responding to New Inquiries', duration: '45 min',
+          objectives: ['Know the NFR inquiry response time target: same day, within 4 hours','Know the 3-part inquiry response: acknowledge, qualify, next step','Draft a response to a new kitchen remodel inquiry from scratch'],
+          task: 'Jose provides a sample inquiry. Maria drafts a response using the 3-part format. Jose reviews for tone and completeness.',
+          tip: 'Speed + warmth in the first reply sets the client\'s impression for the entire project.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Warmth as a Design Strategy — Joanna Gaines', duration: '45 min',
+          objectives: ['Study why Joanna Gaines\'s style connects with mass market buyers','Understand the elements of warm transitional: shiplap, natural wood, soft neutrals','Know when NFR clients are asking for a "Joanna Gaines kitchen" without saying it'],
+          task: 'Find 5 Joanna Gaines kitchens. Write the 3 elements that appear in every one. Which Hearthwood finish lines are closest to this style?',
+          tip: 'The Joanna Gaines client is an NFR client. Know this style cold.',
+          resourceLabel: 'Watch: Joanna Gaines — Kitchen Design', resourceUrl: 'https://www.youtube.com/results?search_query=Joanna+Gaines+Fixer+Upper+kitchen+design',
+        },
+      },
+      // Wed
+      {
+        mozaik: {
+          topic: 'Awkward Spaces — Soffits and Bulkheads', duration: '1 hour',
+          objectives: ['Model a soffit above a wall cabinet run','Handle a wall with a 2" offset correctly','Verify everything looks correct in 3D'],
+          task: 'Build a kitchen with a soffit above the wall cabinet run and one wall with a 2" offset. Verify in 3D.',
+          tip: 'Measure from both ends of each wall.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Follow-Up Cadence', duration: '45 min',
+          objectives: ['Know the NFR follow-up schedule: 48h after proposal, 1 week no response, 2 weeks final','Draft a follow-up email that is warm but not desperate','Know when to stop following up vs. when to escalate to Jose'],
+          task: 'Identify one open proposal in the pipeline. Write the next follow-up email using the NFR cadence. Show Jose before sending.',
+          tip: 'Most clients close on the second or third follow-up. Never stop after one.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Craft & Detail — Millwork and Cabinet Elevation', duration: '45 min',
+          objectives: ['Study how millwork and architectural detail elevates a kitchen space','Understand the difference between a "designer" kitchen and a "contractor" kitchen','Know how to identify detail opportunities in an NFR project'],
+          task: 'Find 2 kitchens with strong millwork detail. Write: What details elevated the space? Could NFR deliver any of these? Which would you propose to a client?',
+          tip: 'The detail that separates premium from commodity is often one decision — a hood design, a panel profile, a hardware choice.',
+          resourceLabel: 'Watch: Kitchen Millwork Detail', resourceUrl: 'https://www.youtube.com/results?search_query=kitchen+millwork+detail+interior+design+custom+cabinetry',
+        },
+      },
+      // Thu
+      {
+        mozaik: {
+          topic: 'U-Shape & Galley Layouts', duration: '1 hour',
+          objectives: ['Build a complete U-shape kitchen layout','Build a complete galley layout with correct clearance','Understand minimum walkway requirements for each layout type'],
+          task: 'Build both — a U-shape in an 8×10 room and a galley in an 8×14 room with 48" clearance between runs.',
+          tip: 'Galley needs 48" minimum between runs.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Difficult Conversations — What to Escalate to Jose', duration: '45 min',
+          objectives: ['Know which conversations Maria handles vs. which go directly to Jose','Understand the escalation triggers: pricing, scope changes, client complaints','Know how to hold a client warmly while Jose is looped in'],
+          task: 'Write the decision rule: "Maria handles ___. Maria escalates to Jose when ___." Use 3 real scenarios from the past 30 days.',
+          tip: 'Never try to resolve a scope or pricing conflict without Jose. Warm hold, then escalate.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Color Theory Basics — The Neutrals Foundation', duration: '45 min',
+          objectives: ['Understand warm vs. cool neutrals and how they affect the feel of a space','Know the Sherwin-Williams Color of the Year and what it signals for 2026','Know how to describe a color\'s undertone to a client without using paint chips'],
+          task: 'Look up the current SW Color of the Year. Write: What feeling does it create? What client would choose it? What Hearthwood cabinet finish would pair with it?',
+          tip: 'Most NFR clients say "I want white" — your job is to find the white that fits their light, their floors, and their personality.',
+          resourceLabel: 'Watch: Color Theory for Interiors', resourceUrl: 'https://www.youtube.com/results?search_query=color+theory+interior+design+warm+cool+neutrals',
+        },
+      },
+      // Fri
+      {
+        mozaik: {
+          topic: 'Week 2 Review — Full Layout Challenge', duration: '1 hour',
+          objectives: ['Build a complete kitchen layout from Jose\'s assigned room size and type','Apply Week 1 modifications within the layout','Generate 3D and cut list, present to Jose at 1pm'],
+          task: 'Jose assigns room size and layout type. Build the complete kitchen, apply modifications, generate 3D and cut list. Present at 1pm.',
+          tip: 'Show Jose the layout, explain why you chose each cabinet type.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Week 2 Admin Review — Client Communication', duration: '45 min',
+          objectives: ['Draft an inquiry response from scratch in 10 minutes','Write a follow-up for an open proposal with no response','Demonstrate the escalation decision rule correctly'],
+          task: 'Jose gives Maria a sample inquiry and an open proposal with no response. Maria responds to both. Jose evaluates tone and completeness.',
+          tip: 'Speed + professionalism in client communication is Maria\'s highest-visibility skill.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Week 2 Design Review — National Icons & Style Translation', duration: '45 min',
+          objectives: ['Identify 3 national icon design styles by name without looking','Translate a style preference from a celebrity designer into an NFR product recommendation','Explain a style decision to a client in plain language'],
+          task: 'Jose names a style (farmhouse, contemporary, transitional, bold). Maria identifies which designer it aligns with and suggests a Hearthwood starting point. 4 rounds.',
+          tip: 'The faster Maria can translate an inspiration image into a product direction, the shorter the sales cycle.',
+          resourceLabel: 'Watch: Interior Design Styles Explained', resourceUrl: 'https://www.youtube.com/results?search_query=interior+design+styles+explained+farmhouse+transitional+contemporary',
+        },
+      },
+    ],
+
+    // ══ PROGRAM WEEK 3 — Mozaik Wk10 / Admin Basic Wk3 / Design Basic Wk3 ═══
+    3: [
+      // Mon
+      {
+        mozaik: {
+          topic: '3D View Navigation & Camera Angles', duration: '1 hour',
+          objectives: ['Navigate the 3D view confidently from any angle','Save named camera views for a project','Export camera views as images'],
+          task: 'Open a completed kitchen. Save 3 camera views: overall, island detail, and corner. Export each as an image.',
+          tip: 'Best client angle is from the kitchen entry at eye height.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'The NFR Agreement — What It Is and Why It Matters', duration: '45 min',
+          objectives: ['Know what the NFR agreement document contains','Understand that no work starts without a signed agreement','Know Maria\'s role in the agreement process: prepare, not decide'],
+          task: 'Read a recent NFR agreement. Identify the 5 required sections. Note any that are missing or incomplete.',
+          tip: 'The agreement is NFR\'s protection on every job. Know it better than the client does.',
+          resourceLabel: 'Staff Portal', resourceUrl: 'https://hearthwoodcabinetry.com/staff/',
+        },
+        design: {
+          topic: 'Storytelling in Design — Emily Henderson', duration: '45 min',
+          objectives: ['Understand Emily Henderson\'s approach: design as personal storytelling','Know how to identify a client\'s "design story" in the first 10 minutes of conversation','Practice translating a client\'s story into a design direction'],
+          task: 'Watch Emily Henderson talk about her process. Write: What 3 questions could Maria ask a new client to uncover their design story? Role-play with Jose.',
+          tip: 'When a client feels heard, they stop comparing prices.',
+          resourceLabel: 'Watch: Emily Henderson — Design Philosophy', resourceUrl: 'https://www.youtube.com/results?search_query=Emily+Henderson+design+philosophy+storytelling',
+        },
+      },
+      // Tue
+      {
+        mozaik: {
+          topic: 'Material & Color Application in 3D', duration: '1 hour',
+          objectives: ['Apply finishes and colors in the 3D view','Create two distinct finish versions of the same kitchen','Export both versions for client comparison'],
+          task: 'Create Version A (white perimeter, navy island) and Version B (greige perimeter, white island). Export both.',
+          tip: 'Always show two options side-by-side — clients decide faster with a comparison.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Preparing an Agreement for Jose\'s Review', duration: '45 min',
+          objectives: ['Know the agreement checklist: scope, price, payment terms, timeline, signatures','Prepare an agreement draft from a client brief','Flag anything incomplete before handing to Jose'],
+          task: 'Jose gives a sample client brief. Maria prepares the agreement draft. Jose reviews for completeness.',
+          tip: 'Every incomplete agreement that reaches a client costs NFR credibility. Catch it first.',
+          resourceLabel: 'Staff Portal', resourceUrl: 'https://hearthwoodcabinetry.com/staff/',
+        },
+        design: {
+          topic: 'Pattern, Texture & Layering — Justina Blakeney', duration: '45 min',
+          objectives: ['Understand how Justina Blakeney uses pattern and texture to create warmth and depth','Know the difference between layering (intentional) and clutter (accidental)','Identify one layering technique that applies to kitchen cabinet design'],
+          task: 'Find 2 Justina Blakeney rooms. Write: What textures are layered? Which of those ideas could work in a kitchen? Propose one material combination for an NFR client.',
+          tip: 'Kitchen design is mostly flat surfaces. The designer\'s job is to find texture opportunities where others see only cabinets.',
+          resourceLabel: 'Watch: Justina Blakeney — Jungalow Design', resourceUrl: 'https://www.youtube.com/results?search_query=Justina+Blakeney+Jungalow+design+home+tour',
+        },
+      },
+      // Wed
+      {
+        mozaik: {
+          topic: 'Lighting & Rendering Quality', duration: '1 hour',
+          objectives: ['Adjust lighting settings in an existing 3D view','Export a render at the highest quality setting','Compare before and after lighting adjustment'],
+          task: 'Adjust lighting on an existing 3D view, export at highest quality, compare before and after. Save both.',
+          tip: 'Good lighting does more for client confidence than cabinet details.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Client Signing Process', duration: '45 min',
+          objectives: ['Know the NFR signing sequence: agreement → Jose approves → client signs + deposit → PO generated','Know how to send an agreement to a client professionally','Know what to do if a client has questions about the agreement'],
+          task: 'Walk through a real agreement signing sequence with Jose. Who does what at each step? Write the sequence on one page.',
+          tip: 'A smooth signing process communicates that NFR is organized. Fumbling it does the opposite.',
+          resourceLabel: 'Staff Portal', resourceUrl: 'https://hearthwoodcabinetry.com/staff/',
+        },
+        design: {
+          topic: 'Materials & Finishes — Sarah Richardson', duration: '45 min',
+          objectives: ['Study Sarah Richardson\'s approach to material selection: practical, beautiful, lasting','Know how to evaluate a material for durability, maintenance, and visual impact','Practice making a material recommendation with a reason for each choice'],
+          task: 'Find 2 Sarah Richardson kitchens. Write the material choices for countertop, cabinet finish, flooring, and hardware. Which NFR/Hearthwood products are closest?',
+          tip: 'Every material recommendation needs a reason the client can understand. Not "it\'s beautiful" — "it hides fingerprints, it\'s easy to clean, and it ages well."',
+          resourceLabel: 'Watch: Sarah Richardson — Kitchen Design', resourceUrl: 'https://www.youtube.com/results?search_query=Sarah+Richardson+kitchen+design+materials',
+        },
+      },
+      // Thu
+      {
+        mozaik: {
+          topic: 'Creating Client Presentation Exports', duration: '1 hour',
+          objectives: ['Assemble a complete client presentation export package','Follow the NFR file naming convention','Ensure the package contains all 4 required items'],
+          task: 'Export a full package: 2 camera views, floor plan, and cut list. Name each file: [ClientLastName]-[Date]-[Version].',
+          tip: 'Every package needs the same 4 items every time.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'From Signed Agreement to Active Job', duration: '45 min',
+          objectives: ['Know what happens after the deposit posts: PO generation, job file creation, calendar scheduling','Understand the handoff from agreement to production','Know when to loop in the Field Manager'],
+          task: 'Trace a recently signed job from signed agreement to first site visit. Document every step and who owned it.',
+          tip: 'The agreement-to-production handoff is where jobs fall through the cracks. Own the transition.',
+          resourceLabel: 'Staff Portal', resourceUrl: 'https://hearthwoodcabinetry.com/staff/',
+        },
+        design: {
+          topic: 'Translating Client Language to Palettes', duration: '45 min',
+          objectives: ['Know the 5 most common client phrases and what they mean as design directions','Practice translating vague client language into a starting material palette','Build a full palette from a 2-sentence client brief'],
+          task: 'Jose gives 3 client briefs (2 sentences each). Maria builds a palette for each: cabinet finish, countertop, hardware, one accent. No more than 5 minutes per brief.',
+          tip: 'Speed in translation is a skill. Practice it until it feels natural, not stressful.',
+          resourceLabel: 'Watch: Interior Design Material Palette', resourceUrl: 'https://www.youtube.com/results?search_query=interior+design+material+palette+kitchen+countertop+cabinet',
+        },
+      },
+      // Fri
+      {
+        mozaik: {
+          topic: 'Week 3 Review — Full Presentation Walkthrough', duration: '1 hour',
+          objectives: ['Build a kitchen to Jose\'s brief and prepare a full presentation package','Walk Jose through the design as if he were the client','Demonstrate camera angles, color options, and the cut list'],
+          task: 'Jose plays the client. Build the kitchen to his brief, prepare the full package, and walk him through it at 1pm.',
+          tip: 'This is your chance to practice being a designer, not just a software operator.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Week 3 Admin Review — Agreement Workflow', duration: '45 min',
+          objectives: ['Walk through the full agreement workflow from memory','Prepare a draft agreement from a client brief in 20 minutes','Explain the handoff to production without looking at notes'],
+          task: 'Jose gives a brief. Maria prepares the agreement, walks through the signing sequence, and explains the production handoff. All from memory.',
+          tip: 'A coordinator who knows the agreement workflow inside out is the backbone of NFR\'s sales process.',
+          resourceLabel: 'Staff Portal', resourceUrl: 'https://hearthwoodcabinetry.com/staff/',
+        },
+        design: {
+          topic: 'Week 3 Design Review — Storytelling & Materials', duration: '45 min',
+          objectives: ['Ask 3 story-uncovering questions in a role-play client conversation','Build a material palette from a 2-sentence brief in under 5 minutes','Explain one material choice to a client without using design jargon'],
+          task: 'Jose plays a client. Maria runs a 10-minute design discovery conversation: story questions, palette proposal, one material explanation. Jose evaluates: would this move a real client forward?',
+          tip: 'A 10-minute design conversation that ends with a direction saves 2 hours of back-and-forth later.',
+          resourceLabel: 'Watch: Design Consultation Process', resourceUrl: 'https://www.youtube.com/results?search_query=interior+design+client+consultation+process+home+renovation',
+        },
+      },
+    ],
+
+    // ══ PROGRAM WEEK 4 — Mozaik Wk11 / Admin Basic Wk4 / Design Basic Wk4 ═══
+    4: [
+      // Mon
+      {
+        mozaik: {
+          topic: 'Understanding Cut List Output', duration: '1 hour',
+          objectives: ['Generate a cut list from a completed kitchen project','Identify every part on the list by name and purpose','Circle or flag any entry that looks incorrect'],
+          task: 'Generate a cut list from a completed kitchen. Go line by line, identify every part, circle anything that looks wrong.',
+          tip: 'The cut list is what Scott and the CNC work from. Read it like you\'re the one making the cut.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'NFR File Naming Convention', duration: '45 min',
+          objectives: ['Know the NFR file naming standard for all document types','Understand why consistent naming prevents lost files and miscommunication','Apply the convention to 10 sample files'],
+          task: 'Review NFR file naming standard. Find 5 files in Drive that are named incorrectly. Rename them using the correct convention.',
+          tip: 'A file Jose can\'t find in 30 seconds might as well not exist.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Door Styles — What Every NFR Client Needs to Know', duration: '45 min',
+          objectives: ['Know the 5 primary door styles NFR offers: shaker, inset, raised panel, flat, beaded','Know which style is most popular in Columbus right now','Describe each style to a client without technical cabinet language'],
+          task: 'Look at 5 kitchen images — one per door style. Write the client-friendly description for each. Which does NFR sell the most of and why?',
+          tip: 'A client who understands their door style options makes faster decisions.',
+          resourceLabel: 'Watch: Cabinet Door Styles Explained', resourceUrl: 'https://www.youtube.com/results?search_query=kitchen+cabinet+door+styles+shaker+inset+flat+explained',
+        },
+      },
+      // Tue
+      {
+        mozaik: {
+          topic: 'Part Labeling & Sheet Optimization', duration: '1 hour',
+          objectives: ['Review the sheet layout and nesting output','Calculate waste percentage from the nesting layout','Identify the largest and smallest cut on the sheet'],
+          task: 'Review a Mozaik sheet layout and nesting output. Note the waste percentage. Identify the largest and smallest cut.',
+          tip: 'If waste is above 20%, flag to Jose before approving.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Project Status Tracking', duration: '45 min',
+          objectives: ['Know the NFR job status stages: inquiry → proposal → agreement → active → punch list → closed','Know where each status lives in Drive','Know how to update a job\'s status and who to notify'],
+          task: 'Open 3 active jobs. Verify each has the correct status in Drive. Update any that are wrong. Report to Jose.',
+          tip: 'Status tracking is not bureaucracy — it\'s how Jose knows what\'s happening without asking.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Hardware — The Jewelry of a Kitchen', duration: '45 min',
+          objectives: ['Know the current hardware finish trends: matte black, brushed gold, satin nickel','Know how to match hardware finish to faucets and light fixtures','Know when hardware is an upgrade vs. a standard spec'],
+          task: 'Browse 5 kitchen photos. Identify the hardware in each. Write: what finish, does it match the fixtures, does it work with the cabinet finish? What would you change?',
+          tip: 'Hardware is the jewelry of a kitchen. Small choice, big visual impact.',
+          resourceLabel: 'Watch: Kitchen Hardware Trends 2026', resourceUrl: 'https://www.youtube.com/results?search_query=kitchen+cabinet+hardware+trends+2026+matte+black+brushed+gold',
+        },
+      },
+      // Wed
+      {
+        mozaik: {
+          topic: 'Material Quantity Reports', duration: '1 hour',
+          objectives: ['Generate a full material quantity report','List total sheet count, door count, drawer count, and hardware','Compare the quantity report to the cut list for accuracy'],
+          task: 'Generate a full material quantity report. List total sheets, door count, drawer count, and hinges. Compare to the cut list.',
+          tip: 'This becomes your purchase order — it must be accurate.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'The Active Job File — What Goes Where', duration: '45 min',
+          objectives: ['Know every document that belongs in an active job folder','Understand that a complete job file protects NFR in case of disputes','Know how to assemble a job file from scratch'],
+          task: 'Open a recently closed job folder. Verify it contains every required document. List anything missing.',
+          tip: 'The file that\'s missing one document is the one that causes a dispute 6 months later.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Countertop Materials — What NFR Clients Actually Choose', duration: '45 min',
+          objectives: ['Know the top 4 countertop materials: quartz, granite, marble, butcher block','Know the maintenance, cost tier, and ideal client for each','Practice making a countertop recommendation based on a client brief'],
+          task: 'For each countertop material, write a 2-sentence client pitch and identify the NFR client most likely to choose it. Jose evaluates which pitch would land.',
+          tip: 'The countertop choice closes the design direction. Get this conversation right.',
+          resourceLabel: 'Watch: Countertop Materials Compared', resourceUrl: 'https://www.youtube.com/results?search_query=kitchen+countertop+materials+quartz+granite+marble+comparison',
+        },
+      },
+      // Thu
+      {
+        mozaik: {
+          topic: 'CNC Output Files & Job Setup', duration: '1 hour',
+          objectives: ['Export CNC-ready files from Mozaik','Apply the NFR file naming convention','Organize exported files in a labeled folder'],
+          task: 'Export CNC-ready files. Name each: [Client]-[Date]-[PartType]. Place in a correctly labeled folder.',
+          tip: 'File naming is not optional — Scott needs to know which files go with which job.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'End-of-Job File Closing', duration: '45 min',
+          objectives: ['Know the job closing checklist: all docs saved, photos archived, client signed off, invoice paid','Know how to close a job folder correctly','Understand that a properly closed file is NFR\'s record of the work'],
+          task: 'With Jose, close a recently completed job. Walk through every item on the closing checklist. Sign off on the file.',
+          tip: 'A properly closed file is proof of work delivered. Treat it as such.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Building a Complete Kitchen Palette', duration: '45 min',
+          objectives: ['Build a complete kitchen palette: cabinet finish + countertop + flooring + hardware + backsplash direction','Know how to evaluate cohesion across all 5 elements','Practice presenting a palette to Jose as if he were the client'],
+          task: 'Build 2 complete palettes from scratch — one warm/traditional, one clean/contemporary. Present both to Jose. For each, name the client type and explain every choice in plain language.',
+          tip: 'A complete palette presented confidently is worth more than a design degree.',
+          resourceLabel: 'Watch: Kitchen Design Palette Building', resourceUrl: 'https://www.youtube.com/results?search_query=kitchen+design+color+palette+building+cohesive',
+        },
+      },
+      // Fri
+      {
+        mozaik: {
+          topic: 'Week 4 Review — Full Manufacturing Package', duration: '1 hour',
+          objectives: ['Generate a complete production package for a real job','Hand the package off to Scott with everything labeled','Present the package to Jose at 1pm'],
+          task: 'Generate the complete production package: cut list, material report, CNC files, labeled folder. Hand to Scott. Present to Jose at 1pm.',
+          tip: 'This is the full circle — design to production.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Week 4 Admin Review — File & Status Management', duration: '45 min',
+          objectives: ['Apply the naming convention to 5 files from memory','Trace a job from inquiry to closed file without reference','Complete a job file closing checklist independently'],
+          task: 'Jose names a job from each status stage. Maria finds the file, names its current status, and states what the next step is.',
+          tip: 'If Maria can\'t locate a job file in 30 seconds, the system is broken. Fix it.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Week 4 Design Review — Technique & Full Palette', duration: '45 min',
+          objectives: ['Name 4 door styles and describe each in client-friendly language','Build a complete 5-element palette from a 3-sentence brief','Present a palette confidently with a reason for every choice'],
+          task: 'Jose gives a client brief. Maria builds the full palette (cabinet, counter, floor, hardware, backsplash direction) and presents it as if the client were in the room.',
+          tip: 'By Week 4, Maria should be able to run the design portion of a discovery meeting independently.',
+          resourceLabel: 'Watch: Interior Design Presentation', resourceUrl: 'https://www.youtube.com/results?search_query=interior+design+presentation+client+mood+board+palette',
+        },
+      },
+    ],
+
+    // ══ PROGRAM WEEK 5 — Mozaik Wk12 Graduation / Admin Intermediate Wk1 / Design Intermediate Wk1 ══
+    5: [
+      // Mon
+      {
+        mozaik: {
+          topic: 'Project Planning from Client Brief', duration: '1 hour',
+          objectives: ['Read and interpret a client brief before opening Mozaik','Write out room dimensions and design constraints','Prepare 3 clarifying questions for the client'],
+          task: 'Jose gives a client brief. Before opening Mozaik: write the room dimensions, constraints, and 3 questions for the client. Then set up the room in Mozaik.',
+          tip: 'The best design starts before you open the software.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Reading a Project Budget', duration: '45 min',
+          objectives: ['Understand what a project budget contains: materials, labor, subs, equipment, margin','Know that Maria reads budgets for status awareness, not financial management','Identify the 3 numbers Jose cares about most on any job'],
+          task: 'With Jose, open a recent project budget. Identify: total budget, total spent to date, remaining margin. Write what you observe — not what it means financially.',
+          tip: 'Financial awareness is not financial management. Know the difference.',
+          resourceLabel: 'QuickBooks Tutorials', resourceUrl: 'https://quickbooks.intuit.com/tutorials/',
+        },
+        design: {
+          topic: 'Developing a Design Point of View', duration: '45 min',
+          objectives: ['Understand what a personal design point of view means for a coordinator, not a decorator','Know the 3 elements of Maria\'s emerging design voice: material preference, style comfort zone, client-type strengths','Write a one-paragraph design positioning statement for Maria at NFR'],
+          task: 'Write: What design choices do you make consistently? What type of client do you work best with? What palette feels most like you? This is your design voice — own it.',
+          tip: 'Clients trust a coordinator who has a point of view. Uncertainty is contagious.',
+          resourceLabel: 'Watch: Finding Your Design Voice', resourceUrl: 'https://www.youtube.com/results?search_query=interior+designer+developing+design+voice+style',
+        },
+      },
+      // Tue
+      {
+        mozaik: {
+          topic: 'Layout & Cabinet Selection', duration: '1 hour',
+          objectives: ['Build a full cabinet layout from the client brief','Select appropriate cabinet types for each position','Apply modifications where required'],
+          task: 'Build the full cabinet layout from the brief. Select appropriate cabinet types. Apply modifications. Layout only — no finishes yet.',
+          tip: 'Get the layout perfect before touching color.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Deposit Tracking', duration: '45 min',
+          objectives: ['Know the NFR deposit sequence: agreement signed → deposit collected → job active','Know how to verify a deposit has posted in QuickBooks','Know what to do if a job goes active without a confirmed deposit'],
+          task: 'Open 3 recent jobs. Verify each has a confirmed deposit in QuickBooks. Report any that don\'t.',
+          tip: 'No deposit, no active job. This rule protects NFR on every engagement.',
+          resourceLabel: 'QuickBooks Tutorials', resourceUrl: 'https://quickbooks.intuit.com/tutorials/',
+        },
+        design: {
+          topic: 'Curating Design Inspiration for NFR Clients', duration: '45 min',
+          objectives: ['Build a curated inspiration folder for each client type (transitional, contemporary, farmhouse, bold)','Know how to present inspiration without overwhelming the client','Use inspiration to accelerate the decision-making process'],
+          task: 'Build one inspiration folder for each of the 3 most common NFR client types. Each folder: 5 images, one-paragraph description, starting palette. Present to Jose.',
+          tip: 'Curated inspiration is not showing a client everything — it\'s showing them the 3 things that will move them forward.',
+          resourceLabel: 'Watch: Interior Design Inspiration Curation', resourceUrl: 'https://www.youtube.com/results?search_query=interior+design+inspiration+client+presentation+curation',
+        },
+      },
+      // Wed
+      {
+        mozaik: {
+          topic: 'Finish, Modifications & Final Design', duration: '1 hour',
+          objectives: ['Apply client-selected finishes to the layout','Create two distinct color option versions','Make final adjustments and review in 3D'],
+          task: 'Apply finishes, create two color options, make final adjustments, and view in 3D. End with the 3D view open.',
+          tip: 'Always end with 3D view open — if it doesn\'t look right there, it won\'t look right in person.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Invoice Status Awareness', duration: '45 min',
+          objectives: ['Know the NFR invoicing sequence: final walk → punch list clear → invoice sent → payment collected','Know how to read an invoice status in QuickBooks: sent, viewed, paid','Know when to flag an overdue invoice to Jose'],
+          task: 'Open 5 recent invoices. Identify their status. Flag any overdue to Jose with the project name and days past due.',
+          tip: 'An overdue invoice that Maria catches is revenue Jose doesn\'t have to chase.',
+          resourceLabel: 'QuickBooks Tutorials', resourceUrl: 'https://quickbooks.intuit.com/tutorials/',
+        },
+        design: {
+          topic: 'Synthesis — Connecting Design to the NFR Sales Sequence', duration: '45 min',
+          objectives: ['Know exactly where design input enters the NFR sales sequence','Understand that design clarity reduces client hesitation and speeds decisions','Practice the design-to-close handoff: Maria builds direction, Jose closes the deal'],
+          task: 'Map the NFR sales sequence and mark every point where Maria\'s design knowledge can accelerate a decision. Present to Jose. Where is the biggest opportunity?',
+          tip: 'Design that closes deals is not about being an artist — it\'s about reducing uncertainty at the right moment.',
+          resourceLabel: 'Watch: Design as a Sales Tool', resourceUrl: 'https://www.youtube.com/results?search_query=interior+design+sales+tool+close+remodel+client',
+        },
+      },
+      // Thu — IS 408 video on Mozaik block (shows Maria what Scott does with her files)
+      {
+        mozaik: {
+          topic: '3D Renders, Presentation & Cut List', duration: '1 hour',
+          objectives: ['Generate renders for both color option versions','Export floor plan and cut list','Assemble everything in a labeled package folder'],
+          task: 'Generate the complete package: renders for both options, floor plan, cut list, material report, labeled folder.',
+          tip: 'Package should be clean enough Jose could send it to the client without reviewing.',
+          resourceLabel: 'Watch: Design to Installation — IS 408 Cabinet', resourceUrl: 'https://www.youtube.com/watch?v=2XGt5-t8tB4',
+        },
+        admin: {
+          topic: 'Understanding Overhead and Why It Matters', duration: '45 min',
+          objectives: ['Know that NFR has fixed monthly overhead costs','Understand that every job must cover overhead before profit exists','Know the question: Is this job fully sold vs. is it profitable?'],
+          task: 'With Jose, review the overhead breakdown. Write: What does each job need to cover? What happens when a job is sold below cost?',
+          tip: 'Understanding overhead is Maria\'s context for why pricing decisions matter — not her job to manage.',
+          resourceLabel: 'QuickBooks Tutorials', resourceUrl: 'https://quickbooks.intuit.com/tutorials/',
+        },
+        design: {
+          topic: 'Translating Design Vision to Production — Full-Circle View', duration: '45 min',
+          objectives: ['Understand the full path from client design vision to Mozaik file to CNC cut to installed cabinet','Know how Maria\'s design decisions directly affect what Scott cuts and what Jorge installs','Close the loop: design-to-production is one workflow, not two'],
+          task: 'Watch the "Design to Installation" video (same link as Mozaik block). Write: What design decisions by Maria directly affected what Scott had to cut? Name 3.',
+          tip: 'You are not just the designer — you are the first link in a production chain. Design like it.',
+          resourceLabel: 'Watch: Design to Installation — IS 408 Cabinet', resourceUrl: 'https://www.youtube.com/watch?v=2XGt5-t8tB4',
+        },
+      },
+      // Fri
+      {
+        mozaik: {
+          topic: 'Week 5 Final — Complete Project Presentation', duration: '1 hour',
+          objectives: ['Present the full project to Jose at 1pm','Walk through every design decision','Write a self-assessment: 3 things learned, 1 to improve'],
+          task: 'Present the full project to Jose at 1pm. Walk through every decision. After: write 3 things learned this week and 1 to improve.',
+          tip: 'Week 5 Mozaik graduation is not the end — it\'s the baseline.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Week 5 Admin Review — Financial Awareness', duration: '45 min',
+          objectives: ['Read a project budget and identify key numbers in under 3 minutes','Verify deposit status for any job Jose names','Flag an overdue invoice independently'],
+          task: 'Jose names 2 jobs. Maria reads their budget status, confirms deposit, and checks invoice standing. All without asking Jose for help.',
+          tip: 'Financial awareness is the difference between a coordinator and an operations partner.',
+          resourceLabel: 'QuickBooks Tutorials', resourceUrl: 'https://quickbooks.intuit.com/tutorials/',
+        },
+        design: {
+          topic: 'Week 5 Design Review — Synthesis & Voice', duration: '45 min',
+          objectives: ['Present your design positioning statement without notes','Build a client-type inspiration folder in 15 minutes','Trace a design decision all the way to its production impact'],
+          task: 'Jose presents 3 client scenarios. Maria responds with: her design point of view for this client, the starting palette, and one production implication of her choices. Full circle.',
+          tip: 'Synthesis week shows Jose that Maria\'s training is working. Show him.',
+          resourceLabel: 'Watch: Interior Design Full Process', resourceUrl: 'https://www.youtube.com/results?search_query=interior+design+full+process+client+to+install',
+        },
+      },
+    ],
+
+    // ══ PROGRAM WEEK 6 — Production Mozaik / Admin Intermediate Wk2 / Design Intermediate Wk2 ← CHECKPOINT ══
+    6: [
+      // Mon
+      {
+        mozaik: {
+          topic: 'Production Mozaik — Sending Files to Scott', duration: '1 hour',
+          objectives: ['Know the correct file export format and naming convention for CNC files','Verify the cut list before sending — every part labeled and sized','Understand what Scott needs from the Mozaik file to run an error-free cut'],
+          task: 'Export CNC files from a completed Mozaik project. Review with Scott: does the file have everything he needs? Fix anything he flags.',
+          tip: 'The handoff from design to production is where errors live. Catch them before Scott does.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'NFR Vendor Relationships — Who We Use and Why', duration: '45 min',
+          objectives: ['Know the primary vendors for each division (paint, flooring, cabinets, materials)','Understand that vendor relationships are owned by Jose and maintained by consistency','Know how to look up a vendor contact and purchase history'],
+          task: 'Build a one-page vendor contact sheet for the top 5 NFR vendors: name, company, phone, what they supply, payment terms.',
+          tip: 'A vendor who knows NFR is organized gets prioritized when supply is short.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Current Kitchen Styles — Transitional, Modern Farmhouse, Contemporary', duration: '45 min',
+          objectives: ['Know the defining features of each style: door style, finish, hardware, countertop, lighting','Know which style is most popular in Columbus right now','Identify a client\'s style from their inspiration images'],
+          task: 'Find one example of each style on Houzz. Write 3 defining features for each. Which does NFR build the most of? Which is growing fastest?',
+          tip: 'Style vocabulary makes Maria credible in client conversations.',
+          resourceLabel: 'NKBA — Design Trends', resourceUrl: 'https://www.nkba.org',
+        },
+      },
+      // Tue
+      {
+        mozaik: {
+          topic: 'Production Mozaik — Cut List Verification', duration: '1 hour',
+          objectives: ['Review a cut list line by line with Scott before a job runs','Identify any discrepancy between the Mozaik file and physical material on hand','Flag any issue to Jose before cutting begins'],
+          task: 'Walk through a real cut list with Scott. Identify every part by name and purpose. Circle anything that doesn\'t match what is staged.',
+          tip: 'If Maria cannot read the cut list, she cannot catch the error. Read it like you\'re the one making the cut.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Material Ordering Basics', duration: '45 min',
+          objectives: ['Know that material orders follow from a signed agreement and confirmed deposit','Understand the ordering sequence: agreement → PO → Maria confirms with vendor → delivery scheduled','Know the lead times for each material category'],
+          task: 'Trace a recent material order from signed agreement to delivery. Document every step. Who touched it and when?',
+          tip: 'Materials ordered without a signed agreement are materials NFR may not get paid for.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Current Bath Trends — Floating Vanities, Walk-In Showers, Spa Neutrals', duration: '45 min',
+          objectives: ['Know the top 3 current bath remodel trends','Know the difference between primary bath, guest bath, and half bath renovation scope','Know which bath projects NFR handles vs. refers out'],
+          task: 'Browse NKBA bath trend pages. Write the 3 biggest trends for 2025–2026 bathrooms. Which one is most requested in NFR\'s Columbus market?',
+          tip: 'Bath projects are growing at NFR. Knowing trends helps Maria pre-sell the category.',
+          resourceLabel: 'NKBA — Bath Trends', resourceUrl: 'https://www.nkba.org',
+        },
+      },
+      // Wed
+      {
+        mozaik: {
+          topic: 'Production Mozaik — Understanding CNC Output', duration: '1 hour',
+          objectives: ['Watch Scott run a CNC cut from a Maria-generated file','Understand how the Mozaik nesting output translates to physical sheet placement','Know what a clean cut looks like so Maria can recognize problems in finished parts'],
+          task: 'Observe Scott\'s CNC run from one complete job. Write: what went smoothly? What required adjustment? What could Maria do differently in the file to prevent that adjustment?',
+          tip: 'You cannot improve what you cannot see. Watch the cut.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Delivery Scheduling and Job Readiness', duration: '45 min',
+          objectives: ['Know how to coordinate a delivery date with a job start date','Understand what happens when materials arrive before the site is ready','Know who to loop in when a delivery needs to be rescheduled'],
+          task: 'Pick an active job with upcoming materials. Verify the site will be ready on delivery day. If not, flag it and propose a resolution.',
+          tip: 'Materials delivered to an unready site cost money twice — storage and re-handling.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'NKBA Resources — Using Industry Tools', duration: '45 min',
+          objectives: ['Know what NKBA is and why it is a credible design reference','Know which NKBA resources Maria can access and use with clients','Find one trend report or design guide and summarize it'],
+          task: 'Visit nkba.org. Find one resource Maria could use in a client conversation. Write a 3-sentence summary and explain how it would help close a kitchen or bath project.',
+          tip: 'Using industry sources makes Maria sound like a professional, not a salesperson.',
+          resourceLabel: 'NKBA Resources', resourceUrl: 'https://www.nkba.org',
+        },
+      },
+      // Thu
+      {
+        mozaik: {
+          topic: 'Production Mozaik — Nesting Efficiency', duration: '1 hour',
+          objectives: ['Understand how Mozaik\'s nesting algorithm arranges parts on sheets','Know what a high-waste nesting layout looks like and why it costs money','Know the flag threshold: if waste is above 20%, Maria flags before approving'],
+          task: 'Open a recent nesting layout. Calculate the waste percentage. Is it above or below 20%? What would you change in the design to reduce waste?',
+          tip: 'Waste percentage is material cost. Every point above 20% comes out of the job margin.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Coordinating with the Field Manager', duration: '45 min',
+          objectives: ['Know the communication protocol between the office and field','Understand that the Field Manager needs material status and timeline info before site visits','Know when a coordination issue becomes an escalation to Jose'],
+          task: 'Write the coordination protocol: what does Maria send to Jorge and when? What format? What does Jorge send back? Keep it to one page.',
+          tip: 'Maria is the bridge between office and field. A clear protocol prevents 10 phone calls a week.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Style Vocabulary — How to Talk About Design', duration: '45 min',
+          objectives: ['Know the 10 most common style terms used in kitchen and bath design','Use style vocabulary in a client conversation naturally','Describe a style without using jargon a client will not understand'],
+          task: 'Write a 10-term design vocabulary list with a plain-English definition for each. Then: how would you use 3 of these terms naturally in a client meeting?',
+          tip: 'Vocabulary is confidence. Use it casually, not like you\'re reading from a textbook.',
+          resourceLabel: 'Architectural Digest — Design Vocabulary', resourceUrl: 'https://www.architecturaldigest.com',
+        },
+      },
+      // Fri — REEVALUATION CHECKPOINT
+      {
+        mozaik: {
+          topic: 'Production Mozaik Week 6 Review — Files, Cuts & Waste', duration: '1 hour',
+          objectives: ['Export a CNC file and walk Scott through it before the cut','Verify a cut list end-to-end without assistance','Calculate nesting waste and flag any layout above 20%'],
+          task: 'Jose assigns a project. Maria exports the files, briefs Scott on the cut list, observes the first cut, and reports the nesting waste percentage. Full production loop.',
+          tip: 'Week 6 is the bridge between design and production. Own both sides of it.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Week 6 Admin Review + Reevaluation Checkpoint', duration: '45 min',
+          objectives: ['Coordinate a material order from signed agreement to delivery schedule independently','Brief the Field Manager on job status without Jose\'s input','Identify one coordination gap in the current week\'s jobs and propose a fix'],
+          task: 'Jose and Maria review: What systems are working? Where is coordination still breaking down? This checkpoint shapes the direction of Maria\'s next phase.',
+          tip: 'Reevaluation checkpoint: Jose decides next direction based on 6 weeks of demonstrated performance.',
+          resourceLabel: 'Google Workspace Tutorials', resourceUrl: 'https://workspace.google.com/intl/en/learn-more/',
+        },
+        design: {
+          topic: 'Week 6 Design Checkpoint — Kitchen & Bath Trends Review', duration: '45 min',
+          objectives: ['Describe 3 kitchen styles and 3 bath trends in client-friendly language','Identify a client\'s style from 3 inspiration images','Use design vocabulary correctly in a role-play client conversation'],
+          task: 'Jose and Maria conduct the formal reevaluation: What has Maria mastered? What still needs work? Where does the training go from here? Jose decides next direction.',
+          tip: 'This checkpoint is not a test — it is a calibration. Be honest about what you can and cannot do yet.',
+          resourceLabel: 'Houzz — Kitchen Design Trends', resourceUrl: 'https://www.houzz.com/magazine/kitchen-ideas',
+        },
+      },
+    ],
+
+    // ══ PROGRAM WEEK 7 — Advanced Production Mozaik / Admin Intermediate Wk3 / Design Intermediate Wk3 ══
+    7: [
+      // Mon
+      {
+        mozaik: {
+          topic: 'Advanced Mozaik — Multi-Room Projects', duration: '1 hour',
+          objectives: ['Build a Mozaik project that includes both kitchen and bathroom cabinets','Manage file organization for a multi-room project without mixing parts','Generate separate cut lists and CNC files per room'],
+          task: 'Build a multi-room Mozaik project (kitchen + bath). Generate separate cut lists. Organize files by room. Hand off to Scott with a clear briefing.',
+          tip: 'Multi-room projects are where file discipline becomes critical. One mixed folder costs everyone time.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'What Makes a Good SOP', duration: '45 min',
+          objectives: ['Understand that an SOP is only useful if anyone can follow it without asking for help','Know the NFR SOP format: trigger, steps, owner, output','Know the difference between an SOP and a to-do list'],
+          task: 'Read two existing NFR SOPs. Rate each: Could you hand this to someone on their first day and they\'d know exactly what to do? Write one improvement for each.',
+          tip: 'The test of a good SOP: would a new hire know what to do without calling anyone?',
+          resourceLabel: 'Staff Portal', resourceUrl: 'https://hearthwoodcabinetry.com/staff/',
+        },
+        design: {
+          topic: 'How Clients Use Houzz & Pinterest', duration: '45 min',
+          objectives: ['Understand that most clients arrive with a Houzz or Pinterest board already built','Know how to read a client\'s board to identify their true style vs. their stated style','Practice extracting a design direction from a 10-image board in under 5 minutes'],
+          task: 'Find a real Houzz ideabook or Pinterest board. Identify: the dominant style, 2 recurring materials, the color story. Write it in 3 sentences.',
+          tip: 'Most clients cannot name what they want — they can only show you. Learn to read the board.',
+          resourceLabel: 'Houzz — Ideabooks & Inspiration', resourceUrl: 'https://www.houzz.com',
+        },
+      },
+      // Tue
+      {
+        mozaik: {
+          topic: 'Advanced Mozaik — Revision Management', duration: '1 hour',
+          objectives: ['Make a client-requested change to a Mozaik file after the cut list has been generated','Understand the downstream impact of a revision on the cut list and CNC files','Know the revision protocol: change → regenerate → reverify → re-brief Scott'],
+          task: 'Jose gives a revision request on an existing project. Maria makes the change, regenerates the cut list, verifies what changed, and re-briefs Scott on the delta.',
+          tip: 'Revisions are normal. A revision without a clear briefing to Scott is a production error waiting to happen.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Writing an SOP for the Inquiry Process', duration: '45 min',
+          objectives: ['Document the NFR inquiry response process as an SOP','Include every step from first email received to appointment scheduled','Verify against real past inquiries'],
+          task: 'Write the inquiry SOP. Walk Jose through it step by step. Does it match what actually happens? Update based on the debrief.',
+          tip: 'The inquiry process is the first impression of NFR. An SOP ensures it\'s consistent every time.',
+          resourceLabel: 'Staff Portal', resourceUrl: 'https://hearthwoodcabinetry.com/staff/',
+        },
+        design: {
+          topic: 'Building a Mood Board for a Client', duration: '45 min',
+          objectives: ['Build a basic mood board using Canva or Google Slides (5 images, palette, direction label)','Know the 5 elements of a complete mood board: style, palette, 2 materials, hardware direction, feeling','Know how to present a mood board in 2 minutes or less'],
+          task: 'Build a mood board for a fictitious NFR client. 5 images. A palette. A one-line direction statement. Present to Jose in under 2 minutes.',
+          tip: 'A mood board is a communication tool, not an art project. If Jose cannot read it in 30 seconds, it needs work.',
+          resourceLabel: 'Watch: Mood Board Design Tutorial', resourceUrl: 'https://www.youtube.com/results?search_query=interior+design+mood+board+tutorial+client+presentation',
+        },
+      },
+      // Wed
+      {
+        mozaik: {
+          topic: 'Advanced Mozaik — Speed and Accuracy Practice', duration: '1 hour',
+          objectives: ['Build a standard 10×12 kitchen in Mozaik in under 45 minutes','Verify the 3D view, cut list, and nesting layout before handing off','Identify the 3 most common errors Maria makes and how to prevent them'],
+          task: 'Build a standard kitchen from a brief in 45 minutes. Jose times it. Review the 3D and cut list together. Where did Maria slow down? What errors did she catch vs. miss?',
+          tip: 'Speed in Mozaik only helps if accuracy is maintained. Build the accuracy first, the speed follows.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Writing an SOP for the Agreement Process', duration: '45 min',
+          objectives: ['Document the agreement workflow as an SOP from client approves proposal to signed agreement filed','Every handoff point is documented','Verify against a real recent job'],
+          task: 'Write the agreement SOP. Compare it against the last 3 signed agreements. Did the process match? Document any variance.',
+          tip: 'An agreement SOP that doesn\'t match real practice is a fiction. Fix the gap.',
+          resourceLabel: 'Staff Portal', resourceUrl: 'https://hearthwoodcabinetry.com/staff/',
+        },
+        design: {
+          topic: 'Design as a Closing Tool — Reducing Client Hesitation', duration: '45 min',
+          objectives: ['Understand how design clarity reduces client hesitation and speeds decision-making','Know the principle: a client who can see it will sign it','Know where design input fits in the NFR sales sequence'],
+          task: 'Write: At what point in a client conversation does a mood board or palette shift the energy? When does design clarity create buying momentum? Share with Jose.',
+          tip: 'Design that closes deals is not about being an artist — it is about reducing uncertainty.',
+          resourceLabel: 'Watch: Design to Close — Sales Strategy', resourceUrl: 'https://www.youtube.com/results?search_query=interior+design+as+sales+tool+closing+remodel+client',
+        },
+      },
+      // Thu
+      {
+        mozaik: {
+          topic: 'Advanced Mozaik — Complex Modifications', duration: '1 hour',
+          objectives: ['Apply 3 or more modifications to a single kitchen layout','Verify that all modifications interact correctly in 3D','Generate a production-ready package: renders, cut list, CNC files'],
+          task: 'Build a kitchen with at least 3 complex modifications. Generate the full package. Scott reviews the CNC files. Jose reviews the renders. Both sign off.',
+          tip: 'Complex modifications are where Maria earns her role. If the files are right, everyone downstream succeeds.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Writing an SOP for Job File Closing', duration: '45 min',
+          objectives: ['Document the job closing process as an SOP','Every checklist item is explicit, not implied','Verify the SOP against 2 recently closed jobs'],
+          task: 'Write the job closing SOP. Check it against 2 closed jobs. Did everything get done? Write any items that were missed and add them to the SOP.',
+          tip: 'A closing SOP is how NFR proves the job is done. Every line item matters.',
+          resourceLabel: 'Staff Portal', resourceUrl: 'https://hearthwoodcabinetry.com/staff/',
+        },
+        design: {
+          topic: 'When to Involve Jose — The Design-to-Sales Handoff', duration: '45 min',
+          objectives: ['Know the clear triggers for looping in Jose: pricing decisions, scope expansions, client hesitation about budget','Know how to hand off a design-engaged client to Jose in a way that maintains momentum','Practice the hand-off conversation: "Let me bring Jose in to walk you through the options."'],
+          task: 'Write the exact hand-off script Maria uses when a client is ready for Jose. Role-play it with Jose. Debrief: does it feel natural? Does it create momentum?',
+          tip: 'A smooth hand-off from Maria to Jose is the moment the sale accelerates.',
+          resourceLabel: 'Watch: Sales Handoff Technique', resourceUrl: 'https://www.youtube.com/results?search_query=sales+handoff+technique+client+momentum',
+        },
+      },
+      // Fri — Graduation
+      {
+        mozaik: {
+          topic: 'Week 7 Mozaik Graduation — Full Production Package', duration: '1 hour',
+          objectives: ['Deliver a complete production package from client brief to Scott-ready files','Walk Jose through the project as if presenting to a client','Write a self-assessment: 3 things learned in 7 weeks, 1 to continue improving'],
+          task: 'Jose gives a client brief. Maria builds the full Mozaik project, generates renders and CNC files, briefs Scott, and presents the 3D to Jose. Graduation.',
+          tip: 'Seven weeks of Mozaik. You are the design-to-production link at NFR. Own it.',
+          resourceLabel: MOZAIK_LABEL, resourceUrl: MOZAIK_URL,
+        },
+        admin: {
+          topic: 'Week 7 Admin Graduation — SOP Review', duration: '45 min',
+          objectives: ['Present all 3 SOPs to Jose','Defend every step when Jose challenges it','Commit to maintaining these SOPs as the processes evolve'],
+          task: 'Maria presents 3 SOPs. Jose challenges each: "What if this step is skipped? What if the vendor doesn\'t respond? What if the client disputes the close?" Maria answers from the SOP.',
+          tip: 'An SOP you can defend is an SOP you actually understand.',
+          resourceLabel: 'Staff Portal', resourceUrl: 'https://hearthwoodcabinetry.com/staff/',
+        },
+        design: {
+          topic: 'Design Track Graduation — Maria as Office & Design Coordinator', duration: '45 min',
+          objectives: ['Present one thing Maria can now do for a client that she could not do 7 weeks ago','Acknowledge the growth from Week 1 to Week 7','Commit to the 90-day growth plan as the next chapter'],
+          task: 'Maria presents to Jose: one specific client interaction she handled better because of this training. Jose responds: one thing he has seen change in Maria. Both write it down.',
+          tip: 'Seven weeks. Three tracks. Every day. You are the Office & Design Coordinator NFR needs.',
+          resourceLabel: 'Watch: Design Career Growth', resourceUrl: 'https://www.youtube.com/results?search_query=interior+design+career+growth+coordinator+client+service',
+        },
+      },
+    ],
+  };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CNC PLAN — Scott (Weeks 1–12)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const CNC_URL   = 'https://www.shopsabre.com/shopsabre-university/';
-  const CNC_LABEL = 'ShopSabre University';
+  const CNC_URL        = 'https://www.shopsabre.com/sabrenation/sabrenation-university/';
+  const CNC_LABEL      = 'SabreNation University';
+  const CNC_MOZAIK_URL   = 'https://sites.google.com/view/mozaikonlinehelp/training-videos';
+  const CNC_MOZAIK_LABEL = 'Mozaik Training Library';
+  const CNC_W4_URL     = 'https://www.youtube.com/watch?v=a4imaKN49fQ';
+  const CNC_W4_LABEL   = 'CNC Cutting Base Cabinet — 5 Min';
+  const CNC_W6_URL     = 'https://www.youtube.com/watch?v=2XGt5-t8tB4';
+  const CNC_W6_LABEL   = 'Design to Installation: IS 408 Cabinet';
+  const CNC_W7_URL     = 'https://www.youtube.com/results?search_query=Mozaik+realtime+nesting+CNC+cabinet+ShopSabre';
+  const CNC_W7_LABEL   = 'Mozaik Nesting — Video Search';
+  const CNC_W9_URL     = 'https://www.youtube.com/results?search_query=CNC+router+bit+types+compression+downcut+upcut+collet';
+  const CNC_W9_LABEL   = 'CNC Bit Management — Video Search';
+  const CNC_W11_URL    = 'https://www.youtube.com/results?search_query=CNC+cabinet+part+inspection+quality+control+tolerance';
+  const CNC_W11_LABEL  = 'CNC QC — Video Search';
 
   const CNC_PLAN = {
     1: [
@@ -1365,39 +2247,39 @@
         tip: 'Learn the software before you touch the machine.',
       },
       {
-        topic: 'Loading and Opening a Job File',
+        topic: 'Bits — What\'s in the Machine (Observation Only)',
         resourceLabel: CNC_LABEL,
         resourceUrl: CNC_URL,
+        objectives: [
+          'Identify a compression bit by sight — know what it looks like',
+          'Understand why we use a compression bit for melamine (clean top AND bottom face)',
+          'Know where bits are stored and how they are labeled in the shop',
+        ],
+        task: 'No cut today — observation only. Walk to the machine with Jose. He points out the bit that\'s loaded. Write: what type is it, what does it look like, what material is it for. Find where all bits are stored and write the inventory.',
+        tip: 'You will use this bit every day. Know it before you ever touch a cut.',
+      },
+      {
+        topic: 'Loading and Opening a Job File',
+        resourceLabel: CNC_MOZAIK_LABEL,
+        resourceUrl: CNC_MOZAIK_URL,
         objectives: [
           'Locate a job file on the shop computer',
           'Load the file into the CNC software correctly',
           'Verify the file loaded without errors',
         ],
-        task: 'Watch the opening files video. Load 3 different sample files provided by Jose.',
+        task: 'Watch the Mozaik training video. Load 3 different sample files provided by Jose.',
         tip: 'Always double-check the file name matches the job before loading.',
       },
       {
-        topic: 'Practice — File Loading',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        topic: 'Practice — File Loading & Toolpath Preview',
+        resourceLabel: CNC_MOZAIK_LABEL,
+        resourceUrl: CNC_MOZAIK_URL,
         objectives: [
           'Load 5 different files independently',
-          'Identify the job and what it will cut for each file',
-          'Confirm correct loading without assistance',
+          'Run the toolpath simulation for each loaded file',
+          'Spot any preview errors before any cutting begins',
         ],
-        task: 'Open 5 different files. For each, state what job it is and what it will cut. No cuts — software only.',
-        tip: 'Speed in file loading prevents mistakes under pressure.',
-      },
-      {
-        topic: 'Toolpath Preview',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
-        objectives: [
-          'Run the toolpath simulation for a loaded file',
-          'Identify each cut pass in the simulation',
-          'Spot potential errors before any cutting begins',
-        ],
-        task: 'Watch the toolpath simulation video. Preview the sample file and describe each cut pass out loud.',
+        task: 'Open 5 different files. For each, state what job it is and what it will cut, then preview the toolpath and describe each cut pass out loud.',
         tip: 'If the preview looks wrong, it IS wrong. Stop and call Jose.',
       },
       {
@@ -1406,11 +2288,11 @@
         resourceUrl: CNC_URL,
         objectives: [
           'State the file format the machine uses',
-          'Explain what toolpath preview reveals before cutting',
+          'Describe a compression bit and why we use it for melamine',
           'Know when to stop and call Jose',
         ],
-        task: 'Write: What file format does the machine use? What does toolpath preview tell you? What would make you stop and call Jose?',
-        tip: 'These are the three most important questions in software operation.',
+        task: 'Write: What file format does the machine use? What is a compression bit and why do we use it? What would make you stop and call Jose?',
+        tip: 'Software + bit awareness before any cutting. That sequence matters.',
       },
     ],
 
@@ -1480,20 +2362,20 @@
     4: [
       {
         topic: 'Cutting a Straight Line — Feed Rate & Cut Direction',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W4_LABEL,
+        resourceUrl: CNC_W4_URL,
         objectives: [
           'Set up a straight-line cut correctly',
           'Understand climb vs. conventional cutting direction',
           'Verify the cut setup before running',
         ],
-        task: 'Watch the basic cutting video. Set up a straight-line cut on scrap. Jose approves before running.',
+        task: 'Watch the base cabinet cutting video. Set up a straight-line cut on scrap. Jose approves before running.',
         tip: 'Climb cutting can grab the material — use conventional on first passes.',
       },
       {
         topic: 'Cutting a Rectangle — Pocket vs. Profile & Tabs',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W4_LABEL,
+        resourceUrl: CNC_W4_URL,
         objectives: [
           'Set up a profile cut with tabs correctly',
           'Understand the difference between pocket and profile cuts',
@@ -1504,8 +2386,8 @@
       },
       {
         topic: 'Practice — First Live Cuts',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W4_LABEL,
+        resourceUrl: CNC_W4_URL,
         objectives: [
           'Run 3 live rectangle cuts on scrap material',
           'Measure each part after cutting',
@@ -1516,8 +2398,8 @@
       },
       {
         topic: 'Feed Rates & Speeds',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W4_LABEL,
+        resourceUrl: CNC_W4_URL,
         objectives: [
           'Understand what feed rate and spindle speed mean',
           'Know NFR standard settings for sheet goods',
@@ -1543,8 +2425,8 @@
     5: [
       {
         topic: 'What Mozaik Outputs — File Types & Naming',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_MOZAIK_LABEL,
+        resourceUrl: CNC_MOZAIK_URL,
         objectives: [
           'Understand what Mozaik generates for the CNC',
           'Know the NFR file naming convention',
@@ -1555,8 +2437,8 @@
       },
       {
         topic: 'Loading a Mozaik File',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_MOZAIK_LABEL,
+        resourceUrl: CNC_MOZAIK_URL,
         objectives: [
           'Load a real Mozaik export into the ShopSabre software',
           'Verify the file loaded correctly with no errors',
@@ -1566,21 +2448,21 @@
         tip: 'Every part in the preview should match the cut list Maria generated.',
       },
       {
-        topic: 'Practice — Reading Cut Files',
+        topic: 'Bit Change — Hands-On (Full Procedure with Jose)',
         resourceLabel: CNC_LABEL,
         resourceUrl: CNC_URL,
         objectives: [
-          'Load 3 different Mozaik files independently',
-          'List every part by name and dimension before previewing',
-          'Verify each part against the preview',
+          'Change a bit safely using the correct collet procedure',
+          'Torque the collet to the correct specification',
+          'Perform a runout check before cutting',
         ],
-        task: 'Load 3 different Mozaik files. For each, list every part by name and dimension before previewing. Then preview and verify.',
-        tip: 'Reading before previewing builds the habit of thinking before cutting.',
+        task: 'You\'ve now seen cuts and know WHY bit condition matters. Today: watch Jose change a bit step by step. Then do it yourself under his supervision. Two full changes minimum.',
+        tip: 'Under-torqued bits spin loose mid-cut. Over-torqued collets crack. Torque spec is not optional.',
       },
       {
         topic: 'Cross-Checking Cut List Against Machine File',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_MOZAIK_LABEL,
+        resourceUrl: CNC_MOZAIK_URL,
         objectives: [
           'Compare the Mozaik cut list to the loaded machine file',
           'Identify any discrepancies between them',
@@ -1596,10 +2478,10 @@
         objectives: [
           'Explain the difference between box part, door, and drawer front files',
           'State the procedure when file and cut list don\'t match',
-          'Describe how Maria\'s output becomes your input',
+          'Describe the correct bit change procedure from memory',
         ],
-        task: 'Write: What is the difference between a box part, a door, and a drawer front in a Mozaik file? What do you do if the file and cut list don\'t match?',
-        tip: 'Understanding the upstream makes you a better operator.',
+        task: 'Write: What is the difference between a box part, a door, and a drawer front in a Mozaik file? What do you do if the file and cut list don\'t match? Write the bit change procedure from memory.',
+        tip: 'Understanding the upstream + knowing your tooling. Both are your responsibility.',
       },
     ],
 
@@ -1618,20 +2500,20 @@
       },
       {
         topic: 'First Live Mozaik Cut — Simple Parts',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W6_LABEL,
+        resourceUrl: CNC_W6_URL,
         objectives: [
           'Run a complete Mozaik job file from load to finished parts',
           'Follow the pre-cut checklist on every step',
           'Measure all parts after cutting and record results',
         ],
-        task: 'Run the cut with Jose watching the full session. Measure every part. Save results in the training log.',
+        task: 'Watch the IS 408 full workflow video before cutting. Run the cut with Jose watching the full session. Measure every part. Save results in the training log.',
         tip: 'First cut is about process, not speed. Slow and correct.',
       },
       {
         topic: 'Practice — Second Cut Independently',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W6_LABEL,
+        resourceUrl: CNC_W6_URL,
         objectives: [
           'Run a complete Mozaik cut independently',
           'Measure all parts and compare to programmed dimensions',
@@ -1642,8 +2524,8 @@
       },
       {
         topic: 'Post-Cut Part Inspection',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W6_LABEL,
+        resourceUrl: CNC_W6_URL,
         objectives: [
           'Measure every cut part against the cut list',
           'Identify acceptable vs. unacceptable variance',
@@ -1669,20 +2551,20 @@
     7: [
       {
         topic: 'Nesting — Part Arrangement & Waste Minimization',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W7_LABEL,
+        resourceUrl: CNC_W7_URL,
         objectives: [
           'Understand how nesting arranges parts on a panel',
           'Calculate waste percentage from a nesting layout',
           'Identify when waste is too high to approve',
         ],
-        task: 'Watch the nesting video. Review a Mozaik sheet layout. Calculate the waste percentage.',
+        task: 'Watch the Mozaik nesting video. Review a Mozaik sheet layout. Calculate the waste percentage.',
         tip: 'Above 20% waste, flag to Jose before approving the cut.',
       },
       {
         topic: 'Cutting a Full 4×8 Panel',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W7_LABEL,
+        resourceUrl: CNC_W7_URL,
         objectives: [
           'Load and set up a full panel with multiple parts',
           'Manage the cut sequence correctly',
@@ -1693,8 +2575,8 @@
       },
       {
         topic: 'Practice — Full Panel Independently',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W7_LABEL,
+        resourceUrl: CNC_W7_URL,
         objectives: [
           'Load, cut, and unload a full panel independently',
           'Stack parts by part type after unloading',
@@ -1705,8 +2587,8 @@
       },
       {
         topic: 'Panel Handling — Loading, Unloading & Stacking',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W7_LABEL,
+        resourceUrl: CNC_W7_URL,
         objectives: [
           'Load a full panel safely without bowing',
           'Unload cut parts without breaking tabs incorrectly',
@@ -1732,8 +2614,8 @@
     8: [
       {
         topic: 'Door Dimensions — How Mozaik Sets Them',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_MOZAIK_LABEL,
+        resourceUrl: CNC_MOZAIK_URL,
         objectives: [
           'Understand how Mozaik calculates door sizing from opening dimensions',
           'Know the standard overlay and gap settings',
@@ -1744,20 +2626,20 @@
       },
       {
         topic: 'Cutting Door Panels — Tolerances & Grain Direction',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_MOZAIK_LABEL,
+        resourceUrl: CNC_MOZAIK_URL,
         objectives: [
           'Set up a door cut with correct grain direction',
           'Run the cut with proper tolerances',
           'Inspect all door panels after cutting',
         ],
-        task: 'Watch the door cutting module. Cut a set of 4 doors from a real Mozaik file. Measure all 4.',
+        task: 'Watch the door cutting module in Mozaik training. Cut a set of 4 doors from a real Mozaik file. Measure all 4.',
         tip: 'Grain direction is non-negotiable on wood-look panels. Wrong direction = reject.',
       },
       {
         topic: 'Practice — Full Door Set',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_MOZAIK_LABEL,
+        resourceUrl: CNC_MOZAIK_URL,
         objectives: [
           'Cut a complete door set from a real job file independently',
           'Measure all doors against the cut list',
@@ -1768,14 +2650,14 @@
       },
       {
         topic: 'Drawer Fronts — Sizing & False Front Rules',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_MOZAIK_LABEL,
+        resourceUrl: CNC_MOZAIK_URL,
         objectives: [
           'Understand drawer front sizing rules',
           'Cut a set of drawer fronts correctly',
           'Verify false front reveal is consistent on all four sides',
         ],
-        task: 'Watch the drawer front video. Cut a drawer front set from scrap. Check reveal consistency on all sides.',
+        task: 'Watch the drawer front video in Mozaik training. Cut a drawer front set from scrap. Check reveal consistency on all sides.',
         tip: 'Drawer front gaps should be equal top, bottom, and sides. Measure all four.',
       },
       {
@@ -1794,64 +2676,64 @@
 
     9: [
       {
-        topic: 'Bit Types — Compression, Downcut, Upcut & V-Bits',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        topic: 'Bit Wear Recognition — Identifying a Dull Bit',
+        resourceLabel: CNC_W9_LABEL,
+        resourceUrl: CNC_W9_URL,
         objectives: [
-          'Identify each bit type by sight',
-          'Know which bit to use for each material and cut type',
-          'Know where bits are stored and how they\'re labeled',
+          'Identify every visual sign of a dull bit: burning, chatter, tearout, dust vs. chip',
+          'Know how dull bit damage differs by material (melamine vs. plywood vs. MDF)',
+          'Understand the cost impact of running a dull bit — rework time, client callbacks',
         ],
-        task: 'Walk the shop and find every bit. Identify its type. Write down which bit is used for sheet good box parts and which for doors.',
-        tip: 'Using the wrong bit destroys surface quality.',
+        task: 'Watch the bit types and wear video. Then inspect every bit in the shop. Write a condition report: sharp, borderline, or replace — and why.',
+        tip: 'You\'ve been cutting for 8 weeks. Now you know what bad cuts look like. This is why.',
       },
       {
-        topic: 'Changing a Bit — Collet, Torque & Runout Check',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        topic: 'Bit Life — How Long Our Bits Last & Cost Per Cut',
+        resourceLabel: CNC_W9_LABEL,
+        resourceUrl: CNC_W9_URL,
         objectives: [
-          'Change a bit safely and correctly',
-          'Torque the collet to the correct specification',
-          'Perform a runout check before cutting',
+          'Know the approximate sheet life for our compression bits on melamine',
+          'Calculate cost per sheet for a new bit vs. a worn bit (scrap risk)',
+          'Know when borderline becomes replace — and who makes the call',
         ],
-        task: 'Watch the tool change video. Observe Jose change a bit. Then do it yourself under supervision.',
-        tip: 'Under-torqued bits spin loose mid-cut. Over-torqued collets crack.',
+        task: 'Ask Jose: what is our compression bit sheet life target? What did the last bit cost? Calculate cost per sheet. Write it in the log.',
+        tip: 'Running a bit past life to "save money" always costs more in scrapped parts.',
       },
       {
-        topic: 'Practice — Bit Change Independently',
+        topic: 'Practice — Full Bit Inspection & Condition Report',
         resourceLabel: CNC_LABEL,
         resourceUrl: CNC_URL,
         objectives: [
-          'Complete 3 full bit changes independently',
-          'Pass Jose\'s inspection for torque and runout on each',
-          'Build the habit before it matters on a live job',
+          'Inspect all bits in the shop independently',
+          'Grade each as: Run / Borderline / Replace',
+          'Prepare a written condition report for Jose',
         ],
-        task: 'Complete 3 full bit changes independently. Jose inspects each for correct torque and runout. No cuts until approved.',
-        tip: 'Bit changes done right take 5 minutes. Done wrong, they cost hours.',
+        task: 'Inspect every bit independently. Write a full condition report. Present to Jose — he confirms or corrects your grades.',
+        tip: 'Your inspection eye is a skill. It builds with every report you write.',
       },
       {
-        topic: 'Tool Life — When to Replace & Signs of a Dull Bit',
+        topic: 'Replacement Protocol — Ordering, Lead Times & Stock Levels',
         resourceLabel: CNC_LABEL,
         resourceUrl: CNC_URL,
         objectives: [
-          'Identify visual signs of a dull bit',
-          'Know the life expectancy of our standard bits',
-          'Know the replacement process and who to notify',
+          'Know who to notify when a bit needs replacement',
+          'Know the reorder lead time for our standard bits',
+          'Understand the minimum stock level we keep on hand',
         ],
-        task: 'Watch the tool wear video. Inspect all current bits and note condition in the log. Flag any that need replacement to Jose.',
-        tip: 'A dull bit burns, chatters, and tears the material. If you see any of those, stop.',
+        task: 'Ask Jose: what is the reorder process? What\'s the lead time from our supplier? What minimum stock do we keep? Write the protocol in the log.',
+        tip: 'Running out of bits stops production. Stock management is part of your job.',
       },
       {
-        topic: 'Week 9 Review',
+        topic: 'Week 9 Review — Bit Management',
         resourceLabel: CNC_LABEL,
         resourceUrl: CNC_URL,
         objectives: [
-          'Describe how to identify a dull bit',
-          'Explain what a dull bit does to cut quality',
-          'Write the correct bit change procedure from memory',
+          'Describe 3 visual signs that a bit needs replacement',
+          'State the approximate sheet life of our compression bit',
+          'Explain the reorder protocol from memory',
         ],
-        task: 'Write: How do you know a bit is dull? What does a dull bit do to cut quality? What is the correct change procedure from memory?',
-        tip: 'Tool management is machine management. Own both.',
+        task: 'Write: What are 3 signs a bit is dull? What is our compression bit sheet life? What is the full reorder protocol?',
+        tip: 'Tool management is machine management. Bits are your responsibility now.',
       },
     ],
 
@@ -1921,8 +2803,8 @@
     11: [
       {
         topic: 'Part Inspection Process — What to Measure & Acceptable Tolerances',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W11_LABEL,
+        resourceUrl: CNC_W11_URL,
         objectives: [
           'Know the tolerance range for box panels, doors, and drawer fronts',
           'Measure parts correctly with a tape measure',
@@ -1933,8 +2815,8 @@
       },
       {
         topic: 'Identifying Cut Defects — Tearout, Burning, Undersized & Oversized',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W11_LABEL,
+        resourceUrl: CNC_W11_URL,
         objectives: [
           'Identify each defect type visually',
           'Know the cause of each defect',
@@ -1945,8 +2827,8 @@
       },
       {
         topic: 'Practice — Full Inspection',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W11_LABEL,
+        resourceUrl: CNC_W11_URL,
         objectives: [
           'Inspect a complete set of parts from a real job',
           'Record every measurement in the inspection log',
@@ -1957,8 +2839,8 @@
       },
       {
         topic: 'What to Do When a Part is Wrong',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W11_LABEL,
+        resourceUrl: CNC_W11_URL,
         objectives: [
           'Apply the decision tree for a wrong part — recut, trim, or flag',
           'Understand the cost of each option',
@@ -1984,8 +2866,8 @@
     12: [
       {
         topic: 'Job Setup — Receive File, Review Cut List & Stage Material',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W6_LABEL,
+        resourceUrl: CNC_W6_URL,
         objectives: [
           'Receive a job file from Maria and review the full cut list',
           'Stage all material in the correct zone with correct labels',
@@ -1996,8 +2878,8 @@
       },
       {
         topic: 'Cut the Job — All Panels, Doors & Drawer Fronts',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W6_LABEL,
+        resourceUrl: CNC_W6_URL,
         objectives: [
           'Run the full cut in the correct sequence',
           'Follow the pre-cut checklist on every step',
@@ -2008,8 +2890,8 @@
       },
       {
         topic: 'Practice — Second Full Job',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W6_LABEL,
+        resourceUrl: CNC_W6_URL,
         objectives: [
           'Run a second full job independently',
           'Maintain the same quality standard as the first',
@@ -2020,8 +2902,8 @@
       },
       {
         topic: 'Part Inspection & Job Packaging',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W6_LABEL,
+        resourceUrl: CNC_W6_URL,
         objectives: [
           'Inspect every part against the cut list',
           'Flag any issues before packaging',
@@ -2032,8 +2914,8 @@
       },
       {
         topic: 'Week 12 Graduation',
-        resourceLabel: CNC_LABEL,
-        resourceUrl: CNC_URL,
+        resourceLabel: CNC_W6_LABEL,
+        resourceUrl: CNC_W6_URL,
         objectives: [
           'Present the full job from Mozaik file to finished parts',
           'Identify what went well and what needs work',
@@ -2063,6 +2945,12 @@
   const FIELD_URL_QC        = 'https://www.youtube.com/results?search_query=construction+quality+control';
   const FIELD_URL_QUALITY   = FIELD_URL_QC;
   const FIELD_URL_NAHB      = 'https://www.nahb.org/nahb-community/nahb-rmi';
+  const FIELD_URL_FLOORING  = 'https://www.youtube.com/results?search_query=LVP+flooring+installation+professional+contractor';
+  const FIELD_URL_CREW      = 'https://www.youtube.com/results?search_query=construction+crew+management+field+supervisor';
+  const FIELD_URL_CHANGE_ORD= 'https://www.youtube.com/results?search_query=construction+change+order+scope+management';
+  const FIELD_URL_BUDGET    = 'https://www.youtube.com/results?search_query=construction+material+cost+management+field+manager';
+  const FIELD_URL_PROJECT   = 'https://www.youtube.com/results?search_query=residential+remodel+project+planning+timeline';
+  const FIELD_URL_LEADERSHIP= 'https://www.youtube.com/results?search_query=construction+foreman+leadership+managing+subcontractors';
   const FIELD_LABEL         = 'Training Resource';
 
   const FIELD_PLAN = {
@@ -2489,8 +3377,8 @@
       // Mon — Concept
       {
         topic: 'Subfloor Prep',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'LVP Flooring — Video Resource',
+        resourceUrl: FIELD_URL_FLOORING,
         objectives: [
           'Understand what makes a subfloor ready for LVP or carpet',
           'Know the flatness tolerance standard for LVP (3/16" over 10 ft)',
@@ -2502,8 +3390,8 @@
       // Tue — Application
       {
         topic: 'LVP Installation Standards',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'LVP Flooring — Video Resource',
+        resourceUrl: FIELD_URL_FLOORING,
         objectives: [
           'Know the NFR LVP install sequence: acclimate, layout direction, first row, expansion gap',
           'Understand the correct expansion gap (1/4") and why it matters',
@@ -2515,8 +3403,8 @@
       // Wed — Practice
       {
         topic: 'Carpet & Seam Standards',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'LVP Flooring — Video Resource',
+        resourceUrl: FIELD_URL_FLOORING,
         objectives: [
           'Know carpet seam placement rules (seams away from high-traffic zones)',
           'Understand tack strip installation around the perimeter',
@@ -2528,8 +3416,8 @@
       // Thu — Deepen
       {
         topic: 'Transitions & Final Walk',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'LVP Flooring — Video Resource',
+        resourceUrl: FIELD_URL_FLOORING,
         objectives: [
           'Know the transition types: T-bar, reducer, threshold, end cap — and when to use each',
           'Understand the NFR final flooring walk: check seams, transitions, gaps, damage',
@@ -2541,8 +3429,8 @@
       // Fri — Review
       {
         topic: 'Week 7 Review — Flooring',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'LVP Flooring — Video Resource',
+        resourceUrl: FIELD_URL_FLOORING,
         objectives: [
           'Describe subfloor readiness criteria from memory',
           'Call out the correct expansion gap for LVP',
@@ -2698,8 +3586,8 @@
       // Mon — Concept
       {
         topic: 'Reading the Schedule',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Project Planning — Video Resource',
+        resourceUrl: FIELD_URL_PROJECT,
         objectives: [
           'Read a project schedule and understand what each line means',
           'Know the difference between a start date, a milestone date, and a completion date',
@@ -2711,8 +3599,8 @@
       // Tue — Application
       {
         topic: 'Trade Dependencies',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Project Planning — Video Resource',
+        resourceUrl: FIELD_URL_PROJECT,
         objectives: [
           'Know the standard NFR trade sequence: demo → rough → drywall → paint → flooring → trim',
           'Understand what happens when a trade is late and how it cascades',
@@ -2724,8 +3612,8 @@
       // Wed — Practice
       {
         topic: 'Flagging Delays Early',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Project Planning — Video Resource',
+        resourceUrl: FIELD_URL_PROJECT,
         objectives: [
           'Know the 24-hour rule: if you see a delay risk, flag it within 24 hours',
           'Know the format for flagging: job name, what\'s delayed, impact, proposed fix',
@@ -2737,8 +3625,8 @@
       // Thu — Deepen
       {
         topic: 'Visit Sequencing — Prioritizing Your Day',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Project Planning — Video Resource',
+        resourceUrl: FIELD_URL_PROJECT,
         objectives: [
           'Know how to sequence your site visits for maximum impact',
           'Understand: inspection visits, check-in visits, and sign-off visits — each needs different time',
@@ -2750,8 +3638,8 @@
       // Fri — Review
       {
         topic: 'Week 10 Review — Planning',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Project Planning — Video Resource',
+        resourceUrl: FIELD_URL_PROJECT,
         objectives: [
           'Read a project schedule cold and identify the next 2 milestones',
           'Spot a trade dependency conflict and flag it correctly',
@@ -2907,8 +3795,8 @@
       // Mon — Concept
       {
         topic: 'How to Give Clear Task Instructions',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Crew Management — Video Resource',
+        resourceUrl: FIELD_URL_CREW,
         objectives: [
           'Know the 4-part instruction format: What, Where, By When, To What Standard',
           'Understand that vague instructions create vague results',
@@ -2920,8 +3808,8 @@
       // Tue — Application
       {
         topic: 'Setting Daily Production Targets',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Crew Management — Video Resource',
+        resourceUrl: FIELD_URL_CREW,
         objectives: [
           'Know how to set a realistic daily production target for a crew based on scope and headcount',
           'Understand that a crew without a target works to comfort, not completion',
@@ -2933,8 +3821,8 @@
       // Wed — Practice
       {
         topic: 'Accountability Check-ins',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Crew Management — Video Resource',
+        resourceUrl: FIELD_URL_CREW,
         objectives: [
           'Know the check-in cadence: morning direction + midday check + EOD confirmation',
           'Understand how to do a check-in without hovering or undermining the crew',
@@ -2946,8 +3834,8 @@
       // Thu — Deepen
       {
         topic: 'When a Crew Member Falls Short',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Crew Management — Video Resource',
+        resourceUrl: FIELD_URL_CREW,
         objectives: [
           'Know the 3-step response: address privately, describe the standard, give one chance to correct',
           'Understand that public correction damages crew morale and authority',
@@ -2959,8 +3847,8 @@
       // Fri — Review
       {
         topic: 'Week 13 Review — Directing a Crew',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Crew Management — Video Resource',
+        resourceUrl: FIELD_URL_CREW,
         objectives: [
           'Use the 4-part instruction format naturally, without thinking about it',
           'Set and track a daily production target independently',
@@ -3114,8 +4002,8 @@
       // Mon — Concept
       {
         topic: "What's In Scope",
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Change Order & Scope — Video Resource',
+        resourceUrl: FIELD_URL_CHANGE_ORD,
         objectives: [
           'Know how to read the NFR scope document before showing up to a job',
           'Understand that anything not in the scope document is not NFR\'s responsibility — yet',
@@ -3127,8 +4015,8 @@
       // Tue — Application
       {
         topic: 'Change Order Triggers',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Change Order & Scope — Video Resource',
+        resourceUrl: FIELD_URL_CHANGE_ORD,
         objectives: [
           'Know the 4 change order triggers: client request, hidden condition, scope error, material upgrade',
           'Understand that Jorge identifies triggers — Jose decides and prices the change order',
@@ -3140,8 +4028,8 @@
       // Wed — Practice
       {
         topic: 'Language to Use on Change Orders',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Change Order & Scope — Video Resource',
+        resourceUrl: FIELD_URL_CHANGE_ORD,
         objectives: [
           'Know the correct language when a client asks for something outside scope',
           'Use the phrase: "That sounds like something we can do — let me have Jose put together a change order for you"',
@@ -3153,8 +4041,8 @@
       // Thu — Deepen
       {
         topic: 'Escalation on Scope Issues',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Change Order & Scope — Video Resource',
+        resourceUrl: FIELD_URL_CHANGE_ORD,
         objectives: [
           'Know the escalation timeline: scope issue identified → Jose notified within 2 hours',
           'Understand that crew should never start out-of-scope work even if the client asks nicely',
@@ -3166,8 +4054,8 @@
       // Fri — Review
       {
         topic: 'Week 16 Review — Scope & Change Orders',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Change Order & Scope — Video Resource',
+        resourceUrl: FIELD_URL_CHANGE_ORD,
         objectives: [
           'Read a scope document and identify what\'s included vs. excluded',
           'Identify a change order trigger and escalate it correctly',
@@ -3185,8 +4073,8 @@
       // Mon — Concept
       {
         topic: 'Prioritizing Multiple Site Visits',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Multi-Job Management — Video Resource',
+        resourceUrl: FIELD_URL_BUDGET,
         objectives: [
           'Know the 3-tier triage for site visits: critical (today or it stops), important (today for progress), routine (check-in)',
           'Build a daily visit plan each morning at 7am before driving',
@@ -3198,8 +4086,8 @@
       // Tue — Application
       {
         topic: 'Time-Splitting Across Jobs',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Multi-Job Management — Video Resource',
+        resourceUrl: FIELD_URL_BUDGET,
         objectives: [
           'Know how long each type of site visit actually takes: QC inspection (30–60 min), check-in (15 min), problem-solve visit (60–90 min)',
           'Allocate realistic time blocks and stick to them',
@@ -3211,8 +4099,8 @@
       // Wed — Practice
       {
         topic: 'Triage — Knowing When to Go vs. Trust the Crew',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Multi-Job Management — Video Resource',
+        resourceUrl: FIELD_URL_BUDGET,
         objectives: [
           'Know the difference between a crew that can be left to run and one that needs a physical visit',
           'Understand that every in-person visit has a cost — use them where they matter most',
@@ -3224,8 +4112,8 @@
       // Thu — Deepen
       {
         topic: 'Knowing Which Job Needs You Most',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Multi-Job Management — Video Resource',
+        resourceUrl: FIELD_URL_BUDGET,
         objectives: [
           'Know the risk signals that demand Jorge\'s physical presence: new crew, new trade, client on site, QC gate, known problem',
           'Build a mental model for each job: green/yellow/red at any moment',
@@ -3237,8 +4125,8 @@
       // Fri — Review
       {
         topic: 'Week 17 Review — Multiple Jobs',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Multi-Job Management — Video Resource',
+        resourceUrl: FIELD_URL_BUDGET,
         objectives: [
           'Build a daily triage sequence without being prompted',
           'Time-track actual visit durations and compare to planned',
@@ -3254,8 +4142,8 @@
       // Mon — Concept
       {
         topic: 'Building Trust with Your Crew',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Field Leadership — Video Resource',
+        resourceUrl: FIELD_URL_LEADERSHIP,
         objectives: [
           'Understand that trust is built through consistency, fairness, and follow-through',
           'Know that a crew member who trusts their manager works harder and shows up more reliably',
@@ -3267,8 +4155,8 @@
       // Tue — Application
       {
         topic: 'Accountability Without Micromanaging',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Field Leadership — Video Resource',
+        resourceUrl: FIELD_URL_LEADERSHIP,
         objectives: [
           'Know the difference between accountability (checking outcomes) and micromanaging (controlling every step)',
           'Understand that giving crew ownership of the HOW — while holding them to the WHAT — builds reliability',
@@ -3280,8 +4168,8 @@
       // Wed — Practice
       {
         topic: 'Leading by Example',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Field Leadership — Video Resource',
+        resourceUrl: FIELD_URL_LEADERSHIP,
         objectives: [
           'Know that crew members copy the manager\'s behavior — especially around safety, quality, and attitude',
           'Understand that showing up early, staying organized, and being honest creates a culture that others adopt',
@@ -3293,8 +4181,8 @@
       // Thu — Deepen
       {
         topic: 'Handling a Difficult Crew Member',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Field Leadership — Video Resource',
+        resourceUrl: FIELD_URL_LEADERSHIP,
         objectives: [
           'Know the 3-step response: address behavior privately, state the standard, set a clear expectation with a deadline',
           'Understand the difference between a performance issue (fixable) and a values issue (not)',
@@ -3306,8 +4194,8 @@
       // Fri — Review
       {
         topic: 'Week 18 Review — Leadership',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Field Leadership — Video Resource',
+        resourceUrl: FIELD_URL_LEADERSHIP,
         objectives: [
           'Describe the difference between a reliable crew and an unreliable one — and what Jorge\'s role is in each',
           'Handle a crew accountability scenario without escalating unnecessarily',
@@ -3323,8 +4211,8 @@
       // Mon — Concept
       {
         topic: 'Flagging Material Risk',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Budget & Material Cost — Video Resource',
+        resourceUrl: FIELD_URL_BUDGET,
         objectives: [
           'Know the signs of material risk: short supply, wrong order, damage on delivery, wrong spec',
           'Understand that material risk flagged before install saves money; material risk discovered after costs 3x more',
@@ -3336,8 +4224,8 @@
       // Tue — Application
       {
         topic: 'Understanding NFR Markups',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Budget & Material Cost — Video Resource',
+        resourceUrl: FIELD_URL_BUDGET,
         objectives: [
           'Know the NFR markup structure: 24% on materials, 30% on subs, 15% on equipment',
           'Understand why markups exist and what they cover: overhead, risk, margin',
@@ -3349,8 +4237,8 @@
       // Wed — Practice
       {
         topic: 'Cost vs. Quality Decisions',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Budget & Material Cost — Video Resource',
+        resourceUrl: FIELD_URL_BUDGET,
         objectives: [
           'Know the NFR default: spec quality, not premium quality — unless the client paid for the upgrade',
           'Understand that cost overruns on materials come out of NFR\'s margin',
@@ -3362,8 +4250,8 @@
       // Thu — Deepen
       {
         topic: 'Budget Conversations with Jose',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Budget & Material Cost — Video Resource',
+        resourceUrl: FIELD_URL_BUDGET,
         objectives: [
           'Know how to bring a cost concern to Jose with context: what it is, why it\'s a risk, what the options are',
           'Understand that budget conversations are facts first, not opinions',
@@ -3375,8 +4263,8 @@
       // Fri — Review
       {
         topic: 'Week 19 Review — Budget & Materials',
-        resourceLabel: 'Training Resource',
-        resourceUrl: FIELD_URL_QUALITY,
+        resourceLabel: 'Budget & Material Cost — Video Resource',
+        resourceUrl: FIELD_URL_BUDGET,
         objectives: [
           'Conduct a material audit on an active job without being asked',
           'Explain NFR\'s markup structure accurately and confidentially',
@@ -3467,7 +4355,7 @@
       role:      'Office & Design Coordinator',
       color:     '#5F8062',
       anchor:    '2026-03-16',
-      startWeek: 8,
+      startWeek: 1,
       plan:      MARIA_PLAN,
     },
     scott: {
@@ -3515,12 +4403,20 @@
     const weekPlan = config.plan[weekNum];
     if (!weekPlan) return null;
 
-    return {
+    const dayData = weekPlan[dayIdx];
+    const result = {
       week: weekNum,
       day:  dayIdx + 1,
       employee,
-      ...weekPlan[dayIdx],
+      ...dayData,
     };
+
+    // For 3-block days (Maria), add a synthetic topic for manager/tracker compat
+    if (dayData && dayData.mozaik && !dayData.topic) {
+      result.topic = dayData.mozaik.topic;
+    }
+
+    return result;
   }
 
   // ── exports ────────────────────────────────────────────────────────────────
