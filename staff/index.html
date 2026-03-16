@@ -212,7 +212,7 @@
 
   <div class="card-body">
 
-    <!-- Step 1: Username + Password -->
+    <!-- Single step: Username + Password. First time = enter password Jose gave you; it’s saved. -->
     <div class="step active" id="step-login">
       <div id="msg-login" class="msg"></div>
       <div class="field">
@@ -222,32 +222,14 @@
       </div>
       <div class="field">
         <label>Password</label>
-        <input type="password" id="login-password" placeholder="password" autocomplete="current-password"
+        <input type="password" id="login-password" placeholder="Enter the password Jose gave you" autocomplete="current-password"
                onkeydown="if(event.key==='Enter') attemptLogin()">
       </div>
+      <div class="field" style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <input type="checkbox" id="remember-me" checked>
+        <label for="remember-me" style="margin:0;text-transform:none;font-weight:400;font-size:13px;">Keep me signed in on this device</label>
+      </div>
       <button class="btn btn-primary" onclick="attemptLogin()">Sign In →</button>
-    </div>
-
-    <!-- Step 2: First-time password setup -->
-    <div class="step" id="step-setup">
-      <div class="setup-intro">
-        Welcome, <strong id="setup-name-label"></strong>! Set a password for your account to continue.
-      </div>
-      <div id="msg-setup" class="msg"></div>
-      <div class="field">
-        <label>Create Password</label>
-        <input type="password" id="setup-password" placeholder="Choose a password" autocomplete="new-password"
-               oninput="checkStrength()"
-               onkeydown="if(event.key==='Enter') document.getElementById('setup-confirm').focus()">
-        <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
-      </div>
-      <div class="field">
-        <label>Confirm Password</label>
-        <input type="password" id="setup-confirm" placeholder="Type it again" autocomplete="new-password"
-               onkeydown="if(event.key==='Enter') createPassword()">
-      </div>
-      <button class="btn btn-accent" onclick="createPassword()">Create Password &amp; Sign In →</button>
-      <span class="back-link" onclick="goBackToLogin()">← Back</span>
     </div>
 
   </div>
@@ -290,14 +272,7 @@ var PORTAL_CARDS = [
   { key: 'inventory',        label: 'Inventory',           sub: 'Track warehouse stock',      icon: 'fa-boxes-stacked',  color: '#5A7FA3', href: 'inventory.html'          },
 ];
 
-// ── Step flow helpers ────────────────────────────────────────────────────────
-var pendingUsername = '';
-
-function showStep(id) {
-  document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
-  document.getElementById(id).classList.add('active');
-}
-
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function showMsg(id, text, type) {
   var el = document.getElementById(id);
   el.className = 'msg ' + type;
@@ -310,81 +285,46 @@ function clearMsg(id) {
   el.textContent = '';
 }
 
-function goBackToLogin() {
-  pendingUsername = '';
-  clearMsg('msg-login');
-  showStep('step-login');
-  setTimeout(function(){ document.getElementById('login-username').focus(); }, 50);
+// Save/load remembered username (not password) for convenience
+function saveRememberedUsername(username) {
+  try { localStorage.setItem('nfr_username', username || ''); } catch (e) {}
+}
+function getRememberedUsername() {
+  try { return localStorage.getItem('nfr_username') || ''; } catch (e) { return ''; }
 }
 
-// ── Login flow ───────────────────────────────────────────────────────────────
+// ── Login flow (one step: username + password; first time = password is set from what they enter) ─
 function attemptLogin() {
   var username = document.getElementById('login-username').value.trim().toLowerCase();
   var password = document.getElementById('login-password').value;
+  var rememberMe = document.getElementById('remember-me').checked;
 
   if (!username) { showMsg('msg-login', 'Please enter your username.', 'error'); return; }
   if (!password) { showMsg('msg-login', 'Please enter your password.', 'error'); return; }
 
-  // Unknown user
   if (!NFRAuth.users[username]) {
     showMsg('msg-login', 'Username not recognized. Check with Jose.', 'error');
     return;
   }
 
-  // First-time setup (no password yet)
-  if (!NFRAuth.hasPassword(username)) {
-    pendingUsername = username;
-    document.getElementById('setup-name-label').textContent = NFRAuth.users[username].name;
-    document.getElementById('setup-password').value = '';
-    document.getElementById('setup-confirm').value = '';
-    clearMsg('msg-setup');
-    showStep('step-setup');
-    setTimeout(function(){ document.getElementById('setup-password').focus(); }, 50);
+  if (!NFRAuth.hasPassword(username) && password.length < 4) {
+    showMsg('msg-login', 'Use the password Jose gave you (at least 4 characters).', 'error');
     return;
   }
 
-  // Attempt sign-in
-  var result = NFRAuth.login(username, password);
+  var result = NFRAuth.login(username, password, rememberMe);
   if (result.ok) {
+    saveRememberedUsername(username);
     showDashboard(result.session);
   } else {
-    showMsg('msg-login', 'Incorrect password. Try again.', 'error');
+    if (result.reason === 'password-too-short') {
+      showMsg('msg-login', 'Use the password Jose gave you (at least 4 characters).', 'error');
+    } else {
+      showMsg('msg-login', 'Incorrect password. Try again.', 'error');
+    }
     document.getElementById('login-password').value = '';
     document.getElementById('login-password').focus();
   }
-}
-
-// ── First-time password creation ────────────────────────────────────────────
-function createPassword() {
-  var pw  = document.getElementById('setup-password').value;
-  var cfm = document.getElementById('setup-confirm').value;
-  if (!pw)          { showMsg('msg-setup', 'Please choose a password.', 'error'); return; }
-  if (pw.length < 4){ showMsg('msg-setup', 'Password must be at least 4 characters.', 'error'); return; }
-  if (pw !== cfm)   { showMsg('msg-setup', 'Passwords do not match.', 'error'); return; }
-
-  NFRAuth.setPassword(pendingUsername, pw);
-  showMsg('msg-setup', 'Password created! Signing you in…', 'success');
-
-  setTimeout(function() {
-    var result = NFRAuth.login(pendingUsername, pw);
-    if (result.ok) showDashboard(result.session);
-  }, 700);
-}
-
-// ── Password strength indicator ──────────────────────────────────────────────
-function checkStrength() {
-  var pw   = document.getElementById('setup-password').value;
-  var fill = document.getElementById('strength-fill');
-  var score = 0;
-  if (pw.length >= 6)          score++;
-  if (pw.length >= 10)         score++;
-  if (/[A-Z]/.test(pw))        score++;
-  if (/[0-9]/.test(pw))        score++;
-  if (/[^A-Za-z0-9]/.test(pw)) score++;
-  var pcts = ['0%','20%','40%','60%','80%','100%'];
-  var cols = ['#E5E7EB','#EF4444','#F59E0B','#EAB308','#22C55E','#10B981'];
-  fill.style.width      = pcts[score];
-  fill.style.background = cols[score];
 }
 
 // ── Render dashboard ─────────────────────────────────────────────────────────
@@ -425,12 +365,14 @@ function capitalizeRole(r) {
   return labels[r] || (r ? (r.charAt(0).toUpperCase() + r.slice(1)) : '');
 }
 
-// ── Auto-login if session already exists ─────────────────────────────────────
+// ── On load: restore session (or pre-fill username) ───────────────────────────
 window.addEventListener('DOMContentLoaded', function() {
   var session = NFRAuth.getSession();
   if (session && NFRAuth.users[session.user]) {
     showDashboard(session);
   } else {
+    var savedUser = getRememberedUsername();
+    if (savedUser) document.getElementById('login-username').value = savedUser;
     setTimeout(function(){ document.getElementById('login-username').focus(); }, 50);
   }
 });

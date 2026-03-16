@@ -52,12 +52,18 @@
   }
 
   // ── Login ──────────────────────────────────────────────────────────────────
+  // First-time: if no password set, we set it from what they typed and log in (one step).
+  // rememberMe: persist session in localStorage so they stay logged in.
 
-  function login(username, password) {
+  function login(username, password, rememberMe) {
     var u = NFR_USERS[username];
     if (!u) return { ok: false, reason: 'unknown-user' };
-    if (!hasPassword(username)) return { ok: false, reason: 'no-password' };
-    if (!checkPassword(username, password)) return { ok: false, reason: 'bad-password' };
+    if (!hasPassword(username)) {
+      if (!password || password.length < 4) return { ok: false, reason: 'password-too-short' };
+      setPassword(username, password);
+    } else if (!checkPassword(username, password)) {
+      return { ok: false, reason: 'bad-password' };
+    }
 
     var roleDef = NFR_ROLES[u.role];
     if (!roleDef) return { ok: false, reason: 'unknown-role' };
@@ -75,6 +81,13 @@
 
     try {
       sessionStorage.setItem('nfr_session', JSON.stringify(session));
+      if (rememberMe) {
+        localStorage.setItem('nfr_session', JSON.stringify(session));
+        localStorage.setItem('nfr_remember_me', '1');
+      } else {
+        localStorage.removeItem('nfr_session');
+        localStorage.removeItem('nfr_remember_me');
+      }
     } catch (e) {
       return { ok: false, reason: 'storage-error' };
     }
@@ -108,6 +121,8 @@
       sessionStorage.removeItem('tp_role');
       sessionStorage.removeItem('tp_employee');
       sessionStorage.removeItem('tp_name');
+      localStorage.removeItem('nfr_session');
+      localStorage.removeItem('nfr_remember_me');
     } catch (e) { /* ignore */ }
     window.location.href = 'index.html';
   }
@@ -116,7 +131,29 @@
 
   function getSession() {
     try {
-      return JSON.parse(sessionStorage.getItem('nfr_session') || 'null');
+      var s = sessionStorage.getItem('nfr_session');
+      if (s) return JSON.parse(s);
+      if (localStorage.getItem('nfr_remember_me') && localStorage.getItem('nfr_session')) {
+        var persisted = JSON.parse(localStorage.getItem('nfr_session'));
+        sessionStorage.setItem('nfr_session', localStorage.getItem('nfr_session'));
+        var roleDef = NFR_ROLES[persisted.role];
+        if (roleDef) {
+          var isManager = roleDef.portals.indexOf('training-manager') !== -1;
+          var isEmployee = roleDef.portals.indexOf('training-employee') !== -1;
+          var isScott = roleDef.portals.indexOf('scott-training') !== -1;
+          if (isManager) {
+            sessionStorage.setItem('tp_role', 'manager');
+            sessionStorage.setItem('tp_employee', '');
+            sessionStorage.setItem('tp_name', persisted.name);
+          } else if (isEmployee || isScott) {
+            sessionStorage.setItem('tp_role', 'employee');
+            sessionStorage.setItem('tp_employee', persisted.employee || '');
+            sessionStorage.setItem('tp_name', persisted.name);
+          }
+        }
+        return persisted;
+      }
+      return null;
     } catch (e) {
       return null;
     }
