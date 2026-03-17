@@ -36,6 +36,17 @@
     jorge: { name: 'Jorge',         role: 'field-manager' },
   };
 
+  // ── Default passwords — work on any device on first login ─────────────────
+  // After first login on any device, password is saved to localStorage automatically.
+  // To change: update the value here and redeploy.
+  const DEFAULT_PASSWORDS = {
+    jose:  btoa(unescape(encodeURIComponent('NFRjose2024'))),
+    maria: btoa(unescape(encodeURIComponent('maria'))),
+    jorge: btoa(unescape(encodeURIComponent('jorge'))),
+    scott: btoa(unescape(encodeURIComponent('scott'))),
+    jen:   btoa(unescape(encodeURIComponent('jen'))),
+  };
+
   // ── Password storage (base64, keyed by username) ───────────────────────────
   // Compatible with the existing nfr_staff_passwords store from old index.html.
 
@@ -58,9 +69,14 @@
   function login(username, password, rememberMe) {
     var u = NFR_USERS[username];
     if (!u) return { ok: false, reason: 'unknown-user' };
+    var encoded = encode(password || '');
     if (!hasPassword(username)) {
+      // New device — check against default password
+      if (DEFAULT_PASSWORDS[username] && encoded !== DEFAULT_PASSWORDS[username]) {
+        return { ok: false, reason: 'bad-password' };
+      }
       if (!password || password.length < 4) return { ok: false, reason: 'password-too-short' };
-      setPassword(username, password);
+      setPassword(username, password); // Save to localStorage so future logins are fast
     } else if (!checkPassword(username, password)) {
       return { ok: false, reason: 'bad-password' };
     }
