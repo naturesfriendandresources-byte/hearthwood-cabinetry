@@ -447,6 +447,39 @@ h1, h2, h3 {
   font-size: 0.9rem;
 }
 
+.admin-video-redirect {
+  padding: 1.75rem 2rem;
+  background: var(--grey-100);
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.admin-video-redirect-label {
+  color: var(--grey-700);
+  font-size: 0.9rem;
+  margin: 0 0 1rem;
+}
+
+.admin-watch-yt-btn {
+  display: inline-block;
+  padding: 0.65rem 1.75rem;
+  background: #C9A96E;
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.01em;
+  transition: background 0.2s;
+}
+
+.admin-watch-yt-btn:hover {
+  background: #b5924f;
+}
+
 .admin-quiz-section {
   margin-top: 1.25rem;
   padding-top: 1.25rem;

@@ -149,7 +149,9 @@
 
     const videoHtml = videoSrc
       ? '<div class="admin-video-wrap"><video id="admin-video" src="' + videoSrc + '" controls preload="metadata" playsinline></video><p class="admin-video-missing" id="admin-video-missing" style="display:none;"></p></div><p class="admin-progress-hint" id="admin-progress-hint">Watch at least 80% of the video to unlock the quiz.</p>'
-      : '<div class="admin-video-placeholder"><p>Video will be added to the portal. Place the file at <code>staff/videos/' + (adminModule.videoFile || adminModule.id + '.mp4') + '</code> and refresh.</p></div>';
+      : adminModule.sourceUrl
+        ? '<div class="admin-video-redirect"><p class="admin-video-redirect-label">This video plays on YouTube. Watch it, then come back here and confirm below to unlock the quiz.</p><a id="admin-watch-btn" href="' + escAttr(adminModule.sourceUrl) + '" target="_blank" rel="noopener" class="admin-watch-yt-btn">&#9654; Watch Video on YouTube</a><p class="admin-progress-hint" id="admin-progress-hint">Click Watch first, then confirm below to unlock the quiz.</p><button type="button" id="admin-watched-confirm" class="mark-complete-btn" disabled>I finished watching &mdash; unlock quiz</button></div>'
+        : '<div class="admin-video-placeholder"><p>Video will be added to the portal. Place the file at <code>staff/videos/' + (adminModule.videoFile || adminModule.id + '.mp4') + '</code> and refresh.</p></div>';
 
     main.innerHTML = `
       <div class="training-card" style="--accent: #1C5A8A">
@@ -214,6 +216,23 @@
       });
     } else {
       unlockQuiz();
+    }
+
+    // YouTube redirect flow — no local video file
+    const watchYtBtn = document.getElementById('admin-watch-btn');
+    const watchedConfirmBtn = document.getElementById('admin-watched-confirm');
+    if (watchYtBtn && watchedConfirmBtn) {
+      watchYtBtn.addEventListener('click', function () {
+        watchedConfirmBtn.disabled = false;
+        if (progressHint) progressHint.textContent = 'Good — when you\'re done watching, click the button below.';
+        sendProgress(adminModule.id, 'video_started', { method: 'youtube_redirect' });
+      });
+      watchedConfirmBtn.addEventListener('click', function () {
+        watchedConfirmBtn.disabled = true;
+        watchedConfirmBtn.textContent = 'Quiz unlocked \u2713';
+        sendProgress(adminModule.id, 'video_progress', { percentWatched: 100, method: 'youtube_redirect' });
+        unlockQuiz();
+      });
     }
 
     if (submitBtn && form) {
