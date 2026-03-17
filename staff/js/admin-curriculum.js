@@ -12,6 +12,7 @@
       title: 'Company Values & Safety',
       videoTitle: 'NFR Company Values & Worksite Safety',
       videoFile: 'admin-1.mp4',
+      sourceUrl: 'https://www.youtube.com/watch?v=g6zYF7fbJk8',
       quiz: [
         { q: 'What should you do before starting any job site task?', options: ['Check your phone', 'Review safety for that task and wear required PPE', 'Start immediately', 'Ask the client'], answer: 1 },
         { q: 'Who do you report a safety concern to?', options: ['Only at the end of the day', 'Jose or the Field Manager right away', 'The client first', 'No one'], answer: 1 },
@@ -23,6 +24,7 @@
       title: 'Communication & Scheduling',
       videoTitle: 'Communication & Scheduling at NFR',
       videoFile: 'admin-2.mp4',
+      sourceUrl: 'https://www.youtube.com/watch?v=CtRgwJaW2N4',
       quiz: [
         { q: "If you're going to be late or can't make a shift, you should:", options: ['Text when you can', 'Call or text Jose (or your direct lead) as soon as you know', 'Show up and explain later', 'Send an email at end of day'], answer: 1 },
         { q: "Where do we keep job schedules and who's on what?", options: ["Only in Jose's head", 'Calendar and portal; check with office or Field Manager', "We don't use a schedule", 'Only the client knows'], answer: 1 },
@@ -34,6 +36,7 @@
       title: 'Quality & Client Experience',
       videoTitle: 'Quality & Client Experience',
       videoFile: 'admin-3.mp4',
+      sourceUrl: 'https://www.youtube.com/watch?v=Sw61Uu8ftII',
       quiz: [
         { q: 'Before leaving a job site for the day, you should:', options: ['Leave as soon as the clock hits 4', 'Clean up your area, secure materials, and note what\'s next', 'Let the next person handle it', 'Only if the client is there'], answer: 1 },
         { q: "If a client asks you to change something that wasn't in the scope, you should:", options: ['Do it without telling anyone', 'Tell Jose or the Field Manager so we can track scope and pricing', 'Refuse', 'Only write it down'], answer: 1 },

@@ -9,7 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/training-styles.css" />
   <style>
-    /* ── Curriculum Portal Layout ───────────────────────────── */
+    /* ── Curriculum Portal: Maria's format (color, style, theme) for the whole page ── */
+    :root {
+      --maria-sage:      #5F8062;
+      --maria-sage-bg:   #D4E6D5;
+      --maria-sage-dark: #4A6650;
+    }
 
     .curriculum-body {
       display: flex;
@@ -17,12 +22,22 @@
       min-height: 100vh;
     }
 
-    /* ── Trainee Tabs ─────────────────────────────────────── */
+    /* ── Header: Maria's sage ───────────────────────────────── */
+    .curriculum-body .app-header {
+      background: var(--maria-sage);
+      color: var(--white);
+    }
+
+    .curriculum-body .header-brand .brand-dot {
+      color: var(--gold);
+    }
+
+    /* ── Trainee Tabs: Maria's sage (same as header) ─────────── */
 
     .trainee-tabs {
       display: flex;
       gap: 0;
-      background: var(--espresso);
+      background: var(--maria-sage);
       padding: 0 1.5rem;
       border-bottom: 3px solid var(--gold);
     }
@@ -38,7 +53,7 @@
       border-bottom: 3px solid transparent;
       margin-bottom: -3px;
       cursor: pointer;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.6);
       font-family: var(--font-body);
       font-size: 0.95rem;
       font-weight: 600;
@@ -56,11 +71,11 @@
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      opacity: 0.7;
+      opacity: 0.85;
     }
 
     .trainee-tab:hover {
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,0.95);
     }
 
     .trainee-tab.active {
@@ -68,7 +83,7 @@
       border-bottom-color: var(--gold);
     }
 
-    /* ── Toolbar ──────────────────────────────────────────── */
+    /* ── Toolbar: Maria's format (cream + sage accent) ───────── */
 
     .curriculum-toolbar {
       display: flex;
@@ -76,7 +91,7 @@
       justify-content: space-between;
       padding: 0.85rem 1.5rem;
       background: var(--white);
-      border-bottom: 1px solid var(--grey-200);
+      border-bottom: 2px solid var(--maria-sage-bg);
       box-shadow: var(--shadow-sm);
       position: sticky;
       top: 60px;
@@ -100,6 +115,7 @@
     }
 
     .trainee-label {
+      font-family: var(--font-head);
       font-size: 1rem;
       font-weight: 700;
       color: var(--espresso);
@@ -141,9 +157,9 @@
     }
 
     .week-nav-btn:hover:not(:disabled) {
-      background: var(--espresso);
+      background: var(--maria-sage);
       color: var(--white);
-      border-color: var(--espresso);
+      border-color: var(--maria-sage);
     }
 
     .week-nav-btn:disabled {
@@ -164,14 +180,14 @@
       min-width: 90px;
     }
 
-    /* ── Phase Progress Bar ───────────────────────────────── */
+    /* ── Phase Progress Bar: Maria's format ─────────────────── */
 
     .phase-progress {
       display: flex;
       align-items: center;
       gap: 0;
       padding: 0 1.5rem;
-      background: var(--cream-dark);
+      background: var(--maria-sage-bg);
       border-bottom: 1px solid var(--grey-200);
       overflow-x: auto;
       -ms-overflow-style: none;
@@ -207,6 +223,101 @@
     }
 
     /* ── Week Cards Grid ──────────────────────────────────── */
+
+    /* ── Approval panel: Maria's format (same as her day cards) ── */
+    .approval-panel {
+      flex: 1;
+      padding: 1.5rem;
+      background: var(--cream);
+    }
+
+    .approval-panel-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .approval-intro {
+      font-size: 0.95rem;
+      color: var(--grey-700);
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .approval-intro code {
+      background: var(--maria-sage-bg);
+      color: var(--maria-sage-dark);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+
+    .approval-module {
+      background: var(--white);
+      border: 1.5px solid var(--grey-200);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.75rem;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--maria-sage);
+    }
+
+    .approval-module h3 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: var(--espresso);
+      margin-bottom: 0.35rem;
+    }
+
+    .approval-module .approval-meta {
+      font-size: 0.8rem;
+      color: var(--grey-500);
+    }
+
+    .approval-module a.approval-video-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--maria-sage);
+      text-decoration: none;
+    }
+
+    .approval-module a.approval-video-link:hover {
+      color: var(--maria-sage-dark);
+      text-decoration: underline;
+    }
+
+    .approval-module .approval-links {
+      margin-top: 0.5rem;
+    }
+
+    .approval-person-block {
+      margin-bottom: 1.5rem;
+    }
+
+    .approval-section-title {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--maria-sage-dark);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.35rem;
+      padding-left: 0.5rem;
+      border-bottom: 2px solid var(--grey-200);
+      border-left: 4px solid var(--maria-sage);
+    }
+
+    .approval-section-title .role-tag {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: var(--grey-500);
+    }
+
+    .approval-module.proposed {
+      border-left-style: dashed;
+      background: var(--maria-sage-bg);
+    }
 
     .curriculum-main {
       flex: 1;
@@ -424,6 +535,43 @@
     </div>
   </header>
 
+  <!-- ── Video approval & curriculum (same tab) ─────────────────── -->
+  <section class="approval-panel" id="panel-video-approval">
+    <div class="approval-panel-inner">
+      <p class="approval-intro">Everyone does <strong>Office Administration Basics</strong> first (shared). After that, each person has their own videos. Use <strong>Preview (source)</strong> to watch this week’s videos until the .mp4 files are in <code>staff/videos/</code>.</p>
+
+      <div class="approval-person-block next-week-proposal">
+        <h2 class="approval-section-title">Next week — proposed for approval</h2>
+        <p class="approval-intro">Approve in chat: <code>/training-video-quiz weekly</code> or <code>/training-video-quiz [topic] admin</code>. Once you approve, new modules appear in the lists below.</p>
+        <div class="approval-module proposed">
+          <h3>Next admin or role video (proposed)</h3>
+          <div class="approval-meta">Run <code>/training-video-quiz weekly</code> in chat to get a video + quiz proposal for next week. Approve to add to the portal.</div>
+        </div>
+      </div>
+
+      <div class="approval-person-block">
+        <h2 class="approval-section-title">Office Administration Basics <span class="role-tag">(Jorge, Maria, Scott — shared)</span></h2>
+        <div id="approval-admin-list"></div>
+      </div>
+
+      <div class="approval-person-block">
+        <h2 class="approval-section-title">Jorge <span class="role-tag">— Field Management</span></h2>
+        <div id="approval-jorge-list"></div>
+      </div>
+
+      <div class="approval-person-block">
+        <h2 class="approval-section-title">Maria <span class="role-tag">— Mozaik &amp; Designer</span></h2>
+        <div id="approval-maria-list"></div>
+      </div>
+
+      <div class="approval-person-block">
+        <h2 class="approval-section-title">Scott <span class="role-tag">— CNC &amp; Warehouse</span></h2>
+        <div id="approval-scott-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Curriculum for the week (Jorge, Maria, Scott) ─────────── -->
   <!-- ── Trainee Tabs ────────────────────────────────────────── -->
   <nav class="trainee-tabs" id="trainee-tabs">
     <button class="trainee-tab active" data-trainee="jorge">
@@ -465,6 +613,7 @@
 
   <!-- ── Scripts ────────────────────────────────────────────── -->
   <script src="js/auth.js"></script>
+  <script src="js/admin-curriculum.js"></script>
   <script>
     var _session = NFRAuth.requireAuth('curriculum');
     if (_session) {
@@ -473,6 +622,40 @@
     document.getElementById('btn-logout').addEventListener('click', function () {
       NFRAuth.logout();
     });
+
+    // ── Video approval: Office Admin (clickable) + separate Jorge / Maria / Scott
+    (function () {
+      function esc(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+      }
+      var modules = window.ADMIN_MODULES || [];
+      var adminList = document.getElementById('approval-admin-list');
+      if (adminList) {
+        if (!modules.length) {
+          adminList.innerHTML = '<p class="state-empty">No admin modules yet. Run /training-video-quiz in chat to propose videos; after you approve, they appear here.</p>';
+        } else {
+          adminList.innerHTML = modules.map(function (m) {
+            var qCount = (m.quiz && m.quiz.length) || 0;
+            var videoPath = (m.videoFile ? 'videos/' + m.videoFile : '');
+            var sourceUrl = m.sourceUrl || '';
+            var linkHtml = '';
+            if (videoPath) linkHtml += '<a class="approval-video-link" href="' + esc(videoPath) + '" target="_blank" rel="noopener">Watch in portal →</a> ';
+            if (sourceUrl) linkHtml += '<a class="approval-video-link" href="' + esc(sourceUrl) + '" target="_blank" rel="noopener">Preview (source)</a>';
+            return '<div class="approval-module">' +
+              '<h3>' + esc(m.title || m.id) + '</h3>' +
+              '<div class="approval-meta">' + esc(m.videoFile || '—') + ' · Quiz: ' + qCount + ' question' + (qCount !== 1 ? 's' : '') + '</div>' +
+              (linkHtml ? '<div class="approval-links">' + linkHtml + '</div>' : '') +
+              '</div>';
+          }).join('');
+        }
+      }
+      var jorgeList = document.getElementById('approval-jorge-list');
+      if (jorgeList) jorgeList.innerHTML = '<p class="state-empty">Field Management videos — add via /training-video-quiz for Jorge’s track. Approved modules will appear here.</p>';
+      var mariaList = document.getElementById('approval-maria-list');
+      if (mariaList) mariaList.innerHTML = '<p class="state-empty">Mozaik & Designer videos — add via /training-video-quiz for Maria’s track. Approved modules will appear here.</p>';
+      var scottList = document.getElementById('approval-scott-list');
+      if (scottList) scottList.innerHTML = '<p class="state-empty">CNC & Warehouse videos — add via /training-video-quiz for Scott’s track. Approved modules will appear here.</p>';
+    })();
   </script>
   <script src="js/training-content.js"></script>
   <script>

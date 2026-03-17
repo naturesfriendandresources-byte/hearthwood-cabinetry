@@ -4370,7 +4370,7 @@
       name:      'Jorge',
       role:      'Field Manager',
       color:     '#7BAFD4',
-      anchor:    '2026-03-17',
+      anchor:    '2026-03-16',
       startWeek: 1,
       plan:      FIELD_PLAN,
     },

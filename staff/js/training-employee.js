@@ -148,8 +148,8 @@
     });
 
     const videoHtml = videoSrc
-      ? '<div class="admin-video-wrap"><video id="admin-video" src="' + videoSrc + '" controls preload="metadata" playsinline></video></div><p class="admin-progress-hint" id="admin-progress-hint">Watch at least 80% of the video to unlock the quiz.</p>'
-      : '<div class="admin-video-placeholder"><p>Video will be added to the portal. Place the file at <code>staff/videos/' + (adminModule.id || '') + '.mp4</code> and refresh.</p></div>';
+      ? '<div class="admin-video-wrap"><video id="admin-video" src="' + videoSrc + '" controls preload="metadata" playsinline></video><p class="admin-video-missing" id="admin-video-missing" style="display:none;"></p></div><p class="admin-progress-hint" id="admin-progress-hint">Watch at least 80% of the video to unlock the quiz.</p>'
+      : '<div class="admin-video-placeholder"><p>Video will be added to the portal. Place the file at <code>staff/videos/' + (adminModule.videoFile || adminModule.id + '.mp4') + '</code> and refresh.</p></div>';
 
     main.innerHTML = `
       <div class="training-card" style="--accent: #1C5A8A">
@@ -203,7 +203,15 @@
           unlockQuiz();
         }
       });
-      videoEl.addEventListener('error', function () { unlockQuiz(); });
+      videoEl.addEventListener('error', function () {
+        var missingEl = document.getElementById('admin-video-missing');
+        if (missingEl) {
+          missingEl.style.display = 'block';
+          missingEl.textContent = 'Video not in portal yet. Add ' + (adminModule.videoFile || adminModule.id + '.mp4') + ' to staff/videos/ and deploy (or contact Jose).';
+          missingEl.className = 'admin-video-missing';
+        }
+        unlockQuiz();
+      });
     } else {
       unlockQuiz();
     }

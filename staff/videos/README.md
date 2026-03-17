@@ -2,7 +2,9 @@
 
 All training videos **live here**. Team watches from our portal only — no redirect to YouTube, Mozaik, or Shopsabre.
 
-**Full checklist:** See **VIDEO-MANIFEST.md** in this folder for every video (Admin, Mozaik, Designer, CNC/Warehouse, Field manager). Use it before push to confirm nothing is missing.
+**Add the 3 admin videos:** See **ADD-ADMIN-VIDEOS.md** in this folder (filenames, how to get the files, then commit and push).
+
+**Full checklist:** See **VIDEO-MANIFEST.md** for every video (Admin, Mozaik, Designer, CNC/Warehouse, Field manager).
 
 ## Admin (required for this push)
 
