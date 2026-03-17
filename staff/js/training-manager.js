@@ -42,6 +42,51 @@
 
     currentMonday = tracker.getMondayStr(tracker.todayStr());
     renderAll();
+    loadLiveProgress();
+    setInterval(loadLiveProgress, 30000);
+  }
+
+  // ── live progress (backend) ────────────────────────────────────────────────
+
+  const PROGRESS_API = '/.netlify/functions/training-progress';
+
+  function loadLiveProgress() {
+    const container = document.getElementById('live-progress-container');
+    const loadingEl = document.getElementById('live-progress-loading');
+    const tableWrap = document.getElementById('live-progress-table');
+    if (!container) return;
+
+    fetch(PROGRESS_API + '?limit=80')
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        var events = (data && data.events) || [];
+        if (loadingEl) loadingEl.style.display = 'none';
+        if (tableWrap) {
+          tableWrap.style.display = 'block';
+          tableWrap.innerHTML = renderLiveProgressTable(events);
+        }
+      })
+      .catch(function () {
+        if (loadingEl) loadingEl.textContent = 'Live data unavailable (backend not configured or error). Set up Supabase per docs/training-backend-schema.md.';
+      });
+  }
+
+  function renderLiveProgressTable(events) {
+    if (!events.length) return '<p class="no-events">No events yet. When the team uses the training portal with the backend configured, events appear here.</p>';
+    var rows = events.slice(0, 50).map(function (ev) {
+      var time = ev.created_at ? new Date(ev.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : '—';
+      var payload = ev.payload || {};
+      var detail = '';
+      if (ev.event_type === 'video_progress') detail = payload.percentWatched + '% watched';
+      if (ev.event_type === 'quiz_passed') detail = 'Quiz ' + (payload.score || 0) + '/' + (payload.total || 0);
+      if (ev.event_type === 'module_complete') detail = 'Module complete';
+      if (ev.event_type === 'quiz_unlocked') detail = 'Quiz unlocked';
+      return '<tr><td>' + (ev.employee || '') + '</td><td>' + (ev.module_id || '') + '</td><td>' + (ev.event_type || '') + '</td><td>' + detail + '</td><td>' + (ev.date_str || '') + '</td><td>' + time + '</td></tr>';
+    });
+    return '<table class="live-progress-table"><thead><tr><th>Employee</th><th>Module</th><th>Event</th><th>Detail</th><th>Date</th><th>Time</th></tr></thead><tbody>' + rows.join('') + '</tbody></table>';
   }
 
   // ── navigation ─────────────────────────────────────────────────────────────

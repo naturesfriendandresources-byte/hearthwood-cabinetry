@@ -375,6 +375,129 @@ h1, h2, h3 {
   font-size: 1rem;
 }
 
+/* ── shared Administration block (video + quiz) ───────────────────────────── */
+.admin-done-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--blue-light);
+  color: var(--blue);
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
+}
+
+.admin-video-intro {
+  font-size: 0.9rem;
+  color: var(--espresso-60);
+  margin-bottom: 1rem;
+}
+
+.admin-progress-hint {
+  font-size: 0.8rem;
+  color: var(--grey-500);
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.admin-video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+  background: var(--grey-200);
+}
+
+.admin-video-wrap iframe,
+.admin-video-wrap video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.admin-video-wrap video {
+  object-fit: contain;
+  background: #000;
+}
+
+.admin-video-placeholder {
+  padding: 2rem;
+  background: var(--grey-100);
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+  color: var(--grey-700);
+  font-size: 0.9rem;
+}
+
+.admin-quiz-section {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--grey-200);
+}
+
+.admin-quiz-section .section-heading {
+  margin-bottom: 0.75rem;
+}
+
+.admin-quiz-form {
+  margin-bottom: 1rem;
+}
+
+.admin-quiz-q {
+  margin-bottom: 1rem;
+}
+
+.admin-quiz-q-text {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--espresso);
+  margin-bottom: 0.35rem;
+}
+
+.admin-quiz-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.admin-quiz-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.admin-quiz-opt input {
+  margin: 0;
+}
+
+.admin-quiz-feedback {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+}
+
+.admin-quiz-pass {
+  background: var(--green-light);
+  color: var(--green);
+}
+
+.admin-quiz-fail {
+  background: var(--yellow-light);
+  color: var(--yellow);
+}
+
 .card-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -829,6 +952,53 @@ h1, h2, h3 {
   font-size: 1.1rem;
   color: var(--espresso);
   margin-bottom: 0.75rem;
+}
+
+.live-progress-desc {
+  font-size: 0.8rem;
+  color: var(--grey-500);
+  margin-top: -0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.live-progress-wrap {
+  margin-bottom: 1.5rem;
+}
+
+.live-progress-loading {
+  font-size: 0.9rem;
+  color: var(--grey-500);
+}
+
+.live-progress-table-wrap {
+  overflow: auto;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.live-progress-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.live-progress-table th {
+  background: var(--grey-200);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  font-weight: 700;
+}
+
+.live-progress-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--grey-200);
+}
+
+.no-events {
+  font-size: 0.9rem;
+  color: var(--grey-500);
+  font-style: italic;
 }
 
 .detail-table-wrap {
