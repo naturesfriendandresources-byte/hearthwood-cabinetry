@@ -643,6 +643,13 @@
   <section class="approval-panel" id="panel-video-approval" style="display:none">
     <div class="approval-panel-inner">
 
+      <!-- Your Approvals summary box -->
+      <div class="approval-person-block" id="approvals-summary-block" style="background:#f8f9fa;border:1.5px solid #C9A96E;border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;">
+        <h2 class="approval-section-title" style="border-left-color:#C9A96E;color:#856404;margin-top:0;">Your Approvals</h2>
+        <div id="approvals-summary-list"><p class="state-empty">No approvals yet — select and confirm options below.</p></div>
+        <button id="copy-approvals-btn" style="display:none;margin-top:0.75rem;padding:0.4rem 1rem;background:#1C2B4A;color:#fff;border:none;border-radius:4px;font-size:0.85rem;cursor:pointer;">Copy for chat</button>
+      </div>
+
       <!-- Already approved (current modules) -->
       <div class="approval-person-block">
         <h2 class="approval-section-title">Office Administration Basics <span class="role-tag">(Jorge, Maria, Scott — shared · approved)</span></h2>
@@ -832,7 +839,7 @@
         return ‘<div class="proposal-card" id="proposal-card-’ + esc(proposal.id) + ‘">’ +
           ‘<h3>’ + esc(proposal.label) + confirmedNote + ‘</h3>’ +
           ‘<div class="proposal-options">’ + optionsHtml + ‘</div>’ +
-          ‘<button class="proposal-confirm-btn" id="confirm-’ + esc(proposal.id) + ‘"’ + (saved ? ‘’ : ‘ disabled’) + ‘>Confirm Selection</button>’ +
+          ‘<button class="proposal-confirm-btn" id="confirm-’ + esc(proposal.id) + ‘" disabled>’ + (saved ? ‘Confirmed \u2713’ : ‘Confirm Selection’) + ‘</button>’ +
           ‘</div>’;
       }).join(‘’);
 
@@ -879,7 +886,40 @@
             h3.appendChild(badge);
           }
         }
+        refreshSummary();
       });
+
+      function refreshSummary() {
+        var summaryList = document.getElementById(‘approvals-summary-list’);
+        var copyBtn = document.getElementById(‘copy-approvals-btn’);
+        if (!summaryList) return;
+        var saved = getSelections();
+        var keys = Object.keys(saved);
+        if (keys.length === 0) {
+          summaryList.innerHTML = ‘<p class="state-empty">No approvals yet — select and confirm options below.</p>’;
+          if (copyBtn) copyBtn.style.display = ‘none’;
+          return;
+        }
+        var html = ‘<ul style="margin:0;padding-left:1.25rem;">’;
+        keys.forEach(function (k) {
+          html += ‘<li style="margin:0.25rem 0;"><strong>’ + esc(k) + ‘</strong>: ‘ + esc(saved[k]) + ‘</li>’;
+        });
+        html += ‘</ul>’;
+        summaryList.innerHTML = html;
+        if (copyBtn) {
+          copyBtn.style.display = ‘inline-block’;
+          copyBtn.onclick = function () {
+            var parts = keys.map(function (k) { return k + ‘ \u2192 ‘ + saved[k]; });
+            var msg = ‘Approved: ‘ + parts.join(‘, ‘);
+            navigator.clipboard.writeText(msg).then(function () {
+              copyBtn.textContent = ‘Copied!’;
+              setTimeout(function () { copyBtn.textContent = ‘Copy for chat’; }, 2000);
+            });
+          };
+        }
+      }
+
+      refreshSummary();
     })();
   </script>
   <script src="js/training-content.js"></script>

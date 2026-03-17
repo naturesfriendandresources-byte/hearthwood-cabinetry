@@ -215,7 +215,8 @@
         unlockQuiz();
       });
     } else {
-      unlockQuiz();
+      var _ytBtn = document.getElementById('admin-watch-btn');
+      if (!_ytBtn) unlockQuiz(); // only fallback if no YouTube flow either
     }
 
     // YouTube redirect flow — no local video file
