@@ -11,7 +11,6 @@
       id: 'admin-1',
       title: 'Company Values & Safety',
       videoTitle: 'NFR Company Values & Worksite Safety',
-      videoFile: 'admin-1.mp4',
       sourceUrl: 'https://www.youtube.com/watch?v=g6zYF7fbJk8',
       quiz: [
         { q: 'What should you do before starting any job site task?', options: ['Check your phone', 'Review safety for that task and wear required PPE', 'Start immediately', 'Ask the client'], answer: 1 },
@@ -23,7 +22,6 @@
       id: 'admin-2',
       title: 'Communication & Scheduling',
       videoTitle: 'Communication & Scheduling at NFR',
-      videoFile: 'admin-2.mp4',
       sourceUrl: 'https://www.youtube.com/watch?v=CtRgwJaW2N4',
       quiz: [
         { q: "If you're going to be late or can't make a shift, you should:", options: ['Text when you can', 'Call or text Jose (or your direct lead) as soon as you know', 'Show up and explain later', 'Send an email at end of day'], answer: 1 },
@@ -35,7 +33,6 @@
       id: 'admin-3',
       title: 'Quality & Client Experience',
       videoTitle: 'Quality & Client Experience',
-      videoFile: 'admin-3.mp4',
       sourceUrl: 'https://www.youtube.com/watch?v=Sw61Uu8ftII',
       quiz: [
         { q: 'Before leaving a job site for the day, you should:', options: ['Leave as soon as the clock hits 4', 'Clean up your area, secure materials, and note what\'s next', 'Let the next person handle it', 'Only if the client is there'], answer: 1 },

@@ -501,6 +501,110 @@
 
     /* ── Responsive ───────────────────────────────────────── */
 
+    /* ── Approve Videos tab ─────────────────────────────── */
+    .trainee-tab[data-trainee="approve"] .tab-name { color: inherit; }
+
+    .proposal-card {
+      background: var(--white);
+      border: 1.5px solid var(--grey-200);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .proposal-card h3 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: var(--espresso);
+      margin-bottom: 0.75rem;
+    }
+
+    .proposal-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .proposal-option {
+      border: 2px solid var(--grey-200);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .proposal-option:hover { border-color: var(--maria-sage); }
+
+    .proposal-option.selected {
+      border-color: var(--maria-sage);
+      background: var(--maria-sage-bg);
+    }
+
+    .proposal-option-title {
+      font-weight: 700;
+      font-size: 0.87rem;
+      color: var(--espresso);
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+
+    .proposal-option-meta {
+      font-size: 0.73rem;
+      color: var(--grey-500);
+      margin-bottom: 0.35rem;
+    }
+
+    .proposal-option-why {
+      font-size: 0.73rem;
+      color: var(--grey-700);
+      font-style: italic;
+      flex: 1;
+    }
+
+    .proposal-watch-link {
+      display: inline-block;
+      font-size: 0.73rem;
+      color: var(--maria-sage);
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 0.5rem;
+    }
+
+    .proposal-watch-link:hover { text-decoration: underline; }
+
+    .proposal-confirm-btn {
+      padding: 0.5rem 1.25rem;
+      background: var(--navy, #1C2B4A);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .proposal-confirm-btn:hover:not(:disabled) { background: #2a3f6a; }
+    .proposal-confirm-btn:disabled { opacity: 0.4; cursor: default; }
+
+    .proposal-confirmed-note {
+      display: inline-block;
+      background: var(--maria-sage);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
     @media (max-width: 900px) {
       .days-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -535,39 +639,38 @@
     </div>
   </header>
 
-  <!-- ── Video approval & curriculum (same tab) ─────────────────── -->
-  <section class="approval-panel" id="panel-video-approval">
+  <!-- ── Approve Videos tab panel ──────────────────────────────── -->
+  <section class="approval-panel" id="panel-video-approval" style="display:none">
     <div class="approval-panel-inner">
-      <p class="approval-intro">Everyone does <strong>Office Administration Basics</strong> first (shared). After that, each person has their own videos. Use <strong>Preview (source)</strong> to watch this week’s videos until the .mp4 files are in <code>staff/videos/</code>.</p>
 
-      <div class="approval-person-block next-week-proposal">
-        <h2 class="approval-section-title">Next week — proposed for approval</h2>
-        <p class="approval-intro">Approve in chat: <code>/training-video-quiz weekly</code> or <code>/training-video-quiz [topic] admin</code>. Once you approve, new modules appear in the lists below.</p>
-        <div class="approval-module proposed">
-          <h3>Next admin or role video (proposed)</h3>
-          <div class="approval-meta">Run <code>/training-video-quiz weekly</code> in chat to get a video + quiz proposal for next week. Approve to add to the portal.</div>
-        </div>
-      </div>
-
+      <!-- Already approved (current modules) -->
       <div class="approval-person-block">
-        <h2 class="approval-section-title">Office Administration Basics <span class="role-tag">(Jorge, Maria, Scott — shared)</span></h2>
+        <h2 class="approval-section-title">Office Administration Basics <span class="role-tag">(Jorge, Maria, Scott — shared · approved)</span></h2>
         <div id="approval-admin-list"></div>
       </div>
 
       <div class="approval-person-block">
-        <h2 class="approval-section-title">Jorge <span class="role-tag">— Field Management</span></h2>
+        <h2 class="approval-section-title">Jorge <span class="role-tag">— Field Management · approved</span></h2>
         <div id="approval-jorge-list"></div>
       </div>
 
       <div class="approval-person-block">
-        <h2 class="approval-section-title">Maria <span class="role-tag">— Mozaik &amp; Designer</span></h2>
+        <h2 class="approval-section-title">Maria <span class="role-tag">— Mozaik &amp; Designer · approved</span></h2>
         <div id="approval-maria-list"></div>
       </div>
 
       <div class="approval-person-block">
-        <h2 class="approval-section-title">Scott <span class="role-tag">— CNC &amp; Warehouse</span></h2>
+        <h2 class="approval-section-title">Scott <span class="role-tag">— CNC &amp; Warehouse · approved</span></h2>
         <div id="approval-scott-list"></div>
       </div>
+
+      <!-- Pending approval — pick one per slot -->
+      <div class="approval-person-block" style="margin-top:2rem">
+        <h2 class="approval-section-title" style="border-left-color:#C9A96E;color:#856404;">Pending Your Approval — pick one per slot</h2>
+        <p class="approval-intro">Click an option to select it, then hit <strong>Confirm Selection</strong>. Tell me in chat and I’ll add the quiz and push it live.</p>
+        <div id="proposal-list"></div>
+      </div>
+
     </div>
   </section>
 
@@ -585,6 +688,10 @@
     <button class="trainee-tab" data-trainee="scott">
       <span class="tab-name">Scott</span>
       <span class="tab-role">Warehouse &amp; CNC</span>
+    </button>
+    <button class="trainee-tab" data-trainee="approve">
+      <span class="tab-name">Approve</span>
+      <span class="tab-role">Videos</span>
     </button>
   </nav>
 
@@ -623,38 +730,156 @@
       NFRAuth.logout();
     });
 
-    // ── Video approval: Office Admin (clickable) + separate Jorge / Maria / Scott
+    // ── Approved modules list (Office Admin) ────────────────────────────────
     (function () {
       function esc(s) {
-        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+        return String(s || ‘’).replace(/&/g, ‘&amp;’).replace(/</g, ‘&lt;’).replace(/"/g, ‘&quot;’);
       }
       var modules = window.ADMIN_MODULES || [];
-      var adminList = document.getElementById('approval-admin-list');
+      var adminList = document.getElementById(‘approval-admin-list’);
       if (adminList) {
         if (!modules.length) {
-          adminList.innerHTML = '<p class="state-empty">No admin modules yet. Run /training-video-quiz in chat to propose videos; after you approve, they appear here.</p>';
+          adminList.innerHTML = ‘<p class="state-empty">No admin modules yet.</p>’;
         } else {
           adminList.innerHTML = modules.map(function (m) {
             var qCount = (m.quiz && m.quiz.length) || 0;
-            var videoPath = (m.videoFile ? 'videos/' + m.videoFile : '');
-            var sourceUrl = m.sourceUrl || '';
-            var linkHtml = '';
-            if (videoPath) linkHtml += '<a class="approval-video-link" href="' + esc(videoPath) + '" target="_blank" rel="noopener">Watch in portal →</a> ';
-            if (sourceUrl) linkHtml += '<a class="approval-video-link" href="' + esc(sourceUrl) + '" target="_blank" rel="noopener">Preview (source)</a>';
-            return '<div class="approval-module">' +
-              '<h3>' + esc(m.title || m.id) + '</h3>' +
-              '<div class="approval-meta">' + esc(m.videoFile || '—') + ' · Quiz: ' + qCount + ' question' + (qCount !== 1 ? 's' : '') + '</div>' +
-              (linkHtml ? '<div class="approval-links">' + linkHtml + '</div>' : '') +
-              '</div>';
-          }).join('');
+            var sourceUrl = m.sourceUrl || ‘’;
+            var linkHtml = sourceUrl ? ‘<a class="approval-video-link" href="’ + esc(sourceUrl) + ‘" target="_blank" rel="noopener">Watch on YouTube &rarr;</a>’ : ‘’;
+            return ‘<div class="approval-module">’ +
+              ‘<h3>’ + esc(m.title || m.id) + ‘</h3>’ +
+              ‘<div class="approval-meta">Quiz: ‘ + qCount + ‘ question’ + (qCount !== 1 ? ‘s’ : ‘’) + ‘ &middot; YouTube redirect flow</div>’ +
+              (linkHtml ? ‘<div class="approval-links">’ + linkHtml + ‘</div>’ : ‘’) +
+              ‘</div>’;
+          }).join(‘’);
         }
       }
-      var jorgeList = document.getElementById('approval-jorge-list');
-      if (jorgeList) jorgeList.innerHTML = '<p class="state-empty">Field Management videos — add via /training-video-quiz for Jorge’s track. Approved modules will appear here.</p>';
-      var mariaList = document.getElementById('approval-maria-list');
-      if (mariaList) mariaList.innerHTML = '<p class="state-empty">Mozaik & Designer videos — add via /training-video-quiz for Maria’s track. Approved modules will appear here.</p>';
-      var scottList = document.getElementById('approval-scott-list');
-      if (scottList) scottList.innerHTML = '<p class="state-empty">CNC & Warehouse videos — add via /training-video-quiz for Scott’s track. Approved modules will appear here.</p>';
+      var jorgeList = document.getElementById(‘approval-jorge-list’);
+      if (jorgeList) jorgeList.innerHTML = ‘<p class="state-empty">No role-specific videos approved yet. Pick one in the Pending section below.</p>’;
+      var mariaList = document.getElementById(‘approval-maria-list’);
+      if (mariaList) mariaList.innerHTML = ‘<p class="state-empty">No role-specific videos approved yet. Pick one in the Pending section below.</p>’;
+      var scottList = document.getElementById(‘approval-scott-list’);
+      if (scottList) scottList.innerHTML = ‘<p class="state-empty">No role-specific videos approved yet. Pick one in the Pending section below.</p>’;
+    })();
+
+    // ── Video proposals — pick one per slot ─────────────────────────────────
+    (function () {
+      var PROPOSALS = [
+        {
+          id: ‘admin-next’,
+          label: ‘Next Admin Video (shared — Jorge, Maria, Scott)’,
+          options: [
+            { title: ‘Professionalism & Accountability on the Job’, url: ‘https://www.youtube.com/results?search_query=professionalism+accountability+construction+job+site’, duration: ‘~8 min’, why: ‘Attitude, ownership, showing up ready every day’ },
+            { title: ‘Time Management for Tradespeople’, url: ‘https://www.youtube.com/results?search_query=time+management+construction+tradespeople+scheduling’, duration: ‘~10 min’, why: ‘Prioritization, keeping your word on timelines’ },
+            { title: ‘Team Communication & Conflict Resolution’, url: ‘https://www.youtube.com/results?search_query=team+communication+conflict+resolution+construction+crew’, duration: ‘~7 min’, why: ‘How to handle disagreements without slowing the job’ },
+          ],
+        },
+        {
+          id: ‘jorge-next’,
+          label: ‘Jorge — Next Field Management Video’,
+          options: [
+            { title: ‘Running a Daily Crew Huddle’, url: ‘https://www.youtube.com/results?search_query=construction+crew+daily+huddle+morning+briefing’, duration: ‘~6 min’, why: ‘Open the job day right — tasks, hazards, expectations’ },
+            { title: ‘Reading a Work Order & Scope Document’, url: ‘https://www.youtube.com/results?search_query=construction+work+order+scope+document+how+to+read’, duration: ‘~9 min’, why: ‘Understand scope, materials, sign-off flow before starting’ },
+            { title: ‘Job Site Walk — Before You Start’, url: ‘https://www.youtube.com/results?search_query=job+site+walkthrough+before+starting+construction+checklist’, duration: ‘~5 min’, why: ‘Hazard spotting, prep checklist, client walkthrough’ },
+          ],
+        },
+        {
+          id: ‘maria-next’,
+          label: ‘Maria — Next Design / Mozaik Video’,
+          options: [
+            { title: ‘Client Consultation: Asking the Right Questions’, url: ‘https://www.youtube.com/results?search_query=interior+design+client+consultation+questions+discovery’, duration: ‘~11 min’, why: ‘Design intent discovery, budget, lifestyle fit’ },
+            { title: ‘Kitchen Design Fundamentals’, url: ‘https://www.youtube.com/results?search_query=kitchen+design+fundamentals+layout+interior+designer’, duration: ‘~15 min’, why: ‘Layout logic, work triangle, material selection’ },
+            { title: ‘Presenting a Design Concept to a Client’, url: ‘https://www.youtube.com/results?search_query=interior+design+concept+presentation+client+mood+board’, duration: ‘~12 min’, why: ‘How to walk a client through a palette and layout clearly’ },
+          ],
+        },
+        {
+          id: ‘scott-next’,
+          label: ‘Scott — Next CNC / Warehouse Video’,
+          options: [
+            { title: ‘CNC Nesting: Minimize Waste on Sheet Goods’, url: ‘https://www.youtube.com/results?search_query=CNC+router+nesting+optimization+sheet+goods+minimize+waste’, duration: ‘~12 min’, why: ‘Smart layout = less material cost and better cut quality’ },
+            { title: ‘Cabinet Box Construction & Tolerances’, url: ‘https://www.youtube.com/results?search_query=cabinet+box+construction+tolerances+CNC+assembly’, duration: ‘~9 min’, why: ‘How parts connect and what gaps cause install problems’ },
+            { title: ‘Bit Selection & Feed Rate Basics’, url: ‘https://www.youtube.com/results?search_query=CNC+router+bit+selection+feed+rate+basics+wood’, duration: ‘~8 min’, why: ‘Right bit + right speed = clean cuts and longer tool life’ },
+          ],
+        },
+      ];
+
+      function esc(s) {
+        return String(s || ‘’).replace(/&/g, ‘&amp;’).replace(/</g, ‘&lt;’).replace(/>/g, ‘&gt;’).replace(/"/g, ‘&quot;’);
+      }
+
+      var STORAGE_KEY = ‘nfr_video_selections’;
+      function getSelections() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || ‘{}’); } catch(e) { return {}; } }
+      function saveSelection(id, title) { var s = getSelections(); s[id] = title; localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }
+
+      var container = document.getElementById(‘proposal-list’);
+      if (!container) return;
+
+      var selections = getSelections();
+
+      container.innerHTML = PROPOSALS.map(function (proposal) {
+        var saved = selections[proposal.id] || null;
+        var optionsHtml = proposal.options.map(function (opt, i) {
+          var isSelected = saved === opt.title;
+          return ‘<div class="proposal-option’ + (isSelected ? ‘ selected’ : ‘’) + ‘" data-proposal="’ + esc(proposal.id) + ‘" data-idx="’ + i + ‘" data-title="’ + esc(opt.title) + ‘">’ +
+            ‘<div class="proposal-option-title">’ + esc(opt.title) + ‘</div>’ +
+            ‘<div class="proposal-option-meta">’ + esc(opt.duration) + ‘</div>’ +
+            ‘<div class="proposal-option-why">’ + esc(opt.why) + ‘</div>’ +
+            ‘<a class="proposal-watch-link" href="’ + esc(opt.url) + ‘" target="_blank" rel="noopener" onclick="event.stopPropagation()">Preview on YouTube &rarr;</a>’ +
+            ‘</div>’;
+        }).join(‘’);
+
+        var confirmedNote = saved ? ‘<span class="proposal-confirmed-note">Selected: ‘ + esc(saved) + ‘</span>’ : ‘’;
+
+        return ‘<div class="proposal-card" id="proposal-card-’ + esc(proposal.id) + ‘">’ +
+          ‘<h3>’ + esc(proposal.label) + confirmedNote + ‘</h3>’ +
+          ‘<div class="proposal-options">’ + optionsHtml + ‘</div>’ +
+          ‘<button class="proposal-confirm-btn" id="confirm-’ + esc(proposal.id) + ‘"’ + (saved ? ‘’ : ‘ disabled’) + ‘>Confirm Selection</button>’ +
+          ‘</div>’;
+      }).join(‘’);
+
+      // Click to select option
+      container.addEventListener(‘click’, function (e) {
+        var opt = e.target.closest(‘.proposal-option’);
+        if (!opt) return;
+        var proposalId = opt.dataset.proposal;
+        var title = opt.dataset.title;
+        // Deselect siblings
+        container.querySelectorAll(‘.proposal-option[data-proposal="’ + proposalId + ‘"]’).forEach(function (el) {
+          el.classList.remove(‘selected’);
+        });
+        opt.classList.add(‘selected’);
+        var btn = document.getElementById(‘confirm-’ + proposalId);
+        if (btn) { btn.disabled = false; btn._pendingTitle = title; }
+      });
+
+      // Confirm button
+      container.addEventListener(‘click’, function (e) {
+        var btn = e.target.closest(‘.proposal-confirm-btn’);
+        if (!btn) return;
+        var proposalId = btn.id.replace(‘confirm-’, ‘’);
+        var title = btn._pendingTitle;
+        if (!title) {
+          // already saved — find from selected option
+          var sel = container.querySelector(‘.proposal-option[data-proposal="’ + proposalId + ‘"].selected’);
+          if (sel) title = sel.dataset.title;
+        }
+        if (!title) return;
+        saveSelection(proposalId, title);
+        btn.textContent = ‘Confirmed \u2713’;
+        btn.disabled = true;
+        // Update header note
+        var card = document.getElementById(‘proposal-card-’ + proposalId);
+        if (card) {
+          var h3 = card.querySelector(‘h3’);
+          if (h3) {
+            var existing = h3.querySelector(‘.proposal-confirmed-note’);
+            if (existing) existing.remove();
+            var badge = document.createElement(‘span’);
+            badge.className = ‘proposal-confirmed-note’;
+            badge.textContent = ‘Selected: ‘ + title;
+            h3.appendChild(badge);
+          }
+        }
+      });
     })();
   </script>
   <script src="js/training-content.js"></script>
@@ -1007,9 +1232,26 @@
         t.classList.toggle('active', t.dataset.trainee === key);
       });
 
+      var approvalPanel  = document.getElementById('panel-video-approval');
+      var curriculumMain = document.getElementById('curriculum-main');
+      var toolbar        = document.querySelector('.curriculum-toolbar');
+      var phaseBar       = document.getElementById('phase-progress');
+
+      if (key === 'approve') {
+        if (approvalPanel)  approvalPanel.style.display  = '';
+        if (curriculumMain) curriculumMain.style.display = 'none';
+        if (toolbar)        toolbar.style.display        = 'none';
+        if (phaseBar)       phaseBar.style.display       = 'none';
+        return;
+      }
+
+      // Curriculum tabs
+      if (approvalPanel)  approvalPanel.style.display  = 'none';
+      if (curriculumMain) curriculumMain.style.display = '';
+      if (toolbar)        toolbar.style.display        = '';
+
       var weeks = getAllWeeks(key);
       state.trainee = key;
-      // Jump to today's week for this trainee if available, else first week
       var todayInfo = (function () {
         var cfg = getConfig(key);
         if (!cfg) return null;
