@@ -11,14 +11,95 @@
   const DAY_NAMES  = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   const DAY_SHORT  = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
+  const QUIZ_TIMER_SECONDS = 300; // 5 minutes to complete quiz
+  const QUIZ_TIMER_KEY     = 'nfr_quiz_timer';
+
   // ── state ──────────────────────────────────────────────────────────────────
 
-  let currentEmployee = '';
-  let currentDate     = '';
-  let currentContent  = null;
-  let timerInterval   = null;
-  let sessionStart    = null;
-  let noteDebounce    = null;
+  let currentEmployee  = '';
+  let currentDate      = '';
+  let currentContent   = null;
+  let timerInterval    = null;
+  let quizTimerInterval = null;
+  let sessionStart     = null;
+  let savedSeconds     = 0;   // seconds carried over from prior page visits today
+  let noteDebounce     = null;
+
+  // ── timer persistence ──────────────────────────────────────────────────────
+
+  const TIMER_STORE_KEY = 'nfr_session_elapsed';
+
+  function getStoredElapsed(employee, dateStr) {
+    try {
+      var d = JSON.parse(localStorage.getItem(TIMER_STORE_KEY) || '{}');
+      return d[employee + '_' + dateStr] || 0;
+    } catch (e) { return 0; }
+  }
+
+  function saveElapsedNow() {
+    try {
+      var d = JSON.parse(localStorage.getItem(TIMER_STORE_KEY) || '{}');
+      d[currentEmployee + '_' + currentDate] =
+        savedSeconds + Math.floor((new Date() - sessionStart) / 1000);
+      localStorage.setItem(TIMER_STORE_KEY, JSON.stringify(d));
+    } catch (e) { /* ignore */ }
+  }
+
+  // ── quiz countdown timer ────────────────────────────────────────────────────
+
+  function getQuizTimerStart(employee, dateStr, moduleId) {
+    try {
+      var d = JSON.parse(localStorage.getItem(QUIZ_TIMER_KEY) || '{}');
+      return d[employee + '_' + dateStr + '_' + moduleId] || 0;
+    } catch (e) { return 0; }
+  }
+
+  function saveQuizTimerStart(employee, dateStr, moduleId, ts) {
+    try {
+      var d = JSON.parse(localStorage.getItem(QUIZ_TIMER_KEY) || '{}');
+      d[employee + '_' + dateStr + '_' + moduleId] = ts;
+      localStorage.setItem(QUIZ_TIMER_KEY, JSON.stringify(d));
+    } catch (e) { /* ignore */ }
+  }
+
+  function clearQuizTimerStart(employee, dateStr, moduleId) {
+    try {
+      var d = JSON.parse(localStorage.getItem(QUIZ_TIMER_KEY) || '{}');
+      delete d[employee + '_' + dateStr + '_' + moduleId];
+      localStorage.setItem(QUIZ_TIMER_KEY, JSON.stringify(d));
+    } catch (e) { /* ignore */ }
+  }
+
+  // existingStart is a ms timestamp; omit to start a fresh 5-min window
+  function startQuizTimer(moduleId, existingStart) {
+    clearInterval(quizTimerInterval);
+    var timerEl = document.getElementById('admin-quiz-timer');
+    if (!timerEl) return;
+    var startTime = existingStart || Date.now();
+    if (!existingStart) saveQuizTimerStart(currentEmployee, currentDate, moduleId, startTime);
+    timerEl.style.display = 'block';
+
+    function tick() {
+      var remaining = QUIZ_TIMER_SECONDS - Math.floor((Date.now() - startTime) / 1000);
+      if (remaining <= 0) {
+        clearInterval(quizTimerInterval);
+        clearQuizTimerStart(currentEmployee, currentDate, moduleId);
+        timerEl.textContent = '\u23f1 Time expired — re-watch the video to try again.';
+        timerEl.style.cssText = 'display:block;padding:.5rem .75rem;border-radius:4px;font-weight:700;font-size:.9rem;background:#f8d7da;color:#842029;margin-bottom:.75rem;';
+        var sb = document.getElementById('admin-quiz-submit');
+        if (sb) sb.disabled = true;
+        return;
+      }
+      var m = Math.floor(remaining / 60);
+      var s = remaining % 60;
+      timerEl.textContent = '\u23f1 ' + pad(m) + ':' + pad(s) + ' remaining to submit';
+      timerEl.style.cssText = remaining <= 60
+        ? 'display:block;padding:.5rem .75rem;border-radius:4px;font-weight:700;font-size:.9rem;background:#fff3cd;color:#856404;margin-bottom:.75rem;'
+        : 'display:block;padding:.5rem .75rem;border-radius:4px;font-weight:700;font-size:.9rem;background:#d1ecf1;color:#0c5460;margin-bottom:.75rem;';
+    }
+    tick();
+    quizTimerInterval = setInterval(tick, 1000);
+  }
 
   // ── init ───────────────────────────────────────────────────────────────────
 
@@ -35,7 +116,9 @@
     const logoutBtn = document.getElementById('btn-logout');
     if (logoutBtn) logoutBtn.addEventListener('click', auth.logout);
 
-    sessionStart = new Date();
+    sessionStart  = new Date();
+    savedSeconds  = getStoredElapsed(currentEmployee, currentDate);
+    window.addEventListener('beforeunload', saveElapsedNow);
     startTimer();
 
     const dow = new Date(currentDate + 'T12:00:00').getDay();
@@ -67,16 +150,17 @@
   function startTimer() {
     const timerEl = document.getElementById('session-timer');
     if (!timerEl) return;
+    var ticks = 0;
     timerInterval = setInterval(function () {
-      const elapsed = Math.floor((new Date() - sessionStart) / 1000);
+      const elapsed = savedSeconds + Math.floor((new Date() - sessionStart) / 1000);
       const h = Math.floor(elapsed / 3600);
       const m = Math.floor((elapsed % 3600) / 60);
       const s = elapsed % 60;
-      if (h > 0) {
-        timerEl.textContent = h + ':' + pad(m) + ':' + pad(s);
-      } else {
-        timerEl.textContent = pad(m) + ':' + pad(s);
-      }
+      timerEl.textContent = h > 0
+        ? h + ':' + pad(m) + ':' + pad(s)
+        : pad(m) + ':' + pad(s);
+      ticks++;
+      if (ticks % 10 === 0) saveElapsedNow(); // persist every ~10 s
     }, 1000);
   }
 
@@ -131,6 +215,7 @@
   }
 
   function renderAdminBlockOnly(adminModule, record) {
+    clearInterval(quizTimerInterval); // stop any orphaned countdown from prior render
     const main = document.getElementById('main-content');
     if (!main) return;
 
@@ -163,6 +248,7 @@
           <h3 class="section-heading">Quiz — prove you watched</h3>
           <form id="${quizId}" class="admin-quiz-form">${quizHtml}</form>
           <div id="admin-quiz-feedback" class="admin-quiz-feedback" style="display:none;"></div>
+          <div id="admin-quiz-timer" style="display:none;"></div>
           <button type="button" id="admin-quiz-submit" class="mark-complete-btn" disabled>Submit quiz</button>
         </div>
       </div>
@@ -181,8 +267,9 @@
       if (quizUnlocked) return;
       quizUnlocked = true;
       if (submitBtn) submitBtn.disabled = false;
-      if (progressHint) progressHint.textContent = 'Quiz unlocked. Answer the questions and submit.';
+      if (progressHint) progressHint.textContent = 'Quiz unlocked. You have 5 minutes to complete and submit.';
       sendProgress(adminModule.id, 'quiz_unlocked', { percentWatched: VIDEO_UNLOCK_PERCENT });
+      startQuizTimer(adminModule.id); // fresh 5-min window
     }
 
     if (videoEl) {
@@ -236,6 +323,30 @@
       });
     }
 
+    // Resume quiz timer if they left the page mid-quiz and came back
+    (function () {
+      var savedStart = getQuizTimerStart(currentEmployee, currentDate, adminModule.id);
+      if (!savedStart) return;
+      var remaining = QUIZ_TIMER_SECONDS - Math.floor((Date.now() - savedStart) / 1000);
+      if (remaining > 0) {
+        if (!quizUnlocked) {
+          quizUnlocked = true;
+          if (submitBtn) submitBtn.disabled = false;
+          if (progressHint) progressHint.textContent = 'Quiz unlocked. ' + Math.ceil(remaining / 60) + ' min remaining — submit before time runs out.';
+        }
+        startQuizTimer(adminModule.id, savedStart);
+      } else {
+        // Time already expired — show message, keep submit locked
+        clearQuizTimerStart(currentEmployee, currentDate, adminModule.id);
+        var timerEl = document.getElementById('admin-quiz-timer');
+        if (timerEl) {
+          timerEl.style.display = 'block';
+          timerEl.textContent = '\u23f1 Time expired — re-watch the video to try again.';
+          timerEl.style.cssText = 'display:block;padding:.5rem .75rem;border-radius:4px;font-weight:700;font-size:.9rem;background:#f8d7da;color:#842029;margin-bottom:.75rem;';
+        }
+      }
+    })();
+
     if (submitBtn && form) {
       submitBtn.addEventListener('click', function () {
         const answers = [];
@@ -251,6 +362,8 @@
 
         feedback.style.display = 'block';
         if (pass) {
+          clearInterval(quizTimerInterval);
+          clearQuizTimerStart(currentEmployee, currentDate, adminModule.id);
           feedback.className = 'admin-quiz-feedback admin-quiz-pass';
           feedback.textContent = 'You passed (' + correct + '/' + total + '). Saving…';
           sendProgress(adminModule.id, 'quiz_passed', { score: correct, total: total });
