@@ -15,6 +15,6 @@ exports.handler = async () => {
       'Content-Type': 'application/json',
       'Cache-Control': 'no-store',
     },
-    body: JSON.stringify({ key: process.env.GOOGLE_MAPS_KEY || '' }),
+    body: JSON.stringify({ key: process.env.Google_Maps_key || process.env.GOOGLE_MAPS_KEY || '' }),
   };
 };
