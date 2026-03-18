@@ -21,7 +21,7 @@
       portals: ['training-employee'],
     },
     'warehouse-cnc-operator': {
-      portals: ['scott-training', 'inventory'],
+      portals: ['scott-training', 'inventory', 'training-employee'],
     },
     'accounting': {
       portals: ['jen', 'training-employee', 'inventory'],
