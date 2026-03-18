@@ -112,7 +112,7 @@
   </div>
   <div class="po-pill">
     PO Number <strong id="po-display">—</strong><br>
-    <span id="po-meta" style="font-size:8pt;opacity:.8;">Created by Maria &nbsp;·&nbsp; <span id="po-timestamp">—</span></span>
+    <span id="po-meta" style="font-size:8pt;opacity:.8;">Created by <span id="po-creator">—</span> &nbsp;·&nbsp; <span id="po-timestamp">—</span></span>
   </div>
 </div>
 
@@ -211,9 +211,7 @@
   </div>
 
   <div class="actions" id="action-btns">
-    <button class="btn btn-o" onclick="saveDraft()">Save Draft</button>
-    <button class="btn btn-g" onclick="submitPO()">Submit for Review →</button>
-    <button class="btn btn-a" onclick="newPO()">+ New PO</button>
+    <span style="font-size:9pt;color:var(--muted);font-style:italic;">Select a PO from history below to view or manage it.</span>
   </div>
 </div>
 
@@ -223,7 +221,7 @@
 <div class="panel" style="margin-top:4px;">
   <div class="p-title">PO History</div>
   <div id="history-empty" style="font-size:8.5pt;color:var(--muted);font-style:italic;padding:6px 0;">
-    No purchase orders yet. Fill out the form above and click Save Draft or Submit for Review.
+    No purchase orders yet. POs are created automatically in the Agreement Portal when a client signs and pays a deposit.
   </div>
   <div style="overflow-x:auto;">
     <table class="hist" id="hist-table" style="display:none;">
@@ -247,54 +245,32 @@ let isLocked = false;
 const CATEGORIES = ['Drywall','Paint','Flooring','Cabinets','Demo','Tile','Framing','Sub-contract','Tools','Other'];
 
 document.addEventListener('DOMContentLoaded', () => {
-  initNewPO();
+  showEmptyState();
   renderHistory();
 });
 
-// ── PO Counter ────────────────────────────────────────────────────────────────
-function getNextPONumber() {
-  const year = new Date().getFullYear();
-  let counter = parseInt(localStorage.getItem('nfr_po_counter') || '1000');
-  counter++;
-  localStorage.setItem('nfr_po_counter', counter);
-  return `PO-${year}-${String(counter).padStart(4, '0')}`;
-}
-
-// ── Init / Reset ──────────────────────────────────────────────────────────────
-function initNewPO() {
-  currentPOId = getNextPONumber();
-  isLocked = false;
-  document.getElementById('po-display').textContent = currentPOId;
-  const now = new Date();
-  document.getElementById('po-timestamp').textContent = now.toLocaleDateString('en-US',
-    {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'});
+// ── Empty state (no PO selected) ──────────────────────────────────────────────
+function showEmptyState() {
+  currentPOId = null;
+  isLocked = true;
+  document.getElementById('po-display').textContent = '—';
+  document.getElementById('po-creator').textContent = '—';
+  document.getElementById('po-timestamp').textContent = '—';
   document.getElementById('status-panel').style.display = 'none';
   document.getElementById('locked-msg').style.display = 'none';
   document.getElementById('rejected-msg').style.display = 'none';
-  document.getElementById('add-row-btn').style.display = 'block';
-  resetActionBtns();
+  document.getElementById('add-row-btn').style.display = 'none';
+  document.getElementById('action-btns').innerHTML =
+    '<span style="font-size:9pt;color:var(--muted);font-style:italic;">Select a PO from history below to view or manage it.</span>';
 
-  ['client-name','client-addr','client-city','client-zip'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.value = '';
+  ['client-name','client-addr','client-city','client-zip','proj-mgr','start-date'].forEach(id => {
+    const el = document.getElementById(id); if (el) { el.value = ''; el.disabled = true; }
   });
-  document.getElementById('proj-mgr').value = 'Jose Martinez';
-  document.getElementById('proj-type').selectedIndex = 0;
-  document.getElementById('tax-region').selectedIndex = 0;
-  document.getElementById('start-date').value = '';
+  document.getElementById('proj-type').disabled = true;
+  document.getElementById('tax-region').disabled = true;
   document.getElementById('sc-body').innerHTML = '';
   scopeRowCount = 0;
-  addScopeRow(); addScopeRow(); addScopeRow();
   calcTotals();
-
-  // Enable all project fields
-  document.querySelectorAll('.panel input, .panel select').forEach(el => el.disabled = false);
-}
-
-function resetActionBtns() {
-  document.getElementById('action-btns').innerHTML = `
-    <button class="btn btn-o" onclick="saveDraft()">Save Draft</button>
-    <button class="btn btn-g" onclick="submitPO()">Submit for Review →</button>
-    <button class="btn btn-a" onclick="newPO()">+ New PO</button>`;
 }
 
 // ── Scope Rows ────────────────────────────────────────────────────────────────
@@ -381,34 +357,7 @@ function calcTotals() {
 }
 
 // ── Build PO Object ───────────────────────────────────────────────────────────
-function buildPO(status) {
-  const taxEl = document.getElementById('tax-region');
-  const taxVal = taxEl.value === 'custom'
-    ? (parseFloat(document.getElementById('custom-tax')?.value) || 7.5)
-    : parseFloat(taxEl.value);
-  return {
-    id: currentPOId,
-    created_by: 'Maria',
-    created_at: new Date().toISOString(),
-    status: status,
-    project: {
-      client_name:  val('client-name'),
-      client_addr:  val('client-addr'),
-      client_city:  val('client-city'),
-      client_zip:   val('client-zip'),
-      project_type: val('proj-type'),
-      proj_mgr:     val('proj-mgr') || 'Jose Martinez',
-      start_date:   val('start-date'),
-      tax_region:   String(taxVal)
-    },
-    scope_items:     getScopeItems(),
-    jose_notes:      '',
-    approved_at:     '',
-    approved_by:     '',
-    rejected_reason: '',
-    commission_pct:  0
-  };
-}
+// buildPO removed — POs are created by the Agreement Portal only
 
 // ── Storage ───────────────────────────────────────────────────────────────────
 function loadPOs() {
@@ -423,62 +372,59 @@ function upsertPO(po) {
   savePOs(pos);
 }
 
-// ── Actions ───────────────────────────────────────────────────────────────────
-function saveDraft() {
-  if (isLocked) return;
-  upsertPO(buildPO('draft'));
+// ── PO Actions ────────────────────────────────────────────────────────────────
+function saveNotes(poId) {
+  const pos = loadPOs();
+  const po = pos.find(p => p.id === poId);
+  if (!po) return;
+  // Save jose_notes field if it exists in the form
+  const notesEl = document.getElementById('jose-notes');
+  if (notesEl) po.jose_notes = notesEl.value;
+  upsertPO(po);
   renderHistory();
-  showToast('Draft saved — ' + currentPOId);
+  showToast('Notes saved — ' + poId);
 }
 
-function submitPO() {
-  if (isLocked) return;
-  if (!val('client-name')) { alert('Please enter a client name before submitting.'); return; }
-  if (getScopeItems().length === 0) { alert('Please add at least one scope item before submitting.'); return; }
-  if (!confirm('Submit ' + currentPOId + ' for Jose\'s review?\n\nYou will not be able to edit it after submission.')) return;
-
-  upsertPO(buildPO('pending_review'));
-  isLocked = true;
-
-  document.getElementById('locked-msg').style.display = 'block';
-  document.getElementById('add-row-btn').style.display = 'none';
-  document.querySelectorAll('#sc-body input, #sc-body select').forEach(el => el.disabled = true);
-  document.querySelectorAll('.panel input, .panel select').forEach(el => el.disabled = true);
-  document.getElementById('action-btns').innerHTML = `
-    <button class="btn btn-a" onclick="newPO()">+ New PO</button>
-    <span style="font-size:9pt;color:var(--success);padding:10px 0;font-weight:700;">✅ Submitted — awaiting Jose's review</span>`;
+function markMaterialsOrdered(poId) {
+  if (!confirm('Mark materials as ordered for ' + poId + '?')) return;
+  const pos = loadPOs();
+  const po = pos.find(p => p.id === poId);
+  if (!po) return;
+  po.status = 'materials_ordered';
+  po.materials_ordered_at = new Date().toISOString();
+  upsertPO(po);
   renderHistory();
-  showToast('✅ ' + currentPOId + ' submitted!');
+  loadPOForEdit(poId);
+  showToast('✅ Materials marked as ordered — ' + poId);
 }
 
-function newPO() {
-  if (!isLocked && val('client-name')) {
-    if (!confirm('Start a new PO? Unsaved changes to this form will be lost.')) return;
-  }
-  initNewPO();
-  renderHistory();
-}
-
-// ── Load draft for editing ────────────────────────────────────────────────────
+// ── View a PO from the agreement portal ──────────────────────────────────────
 function loadPOForEdit(poId) {
   const pos = loadPOs();
   const po = pos.find(p => p.id === poId);
   if (!po) return;
-  if (po.status !== 'draft') { alert('This PO cannot be edited — status: ' + po.status); return; }
 
   currentPOId = po.id;
-  isLocked = false;
+  isLocked = true; // project info is always locked — comes from signed agreement
   document.getElementById('po-display').textContent = po.id;
+  document.getElementById('po-creator').textContent = po.created_by || 'System';
   document.getElementById('po-timestamp').textContent = new Date(po.created_at)
-    .toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+    .toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'});
   document.getElementById('status-panel').style.display = 'none';
   document.getElementById('locked-msg').style.display = 'none';
   document.getElementById('rejected-msg').style.display = 'none';
-  document.getElementById('add-row-btn').style.display = 'block';
-  resetActionBtns();
+  document.getElementById('add-row-btn').style.display = 'none';
 
-  // Re-enable all inputs
-  document.querySelectorAll('.panel input, .panel select').forEach(el => el.disabled = false);
+  // Action buttons based on status
+  const status = po.status || 'new';
+  let actionHtml = `<button class="btn btn-o" onclick="saveNotes('${h(po.id)}')">Save Notes</button>`;
+  if (status === 'new') {
+    actionHtml += ` <button class="btn btn-g" onclick="markMaterialsOrdered('${h(po.id)}')">Mark Materials Ordered</button>`;
+  }
+  document.getElementById('action-btns').innerHTML = actionHtml;
+
+  // Project info is read-only (came from signed agreement)
+  document.querySelectorAll('.panel input, .panel select').forEach(el => el.disabled = true);
 
   // Fill project fields
   document.getElementById('client-name').value  = po.project.client_name || '';
@@ -528,20 +474,19 @@ function renderHistory() {
   tbody.innerHTML = '';
   pos.forEach(po => {
     const dt = new Date(po.created_at).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
-    const sClass = {draft:'status-draft', pending_review:'status-pending',
-      approved:'status-approved', rejected:'status-rejected'}[po.status] || 'status-draft';
-    const sText = {draft:'Draft', pending_review:'Pending Review',
-      approved:'Approved', rejected:'Needs Changes'}[po.status] || po.status;
-    let actionHtml = '';
-    if (po.status === 'draft') {
-      actionHtml = `<button class="btn btn-o" style="padding:4px 12px;font-size:8pt;" onclick="loadPOForEdit('${h(po.id)}')">Edit</button>`;
-    } else if (po.status === 'approved') {
-      actionHtml = `<button class="btn btn-p" style="padding:4px 12px;font-size:8pt;" onclick="window.open('contract.html?po=${encodeURIComponent(po.id)}','_blank')">View Contract</button>`;
-    } else if (po.status === 'rejected') {
-      actionHtml = `<button class="btn btn-a" style="padding:4px 12px;font-size:8pt;" onclick="resubmitPO('${h(po.id)}')">Revise &amp; Resubmit</button>`;
-    } else {
-      actionHtml = '<span style="font-size:8pt;color:var(--muted);">Awaiting review</span>';
-    }
+    const sClass = {
+      new:'status-draft', materials_ordered:'status-pending',
+      jorge_scheduled:'status-approved', completed:'status-approved',
+      draft:'status-draft', pending_review:'status-pending',
+      approved:'status-approved', rejected:'status-rejected'
+    }[po.status] || 'status-draft';
+    const sText = {
+      new:'New — Awaiting Materials', materials_ordered:'Materials Ordered',
+      jorge_scheduled:'Jorge Scheduled', completed:'Completed',
+      draft:'Draft', pending_review:'Pending Review',
+      approved:'Approved', rejected:'Needs Changes'
+    }[po.status] || po.status;
+    const actionHtml = `<button class="btn btn-o" style="padding:4px 12px;font-size:8pt;" onclick="loadPOForEdit('${h(po.id)}')">View</button>`;
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td><strong>${h(po.id)}</strong></td>
@@ -554,20 +499,7 @@ function renderHistory() {
   });
 }
 
-function resubmitPO(poId) {
-  const pos = loadPOs();
-  const po = pos.find(p => p.id === poId);
-  if (!po) return;
-  // Load it like a draft for editing, then change status back to draft
-  po.status = 'draft';
-  upsertPO(po);
-  loadPOForEdit(poId);
-  if (po.rejected_reason) {
-    document.getElementById('rejected-msg').style.display = 'block';
-    document.getElementById('rejected-reason').textContent = po.rejected_reason;
-  }
-  renderHistory();
-}
+// resubmitPO removed — POs flow only from the Agreement Portal
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function val(id) { return (document.getElementById(id)?.value || '').trim(); }
