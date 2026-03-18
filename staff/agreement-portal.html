@@ -789,9 +789,10 @@ function buildAgreement(status) {
   const id     = currentAgrId || getNextAgrId();
   currentAgrId = id;
 
+  const _s2 = NFRAuth.getSession();
   return {
     id,
-    created_by: 'Maria',
+    created_by: (_s2 && _s2.name) ? _s2.name : 'System',
     created_at: now,
     status,
     project: {
