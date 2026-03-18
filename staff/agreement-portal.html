@@ -171,7 +171,7 @@
   </div>
   <div class="agr-pill">
     Agreement <strong id="agr-display">New Draft</strong><br>
-    <span id="agr-meta" style="font-size:8pt;opacity:.8;">Created by Maria &nbsp;·&nbsp; <span id="agr-timestamp">—</span></span>
+    <span id="agr-meta" style="font-size:8pt;opacity:.8;">Created by <span id="agr-creator">—</span> &nbsp;·&nbsp; <span id="agr-timestamp">—</span></span>
   </div>
 </div>
 
@@ -241,15 +241,7 @@
       <span>&#9881; Google Maps</span>
       <span class="maps-status" id="maps-status">&#9675; Manual entry — add API key to enable address verify</span>
     </div>
-    <div class="maps-settings" id="maps-settings">
-      <div class="maps-key-row">
-        <div class="f">
-          <label>API Key</label>
-          <input type="password" id="maps-api-key" placeholder="AIzaSy...">
-        </div>
-        <button onclick="saveMapsKey()">Save</button>
-      </div>
-    </div>
+    <div class="maps-settings" id="maps-settings" style="display:none;"></div>
   </div>
 
   <!-- STATUS PANEL (shown when editing saved agreement) -->
@@ -313,7 +305,7 @@
       <div class="t-item"><label>Sub-Contractor</label><div class="t-val" id="tot-sub">$0.00</div></div>
       <div class="t-item"><label>Tools / Equip</label><div class="t-val" id="tot-tools">$0.00</div></div>
       <div class="t-item"><label>Raw Cost Total</label><div class="t-val" id="tot-raw">$0.00</div></div>
-      <div class="t-item"><label>Est. Grand Total (Jose's rates)</label><div class="t-val" id="tot-grand" style="color:var(--accent);">$0.00</div></div>
+      <div class="t-item" id="grand-total-item"><label>Est. Grand Total (Jose's rates)</label><div class="t-val" id="tot-grand" style="color:var(--accent);">$0.00</div></div>
     </div>
   </div>
 
@@ -517,6 +509,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initMapsPanel();
   initNewAgreement();
   renderHistory();
+  // Hide grand total from non-owners (Maria, Jorge, Scott, Jen)
+  const _s = NFRAuth.getSession();
+  if (!_s || _s.role !== 'owner') {
+    const el = document.getElementById('grand-total-item');
+    if (el) el.style.display = 'none';
+  }
 });
 
 // ── Agreement ID ──────────────────────────────────────────────────────────────
@@ -549,7 +547,10 @@ function initNewAgreement() {
                   'client-phone','client-email','start-date'];
   fields.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   document.getElementById('client-state').value = 'OH';
-  document.getElementById('proj-mgr').value = 'Jose Martinez';
+  const _sess = NFRAuth.getSession();
+  const _userName = (_sess && _sess.name) ? _sess.name : 'Jose Martinez';
+  document.getElementById('proj-mgr').value = _userName;
+  document.getElementById('agr-creator').textContent = _userName;
   document.getElementById('proj-type').selectedIndex = 0;
   document.getElementById('tax-region').selectedIndex = 0;
   document.getElementById('custom-tax-wrap').style.display = 'none';
@@ -1362,26 +1363,17 @@ function createPOFromAgreement(agr) {
 
 // ── Google Maps Panel ─────────────────────────────────────────────────────────
 function initMapsPanel() {
-  const key = localStorage.getItem('nfr_gmaps_api_key');
-  if (key) {
-    document.getElementById('maps-api-key').value = key;
-    updateMapsStatus(true);
-    loadMapsScript(key);
-  }
+  fetch('/.netlify/functions/maps-config')
+    .then(r => r.json())
+    .then(d => { if (d.key) { updateMapsStatus(true); loadMapsScript(d.key); } })
+    .catch(() => {});
 }
 
 function toggleMapsSettings() {
   document.getElementById('maps-settings').classList.toggle('open');
 }
 
-function saveMapsKey() {
-  const key = document.getElementById('maps-api-key').value.trim();
-  if (!key) { alert('Please enter an API key.'); return; }
-  localStorage.setItem('nfr_gmaps_api_key', key);
-  updateMapsStatus(true);
-  loadMapsScript(key);
-  showToast('Maps API key saved.');
-}
+function saveMapsKey() { /* Key is now managed via Netlify environment variable */ }
 
 function updateMapsStatus(connected) {
   const el = document.getElementById('maps-status');
