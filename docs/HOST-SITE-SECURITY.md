@@ -21,7 +21,7 @@ What we do to keep the live site and staff portal secure. **Add to this list; do
 
 ## Access control
 
-- **Staff pages:** Protected by `NFRAuth` in `staff/js/auth.js`. User must sign in; role determines which portals (agreements, training, etc.) they see. No role = no access to protected pages.
+- **Staff pages:** Protected by `NFRAuth`. User must sign in; role determines which portals (agreements, training, etc.) they see. No role = no access to protected pages.
 - **Training progress API:** Netlify function reads/writes Supabase. No auth on the function today; consider adding a shared secret or Netlify Identity later if you need to restrict who can POST. GET is used by the manager dashboard (live progress).
 - **GitHub:** Repo is under NFR’s org. Push only with approval (github-push-with-approval). Add collaborators explicitly.
 
