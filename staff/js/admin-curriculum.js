@@ -40,6 +40,17 @@
         { q: '"Consistency" at NFR means:', options: ['Doing things the same way every time so the team and clients know what to expect', 'Only when the boss is watching', 'Whatever is fastest', 'Each person chooses their own method'], answer: 0 },
       ],
     },
+    {
+      id: 'admin-4',
+      title: 'Workplace Rights & Safety Reporting',
+      videoTitle: 'Filing a Complaint with OSHA',
+      sourceUrl: 'https://www.youtube.com/watch?v=k70Ln7gRWDE',
+      quiz: [
+        { q: 'You can file an OSHA complaint:', options: ['Only in person', 'Only with a lawyer', 'Online, by phone, by mail, or in person', 'Never — only managers can'], answer: 2 },
+        { q: 'OSHA complaints about workplace safety are:', options: ['Shared with your employer immediately', 'Kept confidential if you request it', 'Ignored for small businesses', 'Only valid for large companies'], answer: 1 },
+        { q: 'Who is allowed to file an OSHA complaint?', options: ['Only managers', 'Only union workers', 'Any worker who believes there is a serious safety violation', 'Only US citizens'], answer: 2 },
+      ],
+    },
   ];
 
   /** Returns the admin module for a given program day (1-based). Day 1 = module 1, etc. After last module, returns null (administration complete). */
