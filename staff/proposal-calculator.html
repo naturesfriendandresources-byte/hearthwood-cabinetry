@@ -936,8 +936,33 @@ function copyTotal(){
 // ── AGREEMENT INBOX SYSTEM ────────────────────────────────────────────────────
 function loadPOs(){ try{ return JSON.parse(localStorage.getItem('nfr_pos')||'[]'); }catch(e){ return []; } }
 function savePOs(pos){ localStorage.setItem('nfr_pos', JSON.stringify(pos)); }
+const AGR_API = '/.netlify/functions/agreements';
 function loadAgreements(){ try{ return JSON.parse(localStorage.getItem('nfr_agreements')||'[]'); }catch(e){ return []; } }
 function saveAgreements(agrs){ localStorage.setItem('nfr_agreements', JSON.stringify(agrs)); }
+
+// Pull latest agreements from Supabase on page load so Jose sees all devices' submissions
+function syncAgreementsFromAPI() {
+  fetch(AGR_API)
+    .then(function(r){ return r.json(); })
+    .then(function(agrs){
+      if (!Array.isArray(agrs)) return;
+      var local = loadAgreements();
+      var apiIds = agrs.map(function(a){ return a.id; });
+      var localOnly = local.filter(function(a){ return !apiIds.includes(a.id); });
+      saveAgreements(agrs.concat(localOnly));
+      refreshPOInbox();
+    })
+    .catch(function(e){ console.warn('Agreement API load failed, using local cache:', e); });
+}
+
+// Push a status update (approve/reject) back to Supabase
+function pushAgreementUpdate(agr) {
+  fetch(AGR_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ agreement: agr }),
+  }).catch(function(e){ console.warn('Agreement API update failed (local save succeeded):', e); });
+}
 function escH(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 function refreshPOInbox(){
@@ -1126,6 +1151,7 @@ function approvePO(){
     agrs[idx].jose_notes       = notes;
     agrs[idx].jose_approved_at = new Date().toISOString();
     saveAgreements(agrs);
+    pushAgreementUpdate(agrs[idx]);
     closePOReview();
     refreshPOInbox();
     window.open('contract.html?agr=' + encodeURIComponent(recordId), '_blank');
@@ -1183,7 +1209,7 @@ document.getElementById('po-review-modal')?.addEventListener('click', function(e
 });
 
 // Init + auto-refresh every 30s
-document.addEventListener('DOMContentLoaded', refreshPOInbox);
+document.addEventListener('DOMContentLoaded', function(){ syncAgreementsFromAPI(); refreshPOInbox(); });
 setInterval(refreshPOInbox, 30000);
 
 // ── Staff Password Management (Jose only) ─────────────────────

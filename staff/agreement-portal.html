@@ -509,6 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMapsPanel();
   initNewAgreement();
   renderHistory();
+  syncAgreementsFromAPI();
   // Hide grand total from non-owners (Maria, Jorge, Scott, Jen)
   const _s = NFRAuth.getSession();
   if (!_s || _s.role !== 'owner') {
@@ -811,6 +812,11 @@ function buildAgreement(status) {
     },
     scope_items:        getScopeItems(),
     agent_check:        getLastAgentCheckResult(),
+    grand_total:        (function(items, tax) {
+      let hrs=0,mat=0,sub=0,tools=0;
+      items.forEach(i => { hrs+=(i.men||1)*(i.est_hrs||0); mat+=i.mat_cost||0; sub+=i.sub_cost||0; tools+=i.tools_cost||0; });
+      return (hrs*85 + mat*1.24 + sub*1.30 + tools*1.15) * (1 + (parseFloat(tax)||7.5)/100);
+    })(getScopeItems(), taxVal),
     jose_notes:         '',
     jose_approved_at:   '',
     sent_to_client_at:  '',
@@ -828,16 +834,41 @@ function getLastAgentCheckResult() {
 }
 
 // ── Storage ───────────────────────────────────────────────────────────────────
+const AGR_API = '/.netlify/functions/agreements';
+
 function loadAgreements() {
   try { return JSON.parse(localStorage.getItem('nfr_agreements') || '[]'); } catch(e) { return []; }
 }
 function saveAgreements(arr) { localStorage.setItem('nfr_agreements', JSON.stringify(arr)); }
 
 function upsertAgreement(agr) {
+  // Write to localStorage immediately (fast, local)
   const list = loadAgreements();
   const idx  = list.findIndex(a => a.id === agr.id);
   if (idx >= 0) list[idx] = agr; else list.push(agr);
   saveAgreements(list);
+  // Also write to Supabase via API (so all devices see it)
+  fetch(AGR_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ agreement: agr }),
+  }).catch(function(e) { console.warn('Agreement API sync failed (local save succeeded):', e); });
+}
+
+// On page load — pull from API so this device has latest data from all team members
+function syncAgreementsFromAPI() {
+  fetch(AGR_API)
+    .then(function(r) { return r.json(); })
+    .then(function(agrs) {
+      if (!Array.isArray(agrs)) return;
+      // Merge: API is authoritative; keep any local drafts not yet pushed
+      var local = loadAgreements();
+      var apiIds = agrs.map(function(a) { return a.id; });
+      var localOnly = local.filter(function(a) { return !apiIds.includes(a.id); });
+      saveAgreements(agrs.concat(localOnly));
+      renderHistory();
+    })
+    .catch(function(e) { console.warn('Agreement API load failed, using local cache:', e); });
 }
 
 function findAgreement(id) {
