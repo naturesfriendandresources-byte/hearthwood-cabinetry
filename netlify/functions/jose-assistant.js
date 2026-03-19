@@ -4,8 +4,7 @@
  *
  * Jose-only. Validates role === 'owner' in request body.
  *
- * Environment variable required:
- *   ANTHROPIC_API_KEY — set in Netlify → Site settings → Environment variables
+ * Environment variable required: set AI provider key in Netlify → Site settings → Environment variables
  */
 
 'use strict';
@@ -113,7 +112,7 @@ STAFF PORTAL SYSTEM
 Live at: hearthwoodcabinetry.com/staff/
 GitHub: github.com/naturesfriendandresources-byte/hearthwood-cabinetry
 Deploys: GitHub push → GitHub Actions → Netlify (auto, ~60 seconds)
-Netlify site ID: e21e4c91-b442-4d9a-8ff6-01b95023743a
+
 
 Portals:
 - agreements → create/manage client agreements
