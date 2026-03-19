@@ -6,6 +6,10 @@
   publish = "."
   functions = "netlify/functions"
 
+[build.environment]
+  # auth.js contains intentional default passwords (not real secrets) — exempt from scan
+  SECRETS_SCAN_OMIT_PATHS = "staff/js/auth.js"
+
 [[redirects]]
   # Root → staff portal
   from   = "/"
