@@ -51,6 +51,17 @@
         { q: 'Who is allowed to file an OSHA complaint?', options: ['Only managers', 'Only union workers', 'Any worker who believes there is a serious safety violation', 'Only US citizens'], answer: 2 },
       ],
     },
+    {
+      id: 'admin-5',
+      title: 'Professionalism in the Workplace',
+      videoTitle: 'Professionalism in the Workplace',
+      sourceUrl: 'https://www.youtube.com/watch?v=S703WyqaGn4',
+      quiz: [
+        { q: 'Professionalism at work means:', options: ['Only being formal in meetings', 'Showing up prepared, respectful, and reliable every day', 'Dressing expensively', 'Only following rules when the boss is watching'], answer: 1 },
+        { q: 'If you disagree with how something is being done, the professional response is:', options: ['Ignore it', 'Complain to coworkers', 'Bring it up calmly with your lead or Jose', 'Do it your own way without saying anything'], answer: 2 },
+        { q: 'Being professional on a job site includes:', options: ['Arriving whenever feels right', 'Being on time, prepared, and representing NFR well to clients', 'Finishing as fast as possible', 'Only talking to people you like'], answer: 1 },
+      ],
+    },
   ];
 
   /** Returns the admin module for a given program day (1-based). Day 1 = module 1, etc. After last module, returns null (administration complete). */
