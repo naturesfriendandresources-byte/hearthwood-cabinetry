@@ -21,7 +21,7 @@
       portals: ['portal-admin','portal-manager'],
     },
     'warehouse-cnc-operator': {
-      portals: ['portal-admin','portal-cnc','portal-warehouse'],
+      portals: ['portal-admin','portal-cnc','portal-warehouse','inventory'],
     },
     'accounting': {
       portals: ['jen', 'training-employee', 'inventory'],
