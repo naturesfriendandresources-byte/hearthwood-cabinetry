@@ -1195,3 +1195,136 @@ h1, h2, h3 {
     display: none;
   }
 }
+
+/* ── Portal Engine — Shared Training Portals ───────────────── */
+
+.portal-title-bar {
+  padding: 1.5rem 2rem 0;
+}
+
+.portal-track-title {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  color: var(--espresso);
+  margin-bottom: 0.25rem;
+}
+
+/* Week tabs */
+.portal-week-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 2rem 0;
+}
+
+.portal-week-tab {
+  padding: 0.45rem 1rem;
+  border: 2px solid var(--grey-300);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--grey-700);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.portal-week-tab:hover {
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+
+.portal-week-tab.active {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: var(--white);
+}
+
+.portal-week-tab.done {
+  border-color: var(--sage);
+  color: var(--sage);
+}
+
+.portal-week-tab.done.active {
+  background: var(--sage);
+  color: var(--white);
+}
+
+/* Week theme label */
+.portal-week-theme {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--espresso-60);
+  margin-bottom: 0.6rem;
+}
+
+/* Day pills row */
+.portal-day-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Duration chip */
+.portal-duration-chip {
+  display: inline-block;
+  background: var(--cream-dark);
+  color: var(--espresso-60);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  margin: 0.5rem 2rem 0;
+}
+
+/* Today's schedule segments */
+.portal-segments {
+  padding: 1.25rem 2rem;
+  background: var(--cream-dark);
+  border-left: 3px solid var(--gold);
+  margin: 1rem 0;
+}
+
+.portal-segments-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.portal-segments-list li {
+  font-size: 0.9rem;
+  color: var(--espresso);
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.portal-segments-list li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* Replay button */
+.portal-replay-btn {
+  background: var(--grey-500) !important;
+  margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .portal-title-bar,
+  .portal-week-tabs {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .portal-duration-chip {
+    margin-left: 1rem;
+  }
+}
