@@ -92,27 +92,22 @@ These are “Watch: [topic]” links in Maria’s design block. Save each as a f
 
 ---
 
-## CNC / Warehouse (Scott — ShopSabre, Mozaik)
+## CNC (Scott — ShopSabre Pro408)
 
-**SabreNation University:** https://www.shopsabre.com/sabrenation/sabrenation-university/  
-**Mozaik library:** https://sites.google.com/view/mozaikonlinehelp/training-videos  
+**Source:** SabreNation University — https://www.shopsabre.com/sabrenation/sabrenation-university/
+**Login:** SabreNationUniversityAccess
 
-Concrete YouTube videos to save:
+All CNC videos come from SabreNation University (Pro408-specific content only).
+The portal already defaults to SabreNation University for every CNC video day (Weeks 2–12).
 
-| File | Title | Source |
-|------|--------|--------|
-| [ ] cnc-w4-cutting.mp4 | CNC Cutting Base Cabinet — 5 Min | https://www.youtube.com/watch?v=a4imaKN49fQ |
-| [ ] cnc-w6-design-to-install.mp4 | Design to Installation: IS 408 Cabinet | https://www.youtube.com/watch?v=2XGt5-t8tB4 |
+**To add a video:**
+1. Download the clip from SabreNation University and save it as `cnc-w[N]-[short-topic].mp4`
+2. Drop it in `staff/videos/cnc/`
+3. Run `/video-review cnc` — it will match by filename and wire the local path into the curriculum
 
-Search-based (pick one good video per topic and save as):
-
-| File | Topic | Search / source |
-|------|--------|------------------|
-| [ ] cnc-w7-nesting.mp4 | Mozaik Nesting | YouTube: Mozaik realtime nesting CNC ShopSabre |
-| [ ] cnc-w9-bits.mp4 | CNC Bit Management | YouTube: CNC router bit types compression downcut |
-| [ ] cnc-w11-qc.mp4 | CNC QC / Part Inspection | YouTube: CNC cabinet part inspection quality |
-
-*SabreNation and Mozaik library pages: we can add more specific files once you pick which clips to host.*
+| File | Week · Topic | Status |
+|------|--------------|--------|
+| — | Week 2+ · All topics | Portal defaults to SabreNation URL — upload .mp4 to override |
 
 ---
 
