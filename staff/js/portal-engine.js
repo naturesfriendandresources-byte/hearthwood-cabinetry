@@ -199,55 +199,104 @@
 
     function buildVideoSection(day, wIdx, dIdx) {
       var wrap = document.createElement('div');
+      var isLocal = day.videoUrl && /\.mp4$/i.test(day.videoUrl);
 
       var vidBox = document.createElement('div');
       vidBox.className = 'admin-video-redirect';
 
       var vidTitle = document.createElement('p');
       vidTitle.className = 'admin-video-redirect-label';
-      vidTitle.innerHTML = '<strong>' + esc(day.videoTitle) + '</strong><br><span style="font-size:0.85em;opacity:0.7">' + esc(day.videoDuration || '') + '</span>';
+      vidTitle.innerHTML = '<strong>' + esc(day.videoTitle || '') + '</strong>' +
+        (day.videoDuration ? '<br><span style="font-size:0.85em;opacity:0.7">' + esc(day.videoDuration) + '</span>' : '');
       vidBox.appendChild(vidTitle);
 
-      var watchBtn = document.createElement('a');
-      watchBtn.className = 'admin-watch-yt-btn';
-      watchBtn.href = day.videoUrl;
-      watchBtn.target = '_blank';
-      watchBtn.rel = 'noopener noreferrer';
-      watchBtn.textContent = '▶ Watch Video on YouTube';
-      vidBox.appendChild(watchBtn);
-
-      var hint = document.createElement('p');
-      hint.className = 'admin-progress-hint';
-      hint.textContent = 'Click Watch, then come back here and confirm below to unlock the quiz.';
-      vidBox.appendChild(hint);
-
-      var confirmBtn = document.createElement('button');
-      confirmBtn.className = 'mark-complete-btn';
-      confirmBtn.style.marginTop = '0.75rem';
-      confirmBtn.disabled = true;
-      confirmBtn.textContent = 'I finished watching — unlock quiz';
-      vidBox.appendChild(confirmBtn);
-
-      wrap.appendChild(vidBox);
-
-      // Quiz (hidden until confirmed)
+      // Quiz (hidden until video confirmed)
       var quizWrap = document.createElement('div');
       quizWrap.style.display = 'none';
       quizWrap.appendChild(buildQuizForm(day, wIdx, dIdx));
-      wrap.appendChild(quizWrap);
 
-      // Enable confirm after clicking watch
-      watchBtn.addEventListener('click', function () {
-        setTimeout(function () { confirmBtn.disabled = false; }, 800);
-      });
+      if (isLocal) {
+        // ── Inline player for local .mp4 files ──────────────────────────────
+        var player = document.createElement('video');
+        player.src = day.videoUrl;
+        player.controls = true;
+        player.style.cssText = 'width:100%;max-width:720px;border-radius:8px;margin:0.75rem 0;display:block;';
+        vidBox.appendChild(player);
 
-      confirmBtn.addEventListener('click', function () {
+        var hint = document.createElement('p');
+        hint.className = 'admin-progress-hint';
+        hint.textContent = 'Watch the full video above, then the quiz will unlock automatically when it ends.';
+        vidBox.appendChild(hint);
+
+        var confirmBtn = document.createElement('button');
+        confirmBtn.className = 'mark-complete-btn';
+        confirmBtn.style.marginTop = '0.5rem';
         confirmBtn.disabled = true;
-        confirmBtn.textContent = '✓ Quiz unlocked';
-        quizWrap.style.display = 'block';
-        quizWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+        confirmBtn.textContent = 'I finished watching — unlock quiz';
+        vidBox.appendChild(confirmBtn);
 
+        // Auto-unlock when video ends
+        player.addEventListener('ended', function () {
+          confirmBtn.disabled = false;
+        });
+        // Also allow manual unlock after 30s (in case of scrubbing)
+        player.addEventListener('timeupdate', function () {
+          if (player.duration && player.currentTime >= player.duration * 0.85) {
+            confirmBtn.disabled = false;
+          }
+        });
+
+        confirmBtn.addEventListener('click', function () {
+          confirmBtn.disabled = true;
+          confirmBtn.textContent = '✓ Quiz unlocked';
+          quizWrap.style.display = 'block';
+          quizWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+      } else {
+        // ── External URL (YouTube / SabreNation redirect) ────────────────────
+        if (day.videoNote) {
+          var noteEl = document.createElement('p');
+          noteEl.className = 'admin-progress-hint';
+          noteEl.style.cssText = 'background:#FFF8E1;border-left:3px solid #C9A96E;padding:0.5rem 0.75rem;border-radius:4px;margin-bottom:0.5rem;';
+          noteEl.textContent = day.videoNote;
+          vidBox.appendChild(noteEl);
+        }
+
+        var watchBtn = document.createElement('a');
+        watchBtn.className = 'admin-watch-yt-btn';
+        watchBtn.href = day.videoUrl;
+        watchBtn.target = '_blank';
+        watchBtn.rel = 'noopener noreferrer';
+        watchBtn.textContent = '▶ Watch Video';
+        vidBox.appendChild(watchBtn);
+
+        var hint = document.createElement('p');
+        hint.className = 'admin-progress-hint';
+        hint.textContent = 'Click Watch, then come back here and confirm below to unlock the quiz.';
+        vidBox.appendChild(hint);
+
+        var confirmBtn = document.createElement('button');
+        confirmBtn.className = 'mark-complete-btn';
+        confirmBtn.style.marginTop = '0.75rem';
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = 'I finished watching — unlock quiz';
+        vidBox.appendChild(confirmBtn);
+
+        watchBtn.addEventListener('click', function () {
+          setTimeout(function () { confirmBtn.disabled = false; }, 800);
+        });
+
+        confirmBtn.addEventListener('click', function () {
+          confirmBtn.disabled = true;
+          confirmBtn.textContent = '✓ Quiz unlocked';
+          quizWrap.style.display = 'block';
+          quizWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+
+      wrap.appendChild(vidBox);
+      wrap.appendChild(quizWrap);
       return wrap;
     }
 
