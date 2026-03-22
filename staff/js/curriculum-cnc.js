@@ -1,7 +1,8 @@
 // curriculum-cnc.js — CNC Machine Operator Track
-// Week 1: ShopSabre Machine Fundamentals
+// Week 1: ShopSabre Machine Fundamentals (hardcoded with full quiz)
+// Weeks 2–12: Dynamically built from window.TRAINING_CONTENT (CNC_PLAN for scott)
 // Source: SabreNation University (shopsabre.com/sabrenation/sabrenation-university/)
-// Day pattern: Odd = video, Even = quiz/practice, Day 5 = combined review
+// Daily pattern: Mon/Wed = video, Tue/Thu = quiz, Fri = weekly-review
 
 window.PORTAL_CURRICULUM = {
   track: 'cnc',
@@ -126,3 +127,64 @@ window.PORTAL_CURRICULUM = {
     }
   ]
 };
+
+// ── Dynamically append Weeks 2–12 from TRAINING_CONTENT ───────────────────
+(function () {
+  'use strict';
+
+  var CNC_DEFAULT_URL   = 'https://www.shopsabre.com/sabrenation/sabrenation-university/';
+  var CNC_DEFAULT_LABEL = 'SabreNation University';
+
+  function dailyType(dIdx) {
+    if (window.getDailyType) return window.getDailyType(dIdx);
+    if (dIdx === 0 || dIdx === 2) return 'video';
+    if (dIdx === 4)               return 'weekly-review';
+    return 'quiz';
+  }
+
+  var TC = window.TRAINING_CONTENT;
+  if (!TC || !TC.scott || !TC.scott.plan) return;
+
+  var plan     = TC.scott.plan;
+  var weekNums = Object.keys(plan).map(Number).sort(function (a, b) { return a - b; });
+
+  weekNums.forEach(function (wNum) {
+    if (wNum <= 1) return; // Week 1 is already hardcoded above
+    var days = plan[wNum];
+    if (!days || !days.length) return;
+
+    var portalDays = [];
+    days.forEach(function (day, dIdx) {
+      var dt    = dailyType(dIdx);
+      var topic = day.topic || ('Day ' + (dIdx + 1));
+      var typeLabel = dt === 'video' ? 'Video' : dt === 'weekly-review' ? 'Weekly Review' : 'Practice';
+
+      var pd = {
+        dayNum:   dIdx + 1,
+        label:    topic + ' — ' + typeLabel,
+        type:     dt,
+        duration: 35,
+        segments: day.objectives || [],
+      };
+
+      if (dt === 'video') {
+        pd.videoTitle = topic;
+        pd.videoUrl   = day.resourceUrl   || CNC_DEFAULT_URL;
+        pd.videoNote  = (day.resourceLabel || CNC_DEFAULT_LABEL) + ' · Login: SabreNationUniversityAccess';
+      } else {
+        pd.taskDescription = day.task || 'Apply what you learned on the machine with Jose supervising.';
+      }
+
+      portalDays.push(pd);
+    });
+
+    var theme = (days[0] && days[0].topic) ? days[0].topic : 'CNC Week ' + wNum;
+
+    window.PORTAL_CURRICULUM.weeks.push({
+      weekNum: wNum,
+      theme:   theme,
+      days:    portalDays,
+    });
+  });
+
+})();

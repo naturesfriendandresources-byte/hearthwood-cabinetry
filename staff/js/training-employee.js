@@ -393,6 +393,10 @@
     const accentColor = config ? config.color : '#C4622D';
     const dateObj  = new Date(currentDate + 'T12:00:00');
     const dayName  = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dateObj.getDay()];
+    const dayIndex = dateObj.getDay() === 0 ? 6 : dateObj.getDay() - 1; // Mon=0 … Fri=4
+    const dailyTypeKey   = window.getDailyType ? window.getDailyType(dayIndex) : 'video';
+    const dailyTypeLabel = dailyTypeKey === 'video' ? '📹 Video Day' : dailyTypeKey === 'weekly-review' ? '📋 Weekly Review' : '📝 Quiz Day';
+    const phase          = window.getPhaseForWeek ? window.getPhaseForWeek(content.week || 1) : 'Beginner';
 
     const isComplete = record && record.completed;
 
@@ -418,6 +422,7 @@
         <div class="week-badge">
           Week ${content.week} &middot; Day ${content.day} &middot; ${dayName}
         </div>
+        <div class="phase-badge">${escHtml(phase)} &middot; ${dailyTypeLabel}</div>
 
         <h1 class="topic-title">${escHtml(content.topic)}</h1>
 
@@ -524,6 +529,10 @@
 
     const dateObj  = new Date(currentDate + 'T12:00:00');
     const dayName  = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dateObj.getDay()];
+    const dayIndex = dateObj.getDay() === 0 ? 6 : dateObj.getDay() - 1; // Mon=0 … Fri=4
+    const dailyTypeKey   = window.getDailyType ? window.getDailyType(dayIndex) : 'video';
+    const dailyTypeLabel = dailyTypeKey === 'video' ? '📹 Video Day' : dailyTypeKey === 'weekly-review' ? '📋 Weekly Review' : '📝 Quiz Day';
+    const phase          = window.getPhaseForWeek ? window.getPhaseForWeek(content.week || 1) : 'Beginner';
     const isComplete = record && record.completed;
 
     const adminBadgeHtml = (adminModule && adminPassed) ? '<div class="admin-done-badge"><span class="checkmark">✓</span> Administration done</div>' : '';
@@ -543,6 +552,7 @@
       <div class="training-card" style="--accent: #5F8062">
         ${adminBadgeHtml}
         <div class="week-badge">Week ${content.week} &middot; Day ${content.day} &middot; ${dayName}</div>
+        <div class="phase-badge">${escHtml(phase)} &middot; ${dailyTypeLabel}</div>
         <h1 class="topic-title" style="font-size:20px;">Daily Training — 2.5 Hours</h1>
         ${completionHtml}
 

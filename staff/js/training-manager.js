@@ -140,6 +140,29 @@
     const todayContent = getTrainingDay(employee, today);
     const todayTopic   = todayContent ? todayContent.topic : 'No training today';
     const weekNum      = todayContent ? 'Week ' + todayContent.week : '—';
+    const currentWeek  = todayContent ? (todayContent.week || 1) : 1;
+    const phase        = window.getPhaseForWeek ? window.getPhaseForWeek(currentWeek) : 'Beginner';
+
+    // Quiz average — scan all nfr_tp_[employee] records for quiz_score entries
+    var quizAvg = (function() {
+      try {
+        var allRecords = JSON.parse(localStorage.getItem('nfr_tp_' + employee) || '{}');
+        var scores = [], totals = [];
+        Object.values(allRecords).forEach(function(rec) {
+          if (rec && rec.quizScore != null && rec.quizTotal) {
+            scores.push(rec.quizScore);
+            totals.push(rec.quizTotal);
+          }
+        });
+        if (!scores.length) return null;
+        var totalCorrect = scores.reduce(function(a,b){return a+b;}, 0);
+        var totalQ       = totals.reduce(function(a,b){return a+b;}, 0);
+        return totalQ > 0 ? Math.round((totalCorrect / totalQ) * 100) : null;
+      } catch(e) { return null; }
+    }());
+    const quizAvgHtml = quizAvg != null
+      ? '<div class="quiz-avg">Quiz avg: <strong>' + quizAvg + '%</strong></div>'
+      : '';
 
     // Last active
     const lastActive = tracker.getLastActive(employee);
@@ -223,6 +246,8 @@
               <div class="week-tag">${escHtml(weekNum)}</div>
             </div>
 
+            <div class="phase-tag">${escHtml(phase)}</div>
+
             <div class="today-topic">${escHtml(todayTopic)}</div>
 
             ${pillsHtml}
@@ -239,6 +264,8 @@
                 <span class="stat-label">day streak</span>
               </div>
             </div>
+
+            ${quizAvgHtml}
 
             <div class="last-active">Last active: <strong>${escHtml(lastActiveDisplay)}</strong></div>
 

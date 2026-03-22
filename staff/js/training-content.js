@@ -4419,7 +4419,62 @@
     return result;
   }
 
+  // ── 90-Day Phase System ────────────────────────────────────────────────────
+  // Beginner:     Weeks 1–6   (Days 1–30)
+  // Intermediate: Weeks 7–12  (Days 31–60)
+  // Advanced:     Weeks 13+   (Days 61–90)
+
+  function getPhaseForWeek(weekNum) {
+    if (weekNum <= 6)  return 'Beginner';
+    if (weekNum <= 12) return 'Intermediate';
+    return 'Advanced';
+  }
+
+  // Returns program day number (1-based weekday count from anchor to dateStr)
+  function getProgramDay(employee, dateStr) {
+    var config = TRAINING_CONTENT[employee];
+    if (!config || !config.anchor) return null;
+    var anchor = new Date(config.anchor + 'T00:00:00');
+    var target = new Date(dateStr + 'T00:00:00');
+    if (target < anchor) return null;
+    var day = 0;
+    var cursor = new Date(anchor);
+    while (cursor.toISOString().slice(0, 10) <= dateStr) {
+      var dow = cursor.getDay();
+      if (dow !== 0 && dow !== 6) day++;
+      if (cursor.toISOString().slice(0, 10) === dateStr) break;
+      cursor.setDate(cursor.getDate() + 1);
+    }
+    return day > 0 ? day : null;
+  }
+
+  // ── Daily Schedule Pattern ─────────────────────────────────────────────────
+  // dayIndex: 0=Mon 1=Tue 2=Wed 3=Thu 4=Fri
+  // Mon/Wed → 'video'          (Video + Information)
+  // Tue/Thu → 'quiz'           (Review + Quiz)
+  // Fri    → 'weekly-review'   (All subjects from the week)
+
+  function getDailyType(dayIndex) {
+    if (dayIndex === 0 || dayIndex === 2) return 'video';
+    if (dayIndex === 4)                   return 'weekly-review';
+    return 'quiz';
+  }
+
+  // ── Daily Time Blocks ──────────────────────────────────────────────────────
+  // Maria: 2.5 hrs  — Admin + Mozaik + Design
+  // Scott: 2.0 hrs  — Admin + CNC + Warehouse
+  // Jorge: 0.5 hrs  — Admin + Project Manager (7:30–8:00am only)
+  var DAILY_SCHEDULE = {
+    maria: { hours: 2.5, tracks: ['admin', 'mozaik', 'design'],   timeWindow: null },
+    scott: { hours: 2.0, tracks: ['admin', 'cnc', 'warehouse'],   timeWindow: null },
+    jorge: { hours: 0.5, tracks: ['admin', 'manager'],            timeWindow: '7:30–8:00am' },
+  };
+
   // ── exports ────────────────────────────────────────────────────────────────
-  window.TRAINING_CONTENT = TRAINING_CONTENT;
-  window.getTrainingDay   = getTrainingDay;
+  window.TRAINING_CONTENT  = TRAINING_CONTENT;
+  window.getTrainingDay    = getTrainingDay;
+  window.getPhaseForWeek   = getPhaseForWeek;
+  window.getDailyType      = getDailyType;
+  window.getProgramDay     = getProgramDay;
+  window.DAILY_SCHEDULE    = DAILY_SCHEDULE;
 })();
