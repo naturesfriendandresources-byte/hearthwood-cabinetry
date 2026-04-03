@@ -1305,7 +1305,7 @@ const MARIA_PLAN = {
         task: 'Write 3 sentences describing what Mozaik does in your own words.',
         tip: 'Mozaik connects the design you show a client directly to the parts the shop cuts. Nothing else needs to be redrawn.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=-zxdCkFl0bg',
       },
       admin: {
         topic: 'Staff Portal Orientation — Tools You Will Use Every Day',
@@ -1393,7 +1393,7 @@ const MARIA_PLAN = {
         task: 'Label a screenshot of the Mozaik interface with the names of all 5 areas.',
         tip: 'The properties panel on the right is where you will spend most of your time.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=lIG25hNt2jo',
       },
       admin: {
         topic: 'Google Workspace — Drive, Docs, and Folder Structure',
@@ -1531,7 +1531,7 @@ const MARIA_PLAN = {
         task: 'Find a 30" base cabinet and a 30" wall cabinet. Screenshot both.',
         tip: 'Learn the category names now — clients will ask for them by name.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=vF-jFeIhDOA',
       },
       admin: {
         topic: 'Client Communication — Email Templates and Response Standards',
@@ -1619,7 +1619,7 @@ const MARIA_PLAN = {
         task: 'Place a 36" base cabinet in a new project. Screenshot the result.',
         tip: 'Every placement starts with room dimensions. Get those right first.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=yzVXgpODFjI',
       },
       admin: {
         topic: 'CompanyCam — Job Photos, Albums, and Tagging',
@@ -1757,7 +1757,7 @@ const MARIA_PLAN = {
         task: 'Build a 10-foot straight base cabinet run. Screenshot the top view.',
         tip: 'Always start with the room, then the walls, then cabinets. Never the other way.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=tAHNUDCDD5U',
       },
       admin: {
         topic: 'Google Calendar — Scheduling Appointments and Blocking Time',
@@ -1845,7 +1845,7 @@ const MARIA_PLAN = {
         task: 'Save your Week 3 kitchen project using the correct naming convention.',
         tip: 'Bad file names cost time on every future revision. Name it right once.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=0vhwhusgugQ',
       },
       admin: {
         topic: 'QuickBooks Basics — The NFR Chart of Accounts',
@@ -1983,7 +1983,7 @@ const MARIA_PLAN = {
         task: 'Build a two-wall kitchen with one corner transition. Screenshot.',
         tip: 'Corners are the hardest part of any kitchen layout. Master them early.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=I9OPD4xWMtQ',
       },
       admin: {
         topic: 'NFR Documents — Agreements, Proposals, and Work Orders',
@@ -2071,7 +2071,7 @@ const MARIA_PLAN = {
         task: 'Place sink, dishwasher gap, range, and hood in a kitchen. Screenshot.',
         tip: 'The sink-dishwasher-range triangle is the core of every kitchen layout.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=wIN7ezHqdZU',
       },
       admin: {
         topic: 'Proposal Calculator — Entering Scope and Generating Totals',
@@ -2209,7 +2209,7 @@ const MARIA_PLAN = {
         task: 'Build an L-shape kitchen. Screenshot top view.',
         tip: 'L-shape is the most common kitchen in Columbus homes. Know it instinctively.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=ALsWvrG3H1o',
       },
       admin: {
         topic: 'Proposals — Line Items, Scope Descriptions, and Pricing Rules',
@@ -2297,7 +2297,7 @@ const MARIA_PLAN = {
         task: 'Build a U-shape kitchen. Screenshot.',
         tip: 'U-shape kitchens have 2 corners. Place them before filling the runs.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=iRqJdzMRIuo',
       },
       admin: {
         topic: 'Work Orders — Creating, Assigning, and Tracking',
@@ -2435,7 +2435,7 @@ const MARIA_PLAN = {
         task: 'Build an L-shape kitchen with a 4×2 island. Verify clearances. Screenshot.',
         tip: 'The most common client request: "Can we add an island?" Know clearance rules cold.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=1aLFcA7aQww',
       },
       admin: {
         topic: 'Job Coordination — Scheduling Crews, Deliveries, and Site Visits',
@@ -2523,7 +2523,7 @@ const MARIA_PLAN = {
         task: 'Test 3 different island sizes in the same kitchen. Document which one works.',
         tip: 'Clients always want a bigger island. Your job is to protect the workflow.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=1aLFcA7aQww',
       },
       admin: {
         topic: 'Interior Surface Coordination — Scheduling and Communication',
@@ -2661,7 +2661,7 @@ const MARIA_PLAN = {
         task: 'Modify 3 cabinets in your Week 6 kitchen — change each dimension on one.',
         tip: 'Width changes are most common. Height changes come up with 9-foot ceilings.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=1CU_8rg1oNE',
       },
       admin: {
         topic: 'Admin Checkpoint — Week 1–6 Review and Gap Assessment',
@@ -2749,7 +2749,7 @@ const MARIA_PLAN = {
         task: 'Modify 5 cabinets in one layout. Screenshot before and after.',
         tip: 'On real jobs, you\'ll customize at least 3-4 cabinets per layout.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=2lez-HQyc4w',
       },
       admin: {
         topic: 'Admin Processes — SOP Review and Process Cards',
@@ -2888,7 +2888,7 @@ const MARIA_PLAN = {
         task: 'Add a filler and scribe molding to an existing layout. Screenshot.',
         tip: 'Fillers and scribes make the job look finished. They\'re the last 5% that clients remember.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=JYLZKG0bAXk',
       },
       admin: {
         topic: 'Agreement Lifecycle — From Inquiry to Signed Contract',
@@ -2948,7 +2948,7 @@ const MARIA_PLAN = {
         task: 'Add soffit and crown molding to your existing kitchen layout. Screenshot.',
         tip: 'Crown molding is a finishing detail that adds perceived value. Learn to recommend it.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=tkM_FjE-IkI',
       },
       admin: {
         topic: 'Change Orders — When Scope Changes After Signing',
@@ -3044,7 +3044,7 @@ const MARIA_PLAN = {
         task: 'Build a 3-wall kitchen layout from scratch. Screenshot.',
         tip: 'Multi-wall kitchens are common in older Columbus homes with awkward shapes.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=agYwPxBhNuo',
       },
       admin: {
         topic: 'Vendor Communication — Ordering Materials and Confirming Delivery',
@@ -3104,7 +3104,7 @@ const MARIA_PLAN = {
         task: 'Add all appliances to your 3-wall kitchen. Verify work triangle.',
         tip: 'Complex layouts make the work triangle harder. Always check it after appliances are placed.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=cZ_ruwYRirY',
       },
       admin: {
         topic: 'Job Closeout — Final Walkthrough, Punch List, and Invoice',
@@ -3200,7 +3200,7 @@ const MARIA_PLAN = {
         task: 'Open your most recent kitchen in 3D view. Navigate to 3 different camera angles. Screenshot each.',
         tip: 'The first 3D view you show a client is the first impression. Practice camera control.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=pc50v82ba2o',
       },
       admin: {
         topic: 'Client Experience — First Impression, Follow-Up, and Satisfaction',
@@ -3260,7 +3260,7 @@ const MARIA_PLAN = {
         task: 'Apply 2 different finish colors to your kitchen in 3D. Screenshot both.',
         tip: 'Color in 3D is the closest thing to what a client will see in their home.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=THatXPMgKl0',
       },
       admin: {
         topic: 'Client Reviews and Referrals — Asking and Tracking',
@@ -3356,7 +3356,7 @@ const MARIA_PLAN = {
         task: 'Adjust lighting in your 3D kitchen. Compare 3 settings. Screenshot each.',
         tip: 'Bad lighting makes a good kitchen look like a blueprint. Get this right.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=5MXazM7OAcQ',
       },
       admin: {
         topic: 'Invoices — Creating, Sending, and Tracking in QuickBooks',
@@ -3416,7 +3416,7 @@ const MARIA_PLAN = {
         task: 'Export 2 views of your kitchen render. Save to Google Drive with correct naming.',
         tip: 'File naming is not optional. Every export needs to be findable in 6 months.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=jtYglK_gdeQ',
       },
       admin: {
         topic: 'Payment Tracking — Deposits, Progress Payments, and Final Balance',
@@ -3512,7 +3512,7 @@ const MARIA_PLAN = {
         task: 'Jose gives you a written brief. Start the layout without asking questions.',
         tip: 'The brief is your only instruction. Learn to extract everything from it.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=KzbGH0g7pY0',
       },
       admin: {
         topic: 'Client Consultation — Discovery Call and Site Visit Process',
@@ -3572,7 +3572,7 @@ const MARIA_PLAN = {
         task: 'Present both layouts to Jose. Let him choose. Support his choice with data.',
         tip: 'Presenting options is a skill. Guide without pushing. Inform without overwhelming.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=kHK2e2EjHyM',
       },
       admin: {
         topic: 'Post-Consultation Admin — Notes, Proposal Trigger, and Follow-Up',
@@ -3668,7 +3668,7 @@ const MARIA_PLAN = {
         task: 'Generate a cut list from your Week 12 kitchen. Identify 3 CNC-cut parts.',
         tip: 'The cut list is what Scott reads to run the CNC. Every error here is a cut error there.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=loaargTmFSg',
       },
       admin: {
         topic: 'Job Closeout — Punch List Creation and Tracking',
@@ -3728,7 +3728,7 @@ const MARIA_PLAN = {
         task: 'Generate an optimized sheet layout from your kitchen cut list. Note waste %.',
         tip: 'Waste % directly affects job profitability. Lower is better.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=JDtevbVk5ic',
       },
       admin: {
         topic: 'Client Reviews — Request, Track, and Respond',
@@ -3824,7 +3824,7 @@ const MARIA_PLAN = {
         task: 'Generate a material report from your Week 13 kitchen. Identify the order quantities.',
         tip: 'Material reports tell you what to buy. Cut lists tell you what to cut.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=ieeiyvFOXqQ',
       },
       admin: {
         topic: 'New Client Intake — From First Call to Project Folder',
@@ -3884,7 +3884,7 @@ const MARIA_PLAN = {
         task: 'Assemble a complete job package for Scott from your Week 13 kitchen.',
         tip: 'The shop package is Maria\'s handoff to production. Missing files cause delays.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=JDtevbVk5ic',
       },
       admin: {
         topic: 'CRM Basics — Tracking Leads, Clients, and Follow-Up',
@@ -3980,7 +3980,7 @@ const MARIA_PLAN = {
         task: 'Send a test package to Scott and record the send confirmation.',
         tip: 'Every handoff has a timestamp. Log it.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=hfiuqvIw0lg',
       },
       admin: {
         topic: 'QuickBooks — Expense Tracking and Bill Entry',
@@ -4040,7 +4040,7 @@ const MARIA_PLAN = {
         task: 'Review a CNC output from a past job. Match 5 parts to the cut list.',
         tip: 'Watching production makes you a better designer. The machine shows you what the file becomes.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=GSN1ed9WZa4',
       },
       admin: {
         topic: 'Payroll Basics — Tracking Hours and Reporting to Jose',
@@ -4136,7 +4136,7 @@ const MARIA_PLAN = {
         task: 'Build the standard kitchen. Time it. Target: under 45 minutes.',
         tip: 'Speed is a skill. The first time takes 90 minutes. By graduation it should take 30.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=ALsWvrG3H1o',
       },
       admin: {
         topic: 'Office Efficiency — Batching, Templates, and Time Blocking',
@@ -4196,7 +4196,7 @@ const MARIA_PLAN = {
         task: 'Jose gives brief. Build full 3D presentation. Target: 90 minutes.',
         tip: 'This is the real job. Brief comes in the morning, client sees 3D by afternoon.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=cZ_ruwYRirY',
       },
       admin: {
         topic: 'SOP Creation — Writing a Process That Others Can Follow',
@@ -4292,7 +4292,7 @@ const MARIA_PLAN = {
         task: 'Build a kitchen + bathroom in one Mozaik project. Screenshot both rooms.',
         tip: 'Multi-room projects are common for kitchen + bath remodels. This is your future.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=9Bk_SI5IGbU',
       },
       admin: {
         topic: 'Marketing Support — Social Media, Photos, and Before/After Posts',
@@ -4352,7 +4352,7 @@ const MARIA_PLAN = {
         task: 'Organize a large 3-room project folder. Show Jose the structure.',
         tip: 'Disorganized projects lose money at every handoff. File structure is a skill.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=wWSeWd6VUaw',
       },
       admin: {
         topic: 'Email Campaign Basics — Announcing New Services and Following Up',
@@ -4448,7 +4448,7 @@ const MARIA_PLAN = {
         task: 'Jose gives you the graduation brief. Begin your plan. No help.',
         tip: 'This is the real thing. Everything from 18 weeks leads here.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=yzVXgpODFjI',
       },
       admin: {
         topic: 'Graduation — Admin Operations Mastery Check',
@@ -4508,7 +4508,7 @@ const MARIA_PLAN = {
         task: 'Complete 3D render package for the graduation project.',
         tip: 'Your renders are what the client will see first. Make them count.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=jtYglK_gdeQ',
       },
       admin: {
         topic: 'Graduation — SOP Contribution: Add One New SOP',
