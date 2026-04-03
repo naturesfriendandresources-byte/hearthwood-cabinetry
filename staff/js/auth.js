@@ -41,7 +41,7 @@
   // To change: update the value here and redeploy.
   const DEFAULT_PASSWORDS = {
     jose:  btoa(unescape(encodeURIComponent('NFRjose2024'))),
-    maria: btoa(unescape(encodeURIComponent('maria'))),
+    maria: btoa(unescape(encodeURIComponent('password'))),
     jorge: btoa(unescape(encodeURIComponent('jorge'))),
     scott: btoa(unescape(encodeURIComponent('scott'))),
     jen:   btoa(unescape(encodeURIComponent('jen'))),
