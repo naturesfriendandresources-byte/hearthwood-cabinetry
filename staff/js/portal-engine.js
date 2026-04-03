@@ -330,8 +330,40 @@
 
       var head = document.createElement('h3');
       head.className = 'section-heading';
-      head.textContent = day.type === 'review' ? 'Combined Review Quiz' : 'Quiz';
+      head.textContent = day.type === 'weekly-review' ? 'Weekly Review' : 'Quiz';
       section.appendChild(head);
+
+      // No quiz questions yet — show objectives + mark complete button
+      if (!day.quiz || !day.quiz.length) {
+        if (day.segments && day.segments.length) {
+          var objHead = document.createElement('p');
+          objHead.style.cssText = 'font-weight:600;margin-bottom:0.5rem;';
+          objHead.textContent = 'Review these objectives:';
+          section.appendChild(objHead);
+          var objList = document.createElement('ul');
+          objList.style.cssText = 'margin:0 0 1rem 1.25rem;';
+          day.segments.forEach(function (s) {
+            var li = document.createElement('li');
+            li.style.cssText = 'margin-bottom:0.35rem;';
+            li.textContent = s;
+            objList.appendChild(li);
+          });
+          section.appendChild(objList);
+        }
+        var completeBtn = document.createElement('button');
+        completeBtn.type = 'button';
+        completeBtn.className = 'mark-complete-btn';
+        completeBtn.textContent = 'Mark Day Complete';
+        completeBtn.addEventListener('click', function () {
+          progress[dayKey(wIdx, dIdx)] = true;
+          saveProgress();
+          completeBtn.disabled = true;
+          completeBtn.textContent = '✓ Complete';
+          setTimeout(render, 800);
+        });
+        section.appendChild(completeBtn);
+        return section;
+      }
 
       var form = document.createElement('form');
       form.className = 'admin-quiz-form';
