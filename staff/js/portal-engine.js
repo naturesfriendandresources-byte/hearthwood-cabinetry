@@ -185,8 +185,8 @@
         card.appendChild(segSection);
       }
 
-      // Content: video or quiz
-      if (day.type === 'video') {
+      // Content: show video on any day that has a videoUrl, then task/objectives below
+      if (day.videoUrl) {
         card.appendChild(buildVideoSection(day, wIdx, dIdx));
       } else {
         card.appendChild(buildQuizSection(day, wIdx, dIdx));
