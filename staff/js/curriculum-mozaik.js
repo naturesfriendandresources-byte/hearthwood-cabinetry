@@ -34,11 +34,11 @@
         segments: mz.objectives || [],
       };
 
-      if (dt === 'video') {
-        pd.videoTitle = topic;
-        pd.videoUrl   = mz.resourceUrl   || MOZAIK_RESOURCE_URL;
-        pd.videoNote  = mz.resourceLabel || MOZAIK_RESOURCE_LABEL;
-      } else {
+      // All days get a video — quiz/review days re-watch the week's topic video
+      pd.videoTitle = topic;
+      pd.videoUrl   = mz.resourceUrl   || MOZAIK_RESOURCE_URL;
+      pd.videoNote  = mz.resourceLabel || MOZAIK_RESOURCE_LABEL;
+      if (dt !== 'video') {
         pd.taskDescription = mz.task || 'Practice the Mozaik skills from this week in a real project.';
       }
 

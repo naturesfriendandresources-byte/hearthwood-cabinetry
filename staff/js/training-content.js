@@ -1349,7 +1349,7 @@ const MARIA_PLAN = {
         task: 'Complete the Week 1 Day 1 Mozaik quiz.',
         tip: 'If you missed a question, re-read your Day 1 notes before moving on.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=-zxdCkFl0bg',
       },
       admin: {
         topic: 'Staff Portal — Quiz & Tool Checklist',
@@ -1437,7 +1437,7 @@ const MARIA_PLAN = {
         task: 'Complete the Mozaik interface quiz.',
         tip: 'Speed through the panels 3 times before the quiz — muscle memory matters here.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=lIG25hNt2jo',
       },
       admin: {
         topic: 'Google Workspace — Quiz',
@@ -1481,7 +1481,7 @@ const MARIA_PLAN = {
         task: 'Open Mozaik, navigate to each panel once, then close and summarize the week to Jose.',
         tip: 'Week 1 is orientation. If something didn\'t click, that\'s normal — note it and keep moving.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=-zxdCkFl0bg',
       },
       admin: {
         topic: 'Week 1 Review — Admin Tools Checkpoint',
@@ -1575,7 +1575,7 @@ const MARIA_PLAN = {
         task: 'Complete the cabinet library quiz.',
         tip: 'If you can\'t find a cabinet fast, the client is waiting. Practice search speed.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=vF-jFeIhDOA',
       },
       admin: {
         topic: 'Client Communication — Quiz',
@@ -1663,7 +1663,7 @@ const MARIA_PLAN = {
         task: 'Complete the Mozaik cabinet placement quiz.',
         tip: 'Placement is muscle memory. Do it 10 times and it becomes automatic.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=yzVXgpODFjI',
       },
       admin: {
         topic: 'CompanyCam — Quiz',
@@ -1707,7 +1707,7 @@ const MARIA_PLAN = {
         task: 'Open Mozaik and place one base, one wall, and one tall cabinet. Show Jose.',
         tip: 'You\'re building the foundation. It feels slow now — it won\'t by Week 6.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=vF-jFeIhDOA',
       },
       admin: {
         topic: 'Week 2 Review — Communication and Tools',
@@ -1801,7 +1801,7 @@ const MARIA_PLAN = {
         task: 'Complete the straight-wall kitchen Mozaik quiz.',
         tip: 'Wall cabinet height is one of the first things clients notice. Get it right.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=tAHNUDCDD5U',
       },
       admin: {
         topic: 'Google Calendar — Quiz',
@@ -1889,7 +1889,7 @@ const MARIA_PLAN = {
         task: 'Complete the Mozaik project management quiz.',
         tip: 'One client = one folder = one naming convention. Always.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=0vhwhusgugQ',
       },
       admin: {
         topic: 'QuickBooks — Quiz',
@@ -1933,7 +1933,7 @@ const MARIA_PLAN = {
         task: 'Build a 1-wall kitchen from scratch without notes. Show Jose the result.',
         tip: 'This is your first real Mozaik build. It should feel harder than it looks.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=tAHNUDCDD5U',
       },
       admin: {
         topic: 'Week 3 Review — Admin Tools Full Run',
@@ -2027,7 +2027,7 @@ const MARIA_PLAN = {
         task: 'Complete the corner cabinet Mozaik quiz.',
         tip: 'Ask yourself: what will the client access most? That drives the corner choice.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=I9OPD4xWMtQ',
       },
       admin: {
         topic: 'Documents & Agreements — Quiz',
@@ -2115,7 +2115,7 @@ const MARIA_PLAN = {
         task: 'Complete the appliance placement Mozaik quiz.',
         tip: 'The work triangle (sink-range-fridge) is the industry standard. Know the distances.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=wIN7ezHqdZU',
       },
       admin: {
         topic: 'Proposal Calculator — Quiz',
@@ -2159,7 +2159,7 @@ const MARIA_PLAN = {
         task: 'Build a full two-wall kitchen with corner and appliances. Show Jose.',
         tip: 'By now your builds should look like real kitchens. If something looks off — fix it.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=wIN7ezHqdZU',
       },
       admin: {
         topic: 'Week 4 Review — Documents and Proposal Workflow',
@@ -2253,7 +2253,7 @@ const MARIA_PLAN = {
         task: 'Complete the fillers and end panels Mozaik quiz.',
         tip: 'Fillers fill gaps. End panels finish exposed sides. Never confuse the two.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=ALsWvrG3H1o',
       },
       admin: {
         topic: 'Proposals — Pricing Rules Quiz',
@@ -2341,7 +2341,7 @@ const MARIA_PLAN = {
         task: 'Complete the U-shape and galley kitchen Mozaik quiz.',
         tip: 'Galley kitchens are common in older Columbus homes. Know the clearance rule (48" aisle minimum).',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=iRqJdzMRIuo',
       },
       admin: {
         topic: 'Work Orders — Quiz',
@@ -2385,7 +2385,7 @@ const MARIA_PLAN = {
         task: 'Build a complete L-shape kitchen with all elements. Show Jose.',
         tip: 'This is the most common layout NFR quotes. Build it until it\'s automatic.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=ALsWvrG3H1o',
       },
       admin: {
         topic: 'Week 5 Review — Document and Work Order Cycle',
@@ -2479,7 +2479,7 @@ const MARIA_PLAN = {
         task: 'Complete the peninsula and island Mozaik quiz.',
         tip: 'Peninsula connects to the wall. Island floats. Know when each makes sense.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=1aLFcA7aQww',
       },
       admin: {
         topic: 'Job Coordination — Quiz',
@@ -2567,7 +2567,7 @@ const MARIA_PLAN = {
         task: 'Complete the island with seating Mozaik quiz.',
         tip: 'Seating overhang + clearance + work triangle = 3 things to check every island.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=1aLFcA7aQww',
       },
       admin: {
         topic: 'Interior Surface Coordination — Quiz',
@@ -2611,7 +2611,7 @@ const MARIA_PLAN = {
         task: 'Build the complete kitchen with island and present to Jose verbally.',
         tip: 'You are now 6 weeks in. A full kitchen with island should feel possible — not easy, but possible.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=1aLFcA7aQww',
       },
       admin: {
         topic: 'Week 6 Review — Full Coordination Cycle',
@@ -2705,7 +2705,7 @@ const MARIA_PLAN = {
         task: 'Complete the cabinet sizing Mozaik quiz.',
         tip: 'Custom sizing is what separates a Mozaik user from a catalog browser.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=1CU_8rg1oNE',
       },
       admin: {
         topic: 'Admin Checkpoint — Quiz and Self-Assessment',
@@ -2793,7 +2793,7 @@ const MARIA_PLAN = {
         task: 'Complete the advanced cabinet sizing Mozaik quiz.',
         tip: 'Speed and accuracy together — that\'s the goal from here on.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=2lez-HQyc4w',
       },
       admin: {
         topic: 'SOP Review — Quiz',
@@ -2837,7 +2837,7 @@ const MARIA_PLAN = {
         task: 'Build Jose\'s kitchen challenge from scratch. Present without notes.',
         tip: 'This is Phase 1 graduation for Mozaik. If you can do this — Phase 2 will build on it.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=2lez-HQyc4w',
       },
       admin: {
         topic: 'Week 7 Review — Full Admin Cycle Confirmation',
@@ -2918,7 +2918,7 @@ const MARIA_PLAN = {
         task: 'Complete the angle cabinet and corner transition quiz.',
         tip: 'Angled cabinets appear in irregular rooms. Not common but clients notice when it\'s wrong.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=JYLZKG0bAXk',
       },
       admin: {
         topic: 'Agreement Lifecycle — Quiz',
@@ -2978,7 +2978,7 @@ const MARIA_PLAN = {
         task: 'Complete the soffit, bulkhead, and crown quiz.',
         tip: 'Most clients won\'t know these terms. Explain what they\'ll see, not the label.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=tkM_FjE-IkI',
       },
       admin: {
         topic: 'Change Orders — Quiz',
@@ -3008,7 +3008,7 @@ const MARIA_PLAN = {
         task: 'Build a fully detailed kitchen with all specialty elements. Present to Jose.',
         tip: 'Specialty elements are finishing details. A kitchen without them looks unfinished.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=tkM_FjE-IkI',
       },
       admin: {
         topic: 'Week 8 Review — Agreement and Change Order Cycle',
@@ -3074,7 +3074,7 @@ const MARIA_PLAN = {
         task: 'Complete the awkward room shapes Mozaik quiz.',
         tip: 'Irregular rooms are where Mozaik\'s value becomes obvious. No contractor can sketch this faster.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=agYwPxBhNuo',
       },
       admin: {
         topic: 'Vendor Communication — Quiz',
@@ -3134,7 +3134,7 @@ const MARIA_PLAN = {
         task: 'Complete the combined modifications Mozaik quiz.',
         tip: 'Real jobs always have multiple modifications. Get comfortable combining them.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=cZ_ruwYRirY',
       },
       admin: {
         topic: 'Job Closeout — Quiz',
@@ -3164,7 +3164,7 @@ const MARIA_PLAN = {
         task: 'Ask Jose for a complex kitchen assignment. Build it. Present it.',
         tip: 'This week\'s challenge comes from Jose. No template — just the brief.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=agYwPxBhNuo',
       },
       admin: {
         topic: 'Week 9 Review — Vendor and Closeout Cycle',
@@ -3230,7 +3230,7 @@ const MARIA_PLAN = {
         task: 'Complete the 3D camera and door styles Mozaik quiz.',
         tip: 'Saved camera angles = consistent client presentations. Name them (Front, Island, Corner).',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=pc50v82ba2o',
       },
       admin: {
         topic: 'Client Experience — Quiz',
@@ -3290,7 +3290,7 @@ const MARIA_PLAN = {
         task: 'Complete the material and finish library Mozaik quiz.',
         tip: 'A client who can see 2 versions decides faster. Master the switch.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=THatXPMgKl0',
       },
       admin: {
         topic: 'Client Reviews and Referrals — Quiz',
@@ -3320,7 +3320,7 @@ const MARIA_PLAN = {
         task: 'Present a 3D kitchen package to Jose. 3 angles, 2 options.',
         tip: '3D presentations close more jobs. Own this skill before Week 11.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=pc50v82ba2o',
       },
       admin: {
         topic: 'Week 10 Review — Client Experience Cycle',
@@ -3386,7 +3386,7 @@ const MARIA_PLAN = {
         task: 'Complete the render quality settings Mozaik quiz.',
         tip: 'Use fast render for feedback, quality render for client presentations.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=5MXazM7OAcQ',
       },
       admin: {
         topic: 'Invoices — Quiz',
@@ -3446,7 +3446,7 @@ const MARIA_PLAN = {
         task: 'Complete the full presentation package Mozaik quiz.',
         tip: 'A presentation package is a product. Deliver it like one.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=jtYglK_gdeQ',
       },
       admin: {
         topic: 'Payment Tracking — Quiz',
@@ -3476,7 +3476,7 @@ const MARIA_PLAN = {
         task: 'Full client presentation to Jose. Handle one revision live.',
         tip: 'This is Week 11. Your presentations should feel professional by now.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=jtYglK_gdeQ',
       },
       admin: {
         topic: 'Week 11 Review — Invoice and Payment Cycle',
@@ -3542,7 +3542,7 @@ const MARIA_PLAN = {
         task: 'Complete the two-option design quiz.',
         tip: 'Two options give the client control without infinite choice. This is a sales skill.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=KzbGH0g7pY0',
       },
       admin: {
         topic: 'Consultation Process — Quiz',
@@ -3602,7 +3602,7 @@ const MARIA_PLAN = {
         task: 'Complete the live client simulation quiz — Jose plays the client.',
         tip: 'This is your first simulation under pressure. Mistakes are OK — learning isn\'t.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=kHK2e2EjHyM',
       },
       admin: {
         topic: 'Post-Consultation Admin — Quiz',
@@ -3632,7 +3632,7 @@ const MARIA_PLAN = {
         task: 'Run the full simulation for Jose. This is a pass/fail checkpoint.',
         tip: 'Week 12 is a major milestone. If you pass — production training begins. If not — Jose will tell you what to drill.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=kHK2e2EjHyM',
       },
       admin: {
         topic: 'Week 12 Review — Consultation to Proposal Full Cycle',
@@ -3698,7 +3698,7 @@ const MARIA_PLAN = {
         task: 'Complete the part labels cut list quiz.',
         tip: 'LH = left hand, RH = right hand. Mix them up and the install fails.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=loaargTmFSg',
       },
       admin: {
         topic: 'Punch List — Quiz',
@@ -3758,7 +3758,7 @@ const MARIA_PLAN = {
         task: 'Complete the cut list error-checking quiz.',
         tip: 'A cut list error caught by Maria > a cut list error caught by Scott > a cut list error caught at install.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=JDtevbVk5ic',
       },
       admin: {
         topic: 'Client Reviews — Quiz',
@@ -3788,7 +3788,7 @@ const MARIA_PLAN = {
         task: 'Generate and error-check a cut list. Present to Jose.',
         tip: 'Production starts with your cut list. The shop trusts what you send.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=loaargTmFSg',
       },
       admin: {
         topic: 'Week 13 Review — Closeout and Review Cycle',
@@ -3854,7 +3854,7 @@ const MARIA_PLAN = {
         task: 'Complete the CNC export basics quiz.',
         tip: 'You don\'t run the CNC. But you need to know what you\'re sending and why.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=ieeiyvFOXqQ',
       },
       admin: {
         topic: 'New Client Intake — Quiz',
@@ -3914,7 +3914,7 @@ const MARIA_PLAN = {
         task: 'Complete the file handoff and verification Mozaik quiz.',
         tip: 'The handoff is a contract between you and Scott. Make it clean.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=JDtevbVk5ic',
       },
       admin: {
         topic: 'CRM and Lead Tracking — Quiz',
@@ -3944,7 +3944,7 @@ const MARIA_PLAN = {
         task: 'Assemble and present a full manufacturing package. Present to Jose.',
         tip: 'Week 14 is production handoff. If this is clean — the shop runs smooth.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=JDtevbVk5ic',
       },
       admin: {
         topic: 'Week 14 Review — Intake and Lead Cycle',
@@ -4010,7 +4010,7 @@ const MARIA_PLAN = {
         task: 'Complete the cut list verification walkthrough quiz.',
         tip: 'You sent it — you own it. Know every line item.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=hfiuqvIw0lg',
       },
       admin: {
         topic: 'QuickBooks — Expense Tracking Quiz',
@@ -4070,7 +4070,7 @@ const MARIA_PLAN = {
         task: 'Complete the revision protocol Mozaik quiz.',
         tip: 'Revisions happen. The protocol prevents confusion — follow it every time.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=GSN1ed9WZa4',
       },
       admin: {
         topic: 'Payroll and Time Tracking — Quiz',
@@ -4100,7 +4100,7 @@ const MARIA_PLAN = {
         task: 'Jose assigns a real project. Build and package it. Jose approves before sending.',
         tip: 'This is the closest thing to a real job you\'ve done. Treat it like one.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=hfiuqvIw0lg',
       },
       admin: {
         topic: 'Week 15 Review — QuickBooks Job Costing Full Cycle',
@@ -4166,7 +4166,7 @@ const MARIA_PLAN = {
         task: 'Complete the timed modifications quiz.',
         tip: 'Timed work reveals where your process slows down. Note it.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=ALsWvrG3H1o',
       },
       admin: {
         topic: 'Office Efficiency — Quiz',
@@ -4226,7 +4226,7 @@ const MARIA_PLAN = {
         task: 'Complete the timed revision quiz.',
         tip: 'Revisions are normal. Slow revisions lose clients. Build the muscle.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=cZ_ruwYRirY',
       },
       admin: {
         topic: 'SOP Writing — Quiz',
@@ -4256,7 +4256,7 @@ const MARIA_PLAN = {
         task: 'Two timed builds. Jose grades speed and accuracy. Report times.',
         tip: 'Speed without accuracy is noise. Both matter equally.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=cZ_ruwYRirY',
       },
       admin: {
         topic: 'Week 16 Review — Office Systems Audit',
@@ -4322,7 +4322,7 @@ const MARIA_PLAN = {
         task: 'Complete the project version management Mozaik quiz.',
         tip: 'Version control is respect for your past work. The client will ask to see v1 someday.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=9Bk_SI5IGbU',
       },
       admin: {
         topic: 'Marketing Support — Quiz',
@@ -4382,7 +4382,7 @@ const MARIA_PLAN = {
         task: 'Complete the multi-room efficiency workflow quiz.',
         tip: 'Time matters on multi-room jobs. Every hour saved is margin earned.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=wWSeWd6VUaw',
       },
       admin: {
         topic: 'Email Campaign — Quiz',
@@ -4412,7 +4412,7 @@ const MARIA_PLAN = {
         task: 'Build and present a multi-room project Jose assigns.',
         tip: 'One week until graduation. This is the final practice run.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=9Bk_SI5IGbU',
       },
       admin: {
         topic: 'Week 17 Review — Marketing and Outreach Cycle',
@@ -4478,7 +4478,7 @@ const MARIA_PLAN = {
         task: 'Complete the graduation layout build.',
         tip: 'Build it like a client is paying for it. Because one probably is.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=yzVXgpODFjI',
       },
       admin: {
         topic: 'Graduation — Full Intake-to-Closeout Simulation',
@@ -4538,7 +4538,7 @@ const MARIA_PLAN = {
         task: 'Assemble the full manufacturing package for the graduation project.',
         tip: 'The shop package is your final handoff. Make it clean.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=JDtevbVk5ic',
       },
       admin: {
         topic: 'Graduation — Jose Reviews Your SOP and Admin Package',
@@ -4568,7 +4568,7 @@ const MARIA_PLAN = {
         task: 'GRADUATION: Full presentation to Jose. No notes. No help. This is the job.',
         tip: 'You started knowing nothing about Mozaik. You finish ready to build real kitchens for real clients. That is the work.',
         resourceLabel: MOZAIK_LABEL,
-        resourceUrl: MOZAIK_URL,
+        resourceUrl: 'https://www.youtube.com/watch?v=jtYglK_gdeQ',
       },
       admin: {
         topic: 'GRADUATION DAY — Admin Mastery Final Review with Jose',
