@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kitchen Planner — Hearthwood Cabinetry</title>
-  <meta name="description" content="Plan your dream kitchen with our interactive 2D cabinet layout tool. Enter measurements, choose your style, and download your layout.">
+  <title>Kitchen Design Planner — Hearthwood Cabinetry</title>
+  <meta name="description" content="Design your dream kitchen. Upload a photo for AI dimension analysis, or enter your measurements — then choose cabinets, countertops, and tile to see your finished kitchen.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/visualizer.css">
@@ -32,305 +33,183 @@
   </nav>
 
   <!-- PAGE HERO -->
-  <header class="page-hero">
+  <header class="page-hero planner-hero">
     <div class="container">
       <p class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <span>Kitchen Planner</span></p>
-      <h1>Kitchen Layout Planner</h1>
-      <p>Enter your wall measurements, choose your style, and get an instant 2D cabinet layout — free to download.</p>
+      <h1>Design Your Kitchen</h1>
+      <p>Upload a photo for AI dimension analysis &mdash; or enter your measurements manually. Then pick your cabinets, countertops, and tile to see the finished result.</p>
     </div>
   </header>
 
-  <!-- STEP PROGRESS BAR -->
-  <div class="step-progress" aria-label="Planner steps">
-    <div class="step-progress-inner">
-      <div class="step-indicator active" data-step="1">
-        <div class="step-num">1</div>
-        <span class="step-title">Room Photo</span>
+  <!-- =====================================================
+       SECTION 1 — ENTRY (Photo or Dimensions)
+       ===================================================== -->
+  <section class="planner-entry" id="planner-entry">
+    <div class="container">
+
+      <!-- Mode Tab Switcher -->
+      <div class="entry-tabs" role="tablist">
+        <button class="entry-tab active" data-tab="photo" role="tab" aria-selected="true" aria-controls="panel-photo">
+          <i class="fa-solid fa-camera"></i>
+          <span>Analyze from Photo</span>
+          <small>AI reads your kitchen dimensions</small>
+        </button>
+        <button class="entry-tab" data-tab="dims" role="tab" aria-selected="false" aria-controls="panel-dims">
+          <i class="fa-solid fa-ruler-combined"></i>
+          <span>Enter Dimensions</span>
+          <small>I already know my measurements</small>
+        </button>
       </div>
-      <div class="step-connector"></div>
-      <div class="step-indicator" data-step="2">
-        <div class="step-num">2</div>
-        <span class="step-title">Measurements</span>
+
+      <!-- ---- PHOTO TAB ---- -->
+      <div class="entry-panel active" id="panel-photo" role="tabpanel">
+
+        <!-- State A: Upload zone -->
+        <div class="photo-upload-zone" id="photo-upload-zone">
+          <input type="file" id="photo-input" accept="image/*" aria-label="Upload kitchen photo">
+          <div class="upload-icon-wrap">
+            <i class="fa-solid fa-camera-retro"></i>
+          </div>
+          <h3>Upload a Photo of Your Kitchen</h3>
+          <p>Drop a photo here or click to browse your files</p>
+          <p class="upload-tip">Take a straight-on photo facing your main cabinet wall for best results</p>
+        </div>
+
+        <!-- State B: Analyzing -->
+        <div class="analysis-loading" id="analysis-loading" style="display:none" aria-live="polite">
+          <div class="spinner"></div>
+          <p>Analyzing your kitchen&hellip;</p>
+          <small>AI is estimating your cabinet dimensions from the photo</small>
+        </div>
+
+        <!-- State C: Analysis result + editable dims -->
+        <div class="analysis-result" id="analysis-result" style="display:none">
+          <div class="analysis-header">
+            <img id="photo-preview" src="" alt="Your kitchen" class="photo-thumb">
+            <div class="analysis-info">
+              <div class="analysis-badge" id="analysis-badge">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span id="analysis-confidence-text">AI estimated these dimensions</span>
+              </div>
+              <p id="analysis-notes" class="analysis-notes"></p>
+              <p class="analysis-verify">Review and adjust if needed, then generate your layout.</p>
+            </div>
+          </div>
+
+          <!-- Shared dims form (pre-filled from AI) -->
+          <div class="dims-form" id="dims-form-photo">
+            <!-- Inline template — JS will inject the form here -->
+          </div>
+
+          <div class="entry-actions">
+            <button class="btn btn-primary btn-lg" id="btn-generate-photo">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Generate My Kitchen Layout
+            </button>
+            <button class="btn btn-outline" id="btn-retry-photo">
+              <i class="fa-solid fa-camera-retro"></i> Use Different Photo
+            </button>
+          </div>
+        </div>
+
+        <!-- State D: Analysis error -->
+        <div class="analysis-error" id="analysis-error" style="display:none" aria-live="polite">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <p id="analysis-error-text">Couldn&rsquo;t analyze the photo. You can enter your dimensions manually instead.</p>
+          <button class="btn btn-outline" id="btn-switch-to-dims">
+            Enter Dimensions Manually <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
       </div>
-      <div class="step-connector"></div>
-      <div class="step-indicator" data-step="3">
-        <div class="step-num">3</div>
-        <span class="step-title">Choose Style</span>
+
+      <!-- ---- DIMENSIONS TAB ---- -->
+      <div class="entry-panel" id="panel-dims" role="tabpanel">
+        <div class="dims-form" id="dims-form-manual">
+          <!-- Inline template — JS will inject the form here -->
+        </div>
+        <div class="entry-actions">
+          <button class="btn btn-primary btn-lg" id="btn-generate-dims">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate My Kitchen Layout
+          </button>
+        </div>
       </div>
-      <div class="step-connector"></div>
-      <div class="step-indicator" data-step="4">
-        <div class="step-num">4</div>
-        <span class="step-title">Your Layout</span>
-      </div>
+
     </div>
-  </div>
+  </section>
 
-  <!-- VISUALIZER CONTENT -->
-  <main class="viz-content">
-    <div class="viz-inner">
+  <!-- =====================================================
+       SECTION 2 — LAYOUT OUTPUT
+       ===================================================== -->
+  <section class="planner-layout" id="planner-layout" style="display:none" aria-live="polite">
+    <div class="container">
 
-      <!-- =========================================
-           STEP 1 — Room Photo (Optional)
-           ========================================= -->
-      <div class="viz-step active" id="step-1">
-        <div class="viz-step-header">
-          <h2>Step 1 &mdash; Add a Room Photo <span style="font-size:0.65em; color:var(--gold); font-family:var(--font-body); font-weight:400;">(Optional)</span></h2>
-          <p>Upload a photo of your kitchen wall for reference. This is optional — you can skip ahead to enter measurements.</p>
-        </div>
-
-        <div class="photo-dropzone" id="photo-dropzone">
-          <!-- File input (mobile: triggers camera; desktop: file browser) -->
-          <input type="file"
-                 id="room-photo-input"
-                 accept="image/*"
-                 capture="environment"
-                 aria-label="Upload room photo">
-          <div class="dropzone-icon"><i class="fa-solid fa-camera-retro"></i></div>
-          <p class="dropzone-text"><strong>Drop a photo here</strong> or click to upload</p>
-          <p class="dropzone-hint">On mobile, this will open your camera or photo library</p>
-          <img id="room-photo-preview" src="" alt="Room photo preview">
-        </div>
-
-        <p class="photo-note">
-          <i class="fa-solid fa-circle-info"></i>
-          Photo is used as a visual reference only — it won't affect the layout calculation.
-        </p>
-
-        <div class="viz-actions" style="border:none; padding-top:2rem; margin-top:0;">
-          <button class="btn btn-primary btn-lg" data-step-next="2">
-            Next: Enter Measurements <i class="fa-solid fa-arrow-right"></i>
-          </button>
-          <button class="btn btn-outline" data-step-next="2">Skip Photo</button>
+      <!-- Canvas -->
+      <div class="canvas-wrap" id="canvas-wrap">
+        <canvas id="layout-canvas" aria-label="2D kitchen elevation layout"></canvas>
+        <div class="canvas-empty-msg" id="canvas-empty-msg" style="display:none">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          Not enough wall width to fit standard cabinets.
         </div>
       </div>
 
-      <!-- =========================================
-           STEP 2 — Measurements
-           ========================================= -->
-      <div class="viz-step" id="step-2">
-        <div class="viz-step-header">
-          <h2>Step 2 &mdash; Wall Measurements</h2>
-          <p>Measure your kitchen wall. Don't worry about being perfect — standard cabinet sizes will be used to fill your space.</p>
-        </div>
+      <!-- Layout summary -->
+      <div class="layout-summary" id="layout-summary"></div>
 
-        <!-- Unit Toggle -->
-        <div style="margin-bottom: 2rem;">
-          <span class="selector-label" style="display:inline-block; margin-right:0.75rem;">Units</span>
-          <div class="unit-toggle">
-            <button class="unit-btn active" data-unit="imperial">Imperial (ft/in)</button>
-            <button class="unit-btn" data-unit="metric">Metric (cm)</button>
+      <!-- Product selectors bar -->
+      <div class="product-bar">
+
+        <div class="prod-group">
+          <div class="prod-group-label">Cabinets</div>
+          <div class="prod-group-body">
+            <div class="line-toggle" id="pl-line-toggle">
+              <button class="line-btn active" data-line="line1">Craftsman</button>
+              <button class="line-btn" data-line="line2">Prestige</button>
+            </div>
+            <div class="prod-sublabel">Door Style</div>
+            <div class="door-btn-group" id="pl-door-btns"></div>
+            <div class="prod-sublabel">Color</div>
+            <div class="color-dot-group" id="pl-color-dots"></div>
           </div>
         </div>
 
-        <div class="measurements-grid">
-
-          <!-- Wall Width -->
-          <div class="measure-group">
-            <label class="measure-label">
-              Wall Width <span class="measure-hint">full wall, including doors & windows</span>
-            </label>
-            <!-- Imperial -->
-            <div class="field-imperial">
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="wall-width-ft" min="0" max="50" placeholder="10" aria-label="Wall width feet">
-                <span class="measure-unit">ft</span>
-              </div>
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="wall-width-in" min="0" max="11" placeholder="6" aria-label="Wall width inches">
-                <span class="measure-unit">in</span>
-              </div>
-            </div>
-            <!-- Metric -->
-            <div class="field-metric">
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="wall-width-cm" min="0" placeholder="320" aria-label="Wall width in cm" style="max-width:120px;">
-                <span class="measure-unit">cm</span>
-              </div>
-            </div>
+        <div class="prod-group">
+          <div class="prod-group-label">Countertop</div>
+          <div class="prod-group-body">
+            <div class="material-swatches" id="countertop-swatches"></div>
           </div>
-
-          <!-- Ceiling Height -->
-          <div class="measure-group">
-            <label class="measure-label">
-              Ceiling Height <span class="measure-hint">floor to ceiling</span>
-            </label>
-            <div class="field-imperial">
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="ceiling-height-ft" min="0" max="20" placeholder="8" aria-label="Ceiling height feet">
-                <span class="measure-unit">ft</span>
-              </div>
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="ceiling-height-in" min="0" max="11" placeholder="0" aria-label="Ceiling height inches">
-                <span class="measure-unit">in</span>
-              </div>
-            </div>
-            <div class="field-metric">
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="ceiling-height-cm" min="0" placeholder="244" aria-label="Ceiling height in cm" style="max-width:120px;">
-                <span class="measure-unit">cm</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Upper Cabinet Height -->
-          <div class="measure-group">
-            <label class="measure-label">
-              Upper Cabinet Height <span class="measure-hint">default: 30"</span>
-            </label>
-            <div class="field-imperial">
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="upper-cab-height-ft" min="0" max="5" placeholder="2" aria-label="Upper cabinet height feet">
-                <span class="measure-unit">ft</span>
-              </div>
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="upper-cab-height-in" min="0" max="11" placeholder="6" aria-label="Upper cabinet height inches">
-                <span class="measure-unit">in</span>
-              </div>
-            </div>
-            <div class="field-metric">
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="upper-cab-height-cm" min="0" placeholder="76" aria-label="Upper cabinet height in cm" style="max-width:120px;">
-                <span class="measure-unit">cm</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Counter Height -->
-          <div class="measure-group">
-            <label class="measure-label">
-              Counter Height <span class="measure-hint">default: 36" (standard)</span>
-            </label>
-            <div class="field-imperial">
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="lower-counter-ft" min="0" max="5" placeholder="3" aria-label="Counter height feet">
-                <span class="measure-unit">ft</span>
-              </div>
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="lower-counter-in" min="0" max="11" placeholder="0" aria-label="Counter height inches">
-                <span class="measure-unit">in</span>
-              </div>
-            </div>
-            <div class="field-metric">
-              <div class="measure-input-wrap">
-                <input type="number" class="measure-input" id="lower-counter-cm" min="0" placeholder="91" aria-label="Counter height in cm" style="max-width:120px;">
-                <span class="measure-unit">cm</span>
-              </div>
-            </div>
-          </div>
-
         </div>
 
-        <div class="viz-actions" style="border:none; padding-top:0; margin-top:0;">
-          <button class="btn btn-gold btn-lg" id="calculate-btn">
-            <i class="fa-solid fa-calculator"></i> Calculate Layout
-          </button>
-          <button class="btn btn-outline" data-step-back="1">
-            <i class="fa-solid fa-arrow-left"></i> Back
-          </button>
+        <div class="prod-group">
+          <div class="prod-group-label">Backsplash</div>
+          <div class="prod-group-body">
+            <div class="material-swatches" id="backsplash-swatches"></div>
+          </div>
         </div>
+
+        <div class="prod-group">
+          <div class="prod-group-label">Flooring</div>
+          <div class="prod-group-body">
+            <div class="material-swatches" id="floor-swatches"></div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- =========================================
-           STEP 3 — Style Selection (leads to Step 4)
-           ========================================= -->
-      <div class="viz-step" id="step-3">
-        <div class="viz-step-header">
-          <h2>Step 3 &mdash; Choose Your Style</h2>
-          <p>Select your cabinet line, door style, and color. Your choices will be applied to the layout preview.</p>
-        </div>
-
-        <div class="viz-style-selectors">
-
-          <!-- Cabinet Line -->
-          <div class="viz-selector-row">
-            <span class="viz-selector-label">Collection</span>
-            <div class="line-btns">
-              <button class="line-btn active" data-select-line="line1">Craftsman Collection</button>
-              <button class="line-btn" data-select-line="line2">Prestige Series</button>
-            </div>
-          </div>
-
-          <!-- Door Style -->
-          <div class="viz-selector-row">
-            <span class="viz-selector-label">Door Style</span>
-            <div class="door-styles" id="viz-door-styles"></div>
-          </div>
-
-          <!-- Color -->
-          <div class="viz-selector-row">
-            <span class="viz-selector-label">Color</span>
-            <div class="color-swatches" id="viz-color-swatches"></div>
-          </div>
-
-        </div>
-
-        <div class="viz-actions" style="border:none; padding-top:0; margin-top:0;">
-          <button class="btn btn-primary btn-lg" data-step-next="4">
-            <i class="fa-solid fa-eye"></i> Preview My Layout
-          </button>
-          <button class="btn btn-outline" data-step-back="2">
-            <i class="fa-solid fa-arrow-left"></i> Back
-          </button>
-        </div>
+      <!-- Action buttons -->
+      <div class="layout-actions">
+        <button class="btn btn-gold btn-lg" id="btn-quote">
+          <i class="fa-solid fa-paper-plane"></i> Request a Quote
+        </button>
+        <button class="btn btn-outline btn-lg" id="btn-download">
+          <i class="fa-solid fa-download"></i> Download Layout
+        </button>
+        <button class="btn btn-outline" id="btn-redesign">
+          <i class="fa-solid fa-rotate-left"></i> Start Over
+        </button>
       </div>
 
-      <!-- =========================================
-           STEP 4 — Layout Preview & Export
-           ========================================= -->
-      <div class="viz-step" id="step-4">
-        <div class="viz-step-header">
-          <h2>Step 4 &mdash; Your Kitchen Layout</h2>
-          <p>Here is your generated cabinet layout based on your measurements. Update the style selections below to see live changes.</p>
-        </div>
-
-        <!-- Style Selectors (live preview) -->
-        <div class="viz-style-selectors" style="margin-bottom: 1.5rem;">
-          <div class="viz-selector-row">
-            <span class="viz-selector-label">Collection</span>
-            <div class="line-btns">
-              <button class="line-btn active" data-select-line="line1">Craftsman</button>
-              <button class="line-btn" data-select-line="line2">Prestige</button>
-            </div>
-          </div>
-          <div class="viz-selector-row">
-            <span class="viz-selector-label">Door Style</span>
-            <div class="door-styles" id="viz-door-styles-4"></div>
-          </div>
-          <div class="viz-selector-row">
-            <span class="viz-selector-label">Color</span>
-            <div class="color-swatches" id="viz-color-swatches-4"></div>
-          </div>
-        </div>
-
-        <!-- Canvas -->
-        <div class="canvas-wrap" aria-label="Cabinet layout preview">
-          <canvas id="layout-canvas" aria-label="2D kitchen layout diagram">
-            Your browser does not support the HTML5 Canvas element.
-          </canvas>
-        </div>
-
-        <!-- Legend note -->
-        <p style="font-size:0.78rem; color:var(--charcoal); opacity:0.55; margin-bottom:1.5rem;">
-          <i class="fa-solid fa-circle-info"></i>
-          Layout shows standard cabinet sizes using a greedy fill algorithm. Dimensions are in inches. Filler pieces may be needed for exact fit.
-        </p>
-
-        <!-- Actions -->
-        <div class="viz-actions">
-          <button class="btn btn-gold btn-lg" id="download-layout">
-            <i class="fa-solid fa-download"></i> Download Layout PNG
-          </button>
-          <button class="btn btn-primary btn-lg" id="request-quote-btn">
-            <i class="fa-solid fa-paper-plane"></i> Request a Quote
-          </button>
-          <button class="btn btn-outline" data-step-back="2">
-            <i class="fa-solid fa-arrow-left"></i> Edit Measurements
-          </button>
-        </div>
-      </div>
-
-    </div><!-- end viz-inner -->
-  </main>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer class="site-footer">
@@ -339,7 +218,6 @@
         <div class="footer-brand">
           <h3>Hearth<span>wood</span></h3>
           <p>Two premium collections for every kitchen vision. Crafted to last a lifetime.</p>
-          <!-- TODO: Replace # with actual social media URLs before launch -->
           <div class="footer-social">
             <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -365,7 +243,7 @@
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 Hearthwood Cabinetry. All rights reserved.</span>
-        <span>Kitchen Planner</span>
+        <span>Kitchen Design Planner</span>
       </div>
     </div>
   </footer>
@@ -373,9 +251,10 @@
   <!-- Scripts -->
   <script src="data/image-manifest.js"></script>
   <script src="js/cabinet-data.js"></script>
+  <script src="js/planner-data.js"></script>
   <script src="js/visualizer.js"></script>
   <script>
-    // Mobile nav
+    // Mobile nav toggle
     const toggle = document.getElementById('nav-toggle');
     const links  = document.getElementById('nav-links');
     if (toggle && links) {
@@ -385,8 +264,6 @@
         this.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
       });
     }
-
-    // Style selectors for Step 3 and Step 4 are both populated by visualizer.js
   </script>
 </body>
 </html>
