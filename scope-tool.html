@@ -47,22 +47,16 @@
   <section class="scope-upload-section" id="scope-section">
     <div class="container">
 
-      <!-- STATE 1: Upload zone -->
-      <div id="state-upload">
-        <div class="photo-upload-zone" id="scope-drop-zone">
-          <input type="file" id="scope-file-input" accept="image/*,application/pdf" aria-label="Upload construction plan">
-          <div class="upload-icon-wrap">
-            <i class="fa-solid fa-drafting-compass"></i>
-          </div>
-          <h3>Upload Your Construction Plan</h3>
-          <p>Drop a file here or click to browse</p>
-          <p class="upload-tip">Accepts floor plans, blueprints, or photos of drawings</p>
+      <!-- Redirect notice -->
+      <div id="state-upload" style="text-align:center;padding:3rem 1rem;">
+        <div class="upload-icon-wrap" style="margin:0 auto 1.5rem;">
+          <i class="fa-solid fa-lock"></i>
         </div>
-        <p class="scope-file-types">Supported: JPG &bull; PNG &bull; PDF &nbsp;&mdash;&nbsp; Max 5 MB</p>
-        <div class="scope-size-warning" id="scope-size-warning">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          File is too large. Please use a file under 5 MB. Try exporting a lower-resolution version of your plan.
-        </div>
+        <h3 style="margin-bottom:0.75rem;">Staff Tool</h3>
+        <p style="max-width:420px;margin:0 auto 1.5rem;opacity:0.75;">The Scope Reader is available inside the NFR Staff Portal. Sign in to access it.</p>
+        <a href="staff/" class="btn btn-gold btn-lg">
+          <i class="fa-solid fa-right-to-bracket"></i> Go to Staff Portal
+        </a>
       </div>
 
       <!-- STATE 2: Loading -->

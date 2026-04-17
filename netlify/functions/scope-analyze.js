@@ -1,10 +1,11 @@
 /**
  * scope-analyze.js — Netlify Serverless Function
- * Receives { fileData: "<base64>", mediaType: "image/jpeg|application/pdf" }
- * Runs 3 parallel Claude calls (drywall, paint, flooring agents)
+ * Receives { driveUrl: "https://drive.google.com/..." }
+ * Downloads the file from Google Drive, runs 3 parallel Claude calls
  * Returns { drywall: {...}, paint: {...}, flooring: {...} }
  *
  * Environment variable required: ANTHROPIC_API_KEY
+ * File must be shared: "Anyone with the link can view"
  */
 
 'use strict';
@@ -17,7 +18,71 @@ function corsHeaders() {
   };
 }
 
-// ---- Content block builder (image vs. PDF) ----
+// ---- Parse Google Drive URL → file ID ----
+function parseDriveFileId(url) {
+  // https://drive.google.com/file/d/FILE_ID/view
+  const m1 = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (m1) return m1[1];
+  // https://drive.google.com/open?id=FILE_ID
+  const m2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (m2) return m2[1];
+  // https://drive.google.com/uc?id=FILE_ID
+  const m3 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (m3) return m3[1];
+  return null;
+}
+
+// ---- Download file from Google Drive ----
+async function downloadFromDrive(fileId) {
+  const directUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+
+  const res = await fetch(directUrl, {
+    headers: { 'User-Agent': 'Mozilla/5.0' },
+    redirect: 'follow',
+  });
+
+  if (!res.ok) {
+    throw new Error(`Google Drive returned ${res.status}. Make sure the file is shared as "Anyone with the link."`);
+  }
+
+  const contentType = res.headers.get('content-type') || '';
+
+  // If Google returned HTML, it's showing a virus-scan warning page
+  if (contentType.includes('text/html')) {
+    const html = await res.text();
+
+    // Extract confirm token and retry
+    const confirmMatch = html.match(/[?&]confirm=([a-zA-Z0-9_-]+)/);
+    if (confirmMatch) {
+      const confirmUrl = `https://drive.google.com/uc?export=download&id=${fileId}&confirm=${confirmMatch[1]}`;
+      const confirmed  = await fetch(confirmUrl, { redirect: 'follow' });
+      if (!confirmed.ok) throw new Error('Google Drive download failed after confirm step.');
+      const confirmedType = confirmed.headers.get('content-type') || 'application/pdf';
+      const buffer        = await confirmed.arrayBuffer();
+      return { buffer, contentType: confirmedType };
+    }
+
+    // No confirm token — file may not be publicly shared
+    throw new Error('Google Drive did not allow the download. Make sure the file is shared as "Anyone with the link can view."');
+  }
+
+  const buffer = await res.arrayBuffer();
+  return { buffer, contentType };
+}
+
+// ---- Detect Claude-safe media type ----
+function normalizeMediaType(rawType) {
+  if (!rawType) return 'application/pdf';
+  if (rawType.includes('pdf'))  return 'application/pdf';
+  if (rawType.includes('jpeg') || rawType.includes('jpg')) return 'image/jpeg';
+  if (rawType.includes('png'))  return 'image/png';
+  if (rawType.includes('webp')) return 'image/webp';
+  if (rawType.includes('gif'))  return 'image/gif';
+  // Default to PDF for unknown types (plans are usually PDFs)
+  return 'application/pdf';
+}
+
+// ---- Build Claude content block ----
 function buildContentBlock(base64Data, mediaType) {
   if (mediaType === 'application/pdf') {
     return {
@@ -34,106 +99,80 @@ function buildContentBlock(base64Data, mediaType) {
 // ---- System prompts ----
 const SYSTEM_PROMPTS = {
 
-  drywall: `You are a professional drywall estimator. You will receive a construction plan image or PDF. Extract all information needed to estimate a drywall scope of work.
+  drywall: `You are a professional drywall estimator. Analyze this construction plan and extract all information needed for a drywall scope of work.
 
 Analyze for:
 - Room names and dimensions (length × width × ceiling height)
-- All wall surfaces requiring drywall (partition walls, exterior walls, special areas)
+- All wall surfaces requiring drywall
 - Ceiling surfaces
-- Drywall type: standard (dry areas), moisture_resistant (kitchens, baths, laundry), fire_rated (garage walls/ceilings), abuse_resistant (hallways, schools)
+- Drywall type: standard (dry areas), moisture_resistant (kitchens/baths/laundry), fire_rated (garage walls/ceilings), abuse_resistant (hallways)
 
 Calculate:
-- Wall sq ft per room: perimeter × ceiling height, subtract 21 sq ft per door opening and 15 sq ft per window unless exact dimensions are shown
+- Wall sq ft per room: perimeter × ceiling height, subtract 21 sq ft per door and 15 sq ft per window
 - Ceiling sq ft per room: room footprint
-- Sheet count: total sq ft ÷ 32 (standard 4×8 sheet)
-- If ceiling height is not shown, assume 9 ft
+- Sheet count: total sq ft ÷ 32 (4×8 sheet)
+- Assume 9 ft ceilings if not shown
 
 Return ONLY valid JSON — no markdown, no explanation, no code fences:
 {
   "confidence": "high" | "medium" | "low",
-  "confidence_note": "string — what was clear vs. estimated",
+  "confidence_note": "string",
   "total_wall_sqft": number,
   "total_ceiling_sqft": number,
   "total_sqft": number,
   "sheet_count_estimate": number,
-  "rooms": [
-    {
-      "room_name": "string",
-      "wall_sqft": number,
-      "ceiling_sqft": number,
-      "drywall_type": "standard" | "moisture_resistant" | "fire_rated" | "abuse_resistant",
-      "notes": "string or null"
-    }
-  ],
-  "scope_notes": "string — key assumptions, special conditions, items not visible on plan"
+  "rooms": [{ "room_name": "string", "wall_sqft": number, "ceiling_sqft": number, "drywall_type": "standard|moisture_resistant|fire_rated|abuse_resistant", "notes": "string or null" }],
+  "scope_notes": "string"
 }`,
 
-  paint: `You are a professional paint estimator. You will receive a construction plan image or PDF. Extract all information needed to estimate a paint scope of work.
+  paint: `You are a professional paint estimator. Analyze this construction plan and extract all information needed for a paint scope of work.
 
 Analyze for:
-- Room names and dimensions (length × width × ceiling height)
-- Paintable wall surfaces (drywall, plaster, concrete block — exclude tile areas)
+- Room names and dimensions
+- Paintable wall surfaces (drywall, plaster, concrete block — exclude tile)
 - Ceiling surfaces
-- Trim: baseboards (room perimeter), door casings (17 LF each), window casings (14 LF each), crown molding if indicated
-- Special finishes: accent walls, wainscoting, painted cabinetry, textured surfaces
+- Trim: baseboards (room perimeter LF), door casings (17 LF each), window casings (14 LF each), crown if indicated
+- Special finishes: accent walls, wainscoting, painted cabinetry
 
 Calculate:
-- Wall sq ft per room: gross wall area minus door (21 sq ft) and window (15 sq ft) openings
-- Ceiling sq ft per room: room footprint
-- Trim LF per room: baseboard perimeter + (17 × door count) + (14 × window count)
-- If ceiling height is not shown, assume 9 ft
+- Wall sq ft: gross wall minus door (21 sq ft) and window (15 sq ft) openings
+- Ceiling sq ft: room footprint
+- Trim LF: baseboard perimeter + casings
+- Assume 9 ft ceilings if not shown
 
 Return ONLY valid JSON — no markdown, no explanation, no code fences:
 {
   "confidence": "high" | "medium" | "low",
-  "confidence_note": "string — what was clear vs. estimated",
+  "confidence_note": "string",
   "total_wall_sqft": number,
   "total_ceiling_sqft": number,
   "total_trim_lf": number,
-  "rooms": [
-    {
-      "room_name": "string",
-      "wall_sqft": number,
-      "ceiling_sqft": number,
-      "trim_lf": number,
-      "special_finishes": "string or null",
-      "notes": "string or null"
-    }
-  ],
-  "scope_notes": "string — painting assumptions, surface conditions, finish recommendations"
+  "rooms": [{ "room_name": "string", "wall_sqft": number, "ceiling_sqft": number, "trim_lf": number, "special_finishes": "string or null", "notes": "string or null" }],
+  "scope_notes": "string"
 }`,
 
-  flooring: `You are a professional flooring estimator. You will receive a construction plan image or PDF. Extract all information needed to estimate a flooring scope of work.
+  flooring: `You are a professional flooring estimator. Analyze this construction plan and extract all information needed for a flooring scope of work.
 
 Analyze for:
-- Room names and square footage (length × width)
-- Flooring type per room: hardwood, lvp_lvt (luxury vinyl plank/tile), tile, carpet, concrete, or unknown if not indicated
-- Room-to-room transitions (doorways where flooring type changes)
-- Step-downs, raised platforms, or pattern indicators
+- Room names and sq ft (length × width)
+- Flooring type per room: hardwood, lvp_lvt, tile, carpet, concrete, or unknown
+- Doorway transitions between different flooring materials
+- Step-downs or special areas
 
 Calculate:
-- Net sq ft per room: room footprint
-- Add waste factor: 10% for hardwood/lvp_lvt, 15% for tile, 5% for carpet
-- Transition strips: count doorways between rooms with different flooring types
+- Net sq ft per room
+- With waste: 10% hardwood/LVP, 15% tile, 5% carpet
+- Transition strips: count doorways between different flooring types
 
 Return ONLY valid JSON — no markdown, no explanation, no code fences:
 {
   "confidence": "high" | "medium" | "low",
-  "confidence_note": "string — what was clear vs. estimated",
+  "confidence_note": "string",
   "total_sqft_net": number,
   "total_sqft_with_waste": number,
   "transition_strips": number,
-  "rooms": [
-    {
-      "room_name": "string",
-      "sqft_net": number,
-      "sqft_with_waste": number,
-      "flooring_type": "hardwood" | "lvp_lvt" | "tile" | "carpet" | "concrete" | "unknown",
-      "waste_factor_pct": number,
-      "notes": "string or null"
-    }
-  ],
-  "scope_notes": "string — flooring type assumptions, subfloor conditions if noted, special installation notes"
+  "rooms": [{ "room_name": "string", "sqft_net": number, "sqft_with_waste": number, "flooring_type": "hardwood|lvp_lvt|tile|carpet|concrete|unknown", "waste_factor_pct": number, "notes": "string or null" }],
+  "scope_notes": "string"
 }`,
 };
 
@@ -172,16 +211,12 @@ async function callClaude(systemPrompt, contentBlock, isPdf) {
   return data.content[0].text;
 }
 
-// ---- JSON parser with fallback ----
+// ---- Safe JSON parser ----
 function safeParse(text, trade) {
   try {
-    const clean = text
-      .replace(/^```(?:json)?\s*/i, '')
-      .replace(/\s*```$/i, '')
-      .trim();
+    const clean = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
     return JSON.parse(clean);
   } catch (_) {
-    // Try to extract a JSON object from the response
     const match = text.match(/\{[\s\S]*\}/);
     if (match) {
       try { return JSON.parse(match[0]); } catch (_2) {}
@@ -200,9 +235,9 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  let fileData, mediaType;
+  let driveUrl;
   try {
-    ({ fileData, mediaType } = JSON.parse(event.body || '{}'));
+    ({ driveUrl } = JSON.parse(event.body || '{}'));
   } catch (e) {
     return {
       statusCode: 400,
@@ -211,19 +246,43 @@ exports.handler = async (event) => {
     };
   }
 
-  if (!fileData || !mediaType) {
+  if (!driveUrl) {
     return {
       statusCode: 400,
       headers: { 'Content-Type': 'application/json', ...corsHeaders() },
-      body: JSON.stringify({ error: 'fileData and mediaType are required' }),
+      body: JSON.stringify({ error: 'driveUrl is required' }),
+    };
+  }
+
+  // Extract file ID from Drive URL
+  const fileId = parseDriveFileId(driveUrl);
+  if (!fileId) {
+    return {
+      statusCode: 400,
+      headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+      body: JSON.stringify({ error: 'Could not read a Google Drive file ID from that URL. Paste the full share link.' }),
+    };
+  }
+
+  let base64Data, mediaType;
+
+  try {
+    const { buffer, contentType } = await downloadFromDrive(fileId);
+    mediaType   = normalizeMediaType(contentType);
+    base64Data  = Buffer.from(buffer).toString('base64');
+  } catch (err) {
+    console.error('Drive download error:', err.message);
+    return {
+      statusCode: 400,
+      headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+      body: JSON.stringify({ error: err.message }),
     };
   }
 
   const isPdf        = mediaType === 'application/pdf';
-  const contentBlock = buildContentBlock(fileData, mediaType);
+  const contentBlock = buildContentBlock(base64Data, mediaType);
 
   try {
-    // Run all 3 agents in parallel
     const [drywallText, paintText, flooringText] = await Promise.all([
       callClaude(SYSTEM_PROMPTS.drywall,   contentBlock, isPdf),
       callClaude(SYSTEM_PROMPTS.paint,     contentBlock, isPdf),
@@ -245,7 +304,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 502,
       headers: { 'Content-Type': 'application/json', ...corsHeaders() },
-      body: JSON.stringify({ error: 'Analysis failed — please try again.' }),
+      body: JSON.stringify({ error: 'Analysis failed — ' + (err.message || 'please try again.') }),
     };
   }
 };

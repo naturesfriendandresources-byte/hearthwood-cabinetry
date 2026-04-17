@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scope Reader — NFR Staff Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+<style>
+:root {
+  --primary: #3A6B5F;
+  --primary2:#2E5548;
+  --accent:  #E07B54;
+  --gold:    #D4A054;
+  --light:   #F2F8F6;
+  --border:  #A8CEBF;
+  --text:    #2C2C2C;
+  --muted:   #6B7B7A;
+  --error:   #DC2626;
+  --success: #059669;
+  --purple:  #5A3A7A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Lato',sans-serif;background:#EEF3F1;color:var(--text);min-height:100vh;}
+
+/* TOP BAR */
+.top-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--primary);color:#fff;
+  padding:13px 24px;gap:1rem;
+}
+.brand{font-family:'Playfair Display',serif;font-size:15pt;letter-spacing:.3px;}
+.brand span{font-family:'Lato',sans-serif;font-size:7pt;letter-spacing:2px;text-transform:uppercase;opacity:.65;display:block;margin-top:1px;}
+.top-bar-right{display:flex;align-items:center;gap:12px;font-size:9pt;}
+.top-bar a{color:rgba(255,255,255,.75);text-decoration:none;font-size:8.5pt;}
+.top-bar a:hover{color:#fff;}
+
+/* PAGE BODY */
+.page{max-width:1100px;margin:0 auto;padding:24px 18px 60px;}
+
+.page-header{margin-bottom:22px;}
+.page-header h1{font-family:'Playfair Display',serif;font-size:16pt;color:var(--primary);margin-bottom:4px;}
+.page-header p{font-size:9.5pt;color:var(--muted);max-width:620px;line-height:1.55;}
+
+/* CARD */
+.card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px 22px;margin-bottom:18px;}
+.card-title{font-size:9pt;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.card-title i{color:var(--gold);}
+
+/* DRIVE INPUT */
+.drive-input-wrap{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;}
+.drive-input{
+  flex:1;min-width:260px;
+  border:1px solid var(--border);border-radius:6px;
+  padding:10px 14px;font-family:'Lato',sans-serif;font-size:10pt;color:var(--text);
+  outline:none;transition:border-color .2s;
+}
+.drive-input:focus{border-color:var(--primary);}
+.drive-input::placeholder{color:var(--muted);font-size:9.5pt;}
+.btn-analyze{
+  background:var(--primary);color:#fff;border:none;border-radius:6px;
+  padding:10px 22px;font-family:'Lato',sans-serif;font-size:9.5pt;font-weight:700;
+  cursor:pointer;white-space:nowrap;transition:background .2s;display:flex;align-items:center;gap:7px;
+}
+.btn-analyze:hover{background:var(--primary2);}
+.btn-analyze:disabled{opacity:.55;cursor:not-allowed;}
+
+.drive-hint{font-size:8pt;color:var(--muted);margin-top:10px;line-height:1.6;}
+.drive-hint strong{color:var(--text);}
+.drive-hint ol{padding-left:1.2rem;margin-top:4px;}
+
+/* ERROR / INFO MSG */
+.msg{padding:9px 14px;border-radius:6px;font-size:9pt;margin-top:12px;display:none;}
+.msg.error{background:#FEF2F2;border:1px solid #FECACA;color:var(--error);}
+.msg.info {background:#EFF9F6;border:1px solid var(--border);color:var(--primary);}
+.msg.visible{display:block;}
+
+/* LOADING */
+.loading-wrap{display:none;text-align:center;padding:30px 20px;}
+.loading-wrap.visible{display:block;}
+.spinner{width:36px;height:36px;border:3px solid rgba(58,107,95,.15);border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 14px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-title{font-size:10.5pt;font-weight:700;color:var(--primary);margin-bottom:4px;}
+.loading-sub{font-size:8.5pt;color:var(--muted);margin-bottom:18px;}
+
+.agent-list{display:flex;flex-direction:column;gap:8px;max-width:280px;margin:0 auto;}
+.agent-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--light);border:1px solid var(--border);border-radius:6px;
+  padding:8px 14px;font-size:8.5pt;font-weight:700;color:var(--primary);
+}
+.agent-row i{color:var(--gold);width:16px;text-align:center;}
+.agent-dot{margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--border);animation:pulse 1.4s ease-in-out infinite;}
+#ag-paint   .agent-dot{animation-delay:.35s;}
+#ag-flooring .agent-dot{animation-delay:.7s;}
+@keyframes pulse{0%,100%{background:var(--border);transform:scale(1);}50%{background:var(--gold);transform:scale(1.4);}}
+
+/* RESULTS */
+.results-wrap{display:none;}
+.results-wrap.visible{display:block;}
+
+.results-bar{
+  display:flex;align-items:center;gap:10px;
+  background:#fff;border:1px solid var(--border);border-radius:6px;
+  padding:10px 16px;margin-bottom:16px;font-size:9pt;font-weight:700;color:var(--primary);
+}
+.results-bar i{color:var(--gold);}
+.results-bar .file-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400;color:var(--muted);}
+.btn-reset{background:none;border:1px solid var(--border);border-radius:5px;padding:5px 12px;font-family:'Lato',sans-serif;font-size:8pt;font-weight:700;color:var(--primary);cursor:pointer;white-space:nowrap;}
+.btn-reset:hover{border-color:var(--primary);}
+
+/* 3-CARD GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px;}
+@media(max-width:900px){.cards-grid{grid-template-columns:1fr;}}
+
+.scope-card{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 6px rgba(0,0,0,.05);}
+
+.scope-card-hdr{
+  background:var(--primary);padding:11px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;
+}
+.scope-card-hdr-title{display:flex;align-items:center;gap:8px;}
+.scope-card-hdr-title i{color:var(--gold);font-size:11pt;}
+.scope-card-hdr-title h3{color:#fff;font-family:'Lato',sans-serif;font-size:8pt;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin:0;}
+
+.conf-badge{
+  font-size:6.5pt;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 7px;border-radius:4px;border:1px solid rgba(255,255,255,.25);
+  color:rgba(255,255,255,.7);background:rgba(255,255,255,.08);white-space:nowrap;
+}
+.conf-badge.high{color:#A8D5A2;border-color:rgba(168,213,162,.4);background:rgba(168,213,162,.1);}
+.conf-badge.low {color:#F4B880;border-color:rgba(244,184,128,.4);background:rgba(244,184,128,.1);}
+
+.scope-totals{padding:12px 16px;border-bottom:1px solid rgba(168,207,191,.3);}
+.sec-label{font-size:6.5pt;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+.tot-row{display:flex;justify-content:space-between;align-items:baseline;font-size:8.5pt;color:var(--muted);padding:2px 0;}
+.tot-row span:last-child{font-weight:700;color:var(--text);}
+.tot-row.highlight{border-top:1px solid rgba(168,207,191,.3);margin-top:4px;padding-top:6px;}
+.tot-row.highlight span{color:var(--primary);font-size:9pt;}
+
+.scope-rooms{padding:10px 16px;flex:1;}
+.room-item{padding:6px 0;border-bottom:1px solid #F2F8F6;}
+.room-item:last-child{border-bottom:none;}
+.room-name{font-size:8.5pt;font-weight:700;color:var(--primary);margin-bottom:2px;}
+.room-detail{font-size:7.5pt;color:var(--muted);line-height:1.6;font-weight:300;}
+.room-badge{display:inline-block;font-size:6.2pt;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(212,160,84,.1);border:1px solid rgba(212,160,84,.3);border-radius:3px;padding:1px 5px;color:var(--muted);margin-top:2px;}
+
+.scope-notes{padding:9px 16px;background:var(--light);border-top:1px solid rgba(168,207,191,.3);font-size:7.5pt;color:var(--muted);font-style:italic;line-height:1.55;}
+
+.scope-card-err{padding:20px 16px;text-align:center;color:var(--muted);font-size:8.5pt;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+.scope-card-err i{font-size:18pt;color:var(--border);}
+
+/* ACTION BUTTONS */
+.action-bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding-top:4px;}
+.btn-secondary{
+  background:#fff;color:var(--primary);border:1px solid var(--border);border-radius:6px;
+  padding:9px 18px;font-family:'Lato',sans-serif;font-size:9pt;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;gap:7px;transition:border-color .2s;
+}
+.btn-secondary:hover{border-color:var(--primary);}
+.btn-primary{
+  background:var(--primary);color:#fff;border:none;border-radius:6px;
+  padding:9px 18px;font-family:'Lato',sans-serif;font-size:9pt;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;gap:7px;transition:background .2s;
+}
+.btn-primary:hover{background:var(--primary2);}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);
+  background:var(--primary);color:#fff;border-radius:6px;padding:10px 20px;
+  font-size:9pt;font-weight:700;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;
+  z-index:9999;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div>
+    <div class="brand">Hearthwood<span>NFR Staff Portal</span></div>
+  </div>
+  <div class="top-bar-right">
+    <span id="top-user-name"></span>
+    <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
+    <a href="#" id="top-logout"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="page">
+
+  <div class="page-header">
+    <h1><i class="fa-solid fa-layer-group" style="color:var(--gold);margin-right:8px;font-size:13pt;"></i>Scope Reader</h1>
+    <p>Paste a Google Drive link to a construction plan. Three AI agents read the file simultaneously and extract drywall, paint, and flooring scopes — room by room.</p>
+  </div>
+
+  <!-- INPUT CARD -->
+  <div class="card" id="input-card">
+    <div class="card-title"><i class="fa-brands fa-google-drive"></i> Google Drive File</div>
+    <div class="drive-input-wrap">
+      <input type="url" class="drive-input" id="drive-url" placeholder="Paste Google Drive share link here…" autocomplete="off">
+      <button class="btn-analyze" id="btn-analyze">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Plan
+      </button>
+    </div>
+    <div class="drive-hint">
+      <strong>How to share from Google Drive:</strong>
+      <ol>
+        <li>Right-click your plan file in Google Drive &rarr; <strong>Share</strong></li>
+        <li>Under "General access" choose <strong>Anyone with the link</strong> &rarr; <strong>Viewer</strong></li>
+        <li>Click <strong>Copy link</strong> and paste it above</li>
+      </ol>
+      Supports PDF blueprints and image files (JPG, PNG).
+    </div>
+    <div class="msg error" id="input-error"></div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading-wrap" id="loading-wrap">
+    <div class="spinner"></div>
+    <div class="loading-title">Reading your plan&hellip;</div>
+    <div class="loading-sub">Three agents are analyzing simultaneously</div>
+    <div class="agent-list">
+      <div class="agent-row" id="ag-drywall">
+        <i class="fa-solid fa-layer-group"></i><span>Drywall Agent</span><span class="agent-dot"></span>
+      </div>
+      <div class="agent-row" id="ag-paint">
+        <i class="fa-solid fa-brush"></i><span>Paint Agent</span><span class="agent-dot"></span>
+      </div>
+      <div class="agent-row" id="ag-flooring">
+        <i class="fa-solid fa-border-all"></i><span>Flooring Agent</span><span class="agent-dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-wrap" id="results-wrap">
+
+    <div class="results-bar">
+      <i class="fa-solid fa-file-check"></i>
+      <span class="file-name" id="result-filename">—</span>
+      <button class="btn-reset" id="btn-reset"><i class="fa-solid fa-rotate-left"></i> Analyze Another</button>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- Drywall -->
+      <div class="scope-card" id="card-drywall">
+        <div class="scope-card-hdr">
+          <div class="scope-card-hdr-title"><i class="fa-solid fa-layer-group"></i><h3>Drywall Scope</h3></div>
+          <span class="conf-badge" id="conf-drywall">—</span>
+        </div>
+        <div class="scope-totals" id="totals-drywall"></div>
+        <div class="scope-rooms"  id="rooms-drywall"></div>
+        <div class="scope-notes"  id="notes-drywall" style="display:none"></div>
+      </div>
+
+      <!-- Paint -->
+      <div class="scope-card" id="card-paint">
+        <div class="scope-card-hdr">
+          <div class="scope-card-hdr-title"><i class="fa-solid fa-brush"></i><h3>Paint Scope</h3></div>
+          <span class="conf-badge" id="conf-paint">—</span>
+        </div>
+        <div class="scope-totals" id="totals-paint"></div>
+        <div class="scope-rooms"  id="rooms-paint"></div>
+        <div class="scope-notes"  id="notes-paint" style="display:none"></div>
+      </div>
+
+      <!-- Flooring -->
+      <div class="scope-card" id="card-flooring">
+        <div class="scope-card-hdr">
+          <div class="scope-card-hdr-title"><i class="fa-solid fa-border-all"></i><h3>Flooring Scope</h3></div>
+          <span class="conf-badge" id="conf-flooring">—</span>
+        </div>
+        <div class="scope-totals" id="totals-flooring"></div>
+        <div class="scope-rooms"  id="rooms-flooring"></div>
+        <div class="scope-notes"  id="notes-flooring" style="display:none"></div>
+      </div>
+
+    </div><!-- /.cards-grid -->
+
+    <div class="action-bar">
+      <button class="btn-primary" id="btn-copy">
+        <i class="fa-solid fa-clipboard"></i> Copy Scope to Clipboard
+      </button>
+      <button class="btn-secondary" id="btn-download">
+        <i class="fa-solid fa-download"></i> Download as Text File
+      </button>
+    </div>
+
+  </div><!-- /.results-wrap -->
+
+</div><!-- /.page -->
+
+<div class="toast" id="toast"></div>
+
+<!-- AUTH -->
+<script src="js/auth.js"></script>
+<script>
+var session = NFRAuth.requireAuth('scope-tool');
+if (session) {
+  document.getElementById('top-user-name').textContent = session.name;
+}
+document.getElementById('top-logout').addEventListener('click', function(e){
+  e.preventDefault(); NFRAuth.logout();
+});
+</script>
+
+<!-- TOOL LOGIC -->
+<script>
+(function(){
+  'use strict';
+
+  var driveInput   = document.getElementById('drive-url');
+  var btnAnalyze   = document.getElementById('btn-analyze');
+  var inputError   = document.getElementById('input-error');
+  var loadingWrap  = document.getElementById('loading-wrap');
+  var resultsWrap  = document.getElementById('results-wrap');
+  var inputCard    = document.getElementById('input-card');
+
+  var currentResult = null;
+
+  // ---- Show / hide states ----
+  function showInput(errMsg) {
+    inputCard.style.display   = '';
+    loadingWrap.classList.remove('visible');
+    resultsWrap.classList.remove('visible');
+    if (errMsg) {
+      inputError.textContent = errMsg;
+      inputError.classList.add('visible');
+    } else {
+      inputError.classList.remove('visible');
+    }
+  }
+
+  function showLoading() {
+    inputCard.style.display   = 'none';
+    loadingWrap.classList.add('visible');
+    resultsWrap.classList.remove('visible');
+    inputError.classList.remove('visible');
+  }
+
+  function showResults() {
+    inputCard.style.display   = 'none';
+    loadingWrap.classList.remove('visible');
+    resultsWrap.classList.add('visible');
+  }
+
+  // ---- Analyze ----
+  btnAnalyze.addEventListener('click', runAnalysis);
+  driveInput.addEventListener('keydown', function(e){ if(e.key==='Enter') runAnalysis(); });
+
+  async function runAnalysis() {
+    var url = (driveInput.value || '').trim();
+    if (!url) { showInput('Please paste a Google Drive link.'); return; }
+    if (!url.includes('drive.google.com') && !url.includes('docs.google.com')) {
+      showInput('That doesn\'t look like a Google Drive link. Paste the full share URL.');
+      return;
+    }
+
+    showLoading();
+    document.getElementById('result-filename').textContent = url.split('/').slice(-2)[0] || url;
+
+    try {
+      var res = await fetch('/.netlify/functions/scope-analyze', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ driveUrl: url }),
+      });
+
+      var data = await res.json();
+
+      if (!res.ok || data.error) {
+        showInput(data.error || ('Server error ' + res.status + '. Check that the file is shared publicly.'));
+        return;
+      }
+
+      currentResult = data;
+      renderResults(data);
+      showResults();
+
+    } catch(err) {
+      showInput('Network error — ' + (err.message || 'please try again.'));
+    }
+  }
+
+  // ---- Reset ----
+  document.getElementById('btn-reset').addEventListener('click', function(){
+    showInput('');
+    driveInput.value = '';
+    driveInput.focus();
+  });
+
+  // ---- Render results ----
+  function renderResults(data) {
+    renderDrywall(data.drywall);
+    renderPaint(data.paint);
+    renderFlooring(data.flooring);
+  }
+
+  function setConf(elId, level, note) {
+    var el = document.getElementById(elId);
+    if (!el) return;
+    el.className = 'conf-badge ' + (level || '');
+    el.title = note || '';
+    el.textContent = (level || '—').toUpperCase() + ' CONF';
+  }
+
+  function fmt(n) { return typeof n === 'number' ? n.toLocaleString() : '—'; }
+
+  function buildTotals(containerId, rows) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var html = '<div class="sec-label">Totals</div>';
+    rows.forEach(function(r){
+      html += '<div class="tot-row' + (r.h ? ' highlight' : '') + '"><span>' + r.label + '</span><span>' + r.value + '</span></div>';
+    });
+    el.innerHTML = html;
+  }
+
+  function buildRooms(containerId, rooms, detailFn) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var html = '<div class="sec-label">Room by Room</div>';
+    if (!rooms || !rooms.length) {
+      html += '<p style="font-size:7.5pt;color:var(--muted);padding:4px 0">No room data extracted.</p>';
+    } else {
+      rooms.forEach(function(r){
+        html += '<div class="room-item"><div class="room-name">' + (r.room_name||'Room') + '</div><div class="room-detail">' + detailFn(r) + '</div></div>';
+      });
+    }
+    el.innerHTML = html;
+  }
+
+  function showNotes(elId, text) {
+    var el = document.getElementById(elId);
+    if (!el || !text) return;
+    el.style.display = '';
+    el.textContent = text;
+  }
+
+  function cardError(totalsId, roomsId, msg) {
+    var t = document.getElementById(totalsId);
+    var r = document.getElementById(roomsId);
+    if (t) t.innerHTML = '';
+    if (r) r.innerHTML = '<div class="scope-card-err"><i class="fa-solid fa-triangle-exclamation"></i><span>' + (msg||'Could not extract scope.') + '</span></div>';
+  }
+
+  function renderDrywall(d) {
+    if (!d || d.error) { setConf('conf-drywall','low',''); cardError('totals-drywall','rooms-drywall', d&&d.message); return; }
+    setConf('conf-drywall', d.confidence, d.confidence_note);
+    buildTotals('totals-drywall', [
+      {label:'Wall Area',      value: fmt(d.total_wall_sqft)     + ' sq ft'},
+      {label:'Ceiling Area',   value: fmt(d.total_ceiling_sqft)  + ' sq ft'},
+      {label:'Total',          value: fmt(d.total_sqft)          + ' sq ft', h:true},
+      {label:'Sheet Estimate', value: fmt(d.sheet_count_estimate) + ' sheets (4×8)'},
+    ]);
+    buildRooms('rooms-drywall', d.rooms, function(r){
+      var type = (r.drywall_type||'standard').replace(/_/g,' ');
+      return 'Walls: '+fmt(r.wall_sqft)+' sq ft &nbsp;|&nbsp; Ceiling: '+fmt(r.ceiling_sqft)+' sq ft'
+        + '<br><span class="room-badge">'+type+'</span>'
+        + (r.notes ? '<br><em style="font-size:7pt">'+r.notes+'</em>' : '');
+    });
+    showNotes('notes-drywall', d.scope_notes);
+  }
+
+  function renderPaint(p) {
+    if (!p || p.error) { setConf('conf-paint','low',''); cardError('totals-paint','rooms-paint', p&&p.message); return; }
+    setConf('conf-paint', p.confidence, p.confidence_note);
+    var total = (p.total_wall_sqft||0) + (p.total_ceiling_sqft||0);
+    buildTotals('totals-paint', [
+      {label:'Wall Area',       value: fmt(p.total_wall_sqft)    + ' sq ft'},
+      {label:'Ceiling Area',    value: fmt(p.total_ceiling_sqft) + ' sq ft'},
+      {label:'Total Paintable', value: fmt(total)                + ' sq ft', h:true},
+      {label:'Trim',            value: fmt(p.total_trim_lf)      + ' linear ft'},
+    ]);
+    buildRooms('rooms-paint', p.rooms, function(r){
+      return 'Walls: '+fmt(r.wall_sqft)+' sq ft &nbsp;|&nbsp; Ceiling: '+fmt(r.ceiling_sqft)+' sq ft'
+        + (r.trim_lf ? '<br>Trim: '+fmt(r.trim_lf)+' LF' : '')
+        + (r.special_finishes ? '<br><span class="room-badge">'+r.special_finishes+'</span>' : '')
+        + (r.notes ? '<br><em style="font-size:7pt">'+r.notes+'</em>' : '');
+    });
+    showNotes('notes-paint', p.scope_notes);
+  }
+
+  function renderFlooring(f) {
+    if (!f || f.error) { setConf('conf-flooring','low',''); cardError('totals-flooring','rooms-flooring', f&&f.message); return; }
+    setConf('conf-flooring', f.confidence, f.confidence_note);
+    buildTotals('totals-flooring', [
+      {label:'Net Area',          value: fmt(f.total_sqft_net)        + ' sq ft'},
+      {label:'With Waste',        value: fmt(f.total_sqft_with_waste) + ' sq ft', h:true},
+      {label:'Transition Strips', value: fmt(f.transition_strips)},
+    ]);
+    buildRooms('rooms-flooring', f.rooms, function(r){
+      var type = (r.flooring_type||'unknown').replace(/_/g,'/').replace('lvp','LVP').replace('lvt','LVT');
+      return 'Net: '+fmt(r.sqft_net)+' sq ft &nbsp;|&nbsp; With waste: '+fmt(r.sqft_with_waste)+' sq ft'
+        + '<br><span class="room-badge">'+type+'</span>'
+        + (r.notes ? '<br><em style="font-size:7pt">'+r.notes+'</em>' : '');
+    });
+    showNotes('notes-flooring', f.scope_notes);
+  }
+
+  // ---- Copy / Download ----
+  function buildText(data) {
+    var sep = '='.repeat(50), dash = '-'.repeat(50);
+    var lines = ['SCOPE OF WORK SUMMARY', sep, ''];
+
+    function trade(title, d, fn) {
+      lines.push(title); lines.push(dash);
+      if (!d || d.error) { lines.push('  Could not extract scope.'); }
+      else fn(d);
+      lines.push('');
+    }
+
+    trade('DRYWALL SCOPE', data.drywall, function(d){
+      lines.push('  Wall Area:     '+fmt(d.total_wall_sqft)+' sq ft');
+      lines.push('  Ceiling Area:  '+fmt(d.total_ceiling_sqft)+' sq ft');
+      lines.push('  Total:         '+fmt(d.total_sqft)+' sq ft');
+      lines.push('  Sheet Count:   '+fmt(d.sheet_count_estimate)+' sheets (4×8)');
+      lines.push('  Confidence:    '+(d.confidence||'').toUpperCase());
+      lines.push('');
+      (d.rooms||[]).forEach(function(r){
+        lines.push('    '+r.room_name);
+        lines.push('      Walls: '+fmt(r.wall_sqft)+' | Ceiling: '+fmt(r.ceiling_sqft)+' | Type: '+(r.drywall_type||'').replace(/_/g,' '));
+        if(r.notes) lines.push('      '+r.notes);
+      });
+      if(d.scope_notes){lines.push('');lines.push('  Notes: '+d.scope_notes);}
+    });
+
+    trade('PAINT SCOPE', data.paint, function(p){
+      lines.push('  Wall Area:     '+fmt(p.total_wall_sqft)+' sq ft');
+      lines.push('  Ceiling Area:  '+fmt(p.total_ceiling_sqft)+' sq ft');
+      lines.push('  Trim:          '+fmt(p.total_trim_lf)+' linear ft');
+      lines.push('  Confidence:    '+(p.confidence||'').toUpperCase());
+      lines.push('');
+      (p.rooms||[]).forEach(function(r){
+        lines.push('    '+r.room_name);
+        lines.push('      Walls: '+fmt(r.wall_sqft)+' | Ceiling: '+fmt(r.ceiling_sqft)+' | Trim: '+fmt(r.trim_lf)+' LF');
+        if(r.special_finishes) lines.push('      Special: '+r.special_finishes);
+        if(r.notes) lines.push('      '+r.notes);
+      });
+      if(p.scope_notes){lines.push('');lines.push('  Notes: '+p.scope_notes);}
+    });
+
+    trade('FLOORING SCOPE', data.flooring, function(f){
+      lines.push('  Net Area:          '+fmt(f.total_sqft_net)+' sq ft');
+      lines.push('  With Waste:        '+fmt(f.total_sqft_with_waste)+' sq ft');
+      lines.push('  Transition Strips: '+fmt(f.transition_strips));
+      lines.push('  Confidence:        '+(f.confidence||'').toUpperCase());
+      lines.push('');
+      (f.rooms||[]).forEach(function(r){
+        var type = (r.flooring_type||'unknown').replace(/_/g,'/');
+        lines.push('    '+r.room_name);
+        lines.push('      Net: '+fmt(r.sqft_net)+' | With waste: '+fmt(r.sqft_with_waste)+' | Type: '+type);
+        if(r.notes) lines.push('      '+r.notes);
+      });
+      if(f.scope_notes){lines.push('');lines.push('  Notes: '+f.scope_notes);}
+    });
+
+    lines.push(sep);
+    lines.push('NFR Scope Reader — hearthwoodcabinetry.com');
+    return lines.join('\n');
+  }
+
+  document.getElementById('btn-copy').addEventListener('click', function(){
+    if (!currentResult) return;
+    navigator.clipboard.writeText(buildText(currentResult)).then(function(){
+      showToast('Scope copied to clipboard');
+    }).catch(function(){ showToast('Copy failed — try Download'); });
+  });
+
+  document.getElementById('btn-download').addEventListener('click', function(){
+    if (!currentResult) return;
+    var blob = new Blob([buildText(currentResult)], {type:'text/plain'});
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    a.href = url; a.download = 'scope-of-work.txt'; a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // ---- Toast ----
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._t);
+    t._t = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+
+})();
+</script>
+
+</body>
+</html>
