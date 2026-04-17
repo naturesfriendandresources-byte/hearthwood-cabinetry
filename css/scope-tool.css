@@ -1,0 +1,376 @@
+/* =============================================
+   HEARTHWOOD — Construction Scope Reader Styles
+   ============================================= */
+
+.scope-tool-page { background: var(--alabaster); }
+
+.scope-hero { padding: 2rem 0 1.75rem; }
+.scope-hero h1 { margin-bottom: 0.4rem; }
+.scope-hero p  { font-weight: 300; opacity: 0.8; }
+
+/* =============================================
+   UPLOAD SECTION
+   ============================================= */
+
+.scope-upload-section {
+  padding: 2.5rem 0 4rem;
+  background: var(--alabaster);
+}
+
+/* File type note under upload zone */
+.scope-file-types {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--charcoal);
+  opacity: 0.45;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* Inline size warning */
+.scope-size-warning {
+  max-width: 520px;
+  margin: 0.75rem auto 0;
+  background: rgba(201,169,110,0.08);
+  border: 1px solid rgba(201,169,110,0.4);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-size: 0.82rem;
+  color: var(--charcoal);
+  text-align: center;
+  display: none;
+}
+.scope-size-warning.visible { display: block; }
+
+/* =============================================
+   LOADING STATE
+   ============================================= */
+
+.scope-loading {
+  text-align: center;
+  padding: 3.5rem 2rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.scope-loading-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 1rem 0 0.25rem;
+  font-family: var(--font-body);
+}
+
+.scope-loading-sub {
+  font-size: 0.8rem;
+  color: var(--charcoal);
+  opacity: 0.6;
+  margin-bottom: 1.75rem;
+}
+
+/* Agent status rows */
+.agent-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.agent-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #fff;
+  border: 1px solid rgba(194,181,165,0.4);
+  border-radius: 6px;
+  padding: 0.65rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+}
+
+.agent-status i {
+  color: var(--gold);
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.agent-dot {
+  margin-left: auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--greige);
+  flex-shrink: 0;
+  animation: agent-pulse 1.4s ease-in-out infinite;
+}
+
+#agent-paint .agent-dot    { animation-delay: 0.35s; }
+#agent-flooring .agent-dot { animation-delay: 0.7s; }
+
+@keyframes agent-pulse {
+  0%, 100% { background: var(--greige); transform: scale(1); }
+  50%       { background: var(--gold);   transform: scale(1.4); }
+}
+
+/* =============================================
+   RESULTS
+   ============================================= */
+
+.scope-results { padding: 0; }
+
+/* File bar */
+.scope-file-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #fff;
+  border: 1px solid rgba(194,181,165,0.4);
+  border-radius: 8px;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.scope-file-bar i { color: var(--gold); flex-shrink: 0; }
+
+.scope-file-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 3-card grid */
+.scope-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 960px) {
+  .scope-cards-grid { grid-template-columns: 1fr; }
+}
+
+/* =============================================
+   TRADE CARD
+   ============================================= */
+
+.scope-card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid rgba(194,181,165,0.35);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card header */
+.scope-card-header {
+  background: var(--navy);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.scope-card-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.scope-card-header-title i {
+  color: var(--gold);
+  font-size: 1rem;
+}
+
+.scope-card-header-title h3 {
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Confidence badge inside card header */
+.scope-confidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.08);
+  white-space: nowrap;
+}
+.scope-confidence.high {
+  color: #A8D5A2;
+  border-color: rgba(168,213,162,0.4);
+  background: rgba(168,213,162,0.1);
+}
+.scope-confidence.low {
+  color: #E8B88A;
+  border-color: rgba(232,184,138,0.4);
+  background: rgba(232,184,138,0.1);
+}
+
+/* Card sections */
+.scope-card-totals {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(194,181,165,0.25);
+}
+
+.scope-section-label {
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.55rem;
+}
+
+.scope-totals-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.83rem;
+  color: var(--charcoal);
+  padding: 0.18rem 0;
+}
+
+.scope-totals-row span:first-child { font-weight: 400; }
+.scope-totals-row span:last-child  { font-weight: 700; color: var(--navy); }
+
+.scope-totals-row.scope-total-line {
+  border-top: 1px solid rgba(194,181,165,0.3);
+  margin-top: 0.35rem;
+  padding-top: 0.5rem;
+  font-weight: 700;
+}
+.scope-totals-row.scope-total-line span { color: var(--navy); font-size: 0.88rem; }
+
+/* Room-by-room section */
+.scope-card-rooms {
+  padding: 0.85rem 1.25rem;
+  flex: 1;
+}
+
+.scope-room-item {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(242,238,230,0.9);
+}
+.scope-room-item:last-child { border-bottom: none; }
+
+.scope-room-name {
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.18rem;
+}
+
+.scope-room-detail {
+  font-size: 0.77rem;
+  color: var(--charcoal);
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.scope-room-badge {
+  display: inline-block;
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  background: rgba(201,169,110,0.1);
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  color: var(--charcoal);
+  margin-top: 0.2rem;
+}
+
+/* Notes footer */
+.scope-card-notes {
+  padding: 0.75rem 1.25rem;
+  background: var(--alabaster);
+  border-top: 1px solid rgba(194,181,165,0.25);
+  font-size: 0.76rem;
+  color: var(--charcoal);
+  font-style: italic;
+  line-height: 1.55;
+}
+
+/* Error state inside a card */
+.scope-card-error {
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: var(--charcoal);
+  font-size: 0.84rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.scope-card-error i {
+  font-size: 1.5rem;
+  color: var(--greige);
+}
+
+/* =============================================
+   ACTION BUTTONS
+   ============================================= */
+
+.scope-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.25rem 0 1rem;
+}
+
+/* =============================================
+   ERROR STATE (full page)
+   ============================================= */
+
+.scope-error-panel {
+  text-align: center;
+  padding: 3rem 2rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.scope-error-panel i {
+  font-size: 2.25rem;
+  color: var(--greige);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.scope-error-panel p {
+  font-size: 0.9rem;
+  color: var(--charcoal);
+  margin-bottom: 1.25rem;
+}
+
+/* =============================================
+   TOAST (reuses catalog-toast from styles.css)
+   ============================================= */
+
+/* No new CSS needed — .catalog-toast already defined in styles.css */

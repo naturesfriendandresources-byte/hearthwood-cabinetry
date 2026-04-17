@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scope Reader — Hearthwood Cabinetry</title>
+  <meta name="description" content="Upload a construction plan and three AI agents instantly extract drywall, paint, and flooring scopes of work — room by room.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/visualizer.css">
+  <link rel="stylesheet" href="css/scope-tool.css">
+</head>
+<body class="scope-tool-page">
+
+  <!-- NAVIGATION -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Hearth<span>wood</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="line1.html">Craftsman Collection</a></li>
+        <li><a href="line2.html">Prestige Series</a></li>
+        <li><a href="visualizer.html">Kitchen Planner</a></li>
+        <li><a href="scope-tool.html" class="active">Scope Reader</a></li>
+        <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+        <li><a href="staff/" class="nav-portal"><i class="fa-solid fa-lock" aria-hidden="true"></i> Staff Portal</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <header class="page-hero scope-hero">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <span>Scope Reader</span></p>
+      <h1>Construction Scope Reader</h1>
+      <p>Upload a floor plan or construction drawing &mdash; three AI agents instantly extract drywall, paint, and flooring scopes of work, room by room.</p>
+    </div>
+  </header>
+
+  <!-- MAIN TOOL SECTION -->
+  <section class="scope-upload-section" id="scope-section">
+    <div class="container">
+
+      <!-- STATE 1: Upload zone -->
+      <div id="state-upload">
+        <div class="photo-upload-zone" id="scope-drop-zone">
+          <input type="file" id="scope-file-input" accept="image/*,application/pdf" aria-label="Upload construction plan">
+          <div class="upload-icon-wrap">
+            <i class="fa-solid fa-drafting-compass"></i>
+          </div>
+          <h3>Upload Your Construction Plan</h3>
+          <p>Drop a file here or click to browse</p>
+          <p class="upload-tip">Accepts floor plans, blueprints, or photos of drawings</p>
+        </div>
+        <p class="scope-file-types">Supported: JPG &bull; PNG &bull; PDF &nbsp;&mdash;&nbsp; Max 5 MB</p>
+        <div class="scope-size-warning" id="scope-size-warning">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          File is too large. Please use a file under 5 MB. Try exporting a lower-resolution version of your plan.
+        </div>
+      </div>
+
+      <!-- STATE 2: Loading -->
+      <div id="state-loading" style="display:none" aria-live="polite">
+        <div class="scope-loading">
+          <div class="spinner"></div>
+          <p class="scope-loading-title">Reading your plan&hellip;</p>
+          <p class="scope-loading-sub">Three agents are analyzing simultaneously</p>
+          <div class="agent-status-list">
+            <div class="agent-status" id="agent-drywall">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Drywall Agent</span>
+              <span class="agent-dot"></span>
+            </div>
+            <div class="agent-status" id="agent-paint">
+              <i class="fa-solid fa-brush"></i>
+              <span>Paint Agent</span>
+              <span class="agent-dot"></span>
+            </div>
+            <div class="agent-status" id="agent-flooring">
+              <i class="fa-solid fa-border-all"></i>
+              <span>Flooring Agent</span>
+              <span class="agent-dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE 3: Results -->
+      <div id="state-results" style="display:none" aria-live="polite">
+
+        <!-- File bar -->
+        <div class="scope-file-bar">
+          <i class="fa-solid fa-file-check"></i>
+          <span class="scope-file-name" id="scope-filename">plan.pdf</span>
+          <button class="btn btn-sm btn-outline" id="btn-analyze-another">
+            <i class="fa-solid fa-rotate-left"></i> Analyze Another
+          </button>
+        </div>
+
+        <!-- 3 trade cards -->
+        <div class="scope-cards-grid">
+
+          <!-- Drywall card -->
+          <div class="scope-card" id="card-drywall">
+            <div class="scope-card-header">
+              <div class="scope-card-header-title">
+                <i class="fa-solid fa-layer-group"></i>
+                <h3>Drywall Scope</h3>
+              </div>
+              <span class="scope-confidence" id="conf-drywall">—</span>
+            </div>
+            <div class="scope-card-totals" id="totals-drywall"></div>
+            <div class="scope-card-rooms" id="rooms-drywall"></div>
+            <div class="scope-card-notes" id="notes-drywall" style="display:none"></div>
+          </div>
+
+          <!-- Paint card -->
+          <div class="scope-card" id="card-paint">
+            <div class="scope-card-header">
+              <div class="scope-card-header-title">
+                <i class="fa-solid fa-brush"></i>
+                <h3>Paint Scope</h3>
+              </div>
+              <span class="scope-confidence" id="conf-paint">—</span>
+            </div>
+            <div class="scope-card-totals" id="totals-paint"></div>
+            <div class="scope-card-rooms" id="rooms-paint"></div>
+            <div class="scope-card-notes" id="notes-paint" style="display:none"></div>
+          </div>
+
+          <!-- Flooring card -->
+          <div class="scope-card" id="card-flooring">
+            <div class="scope-card-header">
+              <div class="scope-card-header-title">
+                <i class="fa-solid fa-border-all"></i>
+                <h3>Flooring Scope</h3>
+              </div>
+              <span class="scope-confidence" id="conf-flooring">—</span>
+            </div>
+            <div class="scope-card-totals" id="totals-flooring"></div>
+            <div class="scope-card-rooms" id="rooms-flooring"></div>
+            <div class="scope-card-notes" id="notes-flooring" style="display:none"></div>
+          </div>
+
+        </div><!-- /.scope-cards-grid -->
+
+        <!-- Action buttons -->
+        <div class="scope-actions">
+          <button class="btn btn-gold btn-lg" id="btn-copy">
+            <i class="fa-solid fa-clipboard"></i> Copy Scope to Clipboard
+          </button>
+          <button class="btn btn-outline btn-lg" id="btn-download">
+            <i class="fa-solid fa-download"></i> Download as Text File
+          </button>
+        </div>
+
+      </div><!-- /#state-results -->
+
+      <!-- STATE 4: Error -->
+      <div id="state-error" style="display:none" aria-live="polite">
+        <div class="scope-error-panel">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <p id="scope-error-text">Analysis failed. Please check your file and try again.</p>
+          <button class="btn btn-outline" id="btn-try-again">
+            <i class="fa-solid fa-rotate-left"></i> Try Again
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /.container -->
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Hearth<span>wood</span></h3>
+          <p>Two premium collections for every kitchen vision. Crafted to last a lifetime.</p>
+          <div class="footer-social">
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Collections</h4>
+          <ul>
+            <li><a href="line1.html">Craftsman Collection</a></li>
+            <li><a href="line2.html">Prestige Series</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="visualizer.html">Kitchen Planner</a></li>
+            <li><a href="scope-tool.html">Scope Reader</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get Help</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html">Request a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Hearthwood Cabinetry. All rights reserved.</span>
+        <span>Construction Scope Reader</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // ---- DOM refs ----
+    const stateUpload  = document.getElementById('state-upload');
+    const stateLoading = document.getElementById('state-loading');
+    const stateResults = document.getElementById('state-results');
+    const stateError   = document.getElementById('state-error');
+    const dropZone     = document.getElementById('scope-drop-zone');
+    const fileInput    = document.getElementById('scope-file-input');
+    const sizeWarning  = document.getElementById('scope-size-warning');
+
+    let currentResult  = null;
+    let currentFileName = '';
+
+    // ---- State switcher ----
+    function showState(s) {
+      stateUpload.style.display  = s === 'upload'   ? '' : 'none';
+      stateLoading.style.display = s === 'loading'  ? '' : 'none';
+      stateResults.style.display = s === 'results'  ? '' : 'none';
+      stateError.style.display   = s === 'error'    ? '' : 'none';
+    }
+
+    // ---- File upload ----
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      const f = e.dataTransfer.files[0];
+      if (f) validateAndProcess(f);
+    });
+
+    fileInput.addEventListener('change', e => {
+      if (e.target.files[0]) validateAndProcess(e.target.files[0]);
+    });
+
+    function validateAndProcess(file) {
+      sizeWarning.classList.remove('visible');
+
+      const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'application/pdf'];
+      if (!allowed.includes(file.type) && !file.type.startsWith('image/')) {
+        setError('Unsupported file type. Please upload a JPG, PNG, or PDF.');
+        showState('error');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        sizeWarning.classList.add('visible');
+        return;
+      }
+      processFile(file);
+    }
+
+    function processFile(file) {
+      currentFileName = file.name;
+      document.getElementById('scope-filename').textContent = file.name;
+      showState('loading');
+
+      const reader = new FileReader();
+      reader.onload = async e => {
+        // Strip data-URI prefix: "data:application/pdf;base64,xxxx" → "xxxx"
+        const dataUrl   = e.target.result;
+        const fileData  = dataUrl.split(',')[1];
+        const mediaType = file.type || 'image/jpeg';
+
+        try {
+          const res = await fetch('/.netlify/functions/scope-analyze', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify({ fileData, mediaType }),
+          });
+
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            throw new Error(err.error || 'Server error ' + res.status);
+          }
+
+          const data = await res.json();
+          currentResult = data;
+          renderResults(data);
+          showState('results');
+
+        } catch (err) {
+          setError(err.message || 'Analysis failed. Please try again.');
+          showState('error');
+        }
+      };
+      reader.onerror = () => {
+        setError('Could not read the file. Please try again.');
+        showState('error');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ---- Result rendering ----
+    function renderResults(data) {
+      renderDrywallCard(data.drywall);
+      renderPaintCard(data.paint);
+      renderFlooringCard(data.flooring);
+    }
+
+    function setConfidence(elId, level, note) {
+      const el = document.getElementById(elId);
+      if (!el) return;
+      el.className = 'scope-confidence ' + (level || '');
+      el.title = note || '';
+      el.innerHTML =
+        '<i class="fa-solid fa-circle-check"></i> ' +
+        (level ? level.toUpperCase() + ' CONFIDENCE' : '—');
+    }
+
+    function fmt(n) {
+      if (typeof n !== 'number') return '—';
+      return n.toLocaleString();
+    }
+
+    function totalsEl(containerId, rows) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      const label = '<div class="scope-section-label">Totals</div>';
+      const rowsHTML = rows.map((r, i) =>
+        `<div class="scope-totals-row${r.highlight ? ' scope-total-line' : ''}">
+          <span>${r.label}</span><span>${r.value}</span>
+        </div>`
+      ).join('');
+      el.innerHTML = label + rowsHTML;
+    }
+
+    function roomsEl(containerId, rooms, buildDetail) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      if (!rooms || !rooms.length) {
+        el.innerHTML = '<div class="scope-section-label">Rooms</div><p style="font-size:0.8rem;color:var(--charcoal);padding:0.5rem 0">No room data extracted.</p>';
+        return;
+      }
+      const label = '<div class="scope-section-label">Room by Room</div>';
+      const items = rooms.map(r => {
+        const detail = buildDetail(r);
+        return `<div class="scope-room-item">
+          <div class="scope-room-name">${r.room_name || 'Unnamed Room'}</div>
+          <div class="scope-room-detail">${detail}</div>
+        </div>`;
+      }).join('');
+      el.innerHTML = label + items;
+    }
+
+    function notesEl(containerId, text) {
+      const el = document.getElementById(containerId);
+      if (!el || !text) return;
+      el.style.display = '';
+      el.textContent = text;
+    }
+
+    function showCardError(cardId, totalsId, roomsId, message) {
+      const totals = document.getElementById(totalsId);
+      const rooms  = document.getElementById(roomsId);
+      if (totals) totals.innerHTML = '';
+      if (rooms)  rooms.innerHTML =
+        `<div class="scope-card-error">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>${message || 'Could not extract scope.'}</span>
+        </div>`;
+    }
+
+    // ---- Drywall card ----
+    function renderDrywallCard(d) {
+      if (!d || d.error) {
+        setConfidence('conf-drywall', 'low', '');
+        showCardError('card-drywall', 'totals-drywall', 'rooms-drywall', d && d.message);
+        return;
+      }
+      setConfidence('conf-drywall', d.confidence, d.confidence_note);
+      totalsEl('totals-drywall', [
+        { label: 'Wall Area',       value: fmt(d.total_wall_sqft) + ' sq ft' },
+        { label: 'Ceiling Area',    value: fmt(d.total_ceiling_sqft) + ' sq ft' },
+        { label: 'Total',           value: fmt(d.total_sqft) + ' sq ft', highlight: true },
+        { label: 'Sheet Estimate',  value: fmt(d.sheet_count_estimate) + ' sheets (4×8)' },
+      ]);
+      roomsEl('rooms-drywall', d.rooms, r => {
+        const typeLabel = (r.drywall_type || 'standard').replace(/_/g, ' ');
+        let html = `Walls: ${fmt(r.wall_sqft)} sq ft &nbsp;|&nbsp; Ceiling: ${fmt(r.ceiling_sqft)} sq ft`;
+        html += `<br><span class="scope-room-badge">${typeLabel}</span>`;
+        if (r.notes) html += `<br><em style="font-size:0.74rem">${r.notes}</em>`;
+        return html;
+      });
+      notesEl('notes-drywall', d.scope_notes);
+    }
+
+    // ---- Paint card ----
+    function renderPaintCard(p) {
+      if (!p || p.error) {
+        setConfidence('conf-paint', 'low', '');
+        showCardError('card-paint', 'totals-paint', 'rooms-paint', p && p.message);
+        return;
+      }
+      setConfidence('conf-paint', p.confidence, p.confidence_note);
+      totalsEl('totals-paint', [
+        { label: 'Wall Area',      value: fmt(p.total_wall_sqft) + ' sq ft' },
+        { label: 'Ceiling Area',   value: fmt(p.total_ceiling_sqft) + ' sq ft' },
+        { label: 'Total Paintable',value: fmt((p.total_wall_sqft || 0) + (p.total_ceiling_sqft || 0)) + ' sq ft', highlight: true },
+        { label: 'Trim',           value: fmt(p.total_trim_lf) + ' linear ft' },
+      ]);
+      roomsEl('rooms-paint', p.rooms, r => {
+        let html = `Walls: ${fmt(r.wall_sqft)} sq ft &nbsp;|&nbsp; Ceiling: ${fmt(r.ceiling_sqft)} sq ft`;
+        if (r.trim_lf) html += `<br>Trim: ${fmt(r.trim_lf)} LF`;
+        if (r.special_finishes) html += `<br><span class="scope-room-badge">${r.special_finishes}</span>`;
+        if (r.notes) html += `<br><em style="font-size:0.74rem">${r.notes}</em>`;
+        return html;
+      });
+      notesEl('notes-paint', p.scope_notes);
+    }
+
+    // ---- Flooring card ----
+    function renderFlooringCard(f) {
+      if (!f || f.error) {
+        setConfidence('conf-flooring', 'low', '');
+        showCardError('card-flooring', 'totals-flooring', 'rooms-flooring', f && f.message);
+        return;
+      }
+      setConfidence('conf-flooring', f.confidence, f.confidence_note);
+      totalsEl('totals-flooring', [
+        { label: 'Net Area',        value: fmt(f.total_sqft_net) + ' sq ft' },
+        { label: 'With Waste',      value: fmt(f.total_sqft_with_waste) + ' sq ft', highlight: true },
+        { label: 'Transition Strips', value: fmt(f.transition_strips) },
+      ]);
+      roomsEl('rooms-flooring', f.rooms, r => {
+        const typeLabel = (r.flooring_type || 'unknown').replace(/_/g, '/')
+          .replace('lvp', 'LVP').replace('lvt', 'LVT');
+        let html = `Net: ${fmt(r.sqft_net)} sq ft &nbsp;|&nbsp; With waste: ${fmt(r.sqft_with_waste)} sq ft`;
+        html += `<br><span class="scope-room-badge">${typeLabel}</span>`;
+        if (r.notes) html += `<br><em style="font-size:0.74rem">${r.notes}</em>`;
+        return html;
+      });
+      notesEl('notes-flooring', f.scope_notes);
+    }
+
+    // ---- Copy / Download ----
+    function buildScopeText(data) {
+      const line = '='.repeat(52);
+      const dash = '-'.repeat(52);
+      let out = ['SCOPE OF WORK SUMMARY', line, ''];
+
+      function addTrade(title, scope, buildSection) {
+        out.push(title.toUpperCase());
+        out.push(dash);
+        if (!scope || scope.error) {
+          out.push('  Could not extract scope.');
+        } else {
+          buildSection(scope);
+        }
+        out.push('');
+      }
+
+      addTrade('DRYWALL SCOPE', data.drywall, d => {
+        out.push(`  Total Wall Area:     ${fmt(d.total_wall_sqft)} sq ft`);
+        out.push(`  Total Ceiling Area:  ${fmt(d.total_ceiling_sqft)} sq ft`);
+        out.push(`  Total:               ${fmt(d.total_sqft)} sq ft`);
+        out.push(`  Sheet Estimate:      ${fmt(d.sheet_count_estimate)} sheets (4×8)`);
+        out.push(`  Confidence:          ${(d.confidence || '').toUpperCase()}`);
+        out.push('');
+        out.push('  Room by Room:');
+        (d.rooms || []).forEach(r => {
+          out.push(`    ${r.room_name}`);
+          out.push(`      Walls: ${fmt(r.wall_sqft)} sq ft | Ceiling: ${fmt(r.ceiling_sqft)} sq ft | Type: ${(r.drywall_type || '').replace(/_/g, ' ')}`);
+          if (r.notes) out.push(`      Note: ${r.notes}`);
+        });
+        if (d.scope_notes) { out.push(''); out.push(`  Notes: ${d.scope_notes}`); }
+      });
+
+      addTrade('PAINT SCOPE', data.paint, p => {
+        out.push(`  Total Wall Area:     ${fmt(p.total_wall_sqft)} sq ft`);
+        out.push(`  Total Ceiling Area:  ${fmt(p.total_ceiling_sqft)} sq ft`);
+        out.push(`  Total Trim:          ${fmt(p.total_trim_lf)} linear ft`);
+        out.push(`  Confidence:          ${(p.confidence || '').toUpperCase()}`);
+        out.push('');
+        out.push('  Room by Room:');
+        (p.rooms || []).forEach(r => {
+          out.push(`    ${r.room_name}`);
+          out.push(`      Walls: ${fmt(r.wall_sqft)} sq ft | Ceiling: ${fmt(r.ceiling_sqft)} sq ft | Trim: ${fmt(r.trim_lf)} LF`);
+          if (r.special_finishes) out.push(`      Special: ${r.special_finishes}`);
+          if (r.notes) out.push(`      Note: ${r.notes}`);
+        });
+        if (p.scope_notes) { out.push(''); out.push(`  Notes: ${p.scope_notes}`); }
+      });
+
+      addTrade('FLOORING SCOPE', data.flooring, f => {
+        out.push(`  Net Area:            ${fmt(f.total_sqft_net)} sq ft`);
+        out.push(`  With Waste:          ${fmt(f.total_sqft_with_waste)} sq ft`);
+        out.push(`  Transition Strips:   ${fmt(f.transition_strips)}`);
+        out.push(`  Confidence:          ${(f.confidence || '').toUpperCase()}`);
+        out.push('');
+        out.push('  Room by Room:');
+        (f.rooms || []).forEach(r => {
+          const type = (r.flooring_type || 'unknown').replace(/_/g, '/');
+          out.push(`    ${r.room_name}`);
+          out.push(`      Net: ${fmt(r.sqft_net)} sq ft | With waste: ${fmt(r.sqft_with_waste)} sq ft | Type: ${type}`);
+          if (r.notes) out.push(`      Note: ${r.notes}`);
+        });
+        if (f.scope_notes) { out.push(''); out.push(`  Notes: ${f.scope_notes}`); }
+      });
+
+      out.push(line);
+      out.push('Generated by Hearthwood Cabinetry Scope Reader');
+      return out.join('\n');
+    }
+
+    document.getElementById('btn-copy').addEventListener('click', () => {
+      if (!currentResult) return;
+      const text = buildScopeText(currentResult);
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Scope copied to clipboard');
+      }).catch(() => {
+        showToast('Copy failed — try Download instead');
+      });
+    });
+
+    document.getElementById('btn-download').addEventListener('click', () => {
+      if (!currentResult) return;
+      const text = buildScopeText(currentResult);
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href = url;
+      a.download = 'scope-of-work.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // ---- Reset buttons ----
+    document.getElementById('btn-analyze-another').addEventListener('click', resetToUpload);
+    document.getElementById('btn-try-again').addEventListener('click', resetToUpload);
+
+    function resetToUpload() {
+      fileInput.value = '';
+      sizeWarning.classList.remove('visible');
+      showState('upload');
+    }
+
+    // ---- Error helper ----
+    function setError(msg) {
+      const el = document.getElementById('scope-error-text');
+      if (el) el.textContent = msg;
+    }
+
+    // ---- Toast ----
+    function showToast(message) {
+      let toast = document.querySelector('.catalog-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'catalog-toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = message;
+      toast.classList.add('visible');
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => toast.classList.remove('visible'), 2800);
+    }
+
+  })();
+  </script>
+
+  <!-- Mobile nav toggle -->
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const links  = document.getElementById('nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', function () {
+        const open = links.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+        this.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+      });
+    }
+  </script>
+</body>
+</html>
